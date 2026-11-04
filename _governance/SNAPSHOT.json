@@ -1,5 +1,5 @@
 {
-  "file_count": 1048,
+  "file_count": 1050,
   "files": {
     ".disable_to_model_invocation_migration.json": {
       "bytes": 114,
@@ -36,6 +36,10 @@
     "_governance/REVIEW-CADENCE.md": {
       "bytes": 3291,
       "sha256": "3f03f934dcb0dd4e776c04729ebf655f5e4e9354e35865df5f029d97c12ecd42"
+    },
+    "_governance/VCS.md": {
+      "bytes": 4165,
+      "sha256": "43c8ec28e27c458caf3050041e601b065eb65b810450e6b7cfc230c88698fdce"
     },
     "_governance/acceptance/cases/cost.json": {
       "bytes": 2417,
@@ -84,6 +88,10 @@
     "_governance/taxonomy.json": {
       "bytes": 8153,
       "sha256": "93b553905184e0544189f252d6f1b07655ad8e2717e70a6b7ac121b87f64de01"
+    },
+    "_governance/vcs-verify.py": {
+      "bytes": 6345,
+      "sha256": "b1d032f90a9f30b8a2a43df47d4c3aaa78dbd9b1ed7bde3f6c1f1ceb8802ee65"
     },
     "academic-plotting/SKILL.md": {
       "bytes": 8232,
@@ -754,8 +762,8 @@
       "sha256": "4a9061312d17a3e51aeb0af5beed24889ce46c714bcacbb6cc1b99c55028c658"
     },
     "free-model-market/SKILL.md": {
-      "bytes": 35241,
-      "sha256": "45fe24b922ed12e81063b381ff9a788708081fe4790fec1060fb6af5640d4687"
+      "bytes": 34671,
+      "sha256": "274f23e1ea127de7d36b01a7eb51d97457f05aececb2d660a94b52198a6d709c"
     },
     "free-model-market/_skillhub_meta.json": {
       "bytes": 996,
@@ -2710,8 +2718,8 @@
       "sha256": "d163317f41b9b4578e04f3c94e3a3dcd5a05c7dfc4ad8d2cd07d707059d46dd5"
     },
     "perfectly-replicate-writing-skills__skillhub/SKILL.md": {
-      "bytes": 33396,
-      "sha256": "d4da36e342b17929fa2fcace64aee3b3d4aee6dcac835e19c690f84f17445004"
+      "bytes": 32906,
+      "sha256": "0169eafbb7bef57ca68216ad364fc628796414edf9d67d85c609a31f1930ff94"
     },
     "perfectly-replicate-writing-skills__skillhub/_meta.json": {
       "bytes": 127,
@@ -4194,8 +4202,8 @@
       "sha256": "fcf7b13ec24fe99285a075e74e8869a210548ac97579dfcd20e65731683db50c"
     }
   },
-  "generated_at": "2026-11-03T01:16:38Z",
+  "generated_at": "2026-11-04T13:26:45Z",
   "root": "C:/Users/Administrator/.workbuddy/skills",
   "schema": 1,
-  "total_bytes": 10691879
+  "total_bytes": 10701329
 }
