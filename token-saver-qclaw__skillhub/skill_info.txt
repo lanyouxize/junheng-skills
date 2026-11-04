@@ -1,0 +1,12 @@
+skill_name: token智能省流助手
+skill_id: token_saver_qclaw
+author: QClaw用户
+version: 6.0.0
+description: 自动识别文字/代码/混合文本，分策略压缩；支持代码注释分级清理、长句智能简化、精准Token计算；自然语言开关提示与切换强度；纯本地零依赖
+scene: QClaw对话、代码提问、长文本精简、省token、上下文优化
+entry_func: run
+support_params:
+  - text: 用户输入文本
+return_type: json
+no_deps: true
+support_local: true

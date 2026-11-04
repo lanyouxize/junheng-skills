@@ -1,0 +1,5 @@
+buildId: 2026-09-04T09:13:20
+combo: agent-dev-skills (5 skills)
+layout: SKILL.md at zip root + 5 skills flattened to level-2 dirs (内部深层用 __ 展平)
+depth: max 2 dirs (zip root → <skill>/ → files) — 符合 platform 「仅两级目录」约束
+note: 重新打包时间戳会变，platform 缓存就失效

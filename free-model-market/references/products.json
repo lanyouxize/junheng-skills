@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-28T15:07:26+08:00",
+  "source": "免费模型超市-model-catalog.md#五、配套增效商品·流量省电模式",
+  "note": "本文件收录「商品」（非模型渠道）。商品不提供模型、不改协议、不占额度，与 providers 数据链相互独立。",
+  "products": [
+    {
+      "id": "token-saver",
+      "name": "流量省电模式",
+      "tagline": "同样的免费额度跑更多任务",
+      "category": "token-efficiency",
+      "upstream": {
+        "repo": "T-Auto/dsh-ops",
+        "npm": "dsh-ops",
+        "license": "MIT",
+        "version": "0.5.0",
+        "license_note": "插件本体 MIT；Windows bash 可选载荷 @dsh-ops/bash-win32-x64 另含 GPL-2.0 等上游组件"
+      },
+      "host": "DeepSeek Harness (DSH) 0.2.0-rc.2 – 0.2.1-rc.2",
+      "runtime": "Node ^22.19 || >=24; win32/linux/darwin; x64/arm64（ops_bash 与 PowerShell 替换仅 Windows）",
+      "model_unchanged": true,
+      "mechanism": [
+        "工具瘦身：ops 命名空间工具替代/隐藏部分官方工具，减少功能重叠工具的试探轮次",
+        "渐进加载：启用 DSH 预留 tools_addition，PDF/Word 读取、批量改文件等重工具按需加载，系统提示词不常驻膨胀",
+        "紧凑返回：Native 模式返回带行号且错误更清晰，减少报错重试轮次；PTC 模式返回结构化 JSON"
+      ],
+      "value_scope": {
+        "good_for": [
+          "token 计量额度：Mistral 1B tokens/月、Inception 1 亿、Cloudflare neurons、NVIDIA 限速",
+          "上下文窗口受限或 TPM 受限的任务"
+        ],
+        "limited_for": [
+          "纯请求数/日计量的额度：Groq 1000 请求/日、OpenRouter 50 请求/日（压缩 token 不等于减少请求次数）"
+        ]
+      },
+      "install": [
+        "npx --yes dsh-ops@latest install --profile desktop",
+        "npx --yes dsh-ops@latest install --profile web",
+        "npx --yes dsh-ops@latest install --profile tui",
+        "dsh plugin --profile web add dsh-ops"
+      ],
+      "risks": [
+        "以 DSH 进程权限运行，安装期执行代码",
+        "社区维护（T-Auto），非 DeepSeek 官方",
+        "采用前自审源码并 pin commit"
+      ],
+      "sources": [
+        "https://github.com/T-Auto/dsh-ops",
+        "https://www.npmjs.com/package/dsh-ops"
+      ],
+      "verified": "2026-10-28"
+    }
+  ]
+}

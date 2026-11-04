@@ -1,0 +1,77 @@
+[
+  {
+    "id": "N1",
+    "desc": "单原料 100g：成本单价等于原料库价格（9.5 元/kg）",
+    "skill": "junheng-nutrition",
+    "cmd": "recipe",
+    "args": { "items": [{ "code": "01010001", "weight": 100 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "eq", "path": "data.totalWeight", "value": 100 },
+        { "type": "eq", "path": "data.cost.perKg", "value": 9.5 }
+      ]
+    }
+  },
+  {
+    "id": "N2",
+    "desc": "两原料配方：总重守恒 70+30=100，且逐行输出不为空",
+    "skill": "junheng-nutrition",
+    "cmd": "recipe",
+    "args": {
+      "items": [
+        { "code": "01010001", "weight": 70 },
+        { "code": "01010011", "weight": 30 }
+      ]
+    },
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "data.totalWeight", "value": 100 },
+        { "type": "non_empty", "path": "data.lines" },
+        { "type": "non_empty", "path": "data.energy.meModified" }
+      ]
+    }
+  },
+  {
+    "id": "N3",
+    "desc": "不存在的物料编号不得被静默丢弃，必须进 unknown",
+    "skill": "junheng-nutrition",
+    "cmd": "recipe",
+    "args": { "items": [{ "code": "99999999", "weight": 100 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [{ "type": "non_empty", "path": "data.unknown" }]
+    }
+  },
+  {
+    "id": "N4",
+    "desc": "总重为 0：业务层 data.ok=false + reason=zero_total_weight（顶层 ok 只表示命令执行成功，不表示出数）",
+    "skill": "junheng-nutrition",
+    "cmd": "recipe",
+    "args": { "items": [{ "code": "01010001", "weight": 0 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "eq", "path": "data.ok", "value": false },
+        { "type": "eq", "path": "data.reason", "value": "zero_total_weight" }
+      ]
+    }
+  },
+  {
+    "id": "N5",
+    "desc": "负重量属用法错误：退出码 2 且 ok:false + error.kind=usage",
+    "skill": "junheng-nutrition",
+    "cmd": "recipe",
+    "args": { "items": [{ "code": "01010001", "weight": -5 }] },
+    "expect": {
+      "exit": 2,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": false },
+        { "type": "eq", "path": "error.kind", "value": "usage" }
+      ]
+    }
+  }
+]

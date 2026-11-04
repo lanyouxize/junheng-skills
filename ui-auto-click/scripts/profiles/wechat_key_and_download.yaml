@@ -1,0 +1,81 @@
+# 「微信公众号文章批量下载工具」—— 取密钥 + 下载段（id 已取得，只差密钥与下载）
+#
+# 用途：状态探测判定工具处于「id_ready」（已点过「1.获取公众号id」、拿到 profile_ext，
+# 但还没取到密钥）时专用。完整链 wechat_batch_downloader 会重跑 id/密钥导致在
+# 「已 keyed」态下 wait_log 超时；本 profile 跳过 id，直接：
+#   微信打开 profile_ext 链接（取密钥）→ 等获取密钥成功 → 点批量下载 → 等开始下载 → 等静止。
+#
+# 真机背景（2026-10-28）：用户手动在微信打开 profile_ext 后工具即「获取密钥成功，
+# 请点击下载按钮」，此时再跑完整链会因重点 id 无新日志而卡步骤23。本 profile 承接该态。
+
+window:
+  regex: '.*公众号.*下载工具.*'
+  classes: [Mywindow]
+
+steps:
+  - name: 激活窗口
+    action: activate
+
+  # 取密钥：把 profile_ext 链接在微信内置浏览器打开（工具日志已含该链接，source: log 读取）
+  - name: 在微信内置浏览器打开 profile_ext 链接（取密钥）
+    action: open_url
+    source: log
+    settle: 5
+    target:
+      - {auto_id: Form.TextEdit}
+
+  - name: 等「获取密钥成功」
+    action: wait_log
+    source: file
+    path: 'C:/Users/Administrator/Desktop/下载/log*.txt'
+    timeout: 90
+    interval: 2.0
+    contains_any:
+      - 获取密钥成功
+    target:
+      - {auto_id: Form.TextEdit}
+
+  - name: 等主按钮文字变回「2.批量下载文章」
+    action: wait_control
+    timeout: 180
+    interval: 2.0
+    expect_name_regex: '批量下载|立即下载|开始下载'
+    require_enabled: true
+    target:
+      - {auto_id: Form.PrimaryPushButton}
+
+  - name: 激活窗口
+    action: activate
+
+  - name: 点「2.批量下载文章」（真实鼠标）
+    action: click
+    target:
+      - {auto_id: Form.PrimaryPushButton}
+      - {control_type: Button, name_regex: '批量下载|立即下载'}
+
+  - name: 等日志出现「开始下载」或「下载完成」
+    action: wait_log
+    source: file
+    path: 'C:/Users/Administrator/Desktop/下载/log*.txt'
+    timeout: 300
+    interval: 2.0
+    contains_any:
+      - 开始下载
+      - 下载完成
+    target:
+      - {auto_id: Form.TextEdit}
+
+  # 判"下载结束"不能只看日志静止 15 秒：工具会「暂停19秒，防止访问被限制」。
+  - name: 等日志 60 秒零增长（判任务结束）
+    action: wait_stable
+    source: file
+    path: 'C:/Users/Administrator/Desktop/下载/log*.txt'
+    stable_seconds: 60
+    interval: 5
+    timeout: 1800
+    target:
+      - {auto_id: Form.TextEdit}
+
+  - name: 截图留证（PrintWindow，遮挡无关）
+    action: screenshot
+    path: out/auto-click-evidence.png

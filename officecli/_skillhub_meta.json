@@ -1,0 +1,13 @@
+{
+  "name": "Office 办公文档工具",
+  "installedAt": 1792283951803,
+  "source": "marketplace",
+  "version": "2.0.0",
+  "skillId": "skill_2095053271430721536",
+  "pay_mode": 0,
+  "description_zh": "创建、分析、校对和修改 Word、Excel 与 PowerPoint 文档，适用于文档生成、内容检查、格式修正、问题排查及图表编辑。",
+  "description_en": "Create, analyze, proofread, and modify Word, Excel, and PowerPoint documents, including document generation, content inspection, formatting fixes, issue detection, and chart editing.",
+  "iconSource": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/4e2b6524-e279-4761-9804-fb9b69b2ff76/0627def1-fa47-4226-b671-f421b132713e.png",
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\officecli\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/4e2b6524-e279-4761-9804-fb9b69b2ff76/0627def1-fa47-4226-b671-f421b132713e.png"
+}

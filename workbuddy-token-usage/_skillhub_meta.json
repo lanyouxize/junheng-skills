@@ -1,0 +1,13 @@
+{
+  "name": "WorkBuddy Token 消耗分析",
+  "installedAt": 1791899487833,
+  "source": "marketplace",
+  "version": "1.0.0",
+  "skillId": "skill_2095588488380256256",
+  "pay_mode": 0,
+  "description_zh": "本地只读分析 WorkBuddy 每次 AI 调用的 Token 消耗与成本。统计总览、按模型/会话/Agent/机器拆分、缓存命中率、每日趋势、时段分布、Top-N 异常会话，并按 DeepSeek 官方价换算费用，生成自包含 HTML 报表与 CSV，支持日期区间与多维筛选。",
+  "description_en": "Locally analyze (read-only) the Token consumption and cost of every WorkBuddy AI call. Summarizes totals, breaks down by model/session/agent/worker, cache hit rate, daily trend, hourly distribution, and Top-N costly sessions, then converts to cost using official DeepSeek pricing and produces a self-contained HTML report and CSV with date-range and multi-dimension filters.",
+  "iconSource": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/da3b2c43-4d55-470a-95ca-a5c34d33ac13/7e20ab7b-660f-4d68-ae34-f68205552a50.png",
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\workbuddy-token-usage\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/da3b2c43-4d55-470a-95ca-a5c34d33ac13/7e20ab7b-660f-4d68-ae34-f68205552a50.png"
+}

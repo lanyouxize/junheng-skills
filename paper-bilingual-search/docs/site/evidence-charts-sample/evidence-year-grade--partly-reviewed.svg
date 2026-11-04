@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="410" viewBox="0 0 900 410" role="img" aria-label="发表年份 × 证据等级（候选）">
+<title>发表年份 × 证据等级（候选）</title>
+<desc>按年份堆叠 A-D 四档记录数；「未标注」列与时间轴断开，表示年份缺失。</desc>
+<defs><style>text{font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;}.ec-title{font-size:15px;font-weight:600;fill:#1f2328;}.ec-sub{font-size:11px;fill:#57606a;}.ec-axis{font-size:10.5px;fill:#57606a;font-variant-numeric:tabular-nums;}.ec-label{font-size:12px;fill:#1f2328;}.ec-label-b{font-size:12.5px;font-weight:600;fill:#1f2328;}.ec-value{font-size:12.5px;font-weight:600;fill:#1f2328;font-variant-numeric:tabular-nums;}.ec-cellv{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;}.ec-note{font-size:10.5px;fill:#57606a;}.ec-warn{font-size:11px;fill:#9a6700;font-weight:500;}.ec-legend{font-size:10.5px;fill:#57606a;}.ec-foot{font-size:10px;fill:#57606a;}</style><pattern id="ec-cand-3" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#ffffff" fill-opacity="0"/><line x1="0" y1="0" x2="0" y2="7" stroke="#ffffff" stroke-width="2.2" stroke-opacity="0.85"/></pattern></defs>
+<rect x="0" y="0" width="900" height="410" fill="#ffffff"/>
+<text class="ec-title" x="24" y="26">发表年份 × 证据等级（候选）</text>
+<text class="ec-sub" x="24" y="44">柱高 = 该分段的记录数，段内按 A-D 堆叠（A 贴基线）　·　共 69 条</text>
+<text class="ec-sub" x="876" y="26" text-anchor="end">evidence-charts/v1</text>
+<line x1="68" y1="276.0" x2="876" y2="276.0" stroke="#57606a"/>
+<text class="ec-axis" x="62" y="279.5" text-anchor="end">0</text>
+<line x1="68" y1="212.7" x2="876" y2="212.7" stroke="#d0d7de" stroke-dasharray="2 3"/>
+<text class="ec-axis" x="62" y="216.2" text-anchor="end">10</text>
+<line x1="68" y1="149.3" x2="876" y2="149.3" stroke="#d0d7de" stroke-dasharray="2 3"/>
+<text class="ec-axis" x="62" y="152.8" text-anchor="end">20</text>
+<line x1="68" y1="86.0" x2="876" y2="86.0" stroke="#d0d7de" stroke-dasharray="2 3"/>
+<text class="ec-axis" x="62" y="89.5" text-anchor="end">30</text>
+<rect x="101.5" y="250.7" width="34.0" height="25.3" fill="#8c959f"/>
+<rect x="101.5" y="250.7" width="34.0" height="25.3" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="118.5" y="291" text-anchor="middle">1995-1999</text>
+<text class="ec-note" x="118.5" y="245.66666666666666" text-anchor="middle">4</text>
+<rect x="202.5" y="250.7" width="34.0" height="25.3" fill="#8c959f"/>
+<rect x="202.5" y="250.7" width="34.0" height="25.3" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="219.5" y="291" text-anchor="middle">2000-2004</text>
+<text class="ec-note" x="219.5" y="245.66666666666666" text-anchor="middle">4</text>
+<rect x="303.5" y="193.7" width="34.0" height="82.3" fill="#8c959f"/>
+<rect x="303.5" y="193.7" width="34.0" height="82.3" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="320.5" y="291" text-anchor="middle">2005-2009</text>
+<text class="ec-note" x="320.5" y="188.66666666666669" text-anchor="middle">13</text>
+<rect x="404.5" y="269.7" width="34.0" height="6.3" fill="#bf8700"/>
+<rect x="404.5" y="269.7" width="34.0" height="6.3" fill="url(#ec-cand-3)"/>
+<rect x="404.5" y="105.0" width="34.0" height="164.7" fill="#8c959f"/>
+<rect x="404.5" y="105.0" width="34.0" height="164.7" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="421.5" y="291" text-anchor="middle">2010-2014</text>
+<text class="ec-note" x="421.5" y="100" text-anchor="middle">27</text>
+<rect x="505.5" y="269.7" width="34.0" height="6.3" fill="#7cc47f"/>
+<rect x="505.5" y="269.7" width="34.0" height="6.3" fill="url(#ec-cand-3)"/>
+<rect x="505.5" y="238.0" width="34.0" height="31.7" fill="#bf8700"/>
+<rect x="505.5" y="238.0" width="34.0" height="31.7" fill="url(#ec-cand-3)"/>
+<rect x="505.5" y="206.3" width="34.0" height="31.7" fill="#8c959f"/>
+<rect x="505.5" y="206.3" width="34.0" height="31.7" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="522.5" y="291" text-anchor="middle">2015-2019</text>
+<text class="ec-note" x="522.5" y="201.33333333333334" text-anchor="middle">11</text>
+<rect x="606.5" y="269.7" width="34.0" height="6.3" fill="#0f5132"/>
+<rect x="606.5" y="263.3" width="34.0" height="6.3" fill="#7cc47f"/>
+<rect x="606.5" y="244.3" width="34.0" height="19.0" fill="#7cc47f"/>
+<rect x="606.5" y="244.3" width="34.0" height="19.0" fill="url(#ec-cand-3)"/>
+<rect x="606.5" y="231.7" width="34.0" height="12.7" fill="#bf8700"/>
+<rect x="606.5" y="231.7" width="34.0" height="12.7" fill="url(#ec-cand-3)"/>
+<text class="ec-axis" x="623.5" y="291" text-anchor="middle">2020-2024</text>
+<text class="ec-note" x="623.5" y="226.66666666666669" text-anchor="middle">7</text>
+<rect x="707.5" y="269.7" width="34.0" height="6.3" fill="#0f5132"/>
+<text class="ec-axis" x="724.5" y="291" text-anchor="middle">2025-2029</text>
+<text class="ec-note" x="724.5" y="264.6666666666667" text-anchor="middle">1</text>
+<line x1="775" y1="80" x2="775" y2="282" stroke="#8c959f" stroke-dasharray="3 3"/>
+<rect x="808.5" y="269.7" width="34" height="6.3" fill="#8c959f" fill-opacity="0.45" stroke="#8c959f" stroke-dasharray="3 2"/>
+<text class="ec-axis" x="825.5" y="291" text-anchor="middle">未标注</text>
+<text class="ec-note" x="825.5" y="264.6666666666667" text-anchor="middle">1</text>
+<rect x="24" y="314" width="9" height="9" rx="2" fill="#0f5132"/>
+<text class="ec-legend" x="37" y="322">A　靶动物 RCT/SR</text>
+<rect x="143.20000000000002" y="314" width="9" height="9" rx="2" fill="#7cc47f"/>
+<text class="ec-legend" x="156.20000000000002" y="322">B　靶动物对照</text>
+<rect x="242.97500000000002" y="314" width="9" height="9" rx="2" fill="#bf8700"/>
+<text class="ec-legend" x="255.97500000000002" y="322">C　间接/观察/体外</text>
+<rect x="364.8" y="314" width="9" height="9" rx="2" fill="#8c959f"/>
+<text class="ec-legend" x="377.8" y="322">D　薄弱或信息不足</text>
+<rect x="485.57500000000005" y="314" width="9" height="9" rx="2" fill="#8c959f"/>
+<rect x="485.57500000000005" y="314" width="9" height="9" rx="2" fill="url(#ec-cand-3)" stroke="#8c959f" stroke-dasharray="2 1.5"/>
+<text class="ec-legend" x="498.57500000000005" y="322">斜纹 = 候选待人工确认（未审核）</text>
+<text class="ec-foot" x="24" y="342">「未标注」列 1 条：year 为空 ⇒ 不落在任何年份，也不得当作 0 或某一年</text>
+<text class="ec-foot" x="24" y="358">另有 1 条 year 非数字或超出 1900-2100，未计入时间轴</text>
+<text class="ec-foot" x="24" y="374">年份跨度过大，按 5 年分段；段内合计而非逐年</text>
+</svg>

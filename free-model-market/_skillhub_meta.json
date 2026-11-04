@@ -1,0 +1,11 @@
+{
+  "name": "免费模型超市",
+  "installedAt": 1791682425834,
+  "source": "marketplace",
+  "version": "1.4.6",
+  "skillId": "skill_2103025612478291968",
+  "pay_mode": 0,
+  "description_zh": "免费大模型 API 超市。维护 41 家厂商的免费模型渠道数据（额度、限速、端点、状态、信源），提供按场景选型推荐引擎、配置排障（doctor）与货架巡检优化（watch）闭环。当用户询问有哪些免费大模型 API 可用、推荐免费模型、查询某厂商免费额度，或需要巡检更新免费模型货架时使用。",
+  "description_en": "Free LLM API marketplace. Maintains free-tier model data across 41 providers (quotas, rate limits, endpoints, status, sources), offering a scenario-based recommendation engine, config doctor, and catalog watch/optimization loop. Use when users ask about available free LLM APIs, free model suggestions, provider free-tier quotas, or need to refresh the catalog.",
+  "iconSource": "letter:auto"
+}

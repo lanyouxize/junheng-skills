@@ -1,0 +1,62 @@
+# 「微信公众号文章批量下载工具」—— 仅完成下载段（id/密钥已由人工或前次跑通）
+#
+# 用途：当工具已处于「获取密钥成功！请点击下载按钮」状态（人工已在微信打开
+# profile_ext 链接、或前一次 clicker 已取到密钥但整链因状态错配中断），直接
+# 点「2.批量下载文章」并等落地，避免重复点「1.获取公众号id」导致 wait_log 超时。
+#
+# 真机背景（2026-10-28）：完整七步链在「已取密钥」状态下重跑会卡步骤23
+# （重点的 id 不产生新日志行 → wait_log 只认 run 基线后的新文本 → 超时 rc=3）。
+# 此 profile 跳过 id/密钥段，只验收下载按钮就绪 → 点击 → 等开始下载 → 等静止。
+
+window:
+  regex: '.*公众号.*下载工具.*'
+  classes: [Mywindow]
+
+steps:
+  - name: 激活窗口
+    action: activate
+
+  # 验收下载按钮确实就绪（enabled 且文字含 批量下载/立即下载/开始下载）。
+  # 若工具并不在「已取密钥」态，这里会快速失败，不会盲点。
+  - name: 确认下载按钮就绪
+    action: wait_control
+    timeout: 30
+    interval: 1.0
+    expect_name_regex: '批量下载|立即下载|开始下载'
+    require_enabled: true
+    target:
+      - {auto_id: Form.PrimaryPushButton}
+
+  - name: 点「2.批量下载文章」（真实鼠标）
+    action: click
+    target:
+      - {auto_id: Form.PrimaryPushButton}
+      - {control_type: Button, name_regex: '批量下载|立即下载'}
+
+  - name: 等日志出现「起始下载页数」或「下载完成」（工具真实输出是 起始下载页数：N，非 开始下载）
+    action: wait_log
+    source: file
+    path: 'C:/Users/Administrator/Desktop/下载/log*.txt'
+    timeout: 120
+    interval: 2.0
+    contains_any:
+      - 起始下载页数
+      - 下载完成
+    target:
+      - {auto_id: Form.TextEdit}
+
+  # 判"下载结束"不能只看日志静止 15 秒：工具会「暂停19秒，防止访问被限制」。
+  # 要求 60 秒零增长。
+  - name: 等日志 60 秒零增长（判任务结束）
+    action: wait_stable
+    source: file
+    path: 'C:/Users/Administrator/Desktop/下载/log*.txt'
+    stable_seconds: 60
+    interval: 5
+    timeout: 1800
+    target:
+      - {auto_id: Form.TextEdit}
+
+  - name: 截图留证（PrintWindow，遮挡无关）
+    action: screenshot
+    path: out/auto-click-evidence.png

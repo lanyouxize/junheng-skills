@@ -1,0 +1,67 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "intel-formula",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/intel-formula/SKILL.md",
+      "kind": "template",
+      "sha256": "8a2a48abbf92f7080c9087f3bb34a6774793d61b51bf1fabfb3f73c0b823c474"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/formula.mjs",
+      "kind": "facade",
+      "sha256": "984a0fdf65834031bda46542895be43f69d7209e55ecd098c2a6e46abcbdc058"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "8877c0374b0c7c906a0eb4dd47b2dfc7d68794e793751bd5d56c82d3f0fa8e79"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "4dd4a54b27ec8ec709bdb3782c928b07947028870f2692100eb195d6390f6c62"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "scripts/vendor/formula.js",
+      "origin": "src/lib/formula.js",
+      "kind": "vendor",
+      "sha256": "828e1eb15ff3a26edf8fd1aa936fc3597e98e630de93fe8728729e80bc135bbb"
+    },
+    {
+      "dest": "scripts/vendor/reference-values.js",
+      "origin": "src/lib/reference-values.js",
+      "kind": "vendor",
+      "sha256": "b8d44848003c6d9f83bfc46070372a9762bb4740977c17e5f9af5f285746ab2a"
+    }
+  ]
+}

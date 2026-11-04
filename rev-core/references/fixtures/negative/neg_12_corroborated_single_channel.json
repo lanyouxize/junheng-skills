@@ -1,0 +1,27 @@
+{
+  "claim": "两个静态点合起来算证实",
+  "contradicts": [],
+  "evidence_refs": [
+    "ev-1001",
+    "ev-2001s"
+  ],
+  "id": "fd-2002",
+  "kind": "finding",
+  "produced_at": "2026-11-01T22:40:00+08:00",
+  "produced_by": "rev-core",
+  "provenance": {
+    "command": "analyzeHeadless ... -postScript Xrefs.py",
+    "inputs_sha256": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "tool": "ghidra",
+    "version": "11.3.2"
+  },
+  "refs": [],
+  "schema": "reva/1",
+  "scope": "z",
+  "state": "corroborated",
+  "status": "ok",
+  "target_id": "tgt-abc123",
+  "unknowns": []
+}

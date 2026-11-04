@@ -1,0 +1,259 @@
+{
+  "schema": "reva/1",
+  "version": "1.1.0",
+  "updated": "2026-11-01",
+  "note": "四类工件的唯一真源。所有模块运行时从本文件加载对象定义；出现未定义字段即 lint 红（不做静默兼容）。 | 1.1.0：locator 增加 mode=file|runtime 双模，动态证据不再被迫伪造文件偏移。",
+  "envelope": {
+    "required": [
+      "schema",
+      "kind",
+      "id",
+      "produced_by",
+      "produced_at",
+      "target_id",
+      "provenance",
+      "status",
+      "refs"
+    ],
+    "allowed": [
+      "schema",
+      "kind",
+      "id",
+      "produced_by",
+      "produced_at",
+      "target_id",
+      "provenance",
+      "status",
+      "refs"
+    ],
+    "schema_value": "reva/1",
+    "status_values": [
+      "ok",
+      "partial",
+      "failed"
+    ],
+    "provenance": {
+      "required": [
+        "tool",
+        "version",
+        "command",
+        "inputs_sha256"
+      ],
+      "allowed": [
+        "tool",
+        "version",
+        "command",
+        "inputs_sha256"
+      ]
+    }
+  },
+  "kinds": {
+    "evidence": {
+      "required": [
+        "locator",
+        "digest",
+        "reproduce",
+        "grade",
+        "channel"
+      ],
+      "allowed": [
+        "locator",
+        "digest",
+        "reproduce",
+        "grade",
+        "channel"
+      ],
+      "forbidden": [
+        "confidence"
+      ],
+      "locator": {
+        "required": [
+          "file_sha256",
+          "length"
+        ],
+        "allowed": [
+          "mode",
+          "file_sha256",
+          "addr",
+          "offset",
+          "length",
+          "runtime"
+        ],
+        "rule": "mode=file（缺省）时 addr 与 offset 二选一；mode=runtime 时必须给 runtime 子对象且 addr/offset 可缺；channel=static 只允许 mode=file，channel=dynamic 两者皆可",
+        "mode_values": [
+          "file",
+          "runtime"
+        ],
+        "mode_default": "file",
+        "runtime": {
+          "required": [
+            "host",
+            "pid",
+            "module",
+            "rva",
+            "session"
+          ],
+          "allowed": [
+            "host",
+            "pid",
+            "module",
+            "rva",
+            "session",
+            "captured_at"
+          ],
+          "rule": "host ∈ {windows,linux,android}；pid 正整数；module 为模块名或路径；rva 为模块内偏移（非负整数）；session 为本次采集会话 id（非空）；captured_at 为 ISO8601"
+        }
+      },
+      "digest": {
+        "required": [
+          "algo",
+          "value"
+        ],
+        "allowed": [
+          "algo",
+          "value"
+        ],
+        "algo_values": [
+          "sha256"
+        ]
+      },
+      "reproduce": {
+        "required": [
+          "cmd",
+          "cwd",
+          "env"
+        ],
+        "allowed": [
+          "cmd",
+          "cwd",
+          "env"
+        ]
+      },
+      "grade_values": [
+        "E0",
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "channel_values": [
+        "static",
+        "dynamic"
+      ]
+    },
+    "finding": {
+      "required": [
+        "claim",
+        "scope",
+        "evidence_refs",
+        "unknowns",
+        "contradicts",
+        "state"
+      ],
+      "allowed": [
+        "claim",
+        "scope",
+        "evidence_refs",
+        "unknowns",
+        "contradicts",
+        "state"
+      ],
+      "forbidden": [
+        "confidence"
+      ],
+      "state_values": [
+        "proposed",
+        "corroborated",
+        "refuted",
+        "quarantined"
+      ],
+      "rule": "state=corroborated 需 >=2 条来自不同 channel 的 evidence"
+    },
+    "unknown": {
+      "required": [
+        "question",
+        "why_unknown",
+        "blocking",
+        "tried",
+        "unblock_condition",
+        "owner_module"
+      ],
+      "allowed": [
+        "question",
+        "why_unknown",
+        "blocking",
+        "tried",
+        "unblock_condition",
+        "owner_module"
+      ],
+      "rule": "blocking=true 时 gate 拒绝出交付版报告"
+    },
+    "rebuild-target": {
+      "required": [
+        "surface",
+        "spec_ref",
+        "fixtures",
+        "dod",
+        "unknowns"
+      ],
+      "allowed": [
+        "surface",
+        "spec_ref",
+        "fixtures",
+        "dod",
+        "unknowns"
+      ],
+      "surface_values": [
+        "http",
+        "grpc",
+        "dll-export",
+        "ipc",
+        "cli",
+        "agent-tool"
+      ],
+      "rule": "dod 每条必须是以 rev- 开头的可机检命令"
+    }
+  },
+  "confidence": {
+    "grade_ceiling": {
+      "E0": 0.0,
+      "E1": 0.6,
+      "E2": 0.85,
+      "E3": 1.0
+    },
+    "formula": "min(grade_ceiling, 0.35 + 0.25 * distinct_channel_count)",
+    "note": "confidence 由本表派生，禁止在工件中手填；手填即 lint 红。'看两遍'不涨分，'换手段看'才涨分。"
+  },
+  "target": {
+    "authorization_required": [
+      "basis",
+      "evidence_ref",
+      "purpose",
+      "scope_whitelist",
+      "reviewed_at"
+    ],
+    "basis_values": [
+      "self-owned",
+      "written",
+      "open-source",
+      "public-spec"
+    ],
+    "purpose_values": [
+      "interop",
+      "security-test",
+      "malware-analysis",
+      "migration",
+      "compete-observe"
+    ],
+    "route_policy": {
+      "compete-observe": "no-static",
+      "note": "compete-observe 的路由禁止出现任何 static.* 节点（依据 05-合规与安全门禁 S2）"
+    },
+    "prohibited": [
+      "drm-bypass",
+      "license-check-bypass",
+      "certificate-pinning-bypass",
+      "integrity-check-bypass",
+      "redistribute-as-product"
+    ]
+  }
+}

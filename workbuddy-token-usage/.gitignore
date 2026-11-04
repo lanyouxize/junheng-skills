@@ -1,0 +1,8 @@
+# 生成的报表产物（含个人用量数据，勿提交）
+reports/*.csv
+reports/*.html
+reports/v_csv/
+reports/v_html/
+
+# macOS
+.DS_Store

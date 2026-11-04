@@ -1,0 +1,11 @@
+{
+  "name": "cli-anything-hub",
+  "installedAt": 1776990920774,
+  "source": "marketplace",
+  "iconSource": "cli-anything-hub",
+  "version": "1.0.1",
+  "skillId": "skill_2053081466713624576",
+  "skillName": "cli-anything-hub",
+  "description_zh": "发现并安装面向 AI 智能体的 CLI 工具市场（创意、生产力、AI 平台等）",
+  "description_en": "Discover & install agent-native CLIs for creative, productivity & AI tools"
+}

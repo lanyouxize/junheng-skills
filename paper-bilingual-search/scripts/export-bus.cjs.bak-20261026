@@ -1,0 +1,310 @@
+#!/usr/bin/env node
+'use strict';
+/**
+ * 文献总线写入器（索隐为唯一写方）
+ *
+ * 输入：search-papers.cjs --out <目录> 产出的每关键词 JSON（{records:[...]}）
+ * 输出：D:/petfood-platform/data/bus/literature/records.jsonl（一篇一行，按 id 排序）
+ *
+ * 契约依据：docs/bus/CONTRACTS.md §2
+ *   - id = sha1(doi 小写) ，无 doi 时 sha1(规范化标题)
+ *   - 必填：id title year sourceUrl ingestedBy verifiedAt
+ *   - 幂等：同 id 只更新可变字段（title/year/journal/sourceUrl/doi/tags），
+ *           verifiedAt 保留**首次入库时间**，不因重跑而刷新
+ *   - 缺 sourceUrl 的记录跳过并计数（不得用空 URL 充数）
+ *
+ * 用法：
+ *   node scripts/export-bus.cjs --dir <检索输出目录> [--out <records.jsonl>] [--dry-run]
+ *   node scripts/export-bus.cjs --check [--out <records.jsonl>]
+ *   node scripts/export-bus.cjs --selftest
+ *
+ * 退出码：0 成功/新鲜  1 校验失败  2 环境错误
+ */
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+
+const DEFAULT_OUT = process.env.LITERATURE_BUS ||
+  'D:/petfood-platform/data/bus/literature/records.jsonl';
+const SKIP_FILES = new Set(['summary.json', 'dedupe.json', 'diagnostics.json', 'prisma.json']);
+const FIELDS = ['id', 'doi', 'title', 'year', 'journal', 'abstractHash', 'fulltextPath', 'sourceUrl', 'sourceHost', 'ingestedBy', 'verifiedAt', 'tags'];
+
+const sha1 = (s) => crypto.createHash('sha1').update(String(s), 'utf8').digest('hex');
+const nowIso = () => new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+const normTitle = (t) => String(t || '')
+  .replace(/[\uFF01-\uFF5E]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+  .toLowerCase().replace(/\s+/g, ' ').trim();
+
+// 来源域名（无源 domain 时从 URL 兜底提取）；失败返回 null，不编造。
+// 作用是让"这篇文章从哪个站来的"可查，同时把 tags 位让给主题标签。
+function hostOf(url) {
+  try {
+    const h = new URL(String(url)).hostname.toLowerCase();
+    return h || null;
+  } catch {
+    return null;
+  }
+}
+
+function mapRecord(r) {
+  const doi = (r.doiFromUrl || r.doi || '').trim().toLowerCase() || null;
+  const title = (r.titleEn || r.titleZh || '').trim();
+  if (!title) return { skip: 'no-title' };
+  // 实测：镜像站记录的详情页链接在 paperUrl，sourceUrl 常为 null
+  const sourceUrl = String(r.paperUrl || r.sourceUrl || '').trim();
+  if (!/^https?:\/\//i.test(sourceUrl)) return { skip: 'no-url' };
+  const year = Number(r.year);
+  if (!Number.isInteger(year) || year < 1900 || year > 2100) return { skip: 'no-year' };
+
+  const id = doi ? sha1(doi) : sha1(normTitle(title));
+  const rec = {
+    id,
+    doi,
+    title,
+    year,
+    journal: (r.source || '').trim() || null,
+    // 2026-10-19 E1：此前硬编码 null，导致「摘要已取到但库里没有指针」——
+    // 证据表只能停在 pending。改为透传，但仍按 schema 校验形态：
+    // abstractHash 必须是 sha256(64 hex)，不合规一律落 null，不写入半截值。
+    abstractHash: /^[a-f0-9]{64}$/.test(String(r.abstractHash || '')) ? String(r.abstractHash) : null,
+    fulltextPath: typeof r.fulltextPath === 'string' && r.fulltextPath ? r.fulltextPath : null,
+    sourceUrl,
+    // 2026-10-18 P2-12：来源域名归位到独立字段，不再占用 tags。
+    // tags 语义 = 主题标签（如 ["酶制剂","犬"]），导出器**不臆造**——源里没有就留空，
+    // 由评审/人工在精读后填；填之前 evidence-link 的分类维度为空是预期行为。
+    sourceHost: r.domain ? String(r.domain).trim().toLowerCase() : hostOf(sourceUrl),
+    ingestedBy: 'suoyin',
+    verifiedAt: null, // 由 merge 填充（首次入库时间）
+    tags: Array.isArray(r.tags) ? r.tags.map((t) => String(t).trim()).filter(Boolean) : [],
+  };
+  return { rec };
+}
+
+function readJsonl(p) {
+  const rows = [];
+  if (!fs.existsSync(p)) return rows;
+  for (const [i, line] of fs.readFileSync(p, 'utf8').split('\n').entries()) {
+    const t = line.trim();
+    if (!t) continue;
+    try {
+      rows.push(JSON.parse(t));
+    } catch {
+      throw new Error(`第 ${i + 1} 行不是合法 JSON：${p}`);
+    }
+  }
+  return rows;
+}
+
+function writeJsonl(p, rows) {
+  const sorted = [...rows].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  const body = sorted.map((r) => JSON.stringify(order(r))).join('\n');
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, body ? `${body}\n` : '', 'utf8');
+  return sorted.length;
+}
+
+function order(r) {
+  const o = {};
+  for (const k of FIELDS) if (k in r) o[k] = r[k];
+  if (!o.verifiedAt) o.verifiedAt = nowIso();
+  return o;
+}
+
+/** 汇总一次检索的元信息（供 search-log 留痕：换机器也查得到这次怎么检的） */
+function buildSearchLog(dir) {
+  const keywords = new Set();
+  let retrieved = 0;
+  for (const d of [dir, path.join(dir, 'raw')]) {
+    if (!fs.existsSync(d) || !fs.statSync(d).isDirectory()) continue;
+    for (const f of fs.readdirSync(d).sort()) {
+      if (!f.endsWith('.json') || SKIP_FILES.has(f)) continue;
+      const p = path.join(d, f);
+      if (!fs.statSync(p).isFile()) continue;
+      const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+      if (data.keyword) keywords.add(String(data.keyword));
+      if (Array.isArray(data.records)) retrieved += data.records.length;
+    }
+  }
+  let runId = null;
+  let limit = null;
+  try {
+    const s = JSON.parse(fs.readFileSync(path.join(dir, 'summary.json'), 'utf8'));
+    runId = s.runId || null;
+    limit = s.limit ?? null;
+  } catch { /* summary 可选 */ }
+  return { runId, at: nowIso(), keywords: [...keywords].sort(), limit, retrieved, sourceDir: dir.replace(/\\/g, '/') };
+}
+
+function collect(dir) {
+  const out = [];
+  const skipped = { 'no-title': 0, 'no-url': 0, 'no-year': 0 };
+  // 每关键词记录在 <out>/raw/ 下（实测），同时兼容直接放在 <out>/ 的旧布局
+  for (const d of [dir, path.join(dir, 'raw')]) {
+    if (!fs.existsSync(d) || !fs.statSync(d).isDirectory()) continue;
+    for (const f of fs.readdirSync(d).sort()) {
+      if (!f.endsWith('.json') || SKIP_FILES.has(f)) continue;
+      const p = path.join(d, f);
+      if (!fs.statSync(p).isFile()) continue;
+      const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+      for (const raw of data.records || []) {
+        const m = mapRecord(raw);
+        if (m.skip) skipped[m.skip] += 1;
+        else out.push(m.rec);
+      }
+    }
+  }
+  return { records: out, skipped };
+}
+
+function merge(existing, incoming, dryRun) {
+  const byId = new Map(existing.map((r) => [r.id, r]));
+  let added = 0;
+  let updated = 0;
+  for (const rec of incoming) {
+    const old = byId.get(rec.id);
+    if (!old) {
+      byId.set(rec.id, { ...rec, verifiedAt: rec.verifiedAt || nowIso() });
+      added += 1;
+      continue;
+    }
+    const next = { ...old };
+    for (const k of ['doi', 'title', 'year', 'journal', 'sourceUrl', 'sourceHost', 'abstractHash', 'fulltextPath']) {
+      if (rec[k] !== undefined && JSON.stringify(rec[k]) !== JSON.stringify(old[k])) next[k] = rec[k];
+    }
+    // tags 特殊处理（2026-10-18 P2-12）：源里没有主题标签时**不得清空**已有标签。
+    // 否则每次重跑导出都会把人工/评审填的主题标签洗掉——这是幂等性陷阱。
+    if (Array.isArray(rec.tags) && rec.tags.length > 0) next.tags = rec.tags;
+    next.verifiedAt = old.verifiedAt || nowIso();
+    byId.set(rec.id, next);
+    updated += 1;
+  }
+  return { rows: [...byId.values()], added, updated };
+}
+
+function selftest() {
+  const cases = [];
+  const t = (label, cond) => cases.push([label, cond]);
+
+  const a = mapRecord({ titleEn: 'Effect of X on dogs', year: 2024, sourceUrl: 'https://doi.org/10.1/abc', doiFromUrl: '10.1/ABC', source: 'J Anim Sci', domain: 'nutrition' });
+  t('合法记录应映射成功', !a.skip && /^[a-f0-9]{40}$/.test(a.rec.id));
+  // 2026-10-19 E1：abstractHash 透传的两条判据（此前恒为 null，没有牙齿）
+  const H = 'a'.repeat(64);
+  const withHash = mapRecord({ titleEn: 'Hairball in cats', year: 2025, sourceUrl: 'https://doi.org/10.1/x', doi: '10.1/x', abstractHash: H });
+  t('abstractHash 合法时应透传', !withHash.skip && withHash.rec.abstractHash === H);
+  const badHash = mapRecord({ titleEn: 'Hairball in cats', year: 2025, sourceUrl: 'https://doi.org/10.1/x', doi: '10.1/x', abstractHash: 'abc' });
+  t('abstractHash 非法时应落 null（不写半截值）', !badHash.skip && badHash.rec.abstractHash === null);
+  t('doi 大小写归一同 id', a.rec.id === sha1('10.1/abc'));
+  t('无 doi 用规范化标题', mapRecord({ titleZh: '酶制剂对犬消化的影响', year: 2024, sourceUrl: 'https://x.org/a' }).rec.id === sha1(normTitle('酶制剂对犬消化的影响')));
+  t('全角/空格归一后同 id', mapRecord({ titleEn: 'Ａ  B', year: 2024, sourceUrl: 'https://x.org/a' }).rec.id === mapRecord({ titleEn: 'a b', year: 2024, sourceUrl: 'https://x.org/b' }).rec.id);
+  t('缺 URL 必须跳过', mapRecord({ titleEn: 'x', year: 2024 }).skip === 'no-url');
+  t('paperUrl 可作 sourceUrl 兜底（实测布局）',
+    mapRecord({ titleEn: 'x', year: 2024, paperUrl: 'https://kuluer.com/paper/abc' }).rec.sourceUrl === 'https://kuluer.com/paper/abc');
+  t('缺年份必须跳过', mapRecord({ titleEn: 'x', sourceUrl: 'https://x.org' }).skip === 'no-year');
+  t('缺标题必须跳过', mapRecord({ year: 2024, sourceUrl: 'https://x.org' }).skip === 'no-title');
+
+  const base = { ...a.rec, verifiedAt: '2020-01-01T00:00:00Z' };
+  const m1 = merge([base], [{ ...a.rec, title: 'New title' }], true);
+  t('同 id 视为更新而非新增', m1.added === 0 && m1.updated === 1);
+  t('更新保留首次 verifiedAt', m1.rows[0].verifiedAt === '2020-01-01T00:00:00Z');
+  t('可变字段被更新', m1.rows[0].title === 'New title');
+  t('新 id 计为新增', merge([base], [{ ...a.rec, id: sha1('other'), title: 'zzz' }], true).added === 1);
+
+  t('输出只含契约字段', Object.keys(order(a.rec)).every((k) => FIELDS.includes(k)));
+
+  // ── 2026-10-18 P2-12：tags 语义从"域名"改为"主题标签" ──
+  t('域名不再写进 tags（旧行为已废止）', Array.isArray(a.rec.tags) && a.rec.tags.length === 0);
+  t('域名归位到 sourceHost', a.rec.sourceHost === 'nutrition');
+  t('无 domain 时从 URL 兜底取 host 且小写',
+    mapRecord({ titleEn: 'x', year: 2024, sourceUrl: 'https://Kuluer.com/p/1' }).rec.sourceHost === 'kuluer.com');
+  t('URL 残缺（https://，正则能过但 new URL 抛错）时 sourceHost 为 null（不编造）',
+    mapRecord({ titleEn: 'x', year: 2024, sourceUrl: 'https://' }).rec.sourceHost === null);
+  t('源里带主题标签时原样保留',
+    mapRecord({ titleEn: 'x', year: 2024, sourceUrl: 'https://x.org/a', tags: [' 酶制剂 ', '犬'] }).rec.tags.join('|') === '酶制剂|犬');
+
+  // 幂等性陷阱：重跑导出不得洗掉人工/评审填的主题标签
+  const tagged = { ...base, tags: ['酶制剂', '犬'], sourceHost: 'old.host' };
+  const m2 = merge([tagged], [{ ...a.rec, tags: [], sourceHost: 'new.host' }], true);
+  t('重跑导出不清空已有主题标签', JSON.stringify(m2.rows[0].tags) === JSON.stringify(['酶制剂', '犬']));
+  t('sourceHost 仍可被更新', m2.rows[0].sourceHost === 'new.host');
+  const m3 = merge([tagged], [{ ...a.rec, tags: ['益生菌'] }], true);
+  t('源提供新标签时覆盖', JSON.stringify(m3.rows[0].tags) === JSON.stringify(['益生菌']));
+
+  const dir = fs.mkdtempSync(path.join(process.env.TEMP || '/tmp', 'bus-exp-'));
+  const rawA = { titleEn: 'Effect of X on dogs', year: 2024, sourceUrl: 'https://doi.org/10.1/abc', doiFromUrl: '10.1/ABC', source: 'J Anim Sci' };
+  fs.writeFileSync(path.join(dir, 'kw1.json'), JSON.stringify({ records: [rawA, { titleEn: 'bad', year: 2024 }] }));
+  fs.writeFileSync(path.join(dir, 'summary.json'), JSON.stringify({ records: [rawA] }));
+  fs.writeFileSync(path.join(dir, 'prisma.json'), JSON.stringify({ records: [rawA] }));
+  const col = collect(dir);
+  t('只读检索文件、跳过 summary/prisma', col.records.length === 1 && col.skipped['no-url'] === 1);
+
+  // 实测布局：每关键词记录在 <out>/raw/ 下
+  const d2 = fs.mkdtempSync(path.join(process.env.TEMP || '/tmp', 'bus-exp-raw-'));
+  fs.mkdirSync(path.join(d2, 'raw'));
+  fs.writeFileSync(path.join(d2, 'raw', '01-kw.json'), JSON.stringify({ keyword: 'kw-test', records: [rawA] }));
+  fs.writeFileSync(path.join(d2, 'summary.json'), JSON.stringify({ count: 1 }));
+  const col2 = collect(d2);
+  t('raw/ 子目录下的记录必须被读到', col2.records.length === 1 && col2.skipped['no-url'] === 0);
+
+  const lg = buildSearchLog(d2);
+  t('检索日志取到关键词与检索条数', lg.keywords.length === 1 && lg.retrieved === 1);
+  t('检索日志路径统一正斜杠', !lg.sourceDir.includes('\\'));
+  fs.rmSync(d2, { recursive: true, force: true });
+  fs.rmSync(dir, { recursive: true, force: true });
+
+  const bad = cases.filter(([, c]) => !c);
+  for (const [label] of bad) console.error(`  FAIL ${label}`);
+  console.log(`selftest: ${bad.length ? 'FAIL' : 'PASS'}（${cases.length - bad.length}/${cases.length}）`);
+  return bad.length ? 1 : 0;
+}
+
+function parseArg(name, dflt) {
+  const i = process.argv.indexOf(name);
+  return i > 0 && process.argv[i + 1] ? process.argv[i + 1] : dflt;
+}
+
+function main() {
+  if (process.argv.includes('--selftest')) return selftest();
+  const out = parseArg('--out', DEFAULT_OUT);
+
+  if (process.argv.includes('--check')) {
+    let rows;
+    try {
+      rows = readJsonl(out);
+    } catch (e) {
+      console.error(`[不合格] ${e.message}`);
+      return 1;
+    }
+    const bad = rows.filter((r) => !/^[a-f0-9]{40}$/.test(r.id) || !r.title || !r.sourceUrl || !r.verifiedAt);
+    if (bad.length) {
+      console.error(`[不合格] ${bad.length} 条缺必填或 id 非 sha1`);
+      return 1;
+    }
+    console.log(`[合格] ${rows.length} 条，id 唯一 ${new Set(rows.map((r) => r.id)).size === rows.length}`);
+    return 0;
+  }
+
+  const dir = parseArg('--dir', '');
+  if (!dir || !fs.existsSync(dir)) {
+    console.error(`[不可用] 检索输出目录不存在：${dir || '(未提供 --dir)'}`);
+    return 2;
+  }
+  const { records, skipped } = collect(dir);
+  const existing = readJsonl(out);
+  const { rows, added, updated } = merge(existing, records, process.argv.includes('--dry-run'));
+
+  if (process.argv.includes('--dry-run')) {
+    console.log(`[dry-run] 现有 ${existing.length} → 合并后 ${rows.length}（新增 ${added}，更新 ${updated}），跳过 ${JSON.stringify(skipped)}`);
+    return 0;
+  }
+  const n = writeJsonl(out, rows);
+  let logNote = '';
+  if (!process.argv.includes('--no-log')) {
+    const entry = { ...buildSearchLog(dir), added, updated, total: n };
+    fs.appendFileSync(path.join(path.dirname(out), 'search-log.jsonl'), `${JSON.stringify(entry)}\n`, 'utf8');
+    logNote = '｜检索日志已记入 search-log.jsonl';
+  }
+  console.log(`[已写入] ${out}：${n} 条（新增 ${added}，更新 ${updated}），跳过 ${JSON.stringify(skipped)}${logNote}`);
+  return 0;
+}
+
+process.exitCode = main();

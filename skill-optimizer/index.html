@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Skill 优化大师（skill-optimizer）使用说明：一套标准化的 skill 技能优化协作体系，15 维度质量评估 + 六步需求管理 + 结构化任务指令 + 硬判据验收，帮你把任何 skill 从「能用」迭代到「优秀」。">
+<title>Skill 优化大师 · 使用说明</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --blue:#2563eb;
+  --blue-700:#1d4ed8;
+  --blue-50:#eff6ff;
+  --blue-100:#dbeafe;
+  --ink:#0f172a;
+  --text:#334155;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --code:#1e293b;
+  --green:#047857;
+  --red:#b91c1c;
+  --r:16px;
+  --r-sm:10px;
+  --sh:0 1px 2px rgba(15,23,42,.05), 0 10px 30px -18px rgba(15,23,42,.28);
+  --sh-h:0 4px 10px rgba(15,23,42,.06), 0 22px 44px -20px rgba(37,99,235,.38);
+  --maxw:1120px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:92px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono","Courier New",monospace}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* ---------- 淡入动画 ---------- */
+.fade-up{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.in{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 顶部标题区 ---------- */
+.hero{
+  background:linear-gradient(180deg,#eff6ff 0%,#f8fafc 100%);
+  border-bottom:1px solid var(--line);
+  padding:56px 0 46px;
+}
+.badge{
+  display:inline-block;background:#fff;border:1px solid var(--blue-100);color:var(--blue-700);
+  font-size:13px;font-weight:600;letter-spacing:.02em;padding:5px 12px;border-radius:999px;
+}
+.hero h1{
+  margin:18px 0 10px;font-size:clamp(30px,5.2vw,46px);line-height:1.2;
+  color:var(--ink);letter-spacing:-.02em;font-weight:800;
+}
+.hero .sub{margin:0 0 18px;font-size:clamp(16px,2.3vw,19px);color:var(--blue-700);font-weight:600;line-height:1.6}
+.hero .lead{margin:0;max-width:760px;color:var(--text)}
+.hero .lead + .lead{margin-top:12px}
+.hero-actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+  font-size:15px;font-weight:600;border:1px solid transparent;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn.primary{background:var(--blue);color:#fff;box-shadow:0 10px 24px -12px rgba(37,99,235,.7)}
+.btn.primary:hover{background:var(--blue-700);box-shadow:0 16px 30px -14px rgba(37,99,235,.8)}
+.btn.ghost{background:#fff;color:var(--blue-700);border-color:var(--blue-100);box-shadow:var(--sh)}
+.btn.ghost:hover{border-color:var(--blue);}
+
+/* ---------- 目录导航 ---------- */
+.toc-mobile{display:none;position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.toc-mobile .toc-scroll{display:flex;gap:8px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+.toc-mobile .toc-scroll::-webkit-scrollbar{display:none}
+.toc-mobile a{
+  flex:0 0 auto;font-size:14px;font-weight:600;color:var(--muted);
+  padding:6px 12px;border-radius:999px;background:#f1f5f9;white-space:nowrap;
+}
+.toc-mobile a:hover{text-decoration:none;color:var(--blue-700);background:var(--blue-50)}
+.toc-mobile a.active{background:var(--blue);color:#fff}
+
+.layout{display:grid;grid-template-columns:216px minmax(0,1fr);gap:40px;align-items:start;padding-top:34px;padding-bottom:56px}
+.sidebar{position:sticky;top:28px}
+.side-title{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.sidebar ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.sidebar li{margin:0}
+.sidebar a{
+  display:block;padding:7px 0 7px 14px;margin-left:-2px;border-left:2px solid transparent;
+  font-size:14px;color:var(--muted);line-height:1.5;transition:color .18s ease,border-color .18s ease,background .18s ease;
+}
+.sidebar a:hover{text-decoration:none;color:var(--blue-700);background:var(--blue-50)}
+.sidebar a.active{color:var(--blue-700);font-weight:700;border-left-color:var(--blue)}
+
+/* ---------- 正文 ---------- */
+main{min-width:0}
+section{margin-bottom:52px}
+section > h2{
+  margin:0 0 6px;font-size:clamp(21px,3.2vw,26px);color:var(--ink);font-weight:800;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+section > h2 .n{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:9px;background:var(--blue-50);color:var(--blue-700);
+  font-size:14px;font-weight:800;
+}
+section > .sec-lead{margin:0 0 22px;color:var(--muted);font-size:15px}
+h3{margin:26px 0 10px;font-size:17px;color:var(--ink);font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:1.35em}
+li{margin:5px 0}
+strong{color:var(--ink);font-weight:700}
+.inline{background:#f1f5f9;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.9em;color:var(--blue-700);white-space:nowrap}
+
+/* ---------- 卡片 ---------- */
+.grid{display:grid;gap:16px}
+.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  box-shadow:var(--sh);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh-h);border-color:var(--blue-100)}
+.card h3{margin:0 0 8px;font-size:16px}
+.card p{margin:0;font-size:14.5px;color:var(--text);line-height:1.7}
+.card .icon{
+  display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+  border-radius:11px;background:var(--blue-50);color:var(--blue-700);font-size:18px;font-weight:800;margin-bottom:12px;
+}
+.card .num{
+  display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--blue-700);
+  background:var(--blue-50);border-radius:6px;padding:2px 8px;margin-bottom:10px;
+}
+.card .q{margin:0 0 10px;font-size:14.5px;color:var(--text)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+  background:#f8fafc;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted);
+  transition:background .18s ease,color .18s ease,border-color .18s ease;
+}
+.chip:hover{text-decoration:none;background:var(--blue-50);color:var(--blue-700);border-color:var(--blue-100)}
+
+/* ---------- 场景卡 ---------- */
+.scenario{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+  box-shadow:var(--sh);margin-bottom:18px;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.scenario:hover{transform:translateY(-3px);box-shadow:var(--sh-h);border-color:var(--blue-100)}
+.scenario > h3{margin-top:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:17.5px}
+.scenario .tag{
+  flex:0 0 auto;background:var(--blue);color:#fff;font-size:12px;font-weight:700;
+  border-radius:6px;padding:2px 9px;letter-spacing:.02em;
+}
+.scenario .desc{margin:0 0 16px;color:var(--text);font-size:14.5px}
+.out{
+  margin-top:16px;padding:14px 16px;border-radius:var(--r-sm);
+  background:linear-gradient(180deg,#f0fdf4,#f7fefb);border:1px solid #bbf7d0;
+}
+.out .out-title{display:block;font-size:13px;font-weight:800;color:var(--green);letter-spacing:.04em;margin-bottom:6px}
+.out ul{margin:0;padding-left:1.2em}
+.out li{font-size:14.5px;color:var(--text)}
+
+/* ---------- 代码块 ---------- */
+figure.code{
+  margin:0;border-radius:var(--r-sm);overflow:hidden;background:var(--code);
+  border:1px solid #0f1729;
+}
+figure.code figcaption{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 12px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08);
+}
+figure.code .lang{font-size:12.5px;font-weight:600;color:#94a3b8;letter-spacing:.02em}
+.copy-btn{
+  appearance:none;cursor:pointer;font:inherit;font-size:12.5px;font-weight:600;
+  color:#e2e8f0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);
+  border-radius:7px;padding:4px 12px;transition:background .18s ease,color .18s ease,border-color .18s ease;
+}
+.copy-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+.copy-btn.done{background:rgba(52,211,153,.18);border-color:rgba(52,211,153,.5);color:#6ee7b7}
+figure.code pre{margin:0;padding:14px 16px;overflow-x:auto}
+figure.code code{color:#e2e8f0;font-size:13.5px;line-height:1.75;white-space:pre;display:block}
+
+/* ---------- 表格 ---------- */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--r);background:#fff;box-shadow:var(--sh)}
+table{border-collapse:collapse;width:100%;min-width:660px;font-size:14.5px}
+thead th{
+  background:#f8fafc;color:var(--ink);font-weight:700;text-align:left;
+  padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:top;color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fbfdff}
+td .v{color:var(--blue-700);font-weight:700;white-space:nowrap}
+
+/* ---------- 统计数字 ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}
+.stat{
+  background:linear-gradient(180deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px;box-shadow:var(--sh);text-align:center;transition:transform .22s ease,box-shadow .22s ease;
+}
+.stat:hover{transform:translateY(-4px);box-shadow:var(--sh-h)}
+.stat .v{display:block;font-size:clamp(20px,3vw,26px);font-weight:800;color:var(--blue-700);letter-spacing:-.02em;line-height:1.25}
+.stat .k{display:block;margin-top:6px;font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ---------- 步骤 ---------- */
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps > li{
+  position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px 22px 20px 66px;margin-bottom:14px;box-shadow:var(--sh);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  counter-increment:s;
+}
+.steps > li:hover{transform:translateY(-3px);box-shadow:var(--sh-h);border-color:var(--blue-100)}
+.steps > li::before{
+  content:counter(s);position:absolute;left:20px;top:20px;
+  width:30px;height:30px;border-radius:9px;background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+}
+.steps > li h3{margin:0 0 6px;font-size:16.5px}
+.steps > li p{margin:0 0 12px;font-size:14.5px}
+.steps > li p:last-child{margin-bottom:0}
+
+/* ---------- 双栏清单 ---------- */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.panel.yes{border-left:4px solid var(--blue)}
+.panel.no{border-left:4px solid #cbd5e1}
+.panel h3{margin:0 0 10px;font-size:16px}
+.panel ul{list-style:none;margin:0;padding:0}
+.panel li{position:relative;padding-left:24px;margin:9px 0;font-size:14.5px}
+.panel.yes li::before{content:"✅";position:absolute;left:0;top:0;font-size:13px}
+.panel.no li::before{content:"🚫";position:absolute;left:0;top:0;font-size:13px}
+
+/* ---------- FAQ ---------- */
+.faq-item{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  margin-bottom:14px;box-shadow:var(--sh);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.faq-item:hover{transform:translateY(-3px);box-shadow:var(--sh-h);border-color:var(--blue-100)}
+.faq-item h3{margin:0 0 8px;font-size:16px;display:flex;gap:10px;align-items:flex-start}
+.faq-item h3 .qm{
+  flex:0 0 auto;width:24px;height:24px;border-radius:8px;background:var(--blue-50);color:var(--blue-700);
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px;
+}
+.faq-item p{margin:0 0 0 34px;font-size:14.5px}
+
+/* ---------- 底部信息区 ---------- */
+footer{background:#fff;border-top:1px solid var(--line);padding:38px 0 30px;margin-top:20px}
+footer h2{margin:0 0 14px;font-size:17px;color:var(--ink);font-weight:800}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-bottom:22px}
+.foot-item{background:#f8fafc;border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px}
+.foot-item .k{display:block;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-bottom:4px}
+.foot-item .v{display:block;font-size:14.5px;color:var(--ink);font-weight:600;word-break:break-word}
+footer .note{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8;border-top:1px solid var(--line);padding-top:18px}
+footer .note code{background:#f1f5f9;border-radius:5px;padding:1px 5px;font-size:12.5px;color:var(--blue-700)}
+
+/* ---------- 回到顶部 ---------- */
+#totop{
+  position:fixed;right:20px;bottom:22px;z-index:60;
+  width:44px;height:44px;border-radius:50%;cursor:pointer;
+  background:var(--blue);color:#fff;border:none;font-size:19px;line-height:1;
+  box-shadow:0 12px 28px -10px rgba(37,99,235,.75);
+  opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .26s ease,transform .26s ease,visibility .26s,background .18s ease;
+}
+#totop:hover{background:var(--blue-700)}
+#totop.show{opacity:1;visibility:visible;transform:none}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1080px){
+  .grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1000px){
+  .toc-mobile{display:block}
+  .layout{grid-template-columns:minmax(0,1fr);gap:0;padding-top:24px}
+  .sidebar{display:none}
+}
+@media (max-width:720px){
+  .hero{padding:40px 0 34px}
+  .grid.g3,.grid.g2,.cols{grid-template-columns:minmax(0,1fr)}
+  section{margin-bottom:42px}
+  .scenario,.card,.faq-item,.panel{padding:17px}
+  .steps > li{padding:18px 18px 18px 60px}
+  .steps > li::before{left:16px;top:18px}
+  .faq-item p{margin-left:0;margin-top:6px}
+  figure.code code{font-size:12.5px}
+}
+@media (max-width:400px){
+  .grid.g4{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  #totop{right:14px;bottom:14px;width:40px;height:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .fade-up,.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="fade-up" data-load>
+      <span class="badge">v1.0.1 · 元技能 / meta-skill</span>
+      <h1>Skill 优化大师</h1>
+      <p class="sub">一套标准化的 skill 技能优化协作体系，帮你把任何 skill 从「能用」迭代到「优秀」</p>
+      <p class="lead">它是一个<strong>「审查官」</strong>，不是一个「代笔者」。当你手上某个技能用起来总觉得哪儿不对 —— 结果不全、听感别扭、上架被拒、改了新的坏了旧的 —— 这个技能会陪你把这团模糊的不适感，一步步收敛成一份<strong>说得清、做得准、验得了</strong>的需求与验收方案：先问清场景，再从 15 个角度体检一遍，然后写成执行方能照着做的任务书，最后用可复跑的门禁脚本证明「改对了，也真的没改坏」。</p>
+      <p class="lead">它全部沉淀自一个真实技能 <span class="inline">web-article-to-epub</span> <strong>六轮迭代</strong>的完整过程 —— 包括那些踩过的坑、被推翻的判据、以及「报告全绿但用户打开就看出问题」的教训。所有方法、模板、清单都能直接拿来用，不写可执行代码。</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#quickstart">三步开始使用 →</a>
+        <a class="btn ghost" href="#case">看真实案例</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc-mobile" id="toc-mobile" aria-label="目录（移动端）">
+  <div class="toc-scroll">
+    <a href="#intro">简介</a>
+    <a href="#when">什么时候用</a>
+    <a href="#capability">核心能力</a>
+    <a href="#quickstart">快速上手</a>
+    <a href="#usage">使用方法</a>
+    <a href="#case">真实案例</a>
+    <a href="#faq">常见问题</a>
+    <a href="#about">底部信息</a>
+  </div>
+</nav>
+
+<div class="wrap layout">
+  <nav class="sidebar" id="toc-side" aria-label="侧边目录">
+    <p class="side-title">目录</p>
+    <ol>
+      <li><a href="#intro">一、技能简介</a></li>
+      <li><a href="#when">二、什么时候用</a></li>
+      <li><a href="#capability">三、核心能力（6 模块）</a></li>
+      <li><a href="#quickstart">四、快速上手三步</a></li>
+      <li><a href="#usage">五、使用方法（4 场景）</a></li>
+      <li><a href="#case">六、真实案例</a></li>
+      <li><a href="#faq">七、常见问题</a></li>
+      <li><a href="#about">八、版本与文件</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- ========== 1. 技能简介 ========== -->
+    <section id="intro" class="reveal" data-section="intro">
+      <h2><span class="n">一</span>技能简介</h2>
+      <p class="sec-lead">它是做什么的、解决什么问题、核心价值是什么。</p>
+
+      <p><strong>一句话说清：</strong>把「这个技能用着不太行」变成一份能让执行方照着做、也能被公正验收的施工方案。</p>
+      <p>大多数技能优化之所以反复返工，不是因为改得不够努力，而是因为三件事没说清：<strong>要改什么</strong>（用户只会说「效果不好」）、<strong>改到什么程度算好</strong>（没有可量化的判据）、<strong>怎么证明没改坏别的地方</strong>（只跑了新功能）。本技能就是来补这三块的。</p>
+
+      <h3>核心卖点</h3>
+      <div class="grid g2">
+        <article class="card">
+          <span class="icon">↻</span>
+          <h3>三方协作闭环</h3>
+          <p>用户提需求 → AI 审查官评估并生成指令 → 执行方改代码交产物 → AI 审查官验证裁定 → 用户确认。每一轮都走「探查 → 约束 → 证据 → 执行 → 验证 → 交付」六步，角色边界清晰，不越位、不空转。</p>
+        </article>
+        <article class="card">
+          <span class="icon">15</span>
+          <h3>15 维度质量评估</h3>
+          <p>7 个显性维度（功能完整性 / 实现正确性 / 体验质量 / 回归安全 / 工程化 / 性能与成本 / 安全与合规）+ 8 个隐形维度（认知负荷 / 可观测性 / 容错降级 / 用户心智模型 / 可组合性 / 依赖健康度 / 可迁移性 / 元数据可发现性），共 60 个可逐项勾选的评估问题，专门用来发现用户没提到的问题。</p>
+        </article>
+        <article class="card">
+          <span class="icon">6</span>
+          <h3>六步需求管理</h3>
+          <p>场景还原 → 需求具象化 → 最小原型验证 → 变更分类响应 → 验收标准共同定义 → 期望管理。从用户说「效果不好」开始，一步步挖到可验收的硬判据，不熟悉技术的新手也能说清需求。</p>
+        </article>
+        <article class="card">
+          <span class="icon">✓</span>
+          <h3>硬判据验收体系</h3>
+          <p>零回归是底线而非目标：未改动的功能要与上一版逐字节相同。判据全部脚本化、可复跑，且脚本自身要做反向自检 —— 能测出故意引入的错误，证明它不是在放水。最大反面教材是「全绿陷阱」：门禁全过，用户打开产物一眼就看出问题。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== 2. 什么时候用 ========== -->
+    <section id="when" class="reveal" data-section="when">
+      <h2><span class="n">二</span>什么时候用这个 skill</h2>
+      <p class="sec-lead">判断标准很简单：只要有「已有技能」需要变好，就该用它。</p>
+
+      <div class="cols">
+        <div class="panel yes">
+          <h3>必须使用（6 个场景）</h3>
+          <ul>
+            <li>要<strong>优化 / 改进 / 重构 / 评审</strong>任何一个已有 skill</li>
+            <li>用户反馈某个 skill「效果不好 / 不好用 / 结果不对」，但说不清具体要什么</li>
+            <li>需要给某个 skill 的改动<strong>写任务书</strong>（交给 AI 或工程师执行）</li>
+            <li>需要<strong>验收</strong>某个 skill 的改动是否达标、是否引入回归</li>
+            <li>需要判断某个 skill 的迭代<strong>是否可以结束</strong></li>
+            <li>skill <strong>上架 / 发布被平台拒绝</strong>，需要定位缺什么</li>
+          </ul>
+        </div>
+        <div class="panel no">
+          <h3>不适用（3 个场景）</h3>
+          <ul>
+            <li><strong>从零创建一个全新 skill</strong> —— 本技能面向「优化已有技能」，不含需求从无到有的设计方法</li>
+            <li><strong>纯粹的业务执行</strong>（如「帮我抓这个网页」「帮我转这个格式」）—— 直接调用对应技能即可</li>
+            <li><strong>与 skill 无关的代码库优化</strong> —— 方法论可借鉴，但触发条件不成立</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 3. 核心能力 ========== -->
+    <section id="capability" class="reveal" data-section="capability">
+      <h2><span class="n">三</span>核心能力概览（6 大模块）</h2>
+      <p class="sec-lead">每个模块对应一份独立文档，可单独查阅，也可按流程串起来用。</p>
+
+      <div class="grid g3">
+        <article class="card">
+          <span class="num">模块 1</span>
+          <h3>优化流程总览</h3>
+          <p class="q">谁做什么、一轮怎么走、什么时候可以停？</p>
+          <a class="chip" href="references/01-workflow-overview.md" target="_blank" rel="noopener">01-workflow-overview.md ↗</a>
+        </article>
+        <article class="card">
+          <span class="num">模块 2</span>
+          <h3>多维度质量评估</h3>
+          <p class="q">从哪些角度看这个 skill？现在几分？</p>
+          <a class="chip" href="references/02-assessment-dimensions.md" target="_blank" rel="noopener">02-assessment-dimensions.md ↗</a>
+        </article>
+        <article class="card">
+          <span class="num">模块 3</span>
+          <h3>六步需求管理法</h3>
+          <p class="q">用户说不清要什么，怎么挖出来？需求变了怎么办？</p>
+          <a class="chip" href="references/03-requirement-management.md" target="_blank" rel="noopener">03-requirement-management.md ↗</a>
+        </article>
+        <article class="card">
+          <span class="num">模块 4</span>
+          <h3>结构化任务指令模板</h3>
+          <p class="q">怎么把需求写成执行方能照做的任务书？</p>
+          <a class="chip" href="references/04-instruction-template.md" target="_blank" rel="noopener">04-instruction-template.md ↗</a>
+        </article>
+        <article class="card">
+          <span class="num">模块 5</span>
+          <h3>硬判据验收体系</h3>
+          <p class="q">怎么证明改对了、而且没改坏？</p>
+          <a class="chip" href="references/05-acceptance-system.md" target="_blank" rel="noopener">05-acceptance-system.md ↗</a>
+        </article>
+        <article class="card">
+          <span class="num">模块 6</span>
+          <h3>知识沉淀与复盘机制</h3>
+          <p class="q">怎么让这次的教训下次能复用？</p>
+          <a class="chip" href="references/06-knowledge-management.md" target="_blank" rel="noopener">06-knowledge-management.md ↗</a>
+        </article>
+      </div>
+
+      <div class="table-scroll" style="margin-top:20px">
+        <table>
+          <thead>
+            <tr><th>模块</th><th>解决什么问题</th><th>对应文档</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>优化流程总览</strong></td><td>谁做什么、一轮怎么走、什么时候可以停</td><td><a href="references/01-workflow-overview.md" target="_blank" rel="noopener">01-workflow-overview.md</a></td></tr>
+            <tr><td><strong>多维度质量评估</strong></td><td>从哪些角度看这个 skill？现在几分？</td><td><a href="references/02-assessment-dimensions.md" target="_blank" rel="noopener">02-assessment-dimensions.md</a></td></tr>
+            <tr><td><strong>六步需求管理法</strong></td><td>用户说不清要什么，怎么挖出来？需求变了怎么办？</td><td><a href="references/03-requirement-management.md" target="_blank" rel="noopener">03-requirement-management.md</a></td></tr>
+            <tr><td><strong>结构化任务指令模板</strong></td><td>怎么把需求写成执行方能照做的任务书？</td><td><a href="references/04-instruction-template.md" target="_blank" rel="noopener">04-instruction-template.md</a></td></tr>
+            <tr><td><strong>硬判据验收体系</strong></td><td>怎么证明改对了、而且没改坏？</td><td><a href="references/05-acceptance-system.md" target="_blank" rel="noopener">05-acceptance-system.md</a></td></tr>
+            <tr><td><strong>知识沉淀与复盘机制</strong></td><td>怎么让这次的教训下次能复用？</td><td><a href="references/06-knowledge-management.md" target="_blank" rel="noopener">06-knowledge-management.md</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 4. 快速上手 ========== -->
+    <section id="quickstart" class="reveal" data-section="quickstart">
+      <h2><span class="n">四</span>快速上手：三步开始使用</h2>
+      <p class="sec-lead">不需要提前准备什么，第一句话就可以是「这个技能效果不好」。</p>
+
+      <ol class="steps">
+        <li>
+          <h3>加载本技能</h3>
+          <p>在 WorkBuddy 对话框中输入 <span class="inline">@skill-optimizer</span>，或从「我的技能」列表中选择「Skill 优化大师」。加载后本技能会以「AI 审查官」的身份与你协作。</p>
+        </li>
+        <li>
+          <h3>描述你的优化需求</h3>
+          <p>哪怕只是「这个 skill 效果不好」也可以 —— 本技能会用六步需求管理法帮你挖清楚：发生在什么场景、你的预期是什么、实际发生了什么、影响多大。你只管描述感受，不需要给出技术方案。</p>
+          <figure class="code">
+            <figcaption><span class="lang">提示词 · 可直接复制到对话框</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+            <pre><code>使用 skill-optimizer 技能，我想优化一下 web-article-to-epub 这个技能。
+目前的问题是：转出来的电子书，听书的时候表格读不出来，很难受。
+请帮我挖掘需求并做基线评估。</code></pre>
+          </figure>
+        </li>
+        <li>
+          <h3>按引导完成三个阶段</h3>
+          <p>需求确认（含真实样例与硬判据）→ 任务书生成（交给执行方）→ 执行验收（裁定是否达标）。每次你需要做的事只有一件：<strong>确认</strong>或<strong>补充说明</strong>。</p>
+          <figure class="code">
+            <figcaption><span class="lang">提示词 · 需求确认后生成任务书</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+            <pre><code>使用 skill-optimizer 技能，需求已经确认：把表格额外转成可朗读的嵌套列表，
+让 TTS 听得出每个值属于哪一列。请帮我生成给 WorkBuddy 的任务执行指令。</code></pre>
+          </figure>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ========== 5. 使用方法 ========== -->
+    <section id="usage" class="reveal" data-section="usage">
+      <h2><span class="n">五</span>使用方法：4 个典型场景</h2>
+      <p class="sec-lead">每个场景都给了可直接复制的提示词，以及你能拿到的产出。</p>
+
+      <article class="scenario">
+        <h3><span class="tag">场景 1</span>用户提出 skill 优化需求 → 挖掘需求 + 基线评估</h3>
+        <p class="desc">你只知道「不好用」，说不出具体要改什么。本技能会用六步需求管理法提问，并向你要一个真实样例，同时给出 15 维度基线评分卡，让后面的改进方向有依据、有对比。</p>
+        <figure class="code">
+          <figcaption><span class="lang">提示词 · 可直接复制到对话框</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+          <pre><code>使用 skill-optimizer 技能，我想优化一下 web-article-to-epub 这个技能。
+目前的问题是：转出来的电子书，听书的时候表格读不出来，很难受。
+请帮我挖掘需求并做基线评估。</code></pre>
+        </figure>
+        <div class="out">
+          <span class="out-title">预期产出</span>
+          <ul>
+            <li>需求确认单（含真实样例与模糊标准的量化转化）</li>
+            <li>15 维度基线评分卡（7 显性 + 8 隐形，每项带证据）</li>
+            <li>硬判据清单（本轮要证明什么，用什么方法证明）</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="scenario">
+        <h3><span class="tag">场景 2</span>生成给执行方的任务指令</h3>
+        <p class="desc">需求已经确认，接下来要把「需求」翻译成「执行方能照着做、也能被验收」的任务书。任务书会明确标注什么要改、什么不要改，避免过度发挥。</p>
+        <figure class="code">
+          <figcaption><span class="lang">提示词 · 可直接复制到对话框</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+          <pre><code>使用 skill-optimizer 技能，需求已经确认：把表格额外转成可朗读的嵌套列表，
+让 TTS 听得出每个值属于哪一列。请帮我生成给 WorkBuddy 的任务执行指令。</code></pre>
+        </figure>
+        <div class="out">
+          <span class="out-title">预期产出</span>
+          <ul>
+            <li>一份结构化任务书：背景与问题 / 核心改动 / 配置项变更 / 可勾选的验收标准 / 执行顺序 / 注意事项</li>
+            <li>附「已知的坑」清单（从反模式库中挑出与本轮相关的条目）</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="scenario">
+        <h3><span class="tag">场景 3</span>审查执行方提交的产物</h3>
+        <p class="desc">执行方交了技能包和测试报告，报告可能全绿。本技能不会只看报告 —— 它会复跑门禁、核对比对口径有没有被悄悄放宽，并抽查真实产物。</p>
+        <figure class="code">
+          <figcaption><span class="lang">提示词 · 可直接复制到对话框</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+          <pre><code>使用 skill-optimizer 技能，WorkBuddy 已经按照任务书完成了修改，
+提交了技能包和测试报告。请帮我审查产物并裁定是否达标。</code></pre>
+        </figure>
+        <div class="out">
+          <span class="out-title">预期产出</span>
+          <ul>
+            <li>裁定结论：达标 / 有条件达标 / 不达标</li>
+            <li>未通过项清单（数值 + 占比 + 位置 + 影响判定）</li>
+            <li>下一轮任务书（若不达标或仍有未修项）</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="scenario">
+        <h3><span class="tag">场景 4</span>判断迭代是否可以结束</h3>
+        <p class="desc">已经改了好几轮，想知道能不能收尾。本技能会用四条硬性条件逐条核对 —— 缺一条就不算达标，而不是「感觉差不多了」。</p>
+        <figure class="code">
+          <figcaption><span class="lang">提示词 · 可直接复制到对话框</span><button class="copy-btn" type="button" data-copy>复制</button></figcaption>
+          <pre><code>使用 skill-optimizer 技能，这个 skill 已经优化了 5 轮了，
+请帮我判断是否可以结束迭代。</code></pre>
+        </figure>
+        <div class="out">
+          <span class="out-title">预期产出</span>
+          <ul>
+            <li>收尾裁定：四条硬性条件逐条核对（判据未放宽且全绿 / 零回归用最强判据证明 / 未修项已量化披露 / 隐形维度无 0 分）</li>
+            <li>复盘记录（六个必答问题）</li>
+            <li>知识库更新建议（本轮新增的反模式与最佳实践）</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ========== 6. 真实案例 ========== -->
+    <section id="case" class="reveal" data-section="case">
+      <h2><span class="n">六</span>真实案例：六轮优化轨迹</h2>
+      <p class="sec-lead">全部方法与模板都来自 <span class="inline">web-article-to-epub</span> v1.3.0 → v1.5.1 的真实迭代，不是虚构举例。</p>
+
+      <p>起点是一句很朴素的抱怨：<strong>「听书的时候表格读不出来，听完不知道哪个值对应哪一列。」</strong> 六轮之后，这个技能的内容缺口从 2.3% 降到 0.00%，并且成功上架。</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>轮次</th><th>版本</th><th>主题</th><th>核心成果</th><th>断言数</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="v">1</td><td>v1.4.0</td><td>课程模式</td><td>支持多页课程合并出书，4 章 19 课时一次抓取</td><td>85</td></tr>
+            <tr><td class="v">2</td><td>v1.4.1</td><td>分篇修复</td><td>410 篇碎片章节收敛到 20 篇，内容缺口 2.3% → 0.08%</td><td>105</td></tr>
+            <tr><td class="v">3</td><td>v1.4.2</td><td>缺口归零</td><td>内容缺口 0.00%，视频链接保留</td><td>123</td></tr>
+            <tr><td class="v">4</td><td>v1.5.0</td><td>表格可朗读</td><td>104 个表格转可朗读文本，1443 数据格零丢失</td><td>169</td></tr>
+            <tr><td class="v">5</td><td>v1.5.1</td><td>列表形式</td><td>表格改嵌套列表，TTS 听感优化，引导语移除</td><td>82（专项）</td></tr>
+            <tr><td class="v">6</td><td>v1.5.1</td><td>上架补全</td><td>4 个 frontmatter 字段补全，上架通过</td><td>32 + 41</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>关键数据</h3>
+      <div class="stats">
+        <div class="stat"><span class="v">321</span><span class="k">项验收断言全绿<br>（82 表格专项 + 169 验收矩阵 + 20 单篇回归 + 24 离线 + 26 章节拆分）</span></div>
+        <div class="stat"><span class="v">0.00%</span><span class="k">内容缺口<br>（优化前 2.3%）</span></div>
+        <div class="stat"><span class="v">1443/1443</span><span class="k">表格数据格命中<br>TTS 顺畅性 0 违规</span></div>
+        <div class="stat"><span class="v">410 → 20</span><span class="k">正文篇数<br>空壳章节 51 → 0</span></div>
+      </div>
+
+      <p style="margin-top:18px"><strong>零回归是怎么证明的：</strong>未改动的功能（段落形式 + <span class="inline">off</span> 模式）的正文 XHTML 与上一版<strong>逐字节相同</strong> —— 这是最强判据，而不是「跑了一遍没报错」。</p>
+      <p><strong>最值得记住的一条教训：</strong>这个案例里 10 个被诊断出的问题中，有 <strong>8 个是「静默」的</strong> —— 不报错、不告警，产物里就是少了东西。所以本技能把「每个丢弃都进计数、在发生的阶段就打告警、加账目自洽校验」列为硬性要求。</p>
+    </section>
+
+    <!-- ========== 7. FAQ ========== -->
+    <section id="faq" class="reveal" data-section="faq">
+      <h2><span class="n">七</span>常见问题（FAQ）</h2>
+      <p class="sec-lead">新手最常问的 6 个问题。</p>
+
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>这个 skill 能帮我写代码吗？</h3>
+        <p>不能。本技能扮演「审查官」角色，负责需求挖掘、质量评估、任务书生成和验收裁定。真正改代码由执行方（WorkBuddy 或工程师）完成。</p>
+      </article>
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>我完全不懂技术，能用这个 skill 吗？</h3>
+        <p>可以。本技能的六步需求管理法就是为不熟悉技术的新手用户设计的，你只需要描述「哪里不好用」，剩下的由本技能引导你完成 —— 包括把「读起来要顺」这类感受，翻译成「TTS 顺畅性 0 违规」这类可验证的标准。</p>
+      </article>
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>优化一个 skill 一般需要几轮？</h3>
+        <p>根据 skill 类型不同：纯文档类 2-3 轮，单次执行类 3-4 轮，多阶段流水线类 5-7 轮，需要上架的额外 +1 轮。轮次不是越多越好 —— 每轮只聚焦 1-2 个核心问题，聚焦才能深入。</p>
+      </article>
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>什么是「零回归」？为什么这么重要？</h3>
+        <p>零回归指「未改动的功能与上一版完全一致」。它是优化的底线 —— 改新功能不能改坏老功能。最强判据是与上一版<strong>逐字节相同</strong>；做不到时退一步用 A/B 对照加抖动基线。只跑新功能、老功能「应该没事」，是典型的反面做法。</p>
+      </article>
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>什么是「全绿陷阱」？</h3>
+        <p>门禁全部通过，但用户打开产物一眼就能看出问题。原因是判据覆盖面不足 —— 断言只验证了「能跑通」，没验证「结果对不对」。所以每轮收尾必须有一步「打开真实产物看一眼 / 听一遍 / 用一次」，不能只看门禁结果。一旦遇到全绿但有明显问题，<strong>补判据比收尾更重要</strong>。</p>
+      </article>
+      <article class="faq-item">
+        <h3><span class="qm">Q</span>这个 skill 的知识沉淀怎么用？</h3>
+        <p>每次优化结束后，本技能会引导你填写复盘模板（六个必答问题），并把新发现的反模式和最佳实践入库。下次优化其他 skill 时，先扫一遍反模式库，避免重复踩坑 —— 目前库中已有 <strong>13 条反模式</strong>与 <strong>14 条最佳实践</strong>，全部来自真实事故，不是理论清单。</p>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<!-- ========== 8. 底部信息区 ========== -->
+<footer id="about" data-section="about">
+  <div class="wrap reveal">
+    <h2>版本与文件</h2>
+    <div class="foot-grid">
+      <div class="foot-item"><span class="k">技能版本</span><span class="v">v1.0.1</span></div>
+      <div class="foot-item"><span class="k">最后更新</span><span class="v">2026-09-14</span></div>
+      <div class="foot-item"><span class="k">核心模块</span><span class="v">6 个 references 文档</span></div>
+      <div class="foot-item"><span class="k">配置文件</span><span class="v"><a href="extraction_config.yaml" target="_blank" rel="noopener">extraction_config.yaml</a></span></div>
+      <div class="foot-item"><span class="k">技能主文件</span><span class="v"><a href="SKILL.md" target="_blank" rel="noopener">SKILL.md</a></span></div>
+      <div class="foot-item"><span class="k">案例来源</span><span class="v">web-article-to-epub v1.3.0 → v1.5.1 六轮真实迭代</span></div>
+    </div>
+    <p class="note">
+      本页是「Skill 优化大师」的配套使用说明，面向终端用户，内容与 <a href="SKILL.md" target="_blank" rel="noopener">SKILL.md</a> 及各 references 模块保持一致。<br>
+      本技能不含任何可执行代码、不联网、不读取凭证 —— 全部内容为 Markdown 文档与 <code>extraction_config.yaml</code> 配置。<br>
+      单文件 HTML，无任何外部依赖；双击即可在浏览器中打开。
+    </p>
+  </div>
+</footer>
+
+<button id="totop" type="button" aria-label="回到顶部" title="回到顶部">↑</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 一键复制 ----------
+     策略：优先用异步剪贴板 API；一旦被拒绝（非安全上下文、权限被拒、
+     嵌入式 webview 等），立即降级到 execCommand 兜底，不让用户拿到
+     「复制失败」这种没有出路的结果。 */
+  function fallbackCopy(text) {
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        ta.style.left = '-1000px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        if (ta.setSelectionRange) { ta.setSelectionRange(0, ta.value.length); }
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('execCommand copy failed'));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  function copyText(text) {
+    if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(function () {
+        return fallbackCopy(text);
+      });
+    }
+    return fallbackCopy(text);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (btn) {
+    var timer = null;
+    btn.addEventListener('click', function () {
+      var fig = btn.closest('figure');
+      var codeEl = fig ? fig.querySelector('code') : null;
+      if (!codeEl) { return; }
+      copyText(codeEl.innerText.replace(/\s+$/, '')).then(function () {
+        btn.textContent = '已复制';
+        btn.classList.add('done');
+        if (timer) { clearTimeout(timer); }
+        timer = setTimeout(function () {
+          btn.textContent = '复制';
+          btn.classList.remove('done');
+        }, 1800);
+      }).catch(function () {
+        btn.textContent = '复制失败';
+        if (timer) { clearTimeout(timer); }
+        timer = setTimeout(function () { btn.textContent = '复制'; }, 1800);
+      });
+    });
+  });
+
+  /* ---------- 回到顶部 ---------- */
+  var totop = document.getElementById('totop');
+  function onScroll() {
+    if (window.scrollY > 400) { totop.classList.add('show'); }
+    else { totop.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  totop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---------- 淡入动画 ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    Array.prototype.forEach.call(revealEls, function (el) { io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(revealEls, function (el) { el.classList.add('in'); });
+  }
+
+  window.addEventListener('load', function () {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-load]'), function (el, i) {
+      setTimeout(function () { el.classList.add('in'); }, 60 * (i + 1));
+    });
+  });
+
+  /* ---------- 目录高亮（scrollspy） ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a, .toc-mobile a'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section, footer[data-section]'));
+  var sideLinks = Array.prototype.slice.call(document.querySelectorAll('.sidebar a'));
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+  }
+
+  function spy() {
+    if (!sections.length) { return; }
+    var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    var line = window.scrollY + pad + 28;
+    var current = sections[0];
+    sections.forEach(function (sec) {
+      var top = sec.getBoundingClientRect().top + window.scrollY;
+      if (top <= line) { current = sec; }
+    });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      current = sections[sections.length - 1];
+    }
+    if (current && current.id) { setActive(current.id); }
+  }
+
+  var raf = false;
+  window.addEventListener('scroll', function () {
+    if (raf) { return; }
+    raf = true;
+    window.requestAnimationFrame(function () { spy(); raf = false; });
+  }, { passive: true });
+  window.addEventListener('resize', spy);
+  spy();
+
+  /* ---------- 平滑滚动兜底（不支持 scroll-behavior 的浏览器） ---------- */
+  var smoothOk = 'scrollBehavior' in document.documentElement.style;
+  if (!smoothOk) {
+    Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        var t = id ? document.getElementById(id) : null;
+        if (!t) { return; }
+        e.preventDefault();
+        window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - 84);
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

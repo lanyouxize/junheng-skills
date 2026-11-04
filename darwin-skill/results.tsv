@@ -1,0 +1,21 @@
+﻿timestamp	commit	skill	old_score	new_score	status	dimension	note	eval_mode
+2026-10-10T20:10	baseline	intel-evidence	-	90.3	baseline	结构面(1-7)	维度1-7小计67.7/75；维度8(25分)未测，总分不发	dry_run
+2026-10-10T20:10	baseline	intel-formula	-	90.3	baseline	结构面(1-7)	同上；已知缺陷：disclaimer 自我重复（"方向核对"x2/"随标准修订"x3，信封5971B≈另两者1.85x）	dry_run
+2026-10-10T20:10	baseline	intel-compliance	-	90.3	baseline	结构面(1-7)	同上	dry_run
+2026-10-10T20:10	baseline	junheng-core	-	82.0	baseline	结构面(1-7)	维护者向文档：按设计无「输出字段/示例」小节；其余达标	dry_run
+2026-10-10T20:10	baseline	junheng-nutrition	-	90.3	baseline	结构面(1-7)	无强制检查点——确定性只读计算类，按类型判定不扣分	dry_run
+2026-10-10T20:10	baseline	junheng-labeling	-	90.3	baseline	结构面(1-7)	同上	dry_run
+2026-10-10T20:10	baseline	junheng-cost	-	90.3	baseline	结构面(1-7)	同上	dry_run
+2026-10-10T20:10	baseline	junheng-feeding	-	90.3	baseline	结构面(1-7)	有检查点	dry_run
+2026-10-10T20:10	baseline	junheng-standards	-	90.3	baseline	结构面(1-7)	有检查点	dry_run
+2026-10-10T20:10	baseline	junheng-energy	-	90.3	baseline	结构面(1-7)	无强制检查点（同上按类型判定）	dry_run
+2026-10-10T20:10	baseline	junheng-bcs	-	90.3	baseline	结构面(1-7)	同上	dry_run
+2026-10-10T20:10	baseline	junheng-pipeline	-	90.3	baseline	结构面(1-7)	无强制检查点；有「与单技能的关系」小节（加分）	dry_run
+2026-10-10T20:10	baseline	ALL(12)	-	-	note	-	静态结构面已近天花板，优化重心应在维度8(实测)与工程链路；见 Phase E 计划	dry_run
+2026-10-11T13:14	baseline-8d	junheng-*（9 个）	-	-	note	-	本次全量 8 维基线（含维度 8 实测）与 2026-10-10 的「结构面 90.3」**不同量纲**：后者只算维度 1-7 并重标到 100，本次按 8 维加权满分 100。关键差异在实测：同一份 junheng-labeling 静态面得 90.3，实测却查出 3 条照抄必失败的示例 + 1 处 rc=1 内部崩溃 —— 印证 2026-10-10 自己那条预判「优化重心应在维度 8（实测）与工程链路」。权威日志（含逐技能 8 维明细）：nutrition-agent-work/.darwin/results.tsv	cli_probe
+2026-10-11T13:41	af39027+cb5cb32	junheng-labeling	66.5	89.0	keep	边界条件+指令具体性+工作流清晰度+整体架构+实测表现	示例 2/5→8/8 全可执行；补 checkDraftShape 守卫（render/coverage rc=1→rc=2）；补三步工作流章节；体积 148.7%（≤150% 硬约束）；测试 24→47 项且已变异证伪	cli_probe
+2026-10-11T22:55	baseline	werss-ctl	-	86.7	baseline	结构面(1-7)+实测	维度1-7=64.15/75（1:10/2:8/3:8/4:7/5:8.5/6:10/7:9）；维度8=22.5/25；cli_probe 正向4/4+负路径4/4（rc 3/2/3/2）；已知缺陷：SKILL.md 称 doctor「检查10项」而实际11项、表格仅列8项；全精度总分86.65	cli_probe
+2026-10-11T23:42	acd1b0e	werss-ctl	86.7	88.2	keep	维度5:指令具体性	R1：doctor 段文实对齐（10→11 项 + 表格补全 11 行，与实测逐项一致）；判据=doc_check 5用例(1 PASS+4证伪全拦)+8探针零回归+AC-1；全精度 86.65→88.15	cli_probe
+2026-10-11T23:44	c520370	werss-ctl	88.2	89.7	keep	维度2:工作流清晰度	R2：新增「按症状找命令」决策表（8 行，覆盖全部 description 触发词 + 自检场景；每行命令均有实测或源码支撑）；8 探针零回归；全精度 88.15→89.65	cli_probe
+2026-10-11T23:44	09ce847	werss-ctl	89.7	90.7	keep	维度4:检查点设计	R3：新增「检查点：问方法还是要执行」节（意图判定表 4 行 + 执行守则 3 条；引用已验证的「常驻进程会被回收」纪律）；8 探针零回归；全精度 89.65→90.70	cli_probe
+2026-10-12T10:50	2c17123	werss-ctl	90.7	92.5	keep	维度2:工作流清晰度 + 维度3:边界条件	B3 重评（W5 触发首适用）：SKILL.md +4 节（W1 契约/W2 阶梯/W3 交棒/W5 守卫）+ 命令面 +--first-run + check-probes.py；维度2 9→9.5、维度3 8→9；维度8=22.5/25（check-probes 12/12）；test-prompts 3→4；全精度 90.70→92.45	cli_probe

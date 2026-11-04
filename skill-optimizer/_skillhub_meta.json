@@ -1,0 +1,11 @@
+{
+  "name": "Skill 优化大师",
+  "installedAt": 1791594155725,
+  "source": "marketplace",
+  "version": "1.0.1",
+  "skillId": "skill_2099442660570468352",
+  "pay_mode": 0,
+  "description_zh": "一套标准化的 skill 技能优化协作体系，提供多维度质量评估、需求挖掘与变更管理、结构化任务指令生成、硬判据验收标准，帮助用户与 AI 高效协作完成任何 skill 的迭代优化，从\"能用\"到\"优秀\"。",
+  "description_en": "A standardized skill optimization collaboration system that provides multi-dimensional quality assessment, requirement elicitation and change management, structured task instruction generation, and hard-criteria acceptance standards, helping users and AI collaboratively iterate any skill from usable to excellent.",
+  "iconSource": "letter:auto"
+}

@@ -1,0 +1,109 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "junheng-core",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/junheng-core/SKILL.md",
+      "kind": "template",
+      "sha256": "242a2c14aff8c5e937acd9c47d81279f4cda70a055ce1972fb4223e0f7e5a7ea"
+    },
+    {
+      "dest": "scripts/vendor/nutrition.js",
+      "origin": "src/lib/nutrition.js",
+      "kind": "vendor",
+      "sha256": "ab6679f7257eae07b01c82dbfb3cec6bf3b427830a05c38367d10c614ced4919"
+    },
+    {
+      "dest": "scripts/vendor/dataQuality.js",
+      "origin": "src/lib/dataQuality.js",
+      "kind": "vendor",
+      "sha256": "5537cd99aa3872c54346687769afd4e463ff61b135698ea2e1ab554f00c0d2fb"
+    },
+    {
+      "dest": "scripts/vendor/standards.js",
+      "origin": "src/lib/standards.js",
+      "kind": "vendor",
+      "sha256": "2e7cb54b5b8cc0711bd7911f42bd8339e44427620d66d2de77f3b1f3aaf1732b"
+    },
+    {
+      "dest": "scripts/vendor/energy.js",
+      "origin": "src/lib/energy.js",
+      "kind": "vendor",
+      "sha256": "2359b59b01a788724c68bc648ce20b3551605d4bd28591165a4c79a6320dc141"
+    },
+    {
+      "dest": "scripts/vendor/bcsChart.js",
+      "origin": "src/lib/bcsChart.js",
+      "kind": "vendor",
+      "sha256": "0e199b01508450b18f313fea172c68d353b488fefe01ea973b9ce833fc24ec4e"
+    },
+    {
+      "dest": "scripts/vendor/labeling.js",
+      "origin": "src/lib/labeling.js",
+      "kind": "vendor",
+      "sha256": "6ffe9b729c8ea053a142eb4784ee89ef6f8cb9594d97fe86af5db33ff94f297c"
+    },
+    {
+      "dest": "scripts/vendor/costModes.js",
+      "origin": "src/lib/costModes.js",
+      "kind": "vendor",
+      "sha256": "b7f2a49b31f58d91125aca97fcb4de5bb02b00017eba830d3e6b6620a6238bc7"
+    },
+    {
+      "dest": "scripts/vendor/feedingGuide.js",
+      "origin": "src/lib/feedingGuide.js",
+      "kind": "vendor",
+      "sha256": "d40638a521377755f9fbf6db6237f1fc3ba9241895951155a5be714e8654ced4"
+    },
+    {
+      "dest": "scripts/vendor/species.js",
+      "origin": "src/lib/species.js",
+      "kind": "vendor",
+      "sha256": "04d402947d11b9a004cd034d0b13950e41c567a05c67daf74ab5253c1d4b212c"
+    },
+    {
+      "dest": "scripts/vendor/multiPetPlan.js",
+      "origin": "src/lib/multiPetPlan.js",
+      "kind": "vendor",
+      "sha256": "1d2b8887e1091143a36b157e7d169d586070bd914d1ca80a54e3bf1f3a0583e9"
+    },
+    {
+      "dest": "scripts/vendor/portionLabel.js",
+      "origin": "src/lib/portionLabel.js",
+      "kind": "vendor",
+      "sha256": "cbc2542713b5ecf68bb71e5ef538451033a5e6901595a5042ce06921e18e1b71"
+    },
+    {
+      "dest": "scripts/vendor/toxicology.js",
+      "origin": "src/lib/toxicology.js",
+      "kind": "vendor",
+      "sha256": "794814d83aad5264cb6fb401e6c6f68d53b893fcac7d0a9dd210672176fc2da0"
+    },
+    {
+      "dest": "scripts/data/ingredient_db.js",
+      "origin": "src/data/ingredient_db.js",
+      "kind": "vendor-data",
+      "sha256": "0b083a1df908f3537044fe49dacbadc6e2d884710c518a5cf9e7b0276eac5d61"
+    },
+    {
+      "dest": "scripts/data/moistureProfiles.js",
+      "origin": "src/data/moistureProfiles.js",
+      "kind": "vendor-data",
+      "sha256": "76ca1446cdc6fb1b6fa3d98912a1a0abe27063630f7738c63057e338a264f8a9"
+    },
+    {
+      "dest": "scripts/data/toxicSubstances.js",
+      "origin": "src/data/toxicSubstances.js",
+      "kind": "vendor-data",
+      "sha256": "db33266a0e6fb6c8d0970981996cafd5afa98c7e873e82b160c5d30a50501fab"
+    },
+    {
+      "dest": "references/interface-reference.md",
+      "origin": "cli/skills/junheng-core/references/interface-reference.md",
+      "kind": "reference",
+      "sha256": "15e99302594fa424a9a8ea312e9bbcf9a9aa59c6d67c2a5c6fdea16e825356db"
+    }
+  ]
+}

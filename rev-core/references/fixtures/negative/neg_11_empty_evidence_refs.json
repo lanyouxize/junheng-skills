@@ -1,0 +1,24 @@
+{
+  "claim": "x",
+  "contradicts": [],
+  "evidence_refs": [],
+  "id": "fd-2001",
+  "kind": "finding",
+  "produced_at": "2026-11-01T22:40:00+08:00",
+  "produced_by": "rev-core",
+  "provenance": {
+    "command": "analyzeHeadless ... -postScript Xrefs.py",
+    "inputs_sha256": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "tool": "ghidra",
+    "version": "11.3.2"
+  },
+  "refs": [],
+  "schema": "reva/1",
+  "scope": "y",
+  "state": "proposed",
+  "status": "ok",
+  "target_id": "tgt-abc123",
+  "unknowns": []
+}

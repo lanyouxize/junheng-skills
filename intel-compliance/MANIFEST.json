@@ -1,0 +1,73 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "intel-compliance",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/intel-compliance/SKILL.md",
+      "kind": "template",
+      "sha256": "eda319416e74740c0629fb9601ce4fcd130e83a2deab0b8e591b7c6ee12b25e9"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/compliance.mjs",
+      "kind": "facade",
+      "sha256": "d079455bc953b13dd828b38ce26b388df887a9ba199a455a4aa9c9709df9756f"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "8877c0374b0c7c906a0eb4dd47b2dfc7d68794e793751bd5d56c82d3f0fa8e79"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "4dd4a54b27ec8ec709bdb3782c928b07947028870f2692100eb195d6390f6c62"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "scripts/vendor/compliance.js",
+      "origin": "src/lib/compliance.js",
+      "kind": "vendor",
+      "sha256": "0874ef090bb26da3991c36a97c0bdf71fc107af1b6452fe1cb03c5899504a794"
+    },
+    {
+      "dest": "scripts/vendor/schema.js",
+      "origin": "src/lib/schema.js",
+      "kind": "vendor",
+      "sha256": "e533c3b843f397fa6d77afdb87fccd268e577ef6b6651db7ea2232c789b3ad06"
+    },
+    {
+      "dest": "scripts/vendor/evidence.js",
+      "origin": "src/lib/evidence.js",
+      "kind": "vendor",
+      "sha256": "775fa84f016481ad264c84ade7f4685140215f54b0342c15b1ad116b969cec38"
+    }
+  ]
+}

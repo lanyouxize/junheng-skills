@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="__DEFAULT_THEME__">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__ · 脑图</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --panel-2:#fafbfe; --border:#e3e8f0;
+    --text:#1e2532; --text-2:#586274; --text-3:#8b95a7;
+    --accent:#2563eb; --accent-soft:#e8f0ff;
+    --shadow:0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07);
+    --shadow-sm:0 1px 2px rgba(16,24,40,.06);
+    --stage-grid:rgba(37,99,235,.055);
+    --btn-bg:#ffffff; --btn-hover:#f2f5fb;
+  }
+  html[data-theme="dark"]{
+    --bg:#0d1117; --panel:#161d27; --panel-2:#131a23; --border:#28313e;
+    --text:#e7ecf4; --text-2:#a2adbf; --text-3:#6d7889;
+    --accent:#5b9cff; --accent-soft:#1b2740;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 12px 32px rgba(0,0,0,.5);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --stage-grid:rgba(120,170,255,.06);
+    --btn-bg:#1b222c; --btn-hover:#222b37;
+  }
+  html, body { height:100%; }
+  body{
+    margin:0; display:flex; flex-direction:column; overflow:hidden;
+    background:var(--bg); color:var(--text);
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",
+                system-ui,-apple-system,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    flex:0 0 auto; display:flex; align-items:center; gap:18px;
+    padding:14px 22px; background:var(--panel);
+    border-bottom:1px solid var(--border); box-shadow:var(--shadow-sm);
+    z-index:5;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
+  .logo{
+    flex:0 0 auto; width:38px; height:38px; border-radius:11px;
+    display:grid; place-items:center; color:#fff; font-weight:800; font-size:17px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    box-shadow:0 4px 12px rgba(37,99,235,.32);
+  }
+  .titles{ min-width:0; }
+  .titles h1{
+    margin:0; font-size:17px; font-weight:700; letter-spacing:.2px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:52vw;
+  }
+  .meta{ margin-top:3px; font-size:11.5px; color:var(--text-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:52vw; }
+  .tools{ margin-left:auto; display:flex; align-items:center; gap:7px; flex-wrap:wrap; justify-content:flex-end; }
+  button{
+    font-family:inherit; font-size:12.5px; color:var(--text-2);
+    background:var(--btn-bg); border:1px solid var(--border); border-radius:8px;
+    padding:6px 11px; cursor:pointer; transition:.15s; white-space:nowrap;
+  }
+  button:hover{ background:var(--btn-hover); color:var(--accent); border-color:var(--accent); }
+  button:active{ transform:translateY(1px); }
+  .zbtn{ min-width:30px; padding:6px 8px; font-weight:700; }
+  #zoomLabel{ font-size:12px; color:var(--text-3); min-width:42px; text-align:center; font-variant-numeric:tabular-nums; }
+  .sep{ width:1px; height:20px; background:var(--border); margin:0 3px; }
+
+  /* ---------- summary ---------- */
+  .summary{
+    flex:0 0 auto; margin:14px 22px 0; padding:14px 18px 15px;
+    background:var(--panel); border:1px solid var(--border);
+    border-left:4px solid var(--accent); border-radius:11px; box-shadow:var(--shadow-sm);
+  }
+  .summary-head{ display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+  .badge{
+    font-size:11.5px; font-weight:700; color:var(--accent);
+    background:var(--accent-soft); border-radius:6px; padding:3px 8px; letter-spacing:.4px;
+  }
+  .count{ font-size:11.5px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+  .summary-head .spacer{ flex:1; }
+  .linkbtn{
+    background:none; border:none; padding:2px 4px; font-size:11.5px;
+    color:var(--text-3); cursor:pointer;
+  }
+  .linkbtn:hover{ color:var(--accent); background:none; border:none; }
+  .summary-body{
+    margin:0; font-size:13.5px; line-height:1.78; color:var(--text-2);
+    text-align:justify; max-height:26vh; overflow:auto;
+  }
+  body.summary-collapsed .summary-body{ display:none; }
+
+  /* ---------- stage ---------- */
+  .stage{ flex:1 1 auto; position:relative; overflow:hidden; margin-top:12px; }
+  .stage::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--stage-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--stage-grid) 1px, transparent 1px);
+    background-size:26px 26px; pointer-events:none;
+  }
+  #map{ width:100%; height:100%; display:block; cursor:grab; }
+  #map.dragging{ cursor:grabbing; }
+  .hint{
+    position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+    font-size:11.5px; color:var(--text-3); background:var(--panel);
+    border:1px solid var(--border); border-radius:999px; padding:5px 14px;
+    box-shadow:var(--shadow-sm); pointer-events:none; white-space:nowrap;
+  }
+  .empty{
+    position:absolute; inset:0; display:none; place-items:center;
+    color:var(--text-3); font-size:14px;
+  }
+  .stage.is-empty .empty{ display:grid; }
+
+  g.node rect.shape{ transition:filter .12s ease; }
+  g.node:hover rect.shape{ filter:brightness(1.06) saturate(1.06); }
+  g.node text{ user-select:none; }
+
+  @media (max-width:900px){
+    .titles h1, .meta{ max-width:34vw; }
+    .tools button[data-act="png"], .tools button[data-act="svg"]{ display:none; }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">脑</div>
+      <div class="titles">
+        <h1>__TITLE__</h1>
+        <div class="meta">__SOURCE__　·　生成于 __GENERATED_AT__</div>
+      </div>
+    </div>
+    <div class="tools">
+      <button data-act="expand">展开全部</button>
+      <button data-act="collapse">收起分支</button>
+      <button data-act="fit">适应窗口</button>
+      <span class="sep"></span>
+      <button class="zbtn" data-act="zoomout">−</button>
+      <span id="zoomLabel">100%</span>
+      <button class="zbtn" data-act="zoomin">＋</button>
+      <span class="sep"></span>
+      <button data-act="png">导出 PNG</button>
+      <button data-act="svg">导出 SVG</button>
+      <button data-act="theme" id="themeBtn">深色模式</button>
+    </div>
+  </header>
+
+  <section class="summary" id="summaryCard">
+    <div class="summary-head">
+      <span class="badge">内容摘要</span>
+      <span class="count">__SUMMARY_COUNT__ 字</span>
+      <span class="spacer"></span>
+      <button class="linkbtn" id="toggleSummary">收起</button>
+    </div>
+    <p class="summary-body" id="summaryBody">__SUMMARY_HTML__</p>
+  </section>
+
+  <main class="stage" id="stage">
+    <svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="empty">暂无内容：提取结果为空白，请检查源文档</div>
+    <div class="hint">滚轮缩放 · 拖拽平移 · 单击节点折叠/展开 · 双击节点居中</div>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+
+  var DATA = __DATA_JSON__;
+  var FAM = '"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",system-ui,-apple-system,"Segoe UI",sans-serif';
+
+  var PALETTE = {
+    light: ["#2f6fed","#7c5cf0","#0d9488","#d97706","#e11d63","#16a34a","#0284c7","#b45309"],
+    dark:  ["#5b9cff","#a78bfa","#2dd4bf","#fbbf24","#fb7185","#4ade80","#38bdf8","#f59e0b"]
+  };
+
+  var LEVELS = [
+    { size:15,   weight:800, lh:21, px:18, py:12, r:13, maxW:330 },
+    { size:13.5, weight:700, lh:19.5,px:15, py:10, r:10, maxW:300 },
+    { size:12.5, weight:600, lh:18.5,px:13, py:9,  r:9,  maxW:280 },
+    { size:12,   weight:500, lh:18,  px:12, py:8,  r:8,  maxW:265 },
+    { size:11.5, weight:500, lh:17,  px:11, py:7,  r:7,  maxW:250 }
+  ];
+  var H_GAP = 62, V_GAP = 13, EXPORT_PAD = 48;
+
+  var stage = document.getElementById("stage");
+  var svg = document.getElementById("map");
+  var zoomLabel = document.getElementById("zoomLabel");
+  var vp = null, byId = {}, bbox = null;
+
+  var mctx = document.createElement("canvas").getContext("2d");
+
+  function lvl(d) { return LEVELS[Math.min(d, LEVELS.length - 1)]; }
+  function fontOf(d) { var L = lvl(d); return L.weight + " " + L.size + "px " + FAM; }
+  function theme() { return document.documentElement.getAttribute("data-theme") || "light"; }
+  function pal(d) { var p = PALETTE[theme()]; return p[d % p.length]; }
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+  function rgba(hex, a) {
+    var h = hex.replace("#","");
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    var n = parseInt(h, 16);
+    return "rgba(" + ((n>>16)&255) + "," + ((n>>8)&255) + "," + (n&255) + "," + a + ")";
+  }
+  function wrapText(text, maxW, font) {
+    mctx.font = font;
+    var out = [], cur = "";
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (ch === "\n") { out.push(cur); cur = ""; continue; }
+      var t = cur + ch;
+      if (mctx.measureText(t).width > maxW && cur) { out.push(cur); cur = ch; }
+      else { cur = t; }
+    }
+    if (cur) out.push(cur);
+    if (!out.length) out.push("");
+    return out;
+  }
+
+  var uidSeq = 0;
+  function prep(n, depth, branch) {
+    n.uid = "n" + (uidSeq++);
+    n.depth = depth;
+    n.branch = depth === 0 ? 0 : branch;
+    n.children = n.children || [];
+    n.kind = n.kind || "";
+    n.collapsed = (depth >= 3);
+    var L = lvl(depth), f = fontOf(depth);
+    n.lines = wrapText(n.name, n.kind === "summary" ? 360 : L.maxW, f);
+    n.w = Math.max.apply(null, n.lines.map(function (t) { return mctx.measureText(t).width; })) + L.px * 2;
+    n.h = n.lines.length * L.lh + L.py * 2;
+    byId[n.uid] = n;
+    var bi = 0;
+    for (var i = 0; i < n.children.length; i++) {
+      var c = n.children[i];
+      var br = depth === 0 ? (c.kind === "summary" ? 0 : bi++) : branch;
+      prep(c, depth + 1, br);
+    }
+  }
+  function kids(n) { return n.collapsed ? [] : n.children; }
+
+  function measure(n) {
+    var k = kids(n);
+    if (!k.length) { n.ext = n.h; return n.ext; }
+    var sum = 0;
+    for (var i = 0; i < k.length; i++) { sum += measure(k[i]); if (i) sum += V_GAP; }
+    n.ext = Math.max(n.h, sum);
+    return n.ext;
+  }
+  function columns(n, acc) {
+    acc[n.depth] = Math.max(acc[n.depth] || 0, n.w);
+    kids(n).forEach(function (c) { columns(c, acc); });
+  }
+  function place(n, colX, top) {
+    n.x = colX[n.depth];
+    n.y = top + n.ext / 2;
+    var k = kids(n);
+    if (!k.length) return;
+    var sum = 0, i;
+    for (i = 0; i < k.length; i++) { sum += k[i].ext; if (i) sum += V_GAP; }
+    var cursor = top + (n.ext - sum) / 2;
+    for (i = 0; i < k.length; i++) { place(k[i], colX, cursor); cursor += k[i].ext + V_GAP; }
+  }
+  function buildColX(acc) {
+    var colX = [], x = 0;
+    for (var d = 0; d < acc.length; d++) { colX[d] = x; x += (acc[d] || 0) + H_GAP; }
+    return colX;
+  }
+
+  function paint() {
+    var acc = [];
+    columns(root, acc);
+    measure(root);
+    place(root, buildColX(acc), 0);
+
+    var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    var links = [], nodes = [];
+
+    function nodeBox(n, parts) {
+      var L = lvl(n.depth), t = theme(), r = L.r, x = n.x, y = n.y - n.h / 2;
+      var fill, stroke = "none", sw = 0, tc, fs, fw, solid = false;
+
+      if (n.depth === 0) { fill = "url(#gRoot)"; tc = "#ffffff"; }
+      else if (n.kind === "summary") {
+        fill = t === "dark" ? rgba("#2563eb", .18) : "#eff4ff";
+        stroke = rgba("#2563eb", t === "dark" ? .55 : .28); sw = 1.2;
+        tc = t === "dark" ? "#dbe6ff" : "#1c3d78"; solid = true;
+      } else if (n.depth === 1) { fill = pal(n.branch); tc = t === "dark" ? "#0b1220" : "#ffffff"; }
+      else if (n.depth === 2) {
+        fill = rgba(pal(n.branch), t === "dark" ? .17 : .11);
+        stroke = rgba(pal(n.branch), t === "dark" ? .55 : .3); sw = 1.2;
+        tc = t === "dark" ? "#e3e9f3" : "#1f2937";
+      } else if (n.depth === 3) {
+        fill = t === "dark" ? "#151d29" : "#ffffff";
+        stroke = t === "dark" ? "#2b3644" : "#e0e5ef"; sw = 1;
+        tc = t === "dark" ? "#c6d0de" : "#3b4553";
+      } else {
+        fill = "none"; tc = t === "dark" ? "#93a0b4" : "#556070";
+      }
+
+      fs = L.size; fw = L.weight;
+      parts.push('<g class="node" data-id="' + n.uid + '">');
+      if (n.kind === "summary") {
+        parts.push('<path d="M' + x + ' ' + (y + r) + 'a' + r + ' ' + r + ' 0 0 1 ' + r + ' -' + r +
+                   'h' + (n.w - 2 * r) + 'a' + r + ' ' + r + ' 0 0 1 ' + r + ' ' + r +
+                   'v' + (n.h - 2 * r) + 'a' + r + ' ' + r + ' 0 0 1 -' + r + ' ' + r +
+                   'h-' + (n.w - 2 * r) + 'a' + r + ' ' + r + ' 0 0 1 -' + r + ' -' + r + 'z" fill="' + fill +
+                   '" stroke="' + stroke + '" stroke-width="' + sw + '"/>');
+        parts.push('<rect x="' + x + '" y="' + (y + 3) + '" width="4" height="' + (n.h - 6) +
+                   '" rx="2" fill="' + (t === "dark" ? "#5b9cff" : "#2563eb") + '"/>');
+      } else if (fill !== "none") {
+        parts.push('<rect class="shape" x="' + x + '" y="' + y + '" width="' + n.w + '" height="' + n.h +
+                   '" rx="' + r + '" fill="' + fill + '"' +
+                   (stroke !== "none" ? ' stroke="' + stroke + '" stroke-width="' + sw + '"' : "") +
+                   (n.depth <= 1 && n.kind !== "summary" ? ' filter="url(#softShadow)"' : "") + '/>');
+        if (n.depth === 3) {
+          parts.push('<rect x="' + (x + 1.5) + '" y="' + (y + n.h / 2 - 6) + '" width="3" height="12" rx="1.5" fill="' +
+                     pal(n.branch) + '" opacity=".85"/>');
+        }
+      } else {
+        parts.push('<circle cx="' + (x + 3) + '" cy="' + n.y + '" r="2.6" fill="' + pal(n.branch) + '" opacity=".8"/>');
+      }
+
+      var tx = n.depth >= 4 ? x + 12 : x + L.px;
+      for (var i = 0; i < n.lines.length; i++) {
+        var ly = y + L.py + L.lh * i + L.lh * 0.5;
+        parts.push('<text x="' + tx + '" y="' + ly + '" fill="' + tc + '" font-family=\'' + FAM +
+                   '\' font-size="' + fs + '" font-weight="' + fw + '" dominant-baseline="middle">' +
+                   esc(n.lines[i]) + '</text>');
+      }
+
+      if (n.children.length && n.collapsed) {
+        var cx = x + n.w + 11, cy = n.y, c = pal(n.branch), dark = theme() === "dark";
+        parts.push('<circle cx="' + cx + '" cy="' + cy + '" r="8.5" fill="' + (dark ? rgba(c, .9) : c) + '"/>');
+        parts.push('<text x="' + cx + '" y="' + (cy + .5) + '" fill="' + (dark ? "#0b1220" : "#fff") +
+                   '" font-family=\'' + FAM + '\' font-size="9.5" font-weight="800" text-anchor="middle" ' +
+                   'dominant-baseline="middle">+' + n.children.length + '</text>');
+      }
+      parts.push('</g>');
+
+      var pad = n.depth >= 4 ? 14 : 0;
+      if (n.kind === "summary" || fill !== "none") {
+        minX = Math.min(minX, x); maxX = Math.max(maxX, x + n.w);
+        minY = Math.min(minY, y); maxY = Math.max(maxY, y + n.h);
+      } else {
+        minX = Math.min(minX, x); maxX = Math.max(maxX, x + n.w + pad);
+        minY = Math.min(minY, y); maxY = Math.max(maxY, y + n.h);
+      }
+      if (n.children.length && n.collapsed) { maxX = Math.max(maxX, x + n.w + 22); }
+    }
+
+    function walkLinks(n, parts) {
+      var k = kids(n), c = pal(n.branch), t = theme();
+      for (var i = 0; i < k.length; i++) {
+        var ch = k[i];
+        var x1 = n.x + n.w, y1 = n.y, x2 = ch.x, y2 = ch.y;
+        var dx = Math.max(24, (x2 - x1) * 0.5);
+        parts.push('<path d="M' + x1 + ' ' + y1 + 'C' + (x1 + dx) + ' ' + y1 + ',' + (x2 - dx) + ' ' + y2 + ',' + x2 + ' ' + y2 +
+                   '" fill="none" stroke="' + c + '" stroke-width="' + (n.depth === 0 ? 2 : 1.5) +
+                   '" stroke-opacity="' + (t === "dark" ? .5 : .42) + '" stroke-linecap="round"/>');
+      }
+    }
+    function walk(n, linkParts, nodeParts) {
+      nodeBox(n, nodeParts);
+      walkLinks(n, linkParts);
+      kids(n).forEach(function (c) { walk(c, linkParts, nodeParts); });
+    }
+
+    var linkParts = [], nodeParts = [];
+    walk(root, linkParts, nodeParts);
+    bbox = { x: minX - EXPORT_PAD, y: minY - EXPORT_PAD, w: (maxX - minX) + EXPORT_PAD * 2, h: (maxY - minY) + EXPORT_PAD * 2 };
+
+    var t = theme();
+    svg.innerHTML =
+      '<defs>' +
+        '<linearGradient id="gRoot" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#4f46e5"/>' +
+        '</linearGradient>' +
+        '<filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">' +
+          '<feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="' + (t === "dark" ? "#000000" : "#1e3a8a") +
+          '" flood-opacity="' + (t === "dark" ? ".55" : ".16") + '"/>' +
+        '</filter>' +
+      '</defs>' +
+      '<g id="vp"><g id="links">' + linkParts.join("") + '</g><g id="nodes">' + nodeParts.join("") + '</g></g>';
+    vp = svg.querySelector("#vp");
+    stage.classList.toggle("is-empty", root.children.length === 0 && !root.name);
+    applyView();
+  }
+
+  /* ---------------- viewport ---------------- */
+  var k = 1, tx = 0, ty = 0;
+  function applyView() {
+    if (vp) vp.setAttribute("transform", "translate(" + tx + "," + ty + ") scale(" + k + ")");
+    zoomLabel.textContent = Math.round(k * 100) + "%";
+  }
+  function fit(animate) {
+    if (!bbox || !bbox.w) return;
+    var W = stage.clientWidth, H = stage.clientHeight;
+    var nk = Math.min((W - 40) / bbox.w, (H - 40) / bbox.h, 1.15);
+    nk = Math.max(0.12, nk);
+    k = nk;
+    tx = (W - bbox.w * k) / 2 - bbox.x * k;
+    ty = (H - bbox.h * k) / 2 - bbox.y * k;
+    applyView();
+  }
+  function zoomAt(factor, mx, my) {
+    var nk = Math.min(3.2, Math.max(0.12, k * factor));
+    var r = nk / k;
+    tx = mx - (mx - tx) * r;
+    ty = my - (my - ty) * r;
+    k = nk;
+    applyView();
+  }
+
+  svg.addEventListener("wheel", function (e) {
+    e.preventDefault();
+    var rect = svg.getBoundingClientRect();
+    zoomAt(Math.exp(-e.deltaY * 0.0014), e.clientX - rect.left, e.clientY - rect.top);
+  }, { passive: false });
+
+  var dragging = false, lastX = 0, lastY = 0, moved = 0;
+  svg.addEventListener("mousedown", function (e) {
+    if (e.target.closest && e.target.closest("g.node")) return;
+    dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY;
+    svg.classList.add("dragging");
+  });
+  window.addEventListener("mousemove", function (e) {
+    if (!dragging) return;
+    tx += e.clientX - lastX; ty += e.clientY - lastY;
+    moved += Math.abs(e.clientX - lastX) + Math.abs(e.clientY - lastY);
+    lastX = e.clientX; lastY = e.clientY;
+    applyView();
+  });
+  window.addEventListener("mouseup", function () {
+    dragging = false; svg.classList.remove("dragging");
+  });
+
+  function toggleNode(id) {
+    var n = byId[id];
+    if (!n || !n.children.length) return;
+    n.collapsed = !n.collapsed;
+    paint();
+  }
+  svg.addEventListener("click", function (e) {
+    var g = e.target.closest && e.target.closest("g.node");
+    if (!g) return;
+    if (moved > 6) return;
+    toggleNode(g.getAttribute("data-id"));
+  });
+  svg.addEventListener("dblclick", function (e) {
+    var g = e.target.closest && e.target.closest("g.node");
+    if (!g) return;
+    var n = byId[g.getAttribute("data-id")];
+    if (!n) return;
+    tx = stage.clientWidth / 2 - n.x * k;
+    ty = stage.clientHeight / 2 - n.y * k;
+    applyView();
+  });
+
+  function setAll(collapsed) {
+    Object.keys(byId).forEach(function (id) {
+      var n = byId[id];
+      if (n.children.length) n.collapsed = collapsed && n.depth >= 1;
+    });
+    paint();
+    fit();
+  }
+  function centerFit() { fit(); }
+
+  document.querySelector(".tools").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-act]");
+    if (!b) return;
+    var act = b.getAttribute("data-act");
+    if (act === "expand") setAll(false);
+    else if (act === "collapse") setAll(true);
+    else if (act === "fit") centerFit();
+    else if (act === "zoomin") zoomAt(1.25, stage.clientWidth / 2, stage.clientHeight / 2);
+    else if (act === "zoomout") zoomAt(1 / 1.25, stage.clientWidth / 2, stage.clientHeight / 2);
+    else if (act === "svg") exportSVGFile();
+    else if (act === "png") exportPNG();
+    else if (act === "theme") {
+      var next = theme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.getElementById("themeBtn").textContent = next === "dark" ? "浅色模式" : "深色模式";
+      paint();
+    }
+  });
+
+  /* ---------------- export ---------------- */
+  function exportClone() {
+    if (!bbox || !bbox.w) return null;
+    var clone = svg.cloneNode(true);
+    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    clone.setAttribute("viewBox", bbox.x + " " + bbox.y + " " + bbox.w + " " + bbox.h);
+    clone.setAttribute("width", bbox.w);
+    clone.setAttribute("height", bbox.h);
+    var v = clone.querySelector("#vp");
+    if (v) v.setAttribute("transform", "translate(0,0) scale(1)");
+    var bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bg.setAttribute("x", bbox.x); bg.setAttribute("y", bbox.y);
+    bg.setAttribute("width", bbox.w); bg.setAttribute("height", bbox.h);
+    bg.setAttribute("fill", theme() === "dark" ? "#0d1117" : "#f7f9fd");
+    clone.insertBefore(bg, clone.firstChild);
+    return { node: clone, box: bbox };
+  }
+  function saveBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+  function baseName() { return (DATA.title || "脑图").replace(/[\\/:*?"<>|]/g, "_").slice(0, 60); }
+  function exportSVGFile() {
+    var r = exportClone();
+    if (!r) return;
+    var s = new XMLSerializer().serializeToString(r.node);
+    saveBlob(new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n' + s], { type: "image/svg+xml;charset=utf-8" }),
+             baseName() + "_脑图.svg");
+  }
+  function exportPNG() {
+    var r = exportClone();
+    if (!r) return;
+    var s = new XMLSerializer().serializeToString(r.node);
+    var img = new Image();
+    img.onload = function () {
+      var scale = 2;
+      var c = document.createElement("canvas");
+      c.width = Math.round(r.box.w * scale);
+      c.height = Math.round(r.box.h * scale);
+      var g = c.getContext("2d");
+      g.fillStyle = theme() === "dark" ? "#0d1117" : "#f7f9fd";
+      g.fillRect(0, 0, c.width, c.height);
+      g.drawImage(img, 0, 0, c.width, c.height);
+      c.toBlob(function (blob) { if (blob) saveBlob(blob, baseName() + "_脑图.png"); }, "image/png");
+    };
+    img.onerror = function () { alert("PNG 导出失败，可改用「导出 SVG」。"); };
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(s);
+  }
+
+  document.getElementById("toggleSummary").addEventListener("click", function () {
+    var on = document.body.classList.toggle("summary-collapsed");
+    this.textContent = on ? "展开" : "收起";
+  });
+
+  var root;
+  (function boot() {
+    root = DATA.tree || { name: DATA.title || "脑图", children: [] };
+    document.getElementById("themeBtn").textContent = theme() === "dark" ? "浅色模式" : "深色模式";
+    prep(root, 0, 0);
+    paint();
+    fit();
+    window.addEventListener("resize", function () { fit(); });
+  })();
+})();
+</script>
+</body>
+</html>

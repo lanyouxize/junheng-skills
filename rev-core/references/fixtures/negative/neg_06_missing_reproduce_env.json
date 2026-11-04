@@ -1,0 +1,33 @@
+{
+  "channel": "static",
+  "digest": {
+    "algo": "sha256",
+    "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "grade": "E1",
+  "id": "ev-2006",
+  "kind": "evidence",
+  "locator": {
+    "addr": 4198400,
+    "file_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "length": 8
+  },
+  "produced_at": "2026-11-01T22:40:00+08:00",
+  "produced_by": "rev-core",
+  "provenance": {
+    "command": "analyzeHeadless ... -postScript Xrefs.py",
+    "inputs_sha256": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "tool": "ghidra",
+    "version": "11.3.2"
+  },
+  "refs": [],
+  "reproduce": {
+    "cmd": "python scripts/xrefs.py sample.exe 0x401000 8",
+    "cwd": "."
+  },
+  "schema": "reva/1",
+  "status": "ok",
+  "target_id": "tgt-abc123"
+}

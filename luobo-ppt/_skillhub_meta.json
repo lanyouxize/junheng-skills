@@ -1,0 +1,13 @@
+{
+  "name": "萝卜 PPT",
+  "installedAt": 1792058660031,
+  "source": "marketplace",
+  "version": "2.7.3",
+  "skillId": "skill_2108009164146315264",
+  "pay_mode": 0,
+  "description_zh": "一句话把文章、口播稿、大纲做成可编辑的原生 PPT，也能照一张参考图把旧 PPT 美化得统一好看，原文一字不改。14 套风格可选，交付前自动检查丢字、溢出和对比度。",
+  "description_en": "Turn a topic, article or outline into an editable native PowerPoint deck, or restyle an existing deck after a reference image without changing a single word. 14 built-in styles and automatic checks for missing text, overflow and contrast.",
+  "iconSource": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/af934270-768d-4ffe-87eb-8b4bb2d82a01/a49e77bc-0a10-4e12-a9bb-81b5451674a5.png",
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\luobo-ppt\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/af934270-768d-4ffe-87eb-8b4bb2d82a01/a49e77bc-0a10-4e12-a9bb-81b5451674a5.png"
+}

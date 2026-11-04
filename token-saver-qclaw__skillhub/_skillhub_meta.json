@@ -1,0 +1,15 @@
+{
+  "slug": "token-saver-qclaw",
+  "name": "token省流助手-最多节省70%token",
+  "version": "1.0.1",
+  "installedAt": 1791907194005,
+  "source": "skillhub",
+  "namespace": "user_29dc410e",
+  "canonicalName": "@user_29dc410e/token-saver-qclaw",
+  "iconSource": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/cab3c5ed-3acd-4936-a59b-5f0c5f5dab1b.png",
+  "labels": {
+    "requires_api_key": "false"
+  },
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\token-saver-qclaw__skillhub\\_icon.png",
+  "iconDownloadedFrom": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/cab3c5ed-3acd-4936-a59b-5f0c5f5dab1b.png"
+}

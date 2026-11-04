@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="392" viewBox="0 0 900 392" role="img" aria-label="证据等级 × 物种相关性（候选）">
+<title>证据等级 × 物种相关性（候选）</title>
+<desc>A-D 四档在五种物种相关性上的分布；行和等于该档计数，列合计等于该物种的记录数。</desc>
+<defs><style>text{font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;}.ec-title{font-size:15px;font-weight:600;fill:#1f2328;}.ec-sub{font-size:11px;fill:#57606a;}.ec-axis{font-size:10.5px;fill:#57606a;font-variant-numeric:tabular-nums;}.ec-label{font-size:12px;fill:#1f2328;}.ec-label-b{font-size:12.5px;font-weight:600;fill:#1f2328;}.ec-value{font-size:12.5px;font-weight:600;fill:#1f2328;font-variant-numeric:tabular-nums;}.ec-cellv{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;}.ec-note{font-size:10.5px;fill:#57606a;}.ec-warn{font-size:11px;fill:#9a6700;font-weight:500;}.ec-legend{font-size:10.5px;fill:#57606a;}.ec-foot{font-size:10px;fill:#57606a;}</style><pattern id="ec-cand-2" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#ffffff" fill-opacity="0"/><line x1="0" y1="0" x2="0" y2="7" stroke="#ffffff" stroke-width="2.2" stroke-opacity="0.85"/></pattern></defs>
+<rect x="0" y="0" width="900" height="392" fill="#ffffff"/>
+<text class="ec-title" x="24" y="26">证据等级 × 物种相关性（候选）</text>
+<text class="ec-sub" x="24" y="44">同一批 10 条的二维投影　·　行和必须等于该档计数（自洽校验已通过）　·　格内深浅按行归一：同一行内可比，行间请比数字</text>
+<text class="ec-sub" x="876" y="26" text-anchor="end">evidence-charts/v1</text>
+<rect x="145" y="130" width="144.4" height="30" rx="3" fill="#f6f8fa"/>
+<text class="ec-axis" x="217.2" y="144" text-anchor="middle">犬猫靶动物</text>
+<rect x="291.4" y="130" width="144.4" height="30" rx="3" fill="#f6f8fa"/>
+<text class="ec-axis" x="363.59999999999997" y="144" text-anchor="middle">混杂多物种</text>
+<rect x="437.8" y="130" width="144.4" height="30" rx="3" fill="#f6f8fa"/>
+<text class="ec-axis" x="510" y="144" text-anchor="middle">非靶动物</text>
+<rect x="584.2" y="130" width="144.4" height="30" rx="3" fill="#f6f8fa"/>
+<text class="ec-axis" x="656.4000000000001" y="144" text-anchor="middle">仅体外</text>
+<rect x="730.6" y="130" width="144.4" height="30" rx="3" fill="#f6f8fa"/>
+<text class="ec-axis" x="802.8000000000001" y="144" text-anchor="middle">未识别</text>
+<rect x="24" y="76" width="852" height="42" rx="6" fill="#fff8e5" stroke="#d4a72c" stroke-dasharray="4 3"/>
+<text class="ec-warn" x="36" y="93">⚠ 本图是「待审清单」的分布，不是结论：全部 10 条均为启发式候选（needsReview）</text>
+<text class="ec-warn" x="36" y="110">　未经人工核对原文方法学章节前，任何一档都不得用于宣称支撑</text>
+<text class="ec-label-b" x="24" y="185">A（2）</text>
+<rect x="145" y="166" width="144.4" height="28" rx="3" fill="#0f5132" fill-opacity="0.90"/>
+<text class="ec-cellv" x="217.2" y="184" text-anchor="middle" fill="#ffffff">1</text>
+<rect x="291.4" y="166" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="363.59999999999997" y="184" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="437.8" y="166" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="510" y="184" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="584.2" y="166" width="144.4" height="28" rx="3" fill="#0f5132" fill-opacity="0.90"/>
+<text class="ec-cellv" x="656.4000000000001" y="184" text-anchor="middle" fill="#ffffff">1</text>
+<rect x="730.6" y="166" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="802.8000000000001" y="184" text-anchor="middle" fill="#8c959f">0</text>
+<text class="ec-label-b" x="24" y="219">B（1）</text>
+<rect x="145" y="200" width="144.4" height="28" rx="3" fill="#7cc47f" fill-opacity="0.90"/>
+<text class="ec-cellv" x="217.2" y="218" text-anchor="middle" fill="#ffffff">1</text>
+<rect x="291.4" y="200" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="363.59999999999997" y="218" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="437.8" y="200" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="510" y="218" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="584.2" y="200" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="656.4000000000001" y="218" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="730.6" y="200" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="802.8000000000001" y="218" text-anchor="middle" fill="#8c959f">0</text>
+<text class="ec-label-b" x="24" y="253">C（2）</text>
+<rect x="145" y="234" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="217.2" y="252" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="291.4" y="234" width="144.4" height="28" rx="3" fill="#bf8700" fill-opacity="0.90"/>
+<text class="ec-cellv" x="363.59999999999997" y="252" text-anchor="middle" fill="#ffffff">1</text>
+<rect x="437.8" y="234" width="144.4" height="28" rx="3" fill="#bf8700" fill-opacity="0.90"/>
+<text class="ec-cellv" x="510" y="252" text-anchor="middle" fill="#ffffff">1</text>
+<rect x="584.2" y="234" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="656.4000000000001" y="252" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="730.6" y="234" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="802.8000000000001" y="252" text-anchor="middle" fill="#8c959f">0</text>
+<text class="ec-label-b" x="24" y="287">D（5）</text>
+<rect x="145" y="268" width="144.4" height="28" rx="3" fill="#8c959f" fill-opacity="0.41"/>
+<text class="ec-cellv" x="217.2" y="286" text-anchor="middle" fill="#1f2328">1</text>
+<rect x="291.4" y="268" width="144.4" height="28" rx="3" fill="#8c959f" fill-opacity="0.41"/>
+<text class="ec-cellv" x="363.59999999999997" y="286" text-anchor="middle" fill="#1f2328">1</text>
+<rect x="437.8" y="268" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="510" y="286" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="584.2" y="268" width="144.4" height="28" rx="3" fill="#f2f4f6" stroke="#d0d7de"/>
+<text class="ec-cellv" x="656.4000000000001" y="286" text-anchor="middle" fill="#8c959f">0</text>
+<rect x="730.6" y="268" width="144.4" height="28" rx="3" fill="#8c959f" fill-opacity="0.90"/>
+<text class="ec-cellv" x="802.8000000000001" y="286" text-anchor="middle" fill="#ffffff">3</text>
+<line x1="24" y1="304" x2="876" y2="304" stroke="#d0d7de"/>
+<text class="ec-note" x="24" y="320">列合计</text>
+<text class="ec-value" x="217.2" y="320" text-anchor="middle">3</text>
+<text class="ec-value" x="363.59999999999997" y="320" text-anchor="middle">2</text>
+<text class="ec-value" x="510" y="320" text-anchor="middle">1</text>
+<text class="ec-value" x="656.4000000000001" y="320" text-anchor="middle">1</text>
+<text class="ec-value" x="802.8000000000001" y="320" text-anchor="middle">3</text>
+<rect x="24" y="340" width="9" height="9" rx="2" fill="#0f5132"/>
+<text class="ec-legend" x="37" y="348">A　靶动物 RCT/SR</text>
+<rect x="143.20000000000002" y="340" width="9" height="9" rx="2" fill="#7cc47f"/>
+<text class="ec-legend" x="156.20000000000002" y="348">B　靶动物对照</text>
+<rect x="242.97500000000002" y="340" width="9" height="9" rx="2" fill="#bf8700"/>
+<text class="ec-legend" x="255.97500000000002" y="348">C　间接/观察/体外</text>
+<rect x="364.8" y="340" width="9" height="9" rx="2" fill="#8c959f"/>
+<text class="ec-legend" x="377.8" y="348">D　薄弱或信息不足</text>
+</svg>

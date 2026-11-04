@@ -1,0 +1,15 @@
+{
+  "slug": "memory-manager-v2",
+  "name": "记忆管家 V4.0.6",
+  "version": "4.0.6",
+  "installedAt": 1791907044784,
+  "source": "skillhub",
+  "namespace": "indiv-aakook",
+  "canonicalName": "@indiv-aakook/memory-manager-v2",
+  "iconSource": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/7422abc7-fa86-4505-a723-0575c56e7a2d.png",
+  "labels": {
+    "requires_api_key": "false"
+  },
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\memory-manager-v2__skillhub\\_icon.png",
+  "iconDownloadedFrom": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/7422abc7-fa86-4505-a723-0575c56e7a2d.png"
+}

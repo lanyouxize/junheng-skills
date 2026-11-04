@@ -1,0 +1,25 @@
+{
+  "currency": "CNY",
+  "note": "单价单位均为「元 / 每百万 tokens」。高峰时段按本地时区(Asia/Shanghai, UTC+8)的 09:00-12:00 与 14:00-18:00 计，其余为空闲时段（价格为高峰一半）。来源：DeepSeek 官方定价页 api-docs.deepseek.com，核对于 2026-08。",
+  "providers": {
+    "deepseek": {
+      "label": "DeepSeek",
+      "timezone": "Asia/Shanghai",
+      "peak_hours": [[9, 12], [14, 18]],
+      "models": {
+        "v4-flash": {
+          "label": "DeepSeek V4 Flash",
+          "input_cached": { "idle": 0.05, "peak": 0.10 },
+          "input_miss": { "idle": 1.5, "peak": 3.0 },
+          "output": { "idle": 4.5, "peak": 9.0 }
+        },
+        "v4-pro": {
+          "label": "DeepSeek V4 Pro",
+          "input_cached": { "idle": 0.15, "peak": 0.30 },
+          "input_miss": { "idle": 4.5, "peak": 9.0 },
+          "output": { "idle": 13.5, "peak": 27.0 }
+        }
+      }
+    }
+  }
+}

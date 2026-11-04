@@ -1,0 +1,79 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "junheng-optimize",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/junheng-optimize/SKILL.md",
+      "kind": "template",
+      "sha256": "b9d9a05640af1665441309f81955ce73f3644e4ef4800880368404afec173804"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/optimize.mjs",
+      "kind": "facade",
+      "sha256": "09cd8dac517c84d44671ac42512c0dcf6d489e4465414fb43f22190c5c7cb06c"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "5ac1a0e089471f94e2046da6c0b60b5ee03c2a51ba9405394e93e0439996aa94"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/paramSchema.mjs",
+      "origin": "cli/lib/paramSchema.mjs",
+      "kind": "cli-lib",
+      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "scripts/vendor/optimizer.js",
+      "origin": "src/lib/optimizer.js",
+      "kind": "vendor",
+      "sha256": "b49a2b34f9cba80264dc9614e03d4316accbaa9e25f8d49c5e44468a345c9410"
+    },
+    {
+      "dest": "scripts/vendor/optimizerDiagnose.js",
+      "origin": "src/lib/optimizerDiagnose.js",
+      "kind": "vendor",
+      "sha256": "949c0697d4052a8115fe7a443d11a5d867ecec09744f32e997d78f03ca1662eb"
+    },
+    {
+      "dest": "references/interface-reference.md",
+      "origin": "cli/skills/junheng-optimize/references/interface-reference.md",
+      "kind": "reference",
+      "sha256": "8595a06bfdd1851ece9b8bb70589149f83e192a77108ef969349f0787a128cee"
+    }
+  ]
+}

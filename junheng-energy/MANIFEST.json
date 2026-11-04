@@ -1,0 +1,79 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "junheng-energy",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/junheng-energy/SKILL.md",
+      "kind": "template",
+      "sha256": "c342f853a9e28849cddfb41969af4c6b272befc048cb64963d65c2b176fd5dcf"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/energy.mjs",
+      "kind": "facade",
+      "sha256": "1d14b41aa0be6d6b026f17a9e92ddbbddd108f838f6316e5498ad7f45ba2eac5"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "5ac1a0e089471f94e2046da6c0b60b5ee03c2a51ba9405394e93e0439996aa94"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/paramSchema.mjs",
+      "origin": "cli/lib/paramSchema.mjs",
+      "kind": "cli-lib",
+      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "scripts/vendor/energy.js",
+      "origin": "src/lib/energy.js",
+      "kind": "vendor",
+      "sha256": "2359b59b01a788724c68bc648ce20b3551605d4bd28591165a4c79a6320dc141"
+    },
+    {
+      "dest": "scripts/vendor/species.js",
+      "origin": "src/lib/species.js",
+      "kind": "vendor",
+      "sha256": "04d402947d11b9a004cd034d0b13950e41c567a05c67daf74ab5253c1d4b212c"
+    },
+    {
+      "dest": "references/interface-reference.md",
+      "origin": "cli/skills/junheng-energy/references/interface-reference.md",
+      "kind": "reference",
+      "sha256": "8366d6662404da29216518bf0b479862560163eeb6611c6ca66b9deefd8c635b"
+    }
+  ]
+}

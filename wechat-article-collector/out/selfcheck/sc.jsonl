@@ -1,0 +1,6 @@
+{"ts": "2026-11-01T09:56:42Z", "level": "info", "event": "refresh.source_start", "name": "stub", "layer": "url", "attempt": 1}
+{"ts": "2026-11-01T09:56:42Z", "level": "warn", "event": "refresh.source_retry", "name": "stub", "layer": "url", "attempt": 1, "next_attempt": 2, "backoff": 0, "exit_code": 3}
+{"ts": "2026-11-01T09:56:42Z", "level": "info", "event": "refresh.source_start", "name": "stub", "layer": "url", "attempt": 2}
+{"ts": "2026-11-01T09:56:42Z", "level": "warn", "event": "refresh.source_retry", "name": "stub", "layer": "url", "attempt": 2, "next_attempt": 3, "backoff": 0, "exit_code": 3}
+{"ts": "2026-11-01T09:56:42Z", "level": "info", "event": "refresh.source_start", "name": "stub", "layer": "url", "attempt": 3}
+{"ts": "2026-11-01T09:56:42Z", "level": "info", "event": "refresh.source_ok", "name": "stub", "layer": "url", "attempt": 3}

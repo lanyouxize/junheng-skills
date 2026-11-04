@@ -1,0 +1,272 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""WorkBuddy 本节点消耗积分（官方 credit）读取工具。
+
+数据源 : ~/.workbuddy/projects/**/*.jsonl
+字段口径: providerData.rawUsage.credit  —— 官方积分，与 App「套餐与用量」账单同源
+基准实现: github.com/majiabin2020/workbuddy-token-dashboard 的 grab()（官方 credit 口径）
+
+用法:
+  python node_credit.py                # 当前会话累计消耗积分（人读）
+  python node_credit.py --json         # 机器可读 JSON
+  python node_credit.py --mark         # 任务开始：记录基线快照
+  python node_credit.py --delta        # 任务结束：读自基线的增量 = 本节点消耗积分
+  python node_credit.py --session SID  # 指定会话（sid 或 sid.jsonl）
+  python node_credit.py --projects DIR # 指定日志根目录（默认 ~/.workbuddy/projects）
+  python node_credit.py --model        # 附逐模型积分拆分
+
+说明:
+  - 「当前会话」= projects/<项目>/<sid>.jsonl 中 mtime 最新的一个（正在被写入者）；
+    其 <sid>/subagents/** 的子代理用量一并计入。
+  - credit 为 None 的请求（老格式）不计入积分，但仍计入 token。
+  - --mark / --delta 用同一基线文件；--delta 会在会话切换时给出提示。
+"""
+from __future__ import annotations
+
+import argparse
+import glob
+import json
+import os
+import sys
+import time
+
+DEFAULT_PROJECTS = os.path.join(os.path.expanduser("~"), ".workbuddy", "projects")
+DEFAULT_BASELINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".node_credit_baseline.json")
+
+
+def grab(o):
+    """从一条日志记录中提取 usage；无有效 usage 返回 None。口径对齐 workbuddy-token-dashboard。"""
+    pd = o.get("providerData")
+    if not isinstance(pd, dict):
+        return None
+    ru = pd.get("rawUsage") or {}
+    u = pd.get("usage") or {}
+    tt = ru.get("total_tokens") or u.get("totalTokens")
+    if not tt:
+        return None
+    c = ru.get("credit")
+    return {
+        "ts": o.get("timestamp") or 0,
+        "total": int(tt),
+        "input": int(ru.get("prompt_tokens") or u.get("inputTokens") or 0),
+        "output": int(ru.get("completion_tokens") or u.get("outputTokens") or 0),
+        "credit": float(c) if isinstance(c, (int, float)) else None,
+        "model": pd.get("model") or pd.get("requestModelId") or pd.get("requestModelName") or "unknown",
+    }
+
+
+def cwd_to_projdir(cwd):
+    """把工作目录映射为 projects/ 下的目录名：D:\\a\\b -> d-a-b（WorkBuddy 口径）。"""
+    if not cwd:
+        return None
+    p = os.path.abspath(cwd).replace("\\", "/")
+    if len(p) >= 2 and p[1] == ":":
+        return p[0].lower() + "-" + p[2:].strip("/").replace("/", "-")
+    return None
+
+
+def find_current_session(projects, cwd=None):
+    """返回 (session_jsonl_path, sid, projdir)。
+
+    优先在「当前 cwd 对应的项目目录」内取 mtime 最新会话——多开 WorkBuddy 窗口时
+    多个会话在并发写入，全局取 mtime 最新会串台到别的项目。目录不存在时回退全局最新。
+    """
+    projdir = cwd_to_projdir(cwd)
+    if projdir:
+        cand = glob.glob(os.path.join(projects, projdir, "*.jsonl"))
+        if cand:
+            newest = max(cand, key=os.path.getmtime)
+            return newest, os.path.splitext(os.path.basename(newest))[0], projdir
+    files = glob.glob(os.path.join(projects, "*", "*.jsonl"))
+    if not files:
+        return None, None, None
+    newest = max(files, key=os.path.getmtime)
+    return newest, os.path.splitext(os.path.basename(newest))[0], None
+
+
+def resolve_session(projects, session, cwd=None):
+    """按 --session 或自动探测定位会话文件。"""
+    if session:
+        sid = session[:-6] if session.endswith(".jsonl") else session
+        projdir = cwd_to_projdir(cwd)
+        hits = glob.glob(os.path.join(projects, projdir, sid + ".jsonl")) if projdir else []
+        if not hits:
+            hits = glob.glob(os.path.join(projects, "*", sid + ".jsonl"))
+        if not hits:
+            sys.exit("[error] 未找到会话 %s 的日志文件（在 %s 下）" % (sid, projects))
+        return hits[0], sid
+    path, sid, _ = find_current_session(projects, cwd)
+    if not path:
+        sys.exit("[error] %s 下没有任何会话日志" % projects)
+    return path, sid
+
+
+def collect(session_file, sid):
+    """收集会话自身 + 其 subagents 目录下全部 jsonl 的 usage 记录。"""
+    proj = os.path.dirname(session_file)
+    session_dir = os.path.join(proj, sid)
+    paths = [session_file]
+    if os.path.isdir(session_dir):
+        paths += glob.glob(os.path.join(session_dir, "**", "*.jsonl"), recursive=True)
+    seen, recs = set(), []
+    for p in paths:
+        rp = os.path.realpath(p)
+        if rp in seen:
+            continue
+        seen.add(rp)
+        try:
+            with open(p, encoding="utf-8", errors="ignore") as fh:
+                for line in fh:
+                    if '"rawUsage"' not in line and '"usage"' not in line:
+                        continue
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        o = json.loads(line)
+                    except Exception:
+                        continue
+                    r = grab(o)
+                    if r:
+                        recs.append(r)
+        except OSError:
+            continue
+    return recs
+
+
+def summarize(recs):
+    credit = 0.0
+    n_credit = 0
+    tot = inp = out = 0
+    per_model = {}
+    for r in recs:
+        tot += r["total"]
+        inp += r["input"]
+        out += r["output"]
+        if r["credit"] is not None:
+            credit += r["credit"]
+            n_credit += 1
+            per_model[r["model"]] = per_model.get(r["model"], 0.0) + r["credit"]
+    return {
+        "requests": len(recs),
+        "credit_requests": n_credit,
+        "credit": round(credit, 4),
+        "total_tokens": tot,
+        "input_tokens": inp,
+        "output_tokens": out,
+        "per_model_credit": {k: round(v, 4) for k, v in sorted(per_model.items(), key=lambda kv: -kv[1])},
+    }
+
+
+def load_baseline(path):
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return None
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="WorkBuddy 本节点消耗积分（官方 credit）读取")
+    ap.add_argument("--projects", default=DEFAULT_PROJECTS, help="会话日志根目录（默认 ~/.workbuddy/projects）")
+    ap.add_argument("--session", default=None, help="指定会话 sid（或 sid.jsonl）")
+    ap.add_argument("--cwd", default=None, help="当前工作目录（用于定位本任务会话；默认系统 cwd）")
+    ap.add_argument("--baseline", default=DEFAULT_BASELINE, help="基线文件路径")
+    ap.add_argument("--mark", action="store_true", help="记录基线快照（任务开始时用）")
+    ap.add_argument("--delta", action="store_true", help="读自基线的增量（任务结束时用）")
+    ap.add_argument("--model", action="store_true", help="附逐模型积分拆分")
+    ap.add_argument("--json", action="store_true", help="输出 JSON")
+    args = ap.parse_args(argv)
+
+    projects = os.path.expanduser(args.projects)
+    if not os.path.isdir(projects):
+        sys.exit("[error] 日志目录不存在: %s" % projects)
+
+    cwd = args.cwd or os.getcwd()
+    session_file, sid = resolve_session(projects, args.session, cwd)
+    projdir = cwd_to_projdir(cwd)
+    scope_warn = None
+    if projdir and os.path.basename(os.path.dirname(session_file)) != projdir:
+        scope_warn = ("会话 %s 不在当前项目目录 %s 内——多窗口并发时可能串台，"
+                      "建议用 --session 显式指定" % (sid, projdir))
+    recs = collect(session_file, sid)
+    s = summarize(recs)
+
+    result = {
+        "session": sid,
+        "session_file": session_file,
+        "projects": projects,
+        "cwd": cwd,
+        "project_dir": projdir,
+        "scope_warn": scope_warn,
+        "session_credit": s["credit"],
+        "requests": s["requests"],
+        "credit_requests": s["credit_requests"],
+        "total_tokens": s["total_tokens"],
+        "input_tokens": s["input_tokens"],
+        "output_tokens": s["output_tokens"],
+        "per_model_credit": s["per_model_credit"],
+        "generated_at": int(time.time() * 1000),
+    }
+
+    if args.mark and not args.delta:
+        base = {"session": sid, "credit": s["credit"], "ts": result["generated_at"]}
+        with open(args.baseline, "w", encoding="utf-8") as fh:
+            json.dump(base, fh, ensure_ascii=False, indent=2)
+        result["baseline_marked"] = base
+        if args.json:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+        else:
+            print("基线已记录（会话 %s）: 累计积分 = %.2f" % (sid, s["credit"]))
+            print("基线文件: %s" % args.baseline)
+        return 0
+
+    if args.delta:
+        base = load_baseline(args.baseline)
+        if not base:
+            sys.exit("[error] 未找到基线，请先在任务开始处运行 --mark。基线文件: %s" % args.baseline)
+        if base.get("session") and base["session"] != sid:
+            result["baseline_session_mismatch"] = base["session"]
+        delta = round(s["credit"] - float(base.get("credit", 0.0)), 4)
+        result["baseline"] = base
+        result["node_delta_credit"] = delta
+        result["threshold"] = 30
+        result["within_threshold"] = delta <= 30
+        if args.json:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+        else:
+            print("本节点消耗积分（自基线增量）: %.2f" % delta)
+            print("  会话 %s | 累计 %.2f（基线 %.2f）" % (sid, s["credit"], float(base.get("credit", 0.0))))
+            print("  阈值 30 → %s" % ("未超，可续" if result["within_threshold"] else "超限，下一批另开新任务"))
+            if result.get("baseline_session_mismatch"):
+                print("  [warn] 基线属于另一会话 %s，增量仅供参考" % result["baseline_session_mismatch"])
+            if scope_warn:
+                print("  [warn] %s" % scope_warn)
+        return 0
+
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    else:
+        print("WorkBuddy 本节点（当前会话）积分")
+        print("=" * 44)
+        print("会话            : %s" % sid)
+        print("会话日志        : %s" % session_file)
+        print("累计消耗积分    : %.2f   （官方 credit，与 App 账单同源）" % s["credit"])
+        print("模型请求        : %d 次（其中 %d 条含 credit）" % (s["requests"], s["credit_requests"]))
+        print("Token 合计      : %s  (输入 %s / 输出 %s)" % (
+            f"{s['total_tokens']:,}", f"{s['input_tokens']:,}", f"{s['output_tokens']:,}"))
+        if args.model and s["per_model_credit"]:
+            print("-" * 44)
+            print("逐模型积分:")
+            for m, c in s["per_model_credit"].items():
+                print("  %-28s %8.2f" % (m, c))
+        if scope_warn:
+            print("-" * 44)
+            print("[warn] %s" % scope_warn)
+        print("-" * 44)
+        print("提示: 任务开始跑 --mark，结束跑 --delta 即得「本节点消耗积分」。")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

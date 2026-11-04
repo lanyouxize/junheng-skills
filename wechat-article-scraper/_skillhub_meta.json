@@ -1,0 +1,11 @@
+{
+  "name": "微信公众号图文爬取与知识库导出",
+  "installedAt": 1792284063004,
+  "source": "marketplace",
+  "version": "1.2.0",
+  "skillId": "skill_2107326756307832832",
+  "pay_mode": 0,
+  "description_zh": "微信公众号图文内容爬取与多平台知识库导出工具 v1.1.0：搜狗微信搜索发现文章 + URL直接抓取全文、按公众号名称/关键词/时间范围组合检索、文章全文解析（标题/作者/日期/摘要/正文/图片）、Markdown/Text/HTML/JSON四种格式、ZIP打包导出、纯文本Markdown目录导出、IMA知识库/Dify Dataset/Obsidian Vault三大知识库一键同步、智能去重（规范链接+内容哈希+标题相似度并给出重复原因）、日期范围过滤+关键词过滤+相关性排序、离线抽取式摘要与关键词统计、爬取历史记账支持增量采集、图片本地化、请求限速+自动重试+缓存TTL+反爬验证页识别。",
+  "description_en": "WeChat Official Account article scraping and multi-platform knowledge base export v1.1.0: Sogou WeChat search discovery + direct URL full-text fetch, search by account name / keyword / date range, article parsing (title/author/date/summary/body/images), Markdown/Text/HTML/JSON formats, ZIP packaging plus text-only Markdown folder export, IMA/Dify/Obsidian sync, intelligent dedup (canonical link + content hash + title similarity with reasons), date/keyword filtering + relevance ranking, offline extractive summarization and keyword extraction, scrape-history journal for incremental crawling, local image download, rate limiting + retry + cache TTL + anti-bot page detection.",
+  "iconSource": "letter:auto"
+}

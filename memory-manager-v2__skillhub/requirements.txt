@@ -1,0 +1,9 @@
+# 记忆管家 V4.0.6 依赖清单
+# 强制依赖：无（纯 Python 标准库，零运行时第三方依赖）
+# 以下三项均为**可选**依赖：代码以 try/except ImportError 包裹，缺失时自动回退，功能不受影响。
+# 本清单必须覆盖 memory_manager/ 下的全部非标准库 import —— 由 tests/test_dependency_manifest.py 强制校验。
+colorama>=0.4.0            # 终端彩色输出；不安装则颜色退化为空串
+jieba>=0.42.0              # 中文分词；不安装则回退字符 bigram
+tiktoken>=0.13.0,<1.0.0    # 精确 BPE 分词计量（>=0.13.0 修复 RUSTSEC-2026-0176/0177）；不安装则回退字符估算
+# ⚠️ 安装时务必认准包名 tiktoken —— 同名不同包 `tiktoken-mcp` 曾于 2026-06 被投毒（MAL-2026-5326），
+#    该包伪装 tiktoken 的元数据并经 .pth 启动钩子执行 infostealer。

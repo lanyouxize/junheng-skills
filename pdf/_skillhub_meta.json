@@ -1,0 +1,11 @@
+{
+  "name": "PDF 文档处理",
+  "installedAt": 1791593888268,
+  "source": "marketplace",
+  "version": "1.0.1",
+  "skillId": "skill_2095322904487550976",
+  "pay_mode": 0,
+  "description_zh": "PDF 文档处理工具，支持文本与表格提取、PDF 创建、合并拆分、表单填写及批量分析。",
+  "description_en": "Process PDF documents by extracting text and tables, creating, merging, splitting, filling forms, and performing batch analysis.",
+  "iconSource": "letter:auto"
+}

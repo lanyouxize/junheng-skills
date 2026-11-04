@@ -1,0 +1,2 @@
+-r requirements.txt
+pypdfium2>=5.14,<6

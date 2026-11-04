@@ -1,0 +1,11 @@
+{
+  "name": "公众号整站归档",
+  "installedAt": 1792283989280,
+  "source": "marketplace",
+  "version": "1.0.1",
+  "skillId": "skill_2099155499417280512",
+  "pay_mode": 0,
+  "description_zh": "把公众号历史文章抓成全量语料，交付可点读的 HTML 阅读器、TXT 文章包与带书签的 Word 全集。",
+  "description_en": "Archive a full WeChat official-account article history into a clickable HTML reader, a TXT package and a bookmarked Word collection.",
+  "iconSource": "letter:auto"
+}

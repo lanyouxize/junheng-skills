@@ -1,0 +1,13 @@
+{
+  "personalization": {
+    "customPrompt": "你是一个严谨的助手",
+    "toneStyle": "formal",
+    "language": "zh-CN"
+  },
+  "sandboxSafetyEnabled": true,
+  "theme": "dark",
+  "model": {
+    "default": "deepseek-v3",
+    "temperature": 0.3
+  }
+}

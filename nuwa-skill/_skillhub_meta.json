@@ -1,0 +1,11 @@
+{
+  "name": "女娲",
+  "installedAt": 1791594038163,
+  "source": "marketplace",
+  "version": "1.0.6",
+  "skillId": "skill_2072584908289445888",
+  "pay_mode": 0,
+  "description_zh": "蒸馏人物思维框架，生成可运行的人物 Skill",
+  "description_en": "Distill thinking frameworks from people and generate runnable persona Skills",
+  "iconSource": "letter:auto"
+}

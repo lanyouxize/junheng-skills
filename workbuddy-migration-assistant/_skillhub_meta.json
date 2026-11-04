@@ -1,0 +1,13 @@
+{
+  "name": "WorkBuddy迁移助手",
+  "installedAt": 1791899462312,
+  "source": "marketplace",
+  "version": "2.1.0",
+  "skillId": "skill_2095072400171311104",
+  "pay_mode": 0,
+  "description_zh": "WorkBuddy 国内版跨机器资产迁移助手：换电脑时一键导出/导入全部个人资产（技能、记忆、对话、配置、连接器凭证、会话产物索引等），两包分离快速传输、路径自动映射、导入后自动校验，跟着主线六步完成搬家。",
+  "description_en": "Cross-machine asset migration assistant for WorkBuddy China edition. Export and restore all personal assets (skills, memory, conversations, configs, connector credentials, artifact index) when switching computers, with a two-package layout, automatic path remapping and post-import verification in six guided steps.",
+  "iconSource": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/0028c709-40fb-4813-9403-102eb28b9b4d/51c55cd0-3626-4f53-84b7-db996dfc7b73.png",
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\workbuddy-migration-assistant\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.cn/public/common/capability_cover/0028c709-40fb-4813-9403-102eb28b9b4d/51c55cd0-3626-4f53-84b7-db996dfc7b73.png"
+}

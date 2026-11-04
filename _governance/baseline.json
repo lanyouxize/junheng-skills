@@ -1,0 +1,318 @@
+{
+ "generated_at": "2026-10-31T22:57:56",
+ "root": "C:\\Users\\Administrator\\.workbuddy\\skills",
+ "skill_count": 82,
+ "count": 62,
+ "items": [
+  {
+   "rule": "E1",
+   "dir": "handoff__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "memory-manager-v2__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "perfectly-replicate-writing-skills__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "python-crawler-architect__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "self-improving__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "tiangong-skill__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "token-saver-qclaw__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E1",
+   "dir": "workbuddy-speedup-diagnosis__skillhub",
+   "detail": "目录名含安装器后缀 __"
+  },
+  {
+   "rule": "E2",
+   "dir": "handoff__skillhub",
+   "detail": "目录名 'handoff__skillhub' ≠ name 'handoff'"
+  },
+  {
+   "rule": "E2",
+   "dir": "memory-manager-v2__skillhub",
+   "detail": "目录名 'memory-manager-v2__skillhub' ≠ name 'memory-manager-v2'"
+  },
+  {
+   "rule": "E2",
+   "dir": "perfectly-replicate-writing-skills__skillhub",
+   "detail": "目录名 'perfectly-replicate-writing-skills__skillhub' ≠ name 'perfect-distillation-skill'"
+  },
+  {
+   "rule": "E2",
+   "dir": "python-crawler-architect__skillhub",
+   "detail": "目录名 'python-crawler-architect__skillhub' ≠ name 'Python 爬虫架构师'"
+  },
+  {
+   "rule": "E2",
+   "dir": "self-improving__skillhub",
+   "detail": "目录名 'self-improving__skillhub' ≠ name 'Self-Improving + Proactive Agent'"
+  },
+  {
+   "rule": "E2",
+   "dir": "tiangong-skill__skillhub",
+   "detail": "目录名 'tiangong-skill__skillhub' ≠ name 'tiangong-skill'"
+  },
+  {
+   "rule": "E2",
+   "dir": "token-saver-qclaw__skillhub",
+   "detail": "目录名 'token-saver-qclaw__skillhub' ≠ name 'token-saver-qclaw'"
+  },
+  {
+   "rule": "E2",
+   "dir": "workbuddy-speedup-diagnosis__skillhub",
+   "detail": "目录名 'workbuddy-speedup-diagnosis__skillhub' ≠ name 'workbuddy-speedup'"
+  },
+  {
+   "rule": "E3",
+   "dir": "python-crawler-architect__skillhub",
+   "detail": "name='Python 爬虫架构师' 不是合法 slug"
+  },
+  {
+   "rule": "E3",
+   "dir": "self-improving__skillhub",
+   "detail": "name='Self-Improving + Proactive Agent' 不是合法 slug"
+  },
+  {
+   "rule": "W1",
+   "dir": "memory-manager-v2",
+   "detail": "目录内无 SKILL.md（空壳目录）"
+  },
+  {
+   "rule": "W2",
+   "dir": "ara-compiler",
+   "detail": "SKILL.md 14904 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "ara-research-manager",
+   "detail": "SKILL.md 12747 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "ara-rigor-reviewer",
+   "detail": "SKILL.md 17922 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "autoresearch",
+   "detail": "SKILL.md 16636 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "brainstorming-research-ideas",
+   "detail": "SKILL.md 19519 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "browser-use",
+   "detail": "SKILL.md 11553 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "creative-thinking-for-research",
+   "detail": "SKILL.md 22233 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "darwin-skill",
+   "detail": "SKILL.md 13911 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "delivery-no-pseudoblock",
+   "detail": "SKILL.md 14556 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "dev-expert",
+   "detail": "SKILL.md 65289 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "douyin-video-extract-copywriter",
+   "detail": "SKILL.md 13203 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "free-model-market",
+   "detail": "SKILL.md 24183 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "humanizer",
+   "detail": "SKILL.md 17709 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "ima-skills",
+   "detail": "SKILL.md 14920 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "junheng-labeling",
+   "detail": "SKILL.md 13533 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "junheng-standards",
+   "detail": "SKILL.md 10566 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "lark-unified",
+   "detail": "SKILL.md 21394 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "literature-reviewer-skill",
+   "detail": "SKILL.md 28942 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "luobo-ppt",
+   "detail": "SKILL.md 20705 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "memory-manager-v2__skillhub",
+   "detail": "SKILL.md 18658 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "minimax-docx",
+   "detail": "SKILL.md 15563 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "ml-paper-writing",
+   "detail": "SKILL.md 11412 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "nuwa-skill",
+   "detail": "SKILL.md 37967 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "officecli",
+   "detail": "SKILL.md 11696 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "paper-bilingual-search",
+   "detail": "SKILL.md 48606 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "paper-quick-reader",
+   "detail": "SKILL.md 27627 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "pdfkit-py",
+   "detail": "SKILL.md 12814 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "perfectly-replicate-writing-skills__skillhub",
+   "detail": "SKILL.md 31998 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "presenting-conference-talks",
+   "detail": "SKILL.md 10507 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "repo-retrieval-governance",
+   "detail": "SKILL.md 16598 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "skill-optimizer",
+   "detail": "SKILL.md 18261 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "sparse-autoencoder-training",
+   "detail": "SKILL.md 13051 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "systems-paper-writing",
+   "detail": "SKILL.md 14573 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "tiangong-skill__skillhub",
+   "detail": "SKILL.md 14076 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "totorosir-workbuddy-score",
+   "detail": "SKILL.md 32155 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "ui-auto-click",
+   "detail": "SKILL.md 17508 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "videos-content-analyzer",
+   "detail": "SKILL.md 13350 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "web-access",
+   "detail": "SKILL.md 18827 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "wechat-article-archive",
+   "detail": "SKILL.md 12633 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "wechat-article-scraper",
+   "detail": "SKILL.md 20836 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "werss-ctl",
+   "detail": "SKILL.md 12268 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "workbuddy-migration-assistant",
+   "detail": "SKILL.md 11935 B > 10240 B"
+  },
+  {
+   "rule": "W2",
+   "dir": "workbuddy-speedup-diagnosis__skillhub",
+   "detail": "SKILL.md 12275 B > 10240 B"
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+# 每日自动刷新订阅文章 —— 配置示例
+# 用法：collect.py refresh run --yes --config subscriptions.yaml
+# 未给 --config 时自动回退到技能根的 subscriptions.yaml。
+#
+# 本文件同时是采集层子进程的 --config（内含 library/vault/rate_limit 覆盖），
+# refresh / subscriptions 块仅被 refresh 编排器读取，采集层会忽略它们。
+
+# ---- 刷新编排设置（仅 refresh 使用）----
+refresh:
+  # 运行日志 / 状态 / 临时 JSONL 目录。直接指向外部数据目录（遵循 SKILL.md
+  # 「产物不要留在技能目录」原则），不会污染技能文件夹。
+  # 如需换机，改这一行即可；子目录 refresh/ 用于区分每日刷新产物。
+  output_dir: "D:/workbuddy重做系统后版本/2026-10-23-14-10-52/data/wechat-article-collector/refresh"
+  schedule:
+    enabled: true
+    time: "08:00"                     # 每日触发时间（本地 24h，install 写入计划任务）
+    task_name: "WeChatArticleDailyRefresh"
+  max_retries: 2                     # 单源失败最大重试次数
+  retry_backoff_seconds: 30          # 指数退避基数（第 n 次重试等待 backoff*2^(n-1)）
+  per_source_timeout: 600            # 单源采集超时（秒）
+  import_media: false                # true 时写库顺带上传正文/图片到库
+  alert:
+    enabled: true
+    on: ["error", "partial", "zero_yield"]   # 触发条件
+    webhook_url: ""                  # 非空则同时 POST JSON 摘要（企业微信/钉钉/自定义）
+  # 可选：固定复用某张已建数据表（否则首跑建表并把 id 写入 out/refresh/state.json）
+  # database_id: ""
+
+# ---- 订阅源清单：每个源用一种采集层（url/account/exe/desktop）----
+subscriptions:
+  - name: "宠物食品研发号A"
+    layer: account                   # L2：按 __biz 拉取该号近期文章（真正的"订阅"语义）
+    enabled: true
+    biz: "MzUxNxxxxxxxxxxxx"         # 公众号 __biz（profile_ext 必需）
+    cookie_file: "cookies/account_a.json"   # L2 cookie；放 config 同级目录
+    since: "2020-01-01"              # 仅保留该日起发布的文章
+    limit: 50                        # 单次最多篇数
+    # keyword: "猫粮"                # 可选：标题/摘要含关键词才保留
+
+  - name: "已知文章直抓"
+    layer: url                       # L1：已知文章 URL 列表（适合收藏夹/RSS 转 URL）
+    enabled: true
+    urls_file: "subscriptions/urls.txt"   # 每行一个 URL（# 开头为注释）
+    # 也可用 urls: "https://mp.weixin.qq.com/s/AAA,https://mp.weixin.qq.com/s/BBB"
+
+  # - name: "闭源工具兜底"
+  #   layer: exe
+  #   enabled: false
+  #   exe: "C:/tools/微信公众号批量下载工具4.0.exe"
+  #   targets_file: "subscriptions/exe_targets.txt"
+  #   output_dir: "out/exe_out"
+
+  # - name: "PC 微信客户端驱动"
+  #   layer: desktop                 # L3：驱动 PC 微信客户端抓取（需微信已登录）
+  #   enabled: false
+  #   extra_args: "--plugin favorites"   # L3 参数走透传
+
+# ---- 写库层配置（与 config.example.yaml 同义，会被合并进 DEFAULT_CONFIG）----
+library:
+  node_id: ""                        # 智库节点 id（或写 --library-node）
+  database_name_prefix: "公众号采集归档"
+  batch_size: 50
+
+vault:
+  enabled: false                    # true 常驻开启 vault 双写；或 refresh run --vault 临时开
+  root: "D:\\workbuddy重做系统后版本\\2026-10-16-21-12-03\\vault"
+  auto_apply: true

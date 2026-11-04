@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-09-19 15:28:32",
+  "source": "WorkBuddy local cache entry_*.info (modelPromotions / ModelTrialBanner)",
+  "models": {
+    "wb-auto": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-fast-model": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-balanced-model": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deep-model": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hy3": {
+      "free_type": "limited",
+      "expires_at": "2026-10-01",
+      "note": "限时免费（至 2026-10-01）"
+    },
+    "wb-hy3-x": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hy4-preview": {
+      "free_type": "limited",
+      "expires_at": null,
+      "note": "夜间免费"
+    },
+    "wb-hy4-preview-dev": {
+      "free_type": "limited",
+      "expires_at": null,
+      "note": "夜间免费"
+    },
+    "wb-hy4-preview-x": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-minimax-m2.5": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5v-turbo": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5.3": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5.3-flash": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5.2": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5.1": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-5.0-turbo": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-4.6v": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k3-1": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2.8-preview": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2.7": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2.6": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2.5": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2-thinking": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-minimax-m3": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-minimax-m2.7": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-glm-4.6": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v4-flash": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v4.1-flash": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v4-pro": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-2-volc": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-1-volc": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-1-lkeap": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-1": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-0324-lkeap": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-r1-0528-lkeap": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-kimi-k2-instruct-taiji": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-completion-gf": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-default-1.1": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-3b": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-7b-dense": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-codewise-completions": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-codewise-rewrite": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-codewise-nes-a4-027-aide": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-codewise-jump": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-r1-0528": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-0324-taco-completion": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-deepseek-v3-0324": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-default-1.2": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-2.0-instruct": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-chat": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-image-alpha": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    },
+    "wb-hunyuan-image-alpha-edit": {
+      "free_type": "permanent",
+      "expires_at": null,
+      "note": ""
+    }
+  }
+}

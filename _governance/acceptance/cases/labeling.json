@@ -1,0 +1,136 @@
+[
+  {
+    "id": "L1",
+    "desc": "跨技能契约：nutrition.recipe.data → labeling.draft 必须成功并产出保证值表",
+    "pipeline": [
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "recipe",
+        "args": { "items": [{ "code": "01010001", "weight": 70 }, { "code": "01010011", "weight": 30 }] },
+        "as": "recipe_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "requirements",
+        "args": { "species": "dog", "weightKg": 10, "ageMonths": 12 },
+        "as": "req_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-labeling",
+        "cmd": "draft",
+        "args": { "recipe": "$recipe_data", "req": "$req_data", "meta": { "productName": "验收集测试犬粮" } }
+      }
+    ],
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "non_empty", "path": "data.guaranteed" },
+        { "type": "non_empty", "path": "data.ingredients" },
+        { "type": "range", "path": "data.compliance.judged", "value": [1, 99] }
+      ]
+    }
+  },
+  {
+    "id": "L2",
+    "desc": "契约严格性：不完整的 recipe 对象必须被拒（exit 2 + error.kind=usage）",
+    "skill": "junheng-labeling",
+    "cmd": "draft",
+    "args": { "recipe": { "ok": true }, "req": { "ok": true } },
+    "expect": {
+      "exit": 2,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": false },
+        { "type": "eq", "path": "error.kind", "value": "usage" }
+      ]
+    }
+  },
+  {
+    "id": "L3",
+    "desc": "不合规配方不得假绿：allPass=false 且 failCount>0（纯肉配方钙磷失衡）",
+    "pipeline": [
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "recipe",
+        "args": { "items": [{ "code": "01010001", "weight": 70 }, { "code": "01010011", "weight": 30 }] },
+        "as": "recipe_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "requirements",
+        "args": { "species": "dog", "weightKg": 10, "ageMonths": 12 },
+        "as": "req_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-labeling",
+        "cmd": "draft",
+        "args": { "recipe": "$recipe_data", "req": "$req_data", "meta": { "productName": "验收集测试犬粮" } }
+      }
+    ],
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "data.compliance.allPass", "value": false },
+        { "type": "range", "path": "data.compliance.failCount", "value": [1, 99] }
+      ]
+    }
+  },
+  {
+    "id": "L4",
+    "desc": "缺必填参数 req 时必须 exit 2，不得静默补默认值",
+    "skill": "junheng-labeling",
+    "cmd": "draft",
+    "args": { "recipe": { "ok": true, "totalWeight": 100 } },
+    "expect": { "exit": 2 }
+  },
+  {
+    "id": "L5",
+    "desc": "自描述契约：describe 必须列出 draft 命令与退出码约定",
+    "skill": "junheng-labeling",
+    "cmd": "describe",
+    "args": {},
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "not_null", "path": "data.commands" }
+      ]
+    }
+  },
+  {
+    "id": "L6",
+    "desc": "标准表指纹：同一配方在 CN-GB 下的 judged=7 / failCount=3（法规限值或计算链任一变动即报红）",
+    "pipeline": [
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "recipe",
+        "args": { "items": [{ "code": "01010001", "weight": 70 }, { "code": "01010011", "weight": 30 }] },
+        "as": "recipe_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-nutrition",
+        "cmd": "requirements",
+        "args": { "species": "dog", "weightKg": 10, "ageMonths": 12 },
+        "as": "req_data",
+        "pick": "data"
+      },
+      {
+        "skill": "junheng-labeling",
+        "cmd": "draft",
+        "args": { "recipe": "$recipe_data", "req": "$req_data", "meta": { "productName": "验收集测试犬粮" } }
+      }
+    ],
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "data.compliance.judged", "value": 7 },
+        { "type": "eq", "path": "data.compliance.failCount", "value": 3 }
+      ]
+    }
+  }
+]

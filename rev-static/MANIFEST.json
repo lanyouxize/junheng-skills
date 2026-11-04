@@ -1,0 +1,21 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "SKILL.md": {
+      "bytes": 5228,
+      "sha256": "be25604c800d51c7ed1014baa38faf22780fea4e4c977c1b3559fe20af48d06f"
+    },
+    "references/channels.md": {
+      "bytes": 1523,
+      "sha256": "3076c5a5ca2fa1ea41b77c5a5a0fcf7fcf9c060132f80d36277053b4420f5ce2"
+    },
+    "scripts/cli.py": {
+      "bytes": 24277,
+      "sha256": "f472c3c8feb89530cfe01e12a64d487a237d57c1a40f591db23723eaf184f1fb"
+    }
+  },
+  "generated_at": "2026-11-01T22:44:31+08:00",
+  "schema": "skill-manifest/1",
+  "skill": "rev-static",
+  "version": "1.0.0"
+}

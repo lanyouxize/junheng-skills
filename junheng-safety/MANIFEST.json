@@ -1,0 +1,85 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "junheng-safety",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/junheng-safety/SKILL.md",
+      "kind": "template",
+      "sha256": "c481ee0ec0c637cfb9d4afbc0eb2ba125ba5f7d2a7dcdf9da11d7ac95df8e394"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/safety.mjs",
+      "kind": "facade",
+      "sha256": "9614b9f4e2a049c4f8124491221b48d9535d3753a44c69e55578b2c9ba53cfac"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "5ac1a0e089471f94e2046da6c0b60b5ee03c2a51ba9405394e93e0439996aa94"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/paramSchema.mjs",
+      "origin": "cli/lib/paramSchema.mjs",
+      "kind": "cli-lib",
+      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "scripts/vendor/toxicology.js",
+      "origin": "src/lib/toxicology.js",
+      "kind": "vendor",
+      "sha256": "794814d83aad5264cb6fb401e6c6f68d53b893fcac7d0a9dd210672176fc2da0"
+    },
+    {
+      "dest": "scripts/vendor/species.js",
+      "origin": "src/lib/species.js",
+      "kind": "vendor",
+      "sha256": "04d402947d11b9a004cd034d0b13950e41c567a05c67daf74ab5253c1d4b212c"
+    },
+    {
+      "dest": "scripts/data/toxicSubstances.js",
+      "origin": "src/data/toxicSubstances.js",
+      "kind": "vendor-data",
+      "sha256": "db33266a0e6fb6c8d0970981996cafd5afa98c7e873e82b160c5d30a50501fab"
+    },
+    {
+      "dest": "references/interface-reference.md",
+      "origin": "cli/skills/junheng-safety/references/interface-reference.md",
+      "kind": "reference",
+      "sha256": "cfda21909a58d2f9f9ce79feb491518145ae7150e27c9c36dad3771baa259468"
+    }
+  ]
+}

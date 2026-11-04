@@ -1,0 +1,6 @@
+interface:
+  display_name: "Office 办公文档工具"
+  short_description: "创建、检查和编辑 Word、Excel 与 PowerPoint 文档"
+  icon_small: "./assets/officecli-avatar.png"
+  icon_large: "./assets/officecli-avatar.png"
+  brand_color: "#A77BE8"

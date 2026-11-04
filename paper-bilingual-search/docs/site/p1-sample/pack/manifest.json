@@ -1,0 +1,58 @@
+{
+  "packVersion": "site-pack/v1",
+  "slug": "paper-search-20261021-sample",
+  "title": "论文检索·中英对照报告（2026-10-21）",
+  "source": {
+    "tool": "paper-bilingual-search",
+    "runId": "SAMPLE",
+    "site": "kuluer",
+    "startedAt": "2026-10-21T02:00:00Z"
+  },
+  "status": "candidate-unconfirmed",
+  "stats": {
+    "keywords": [
+      "猫 排毛 / 泌尿"
+    ],
+    "gradeLine": null,
+    "charts": 3,
+    "hasSynthesis": true
+  },
+  "files": [
+    {
+      "path": "index.md",
+      "bytes": 14168,
+      "sha256": "38ce36db4b010f2f8a8510e232fe193e12ad14aa97c1ca52a84cdcd00cb0b4a6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1192,
+      "sha256": "f500bc261bac3f6252f4a78ea1d120dd91f2770d3773e12d35989a88adbdcf97"
+    },
+    {
+      "path": "moc-entry.md",
+      "bytes": 88,
+      "sha256": "1ed8ab51242744be6118ff763b331f77d24965cb20679db3ed651ce394287799"
+    },
+    {
+      "path": "charts/evidence-grade-dist.svg",
+      "bytes": 5217,
+      "sha256": "69f9c42011c20f6a7f557253e1443752d9c3e79d01d1ba446c70e6d233243a5e"
+    },
+    {
+      "path": "charts/evidence-grade-species.svg",
+      "bytes": 8050,
+      "sha256": "5c069c63e929f1309f3d47b5f3b9c030c64c1b9ebb8c2ec4243c4157b3257ff3"
+    },
+    {
+      "path": "charts/evidence-year-grade.svg",
+      "bytes": 6659,
+      "sha256": "826b9e60732524b56606815015750f8b80f7df60e2ed00df3bb3829a0fdfb757"
+    }
+  ],
+  "checklist": [
+    "逐条核对 A/B 档原文方法学章节（对照全文，而不是摘要）",
+    "确认物种与目标动物一致（体外/非靶动物的不能按 A/B 档引用）",
+    "确认样本量足以支撑结论（\"样本量未识别\" 不等于 \"小样本\"）",
+    "核对完成后把证据等级与 reviewed 标记回写，再重跑 assemble-report 与 pack-site"
+  ]
+}

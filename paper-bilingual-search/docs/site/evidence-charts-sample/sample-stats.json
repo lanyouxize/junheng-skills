@@ -1,0 +1,72 @@
+{
+  "allCandidate": {
+    "tag": "all-candidate",
+    "total": 69,
+    "gradeStat": {
+      "A": 2,
+      "B": 5,
+      "C": 8,
+      "D": 54
+    },
+    "candidate": 69,
+    "confirmed": 0,
+    "yearMissing": 1,
+    "yearInvalid": 1,
+    "violations": [],
+    "files": [
+      {
+        "file": "evidence-grade-dist.svg",
+        "bytes": 5191,
+        "lines": 50,
+        "geom": []
+      },
+      {
+        "file": "evidence-grade-species.svg",
+        "bytes": 8056,
+        "lines": 83,
+        "geom": []
+      },
+      {
+        "file": "evidence-year-grade.svg",
+        "bytes": 7254,
+        "lines": 78,
+        "geom": []
+      }
+    ]
+  },
+  "partlyReviewed": {
+    "tag": "partly-reviewed",
+    "total": 69,
+    "gradeStat": {
+      "A": 2,
+      "B": 5,
+      "C": 8,
+      "D": 54
+    },
+    "candidate": 66,
+    "confirmed": 3,
+    "yearMissing": 1,
+    "yearInvalid": 1,
+    "violations": [],
+    "files": [
+      {
+        "file": "evidence-grade-dist--partly-reviewed.svg",
+        "bytes": 4729,
+        "lines": 47,
+        "geom": []
+      },
+      {
+        "file": "evidence-grade-species--partly-reviewed.svg",
+        "bytes": 7653,
+        "lines": 80,
+        "geom": []
+      },
+      {
+        "file": "evidence-year-grade--partly-reviewed.svg",
+        "bytes": 6775,
+        "lines": 74,
+        "geom": []
+      }
+    ]
+  }
+}

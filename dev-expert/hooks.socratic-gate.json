@@ -1,0 +1,17 @@
+{
+  "_comment": "需求锁定门控强制化 hook —— **opt-in，不合并进 hooks.json**。与 hooks.capture-draft.json 同属可选增强配置。启用方式：把下面 PreToolUse 段落并入你的运行时 hooks 配置（或并入 hooks.json 后重跑 install_hooks.py），并设置环境变量 SOCRATIC_GATE=1。默认不启用时本 hook 一律放行（exit 0），不影响既有行为。作用：把 references/requirement-lock-socratic.md 的「先锁定需求再执行」从指令约束升级为技术约束。豁免方式：落盘 {PROJECT_ROOT}/.ai-memory/{YYYYMMDD}/socratic_bypass.md；或取消 SOCRATIC_GATE 环境变量。",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file|replace_in_file|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{{PYTHON_BIN}} \"{{HOOKS_DIR}}/socratic_gate.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "formatVersion": 1,
+  "generator": "scripts/sync-skills.mjs",
+  "skill": "junheng-nutrition",
+  "entries": [
+    {
+      "dest": "SKILL.md",
+      "origin": "cli/skills/junheng-nutrition/SKILL.md",
+      "kind": "template",
+      "sha256": "4f1550ea16f9347ec153ca2970a40190ff31e85e41452e9275ec5cbd9ecbd4a3"
+    },
+    {
+      "dest": "scripts/cli.mjs",
+      "origin": "cli/nutrition.mjs",
+      "kind": "facade",
+      "sha256": "f39089e5de454c66e1904cade5dab8fca9be5356a57093513332e196d4e5f62b"
+    },
+    {
+      "dest": "scripts/lib/core-name.mjs",
+      "origin": "cli/lib/core-name.mjs",
+      "kind": "cli-lib",
+      "sha256": "5ac1a0e089471f94e2046da6c0b60b5ee03c2a51ba9405394e93e0439996aa94"
+    },
+    {
+      "dest": "scripts/lib/input.mjs",
+      "origin": "cli/lib/input.mjs",
+      "kind": "cli-lib",
+      "sha256": "55111fb1cb716009867796bfae82bdfe370424ad52a91710772b2701b7af9b1f"
+    },
+    {
+      "dest": "scripts/lib/locate.mjs",
+      "origin": "cli/lib/locate.mjs",
+      "kind": "cli-lib",
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
+    },
+    {
+      "dest": "scripts/lib/output.mjs",
+      "origin": "cli/lib/output.mjs",
+      "kind": "cli-lib",
+      "sha256": "bf685649baf8375015bba0f5d8a8e9cf582f4af8d695a97e8072dcd6840905fd"
+    },
+    {
+      "dest": "scripts/lib/paramSchema.mjs",
+      "origin": "cli/lib/paramSchema.mjs",
+      "kind": "cli-lib",
+      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+    },
+    {
+      "dest": "scripts/lib/runner.mjs",
+      "origin": "cli/lib/runner.mjs",
+      "kind": "cli-lib",
+      "sha256": "85c38e33c4e93ea9fb69d9556610f418d0113afad718408876ecf799e7857663"
+    },
+    {
+      "dest": "scripts/lib/schema.mjs",
+      "origin": "cli/lib/schema.mjs",
+      "kind": "cli-lib",
+      "sha256": "439136deb363811cac392e3803f094baf413f9a134a8802ba8b2363622b26c7f"
+    },
+    {
+      "dest": "references/interface-reference.md",
+      "origin": "cli/skills/junheng-nutrition/references/interface-reference.md",
+      "kind": "reference",
+      "sha256": "5b4191743e971802303f5a924542a11f3cdf5494c976f2f093eaf1af0b67d39c"
+    }
+  ],
+  "coreRef": {
+    "name": "junheng-core",
+    "manifestSha": "3fa4f07cb6584c0ca1bdb7f05b1b73f47bab30619f5b02ed2475be85713cc614"
+  }
+}

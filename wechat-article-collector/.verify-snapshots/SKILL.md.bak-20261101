@@ -1,0 +1,157 @@
+---
+name: wechat-article-collector
+description: 自动采集微信公众号文章（图文/视频元数据）并归档写入「铭衍·元典」资料库数据表。当用户要求采集/保存/批量下载公众号文章、按公众号批量抓历史、把微信文章入库或导出 JSONL 时触发；四层采集 url/account/desktop/exe + write 写库，仅限本机、仅限已授权内容。
+disable-model-invocation: true
+---
+
+# wechat-article-collector 公众号文章采集器
+
+把微信公众号文章（图文/视频）归一化为统一 24 列 schema，写入「铭衍·元典」智库子数据表，供下游情报筛选。纯本机 skill，运行于 WorkBuddy 托管 Python 3.13.12 / Windows。
+
+## 何时用 / 不做什么
+
+- **用**：用户给出文章 URL 要归档；按公众号批量抓历史；本机 PC 微信辅助采集（desktop）；exe 兜底；把已采集 JSONL 写库。
+- **不做**：协议级逆向/mTLS 签名伪造、手机微信、评论/阅读量/点赞指标、云端部署、抓非授权号。
+- **合规闸（强制，AC-10）**：仅限自有/已授权内容；每次运行打印合规声明，非交互会话必须传 `--yes`（用户已在对话中授权时才代传）。
+
+**同类技能分工（按工序选，勿混用）**：
+- 关键词检索、要一份前 10 条列表 → `wechat-article-search`（仅需 node，最轻）
+- 抓正文并导出到 IMA / Dify / Obsidian → `wechat-article-scraper`
+- 整站历史归档成 HTML 阅读器 / TXT 包 / Word → `wechat-article-archive`
+- **本技能只做「采集 → 写库」**：会建表并写入「铭衍·元典」，属写副作用操作；不承担通用检索、不做纯文本导出
+
+## 环境准备
+
+```bash
+# 本机已验证可用的技能解释器（依赖 bs4/lxml/pyyaml/requests/tenacity/playwright 均已装在位）。
+# 所有命令与测试一律显式用该全路径，避免命中系统 python/其他 env 而误报"缺依赖"。
+# C:/Users/Administrator/.workbuddy/binaries/python/envs/default/Scripts/python.exe
+
+python -m venv <env> && <env>/pip install -r requirements.txt
+playwright install chromium          # L1/L2 文章页渲染需要
+```
+
+## 操作步骤（5–7 步）
+
+1. **确认授权**：向用户确认目标公众号为本人自有或已获授权；未确认不得运行。
+2. **准备配置**：复制 `config.example.yaml` 为 `config.yaml`，填 `library.node_id`（或运行时 `--library-node` 传智库节点 id）。
+3. **选择采集层**：单篇/多篇 URL → `url`；按号批量 → `account`；PC 微信辅助 → `desktop`；exe 兜底 → `exe`。
+4. **执行采集**：见下方命令清单；产出 JSONL（24 列记录，`status=fail` 行带 `fail_reason`，不静默丢弃）。
+5. **写库**：`write` 模式建表（create-database 一次建 24 列）+ batch-add-records（每批 50–100，带小延迟）；先 `--dry-run` 核对 payload。
+6. **验收**：断言 JSONL `status=ok` 且字段齐全；写库后 query-database 按 account/publish_time 可筛出（`keyword_tags` 当前恒空、暂不可依赖，见 references/schema.md B5）。
+
+## 命令清单（统一入口 collect.py）
+
+```bash
+# L1 单/多 URL（--urls 逗号分隔或 --url-file 每行一个）
+python collect.py --config config.yaml --yes url --urls "https://mp.weixin.qq.com/s/xxxx" --out out/v1.jsonl
+
+# L2 按号批量历史（cookie 复用 profile_ext 翻页）
+python collect.py --yes account --biz <__biz> --cookie-file cookies.json --limit 20 --out out/v3.jsonl
+
+# L3 PC 微信自动驱动（--assist = 用户协助在微信里打开文章；拦截由 mitmproxy 完成）
+# 模式 auto：先试 local 透明劫持，驱动装不上自动降级 regular（临时接管系统代理，退出还原）
+python collect.py --yes desktop --account "公众号名" --mitm-mode auto --assist --out out/v4.jsonl
+
+# 驱动装不上的机器（HVCI/驱动黑名单/签名过期）：显式走 regular + 系统代理
+python collect.py --yes desktop --account "公众号名" --mitm-mode regular --system-proxy --out out/v4.jsonl
+
+# exe 兜底（先探测 CLI，不支持则启动进程 + 扫描输出目录）
+python collect.py --yes exe --exe "D:/tools/4.0.exe" --target "公众号名" --out out/v4e.jsonl
+
+# 写库（--dry-run 只打印将发送的 payload）
+python collect.py --yes write --in out/v1.jsonl --library-node <node_id> --dry-run
+python collect.py --yes write --in out/v1.jsonl --library-node <node_id>
+
+# 双写（云端资料库 + 本地 vault 一键完成，B3 分类筛选后自动双写）
+# 复用同一份分类结论；离域不写；vault 失败 best-effort 不阻断云端
+python collect.py --yes write --in out/v1.jsonl --library-node <node_id> --vault
+```
+
+> `--vault` 默认关（只写云端）；本地 vault 根目录见 config `vault.root`，
+> 设 `vault.enabled: true` 可让每次 write 常驻双写、`vault.auto_apply: false` 转预览。
+
+## 每日自动刷新订阅文章（refresh 编排）
+
+把采集层 + 写库层编排成「每日刷新」能力：定时调度、按订阅源拉新、去重增量、失败重试、
+运行日志、状态监控、异常告警。编排器只做外壳，不重写采集/写库逻辑；每个采集层、写库层
+均以**子进程**隔离调用，单源崩溃不连累整轮。复用既有 `write` 的 URL 差减去重 + vault 幂等。
+
+```bash
+# 1) 准备订阅源清单：复制 subscriptions.example.yaml 为 subscriptions.yaml，填 sources
+# 2) 手动触发一次（也可不传 --config，回退技能根 subscriptions.yaml）
+python collect.py refresh run --yes --config subscriptions.yaml
+#    加 --vault 临时开启本地 vault 双写；--dry-run 仅打印将要执行的各源/写库命令
+#    加 --since-days N 自动给所有 account 源注入 --since（today-N 天，覆盖源配置的 since），免去逐个手填
+
+# 3) 注册 Windows 计划任务（每日 08:00 自动跑，重启存活、无常驻进程）
+python collect.py refresh install --config subscriptions.yaml --time 08:00
+#    --dry-run 仅生成 run-refresh.bat 与 schtasks 命令，不实际注册
+
+# 4) 查看上次运行状态
+python collect.py refresh status --config subscriptions.yaml
+
+# 5) 注销计划任务
+python collect.py refresh uninstall --config subscriptions.yaml
+
+# 离线自测（不联网，验证重试/合并/告警/状态核心逻辑）
+python collect.py refresh selfcheck
+```
+
+**运行产物**（`out/refresh/`，可在 subscriptions.yaml 的 `refresh.output_dir` 改）：
+- `status.json` —— 上次运行状态（退出码/拉取数/写入数/数据表ID/各源明细）
+- `run-<时间戳>.jsonl` —— 本轮机读事件流（含各子进程转发的 emit_event）
+- `alerts.log` —— 异常告警追加记录（`refresh.alert.on` 命中时；可选 webhook POST）
+- `combined-<时间戳>.jsonl` + `src-<源名>-*.jsonl` —— 本轮采集中间产物
+
+**去重/增量**：`write` 按规范化 URL 与云端表差减去重；首跑建表后把 `database_id` 存
+`out/refresh/state.json`，后续自动复用同一张表做跨天增量（也可在 yaml 显式填 `refresh.database_id`）。
+**写库目标节点**：refresh 把 `--config`（即 subscriptions.yaml）透传给 `write` 子进程，由其中的
+`library.node_id` / `library.node_title` 解析智库节点（默认 `node_title: ""` + `node_id: ""` 会解析失败）。
+⚠ 真机验证发现 `--node-title` 可能模糊首匹配写错节点，建议**显式填 `library.node_id`**（精确目标，零歧义）。
+**重试**：单源 EXIT_ERROR/ENV/PARTIAL 按 `max_retries` + 指数退避重试，PARAM/COMPLIANCE 不重试。
+**告警**：`refresh.alert.on` 命中（error/partial/zero_yield/source_failed）时写 `alerts.log`，
+填了 `webhook_url` 再 POST 一份 JSON 摘要。
+
+## 省时技巧
+
+- `--out` 省略时 JSONL 直接进 stdout，可管道给 `write` 前的 `jq` 过滤。
+- 采集与写库分离：先跑采集层落 JSONL，人工抽查后再 `write`，失败行已在 JSONL 标注原因。
+- `write` 按规范化 URL 去重（保留 `__biz+mid+idx`，剥离 `sn/chksm/utm`），重复执行不会写重行。
+- 媒体文件（正文 HTML、图片）落在 `<out 去扩展名>.media/`（如 `out/v1.jsonl` → `out/v1.media/`），`body_ref/images_ref/videos_ref` 指向该目录。
+- **产物不要留在技能目录**：2026-11-01 已把历史 `out/`（229 文件 / 76.4 MB）外置到
+  `D:/workbuddy重做系统后版本/2026-10-23-14-10-52/data/wechat-article-collector/`。
+  新采集请把 `--out` 直接指向该目录（脚本会自动建父目录），避免技能目录再次膨胀。
+
+## 避坑提示
+
+L1 文章图用 `data-src` 懒加载而非 `src`，必须等 `networkidle` 并滚动页面后再取 HTML，否则图片清单为空——这是最常见的"正文有了图没了"原因。
+
+L3 的 `local` 模式依赖 WinDivert 内核驱动：驱动签名过期或被 HVCI/驱动黑名单拦截时，mitmdump 主进程**仍然存活**但内部 redirector 已退出（日志 `Task failed: ...`），表现为"跑满整个窗口 0 捕获"。故启动探活必须同时读日志特征，不能只看进程存活；`--mitm-mode auto` 会在此时自动降级 `regular`。
+
+## 模块结构
+
+```
+scripts/
+  collect.py                 统一派发器（register/run 契约）
+  common.py                  退出码/事件流/配置/合规闸/JSONL/礼貌延迟
+  normalize.py               24 列 schema、校验、去重键、PropertyValue 映射
+  extract.py                 文章页 HTML 纯解析（三层共用）
+  l1_fetch_urls.py           L1 Playwright 单/多 URL
+  l2_fetch_account.py        L2 profile_ext 按号批量
+  l3_drive_wechat.py         L3 PC 微信驱动（pywinauto + mitmproxy 编排）
+  addons/wechat_article_addon.py   mitmproxy 附加脚本（抓文章页响应）
+  exe_wrapper.py             闭源 exe 兜底
+  write_to_library.py        写库（space_api.py CLI 转发）
+  refresh.py                 每日自动刷新编排（调度/重试/状态/告警）
+tests/                       unittest（extract/normalize/collect）
+references/
+  schema.md                  24 列契约与类型映射
+  wechat-endpoints.md        profile_ext 等端点与已知坑
+  l3-setup.md                L3 环境搭建（CA/防火墙/权限）
+docs/decisions/              ADR-001/002/003（实现阶段落盘）
+```
+
+## 退出码（与事件 level 1:1）
+
+`0` ok/info · `2` 参数 · `3` 错误 · `4` 合规拦截 · `5` 部分完成 · `6` 环境缺失

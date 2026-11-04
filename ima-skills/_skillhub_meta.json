@@ -1,0 +1,14 @@
+{
+  "name": "腾讯ima",
+  "installedAt": 1791815182902,
+  "source": "marketplace",
+  "version": "1.1.9",
+  "skillId": "skill_2053082144792322048",
+  "pay_mode": 0,
+  "description_zh": "ima笔记与知识库管理（读取、写入、检索）",
+  "description_en": "IMA notes & knowledge base management (read, write, search)",
+  "iconSource": "https://openplatform-cdn.codebuddy.cn/public/operation-platform/skill-icons/skill_2053082144792322048/2ae5e9cb1994dbc8.png",
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\ima-skills\\_icon.png",
+  "iconDownloadedFrom": "https://openplatform-cdn.codebuddy.cn/public/operation-platform/skill-icons/skill_2053082144792322048/2ae5e9cb1994dbc8.png",
+  "iconDownloadFailedAt": 1791815487838
+}

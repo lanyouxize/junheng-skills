@@ -1,0 +1,11 @@
+{
+  "name": "编程专家",
+  "installedAt": 1791593947882,
+  "source": "marketplace",
+  "version": "1.18.2",
+  "skillId": "skill_2102935732193693696",
+  "pay_mode": 0,
+  "description_zh": "编程专家：P8 级编程助手。覆盖项目总控、代码生成/审查/重构、Bug 根因诊断、API 与前端设计、MySQL、测试与性能基准、技术选型、文档生成、任务拆解、Spec 驱动、CMS 二次开发、项目记忆管理与知识图谱，以及工程纪律层专项。含苏格拉底式需求锁定门控。支持 @标识 显式调用。",
+  "description_en": "Code Expert: a P8-level programming assistant. Covers project orchestration, code generation/review/refactoring, root-cause bug diagnosis, API and frontend design, MySQL, testing and performance benchmarking, tech stack selection, documentation generation, task decomposition, spec-driven development, CMS secondary development, project memory management and knowledge graphs, plus engineering-discipline modules. Includes a Socratic requirement-locking gate. Supports explicit @-mention invocation.",
+  "iconSource": "letter:auto"
+}

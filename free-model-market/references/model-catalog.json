@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-30T02:06:17+08:00",
+  "source": "免费模型超市-model-catalog.md",
+  "snapshot_date": "2026-10-30",
+  "verify_note": "2026-09-13 两轮 + 2026-09-18 第三轮 + 2026-09-29 第四轮 OpenCode Zen + 2026-10-05 第五轮 双周健康检查 OpenCode Zen 复测 + 2026-10-06 第六轮 DeepSeek 开源自部署新增 + 2026-10-07 第七轮 Zen 88/14 复测与 Qwen/GLM/OpenRouter 三家免费层官方信源核对 + 2026-10-13 第八轮 OpenRouter 459/19/:free15 与 Zen 83/9 复测（space-bunny-free 归零） + 2026-10-19 第九轮 双周健康检查（Zen 85/9 复测外部全 403、Inception 100M 官方裁决、B.AI 0-Credit 全面退出、xAI/Ollama Cloud 维持） + 2026-10-22 第十轮 Kilo AI Gateway 新增（免 Key 匿名免费池，401 模型 / 18 isFree / 视觉实测） + 2026-10-30 模型 ID 订正与免费清单实测（OVHcloud 3 条补 `-Instruct` 后缀、OpenRouter 456/16 `:free` 全量替换、智谱国内站与硅基流动实测记录、导出器反引号保护修复）",
+  "provider_count": 45,
+  "providers": [
+    {
+      "name": "Google AI Studio",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://generativelanguage.googleapis.com/v1beta"
+      ],
+      "status": "active",
+      "quota": "官方已不再公布固定数值；第三方信源 Flash 250–1,500 请求/日、Flash-Lite 最高 1,000 请求/日（多源矛盾）",
+      "rate_limit": "多数模型 5–15 RPM，250K TPM",
+      "credit_card": "不需要",
+      "models": "Gemini 3.x Flash / Flash-Lite",
+      "notes": "免费层仅剩 Flash 系（Pro 于 2026-04-01 退出）；EEA/UK 之外数据可能用于训练；官方文档明确限额随账户状态浮动且\"不作保证\"，以 AI Studio 实时显示为准"
+    },
+    {
+      "name": "Groq",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.groq.com/openai/v1"
+      ],
+      "status": "active",
+      "quota": "1,000 请求/日（compound 系 250/日；whisper 2,000/日）；社区清单另记配额区间 250–14,400 请求/日、6,000–70,000 TPM（按模型族与模态浮动）",
+      "rate_limit": "30 RPM / 8K TPM / 200K TPD（compound 70K TPM）",
+      "credit_card": "不需要",
+      "models": "gpt-oss-120b / gpt-oss-20b、qwen3.6/3.8-27b、groq/compound、whisper-large-v3",
+      "notes": "Llama 系列已于 2026-08 转入 Enterprise，免费层不再提供；额度随模型族差异极大，以 Groq dashboard 实时显示为准；OpenAI 兼容"
+    },
+    {
+      "name": "OpenRouter",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://openrouter.ai/api/v1"
+      ],
+      "status": "active",
+      "quota": "50 请求/日；累计充值 $10 后升至 1,000 请求/日（充值永不过期）",
+      "rate_limit": "20 RPM",
+      "credit_card": "不需要",
+      "models": "`:free` 后缀模型 16 个（2026-10-30 实测，共 456 模型）：`nvidia/nemotron-3.5-super-vl:free`、`nvidia/nemotron-3.5-lightning:free`、`nvidia/nemotron-3.5-content-safety:free`、`nvidia/nemotron-3-ultra-550b-a55b:free`、`nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free`、`thinkingmachines/inkling:free`、`thinkingmachines/inkling-small:free`、`dots-studio/dots-3-note-preview:free`、`poolside/laguna-s-2.1:free`、`poolside/laguna-xs-2.1:free`、`cohere/north-mini-code:free`、`google/gemma-4-26b-a4b-it:free`、`google/gemma-4-31b-it:free`、`liquid/lfm-2.5-2.6b:free`、`recursive/flint-v1.0:free`、`xingchen-agi/xing4.0-29b-a4b:free`",
+      "notes": "2026-10-13 直连采样（GET https://openrouter.ai/api/v1/models，total 459）：全站 0 价条目 19 个（其中 `:free` 后缀 15 个）；此前 09-28 采样 21 个（:free 17）、09-24 采样 24 个（:free 20）、09-15 采样 22 个（:free 19）、09-10 采样 21 个。免费层硬约束（GET https://openrouter.ai/api/v1/key 核实 2026-09-21）：`is_free_tier=true`、`free_model_daily_requests` 上限 50 次/日；裸 `auto` 路由走 OpenRouter 付费路由会 402（Insufficient credits），须显式指定 `:free` 模型或自建 combo 才走免费层。单 Key 调用全部免费模型；失败请求也计入日额度；免费端点上下文可能小于付费版。2026-10-30 复测（`GET https://openrouter.ai/api/v1/models`，total 456 / `:free` 16）：此前列示的 `Llama 3.3 70B`、`Qwen3 Coder`、`GPT-OSS 120B` 已全部不在 `:free` 列表内（nvidia nemotron 系列延续），清单已按接口实时返回替换为 16 条完整 ID。该接口无需 Key 即可公开读取，可随时自校；`:free` 条目数量近一年呈单调下降（21→24→22→19→15→16），不宜作为长期主力。"
+    },
+    {
+      "name": "Mistral La Plateforme（Experiment 计划）",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.mistral.ai/v1"
+      ],
+      "status": "active",
+      "quota": "约 1B tokens/月（2026-09 起信源冲突，见备注）",
+      "rate_limit": "1 RPS / 约 500K TPM",
+      "credit_card": "不需要（需手机验证）",
+      "models": "Mistral Large / Small / Medium 3.5 / Codestral / Pixtral / Embed 全线",
+      "notes": "冲突未裁决：① 2026-09-03 有变更跟踪站称 API 免费额度已被 Vibe 产品内限量（消息/搜索/图片生成）取代、$10/月 API credits 转为单独售卖；② 2026-09-08 一手实测清单仍记录 9 个免费模型在线、1B tokens/月、1 RPS/500K TPM；③ Mistral 官方未发公告，且已把额度改为控制台动态显示、不公布固定值。采用前必须登录 console.mistral.ai 的 Limits 页看实际余额。默认数据用于训练，可在 Admin Console 关闭；手机号一号一计划 【免费额度存疑未裁决】 变更跟踪站（agentdeals.dev，2026-09-03）称免费额度已由 Vibe 产品内限量取代、$10/月 credits 单独售卖，但 09-08 一手清单（freellm.net）仍记录 9 个免费模型在线，官方无公告；官方无裁决前维持 active。"
+    },
+    {
+      "name": "Cloudflare Workers AI",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/"
+      ],
+      "status": "active",
+      "quota": "10,000 neurons/日（按模型折算约数百万 tokens）",
+      "rate_limit": "文本生成 300 RPM（按任务类型）",
+      "credit_card": "不需要",
+      "models": "glm-4.7-flash、gemma-4-26b、nemotron-3-120b、llama-3.x 等",
+      "notes": "kimi-k2.6、kimi-k2.7-code、glm-5.2/5.3、deepseek-v4 等旗舰自 2026-07-28 起需 Workers Paid；额度 00:00 UTC 重置"
+    },
+    {
+      "name": "Cohere",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.cohere.com/v2"
+      ],
+      "status": "active",
+      "quota": "1,000 次调用/月",
+      "rate_limit": "Chat 20 RPM；Rerank 10 RPM；Embed 2,000 inputs/min",
+      "credit_card": "不需要",
+      "models": "Command A / A+ / R+ / R7B、Aya Expanse、Embed、Rerank（Trial Key）",
+      "notes": "Trial Key 面向评估用途；Command A Reasoning/Translate/Vision 生产需联系销售"
+    },
+    {
+      "name": "NVIDIA NIM (build.nvidia.com)",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://integrate.api.nvidia.com/v1"
+      ],
+      "status": "degraded",
+      "quota": "免费原型层：不按 token 计费，仅限速。免费层实测并发上限 = 1（2026-10-07 记录，已于 2026-10-09 部分推翻，见备注）（并发请求 6 个全部 25s 无响应，串行才出 token。2026-10-09 14:10 复测 `nvidia/nemotron-3-super-120b-a12b` 并发 6 请求全部 200，延迟 1.23/1.31/1.69/2.50/3.52s。限流阈值按模型不同，不可跨模型外推；`nemotron-3.5-lightning` 的并发 1 记录未复测，仍标 unknown 待验）。额度数字 `unknown`（官方文档站未公布，已查 docs.nvidia.com / build.nvidia.com / developer.nvidia.com 均无）",
+      "rate_limit": "unknown（2026-10-07 实测 nemotron-3.5-lightning 并发 1；2026-10-09 实测 nemotron-3-super 并发 6 通过 → 按模型分化，待逐一复测）",
+      "credit_card": "需账号 + 手机验证（实测国内号码可收短信，Skip 仅能跳过一次）",
+      "models": "实测仅 10/80 个模型对该 Key 可用；旗舰（DeepSeek V4 / GLM-5.3 / Kimi K3）全部不可用。主力可用：`nvidia/nemotron-3.5-lightning-30b-a3b`、`nvidia/nemotron-3-super-120b-a12b`、`nvidia/nemotron-3-ultra-550b-a55b`、`openai/gpt-oss-20b`、`meta/muse-glimmer-30b`、`meta/llama-3.2-11b-vision-instruct`",
+      "notes": "2026-10-07 一手实测（本机 Windows / Node 22 / 直连 integrate.api.nvidia.com）：`GET /v1/models` 免 Key 即返回 80 个模型，但带 Key 逐个 `POST /v1/chat/completions` 探测 →仅 10 个 200，59 个返回 `404 Function not found for account`（该账号未开通，非模型下线），11 个超时（重模型冷启动，串行 120s 复测见备注更新）。2026-10-09 14:10 并发复测（经OmniRoute `nvidia` provider，模型 `nvidia/nemotron-3-super-120b-a12b`）：6 个并发请求全部 HTTP 200，延迟 1.234/1.313/1.688/2.500/3.516s，无 429、无排队。与2026-10-07 「并发 6 全部 25s 无响应」直接冲突。 判别：两次测的不是同一模型 —— 07 日测的记录未绑定具体模型（推测为 `nemotron-3.5-lightning`，该模型现仅在 openrouter 侧节点可见），09 日测的是 `nemotron-3-super-120b-a12b`。结论：NVIDIA 免费层限流按模型分化，`super` 至少支持 6 并发；「免费层并发上限 = 1」不能作为全局结论使用。下次双周巡检须按模型逐一复测并拆分记录。。另有2 个已 EOL 返回 410：`openai/gpt-oss-120b`（2026-09-03）、`meta/llama-3.3-70b-instruct`（2026-08-26）。OpenAI 兼容；生产部署需 NVIDIA AI Enterprise 或本地部署 NIM 容器"
+    },
+    {
+      "name": "Hugging Face Inference Providers",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://router.huggingface.co/v1"
+      ],
+      "status": "active",
+      "quota": "Free 用户 $0.10/月（官方注明金额可调）；PRO（$9/月）$2/月；Team/Enterprise $2/席",
+      "rate_limit": "数百请求/时",
+      "credit_card": "不需要",
+      "models": "10 万+开源模型，15+ Provider 路由",
+      "notes": "赠金按月发放、不累积；用完后 Free 用户无法按量续费（需购 credits 或升 PRO）；OpenAI 兼容"
+    },
+    {
+      "name": "Vercel AI Gateway",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://ai-gateway.vercel.sh/v1"
+      ],
+      "status": "active",
+      "quota": "$5/月赠金（覆盖清单内模型 token 费用，零加价）",
+      "rate_limit": "免费层按模型限速，低于付费层",
+      "credit_card": "不需要",
+      "models": "路由 OpenAI / Anthropic / Cohere 等官方模型（Free Tier 模型清单）",
+      "notes": "免费层仅覆盖 Free Tier eligible 模型子集；一旦购入 Credits 即转付费层、不再享月度赠金；BYOK 仅付费层可用"
+    },
+    {
+      "name": "Hetzner Inference（Experiments）",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://inference.hetzner.com/api/v1"
+      ],
+      "status": "active",
+      "quota": "按限速不按总额度：实验期内完全免费、无计费系统、无价目表",
+      "rate_limit": "官方文档当前值：60s 内 4M 输入 / 100K 输出 tokens、10 请求；第三方另记 3M/60K 与 24h 500M 输入 / 5M 输出（页面曾调整，以官方实时为准）",
+      "credit_card": "不需要（需 Hetzner 账号建 Token）",
+      "models": "Qwen3.6-35B-A3B-FP8（262K、视觉、推理）、Qwen3.8-27B —— Apache 2.0",
+      "notes": "2026-09-18 新增。官方定位实验性：无 SLA、无备份、可随时变更或撤回、无 DPA（GDPR 场景需另签）；官方称只留存用量元数据、不存请求与响应内容；欧盟机房（德国/芬兰），适合欧洲数据驻留场景；必须带 Token，无 Key 或假 Key 均 401；不支持 embeddings"
+    },
+    {
+      "name": "OpenCode Zen",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://opencode.ai/zen/v1/chat/completions",
+        "https://opencode.ai/zen/v1/models"
+      ],
+      "status": "degraded",
+      "quota": "每日刷新额度（具体日限额未公开 → unknown；多数免费模型仅限 OpenCode 客户端内使用，外部额度无从消费）",
+      "rate_limit": "未公布；实测响应较慢；外部免费通道已归零（2026-10-13 复测 9 个 -free 全部 403，含 space-bunny-free，带浏览器 UA 仍不可用），现状见备注",
+      "credit_card": "不需要（API Key 固定 `public`，免注册）",
+      "models": "9 个 `-free` 后缀模型（实测 2026-10-19 共 85 模型、9 个 -free，较 10-13 的 83/9 移除 `ling-3.1-flash-free`、`muse-spark-1.2-contributor-free`、`muse-spark-1.3-contributor-free`、`step-5-preview-free`、新增 `beam-free`、`nemotron-3.5-super-vl-free`、`deepseek-v4.1-flash-free`、`glm-5.3-flash-free`：`beam-free`、`mimo-v2.6-flash-free`、`nemotron-3.5-super-vl-free`、`nemotron-3.5-lightning-free`、`jev-1.13-free`、`longcat-2.5-preview-free`、`deepseek-v4.1-flash-free`、`glm-5.3-flash-free`、`space-bunny-free`）",
+      "notes": "实测 2026-09-29 重大纠偏（2026-10-05 双周复测维持结论）：用 `public` key 自外部（含 WorkBuddy）调用 -free 模型——09-29 为 11 个、10 个 `403 FreeTierError`、仅 `space-bunny-free` 200（返回 `reasoning_content`，真实支持推理）、`deepseek-v4-flash-free` `400 上游不可用`。2026-10-05 复测：清单漂移——/models 实测 86 模型、13 个 -free（新增 `fledge-alpha-free`、`ling-3.1-flash-free`）；外部调用 13 个 -free：仅 `space-bunny-free` 200 可用；10 个 403（8 个 `FreeTierError: can only be used from within OpenCode`：`fledge-alpha-free`、`ling-3.0-flash-fin-free`、`ling-3.1-flash-free`、`longcat-2.5-preview-free`、`mimo-v2.5-free`、`mimo-v2.6-flash-free`、`nemotron-3-ultra-free`、`nemotron-3.5-lightning-free`；2 个 `RegionError: not available in your country`：`muse-spark-1.2/1.3-contributor-free`）；`deepseek-v4-flash-free` `400 上游不可用`；`jev-1.13-free` 由 09-29 的 403 变为 `500 Internal server error`。2026-10-07 复测：`/models` 实测 88 模型、14 个 -free（新增 `deepseek-v4-flash-free`、`exo-free`）；`/models` 接口仍只返回 id/object/created/ownedby，不返回上下文长度与模态标记，故上下文/图片输入能力无法从官方接口核实。客户端锁未放开，状态维持 degraded。2026-10-09 归因纠偏（带浏览器 UA 复测 14 个 -free 模型，POST `/zen/v1/chat/completions`，public key，外部）：此前把外部 403 全部归因为「限 OpenCode 客户端内使用」，实测发现其中一层真因是 User-Agent 被前置 Cloudflare 拦截——无 UA 的python-urllib 请求返回 `403 error code: 1010`，补浏览器 UA 后同一请求立即 200。隔离验证：UA only → 200；`Accept` only（无 UA）→ 403；两者皆无 → 403。带 UA 复测 14 个 -free：`space-bunny-free` 200（1.2s，`content=\"OK\"`）；`jev-1.13-free`/`ling-3.1-flash-free`/`longcat-2.5-preview-free`/`mimo-v2.6-flash-free`/`nemotron-3-ultra-free`/`nemotron-3.5-lightning-free` → 403 FreeTierError（限客户端）；`muse-spark-1.2/1.3-contributor-free` → 403 RegionError（本地域）；`deepseek-v4-flash-free`/`fledge-alpha-free`/`mimo-v2.5-free` → 401 ModelError；`ling-3.0-flash-fin-free` → 400 上游错误；`exo-free` → 410 ModelDeprecated（已下线）。结论：「仅 space-bunny-free 外部可用」这一结论仍成立，但机制是「客户端锁 + UA 拦截 + 地域限制 + 模型自身故障」四层叠加，不是单一的客户端锁。⚠️ 端点必须写完整路径 `/zen/v1/chat/completions`：实测去掉 `/chat/completions` 后缀 → 404（返 HTML 页面）；保留后缀 → 200。doctor 旧版曾把带后缀判为 WARN 并纳入 `--fix-safe`，会把唯一可用配置改坏，已于 2026-10-09 删除该规则。对用户的硬要求：走Zen 的任何请求都必须带浏览器 User-Agent，否则一律 403。原 OW Bridge「免费层无缝接入 WorkBuddy」宣传被实测证伪——标签可加、调用即 403。注入器（`inject_workbuddy.py`）据此仅默认注入实测可用的 `space-bunny-free`，其余 -free 不注入。Zen 接口仅返回 id/object/created/ownedby，不返回能力标签与配额；free-buddy-skills 硬编码 `supportsToolCall:true` 等标签未经实测、不可信。`big-pickle`/`qwen3.8-max` 无 -free 后缀，或属 Zen 免费层待核。另实测 OmniRoute 网关的 `opencode` 上游（候选 `opencode/big-pickle`、`opencode/deepseek-v4-flash-free`）同样指向该 Zen 端点：带 `opencode/` 前缀形态在 Zen 端点报 `401 not supported`、去前缀调 `big-pickle` 即 `403 FreeTierError`，故网关侧 opencode 免费路由同样外部不可用，P2「加 opencode-zen 高优先级路由」规划不成立——网关价值在于聚合 Groq / OpenRouter `:free` 等经实测可外部调用的免费渠道，而非 opencode2026-10-13 复测补充：`/zen/v1/models` 实测 83 模型、9 个 -free（较 10-07 的 88/14：移除 `deepseek-v4-flash-free`、`exo-free`、`mimo-v2.5-free`、`ling-3.0-flash-fin-free`、`fledge-alpha-free`、`nemotron-3-ultra-free`，新增 `step-5-preview-free`）；带浏览器 UA 复测 `space-bunny-free`（POST `/zen/v1/chat/completions`，public key，外部）→ HTTP 403 FreeTierError（客户端锁扩大，UA 补齐已不能通过）。Zen 外部免费通道归零——全部 -free 模型外部均 403，无任何外部可用节点。 状态维持 degraded，但外部实际可用性已降为零；建议下轮评估是否移出永久免费推荐或转 expired（待用户确认）。2026-10-13 同步订正注入器与诊断脚本（候选⑪）：injectworkbuddy.py 不再默认注入任何 Zen 模型，doctor.py 对 Zen 外部调用统一判 WARN，旧「仅 space-bunny-free 外部可用」结论及其代码路径已废弃。"
+    },
+    {
+      "name": "DeepSeek",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "http://localhost:8000/v1"
+      ],
+      "status": "active",
+      "quota": "无限（自托管，需自备 GPU/算力）",
+      "rate_limit": "自部署无平台限速（受本地硬件限制）",
+      "credit_card": "不需要",
+      "models": "DeepSeek-V4 开源权重自部署（V4.1-Flash / V4-Pro）",
+      "notes": "权重开源免费，需自备算力、非托管 API；许可证以官方仓库（HuggingFace: deepseek-ai）为准（未逐一核实）；API 托管版为纯付费（见收录边界说明），本条目仅指自部署渠道；官方新闻 deepseek.com/en/news/v4-preview 确认 V4 系列开源"
+    },
+    {
+      "name": "Kilo AI Gateway",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.kilo.ai/api/gateway"
+      ],
+      "status": "active",
+      "quota": "匿名免费池：无需注册、无需 API Key；额度与并发档位官方未公布 → `unknown`（未测到 429，未做长时段采样）",
+      "rate_limit": "未公布 → `unknown`",
+      "credit_card": "不需要",
+      "models": "16 个 `isFree` 模型（清单共 387 个，2026-10-30 复核；逐个体测 14 个能出字、2 个 429）；其中 5 个声明 image 输入，实际可用视觉仅 2 个：`nvidia/nemotron-3.5-super-vl:free`（text+image+video，1M ctx，首选）、`dots-studio/dots-3-note-preview:free`（text+image，512K，2026-12-31 到期）；文本推荐 `kilo-auto/free`（256K ctx，上游自路由）、`reflection/beam-free`、`nvidia/nemotron-3-ultra-550b-a55b:free`",
+      "notes": "2026-10-22 一手实测（本机 Windows / 境外直连）：`GET /models` → HTTP 200 / 401 模型 / 18 个 `isFree`；无 Authorization 头或 `Bearer anonymous` 均 200；`Bearer public`/`none`/`kilo`/`sk-…` 一律 `401 INVALID_TOKEN`。2026-10-23 第十一轮复核（池已轮换）：17 个 `isFree`；`minimax/minimax-m3.1-flash:free` 已下线，返回 404「does not exist」（此前 10-22 记为可用视觉，属池轮换正常现象，非账号问题）；视觉 3 次重复实测 —— `nvidia/nemotron-3.5-super-vl:free` 1.6/1.6/2.7s，3/3 答对（最佳），`dots-studio/dots-3-note-preview:free` 3.9/2.7/4.4s，3/3 答对（备用），`openrouter/free` 仅 1/3 答对（另 2 次返回 `User Safety: safe`，被路由到安全审查模型）⇒ 路由器型模型不可作视觉通道；`kilo-auto/free` 传图 400「Beam supports text input only」 ⇒ 纯文本专用，勿当视觉；`nvidia/nemotron-3.5-super-vl:free` 曾出现一次 502（瞬时），复测恢复。「列出 ≠ 可用」实证：`nvidia/nemotron-3-super-120b-a12b:free` 在 `/models` 里 `isFree=true`，实调 404 `Provider returned error`。⚠️ 隐私：上游模型卡自述免费池提示词可能被记录用于服务改进，勿传敏感内容；上下文长度取自该网关 `/models` 自报字段，未经二次核实。2026-10-30 复核（池继续收缩）：清单 387 模型 / 16 个 `isFree`（较 10-23 的 401/17 再减 1）；逐个 `POST /chat/completions`（不带 Authorization、`max_tokens=2000`）实测 14 个返回 200 且 content 非空（1.0–2.5s），2 个 `429 Provider returned error`（`xingchen-agi/xing4.0-29b-a4b:free`、`poolside/laguna-xs-2.1:free`，属限流非永久失效）。同时确认两条口径：① `apiKey` 必须填 `anonymous` —— 填 `kilo`/`public`/`none` 一律 `401 INVALID_TOKEN`（换源注入时踩过）；② reasoning 模型必须给足 `max_tokens` —— `reflection/beam-free` 在 `max_tokens=20` 时 20 个 token 全被推理吃掉、`content` 为空串（`finish_reason=length`），给到 2000 才出正文，故「HTTP 200」不等于「可用」"
+    },
+    {
+      "name": "OVHcloud AI Endpoints",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1"
+      ],
+      "status": "active",
+      "quota": "匿名层：无需注册、无需 Key、无需信用卡；2 请求/分钟/IP/模型（分桶按模型独立，跨模型可并行，实测已确认）",
+      "rate_limit": "2 RPM / IP / 模型（实测）",
+      "credit_card": "不需要",
+      "models": "22 个模型全量实测：18 个可用。对话 11/11 全通：`Mistral-Nemo-Instruct-2407` 0.9s、`Mistral-Small-3.2-24B-Instruct-2506` 1.0s、`Meta-Llama-3_3-70B-Instruct` 1.4s、`gpt-oss-20b` 1.8s、`Qwen3.5-397B-A17B` 2.5s、`Qwen3.6-27B` 2.5s、`gpt-oss-120b` 2.9s、`Qwen3.5-9B` 6.5s、`Qwen3.8-27B` 6.8s、`Qwen3Guard-Gen-8B/0.6B` 1.0/1.2s（审核模型，输出 `Safety: Safe`）。视觉 4/4 全通：`Qwen2.5-VL-72B-Instruct` 1.1s（最快）、`Qwen3.5-397B-A17B` 1.5s、`Qwen3.6-27B` 2.5s、`Qwen3.8-27B` 38.4s（波动大）。向量 3/3：`bge-m3` dim=1024 1.3s、`bge-multilingual-gemma2` dim=3584 1.5s、`Qwen3-Embedding-8B` dim=4096 4.1s。ASR 2/2 真可用：`whisper-large-v3-turbo` 3.0s、`whisper-large-v3` 3.8s 带句读（Harvard 句 538KB WAV 回灌，转写全文正确）。绘图 1/1：`stable-diffusion-xl-base-v10` 仅支持 1024x1024，成功返 b64。TTS 4 个不可用：`nvr-tts-*` 打 `/audio/speech` 一律 404 `unknown endpoint`",
+      "notes": "2026-10-23 一轮全量实测（本机 Windows / 境外直连，无任何凭据头）：`GET /models` → 200 / 22 模型；25 次探测 18 类能力通过。⚠️ 2 RPM 是硬约束，只作兜底/低频通道；EU 机房（法国），数据驻留欧盟。这是货架里唯一的免费匿名 ASR 通道（whisper），此前空白。2026-10-30 复测订正模型 ID：`GET /models` 仍为 22 条，但其中 3 条名称此前缺 `-Instruct` 后缀（`Mistral-Nemo-2407` / `Mistral-Small-3.2-24B` / `Meta-Llama-3_3-70B`），照抄调用返回 404；已按接口实际返回值订正（见上），代表作复测 `POST /chat/completions` → 200 且 `content=\"OK\"`（`Mistral-Nemo-Instruct-2407` 1.06s、`Meta-Llama-3_3-70B-Instruct` 8.09s）。教训：匿名端点的模型名必须从 `GET /models` 原样复制，简写一律 404。"
+    },
+    {
+      "name": "LLM7.io",
+      "section": "一、永久免费渠道（active / degraded）",
+      "endpoints": [
+        "https://api.llm7.io/v1"
+      ],
+      "status": "degraded",
+      "quota": "匿名可用（无需 Key）；免费 token 提额至 60 RPM / 250 请求/小时",
+      "rate_limit": "匿名：未公布；带 token：60 RPM / 250 req/h",
+      "credit_card": "不需要",
+      "models": "4 个：`gpt-oss:20b`（128K）、`mistral-Nemo-Instruct-2407`（128K）、`minimax-m2.7`（180K，推理）、`DeepSeek-V4-Flash-0731`（400K，推理）",
+      "notes": "2026-10-23 一手实测：无 Key 匿名可出字 —— `gpt-oss:20b` 12.1s、`minimax-m2.7` 11.0s（均答 `PONG`），延迟过高；`DeepSeek-V4-Flash-0731` 400「currently unavailable」 ⇒ 第三方清单在册但实调不可用。判定 degraded：可用但慢且模型状态不稳，仅作最后兜底"
+    },
+    {
+      "name": "Anthropic",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.anthropic.com/v1"
+      ],
+      "status": "active",
+      "quota": "约 $5 起始额度；Claude for Open Source 计划 6 个月 Claude Max 20x（2026-02 起，10,000 名额）",
+      "notes": "API 使用需绑卡；OSS 计划需开源维护者身份申请"
+    },
+    {
+      "name": "OpenAI",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.openai.com/v1"
+      ],
+      "status": "degraded",
+      "quota": "数据共享计划赠 tokens（原 $5 自动额度已不稳定）",
+      "notes": "需绑卡；额度政策频繁变动"
+    },
+    {
+      "name": "Baseten",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://inference.baseten.co/v1"
+      ],
+      "status": "active",
+      "quota": "新工作区免费 credits（官方 billing 文档确认存在、未公布金额；官方定价页 marketing 称 $30）",
+      "notes": "官方 billing 文档：credits 自动抵扣在用卡扣费前；credits 耗尽且未添加支付方式时模型会被停用；无永久免费模型层，Model APIs 一律按 token 计费"
+    },
+    {
+      "name": "Modal",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://modal.com"
+      ],
+      "status": "active",
+      "quota": "$30/月免费计算额度（Starter 计划，$0 月费）",
+      "notes": "官方定价页 2026-09-18 核实：Starter 含 $30/月免费计算 + 3 席位 + 100 容器/10 GPU 并发；Team 为 $250/月（含 $100/月额度）；初创与学术可申请最高 $10,000 额度"
+    },
+    {
+      "name": "NLP Cloud",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.nlpcloud.io/v1"
+      ],
+      "status": "active",
+      "quota": "$15 免费 credits（Pay-As-You-Go 计划自动发放）",
+      "notes": "官方定价页：免费计划免信用卡可测全部预训练模型（文本生成模型除外，需绑卡但前 100k tokens 免费）；并行请求 10；原「需手机验证」在官方信源中无记载，已撤下"
+    },
+    {
+      "name": "AI21",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.ai21.com/studio/v1"
+      ],
+      "status": "active",
+      "quota": "$10 credits",
+      "notes": "官方确认无需信用卡；Jamba 系列 256K 上下文；额度用尽或过期后须绑卡续用；有效期两说并存，采用前 studio.ai21.com 实测"
+    },
+    {
+      "name": "Upstage",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.upstage.ai/v1"
+      ],
+      "status": "active",
+      "quota": "$10 credits（官方 Console 确认）",
+      "notes": "官方 Console 示例 baseurl 为 `https://api.upstage.ai/v1`（Agent 走 `/v2`），旧 `/v1/solar` 已不推荐；每个 Agent 含 10 次免费运行、无需信用卡；Solar Pro 4 / 3 / 2 / Mini"
+    },
+    {
+      "name": "SambaNova",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.sambanova.ai/v1"
+      ],
+      "status": "active",
+      "quota": "$5 赠金（官方 plans 页：30 天过期）",
+      "notes": "官方另有不绑卡的限速 Free Tier，赠金耗尽后仍可低速调用（10–30 RPM 按模型）；信源对过期时长有 30 天/3 个月两说，官方 plans 页为 30 天"
+    },
+    {
+      "name": "Together AI",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.together.xyz/v1"
+      ],
+      "status": "expired",
+      "quota": "已取消（2025-07 计费变更）",
+      "notes": "需 $5 预存才能调用；个别 $0 定价模型端点（如 Ternary-Bonsai-27B）仍免费用；Startup 计划最高 $50K 需申请"
+    },
+    {
+      "name": "Fireworks",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.fireworks.ai/inference/v1"
+      ],
+      "status": "active",
+      "quota": "$1（一次性）",
+      "notes": "不绑卡另有限速免费层（10 RPM），绑卡后可升至 6,000 RPM"
+    },
+    {
+      "name": "Nebius（现品牌 Token Factory）",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.studio.nebius.ai/v1"
+      ],
+      "status": "active",
+      "quota": "$1 试用 credits",
+      "notes": "官方 billing 文档明确：绑卡强制——未完成账单设置无法完成 onboarding（原条目漏标）；品牌已改名 Token Factory，第三方另记端点 `api.tokenfactory.nebius.com/v1`，待核"
+    },
+    {
+      "name": "Hyperbolic",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.hyperbolic.xyz/v1"
+      ],
+      "status": "active",
+      "quota": "$1 推广 credits（需验证手机号）",
+      "notes": "官方 billing 文档：credits 仅可用于推理服务，不可用于租 GPU；Basic 免费层 60 RPM，充值 $5+ 自动升 Pro（600 RPM）；第三方称 $10 与官方 $1 冲突，以官方为准"
+    },
+    {
+      "name": "Novita",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.novita.ai/v3/openai"
+      ],
+      "status": "active",
+      "quota": "$0.50",
+      "notes": "开源模型；官方另有 $0 定价免费模型目录（轮换），推荐计划 $10/人上限 $500"
+    },
+    {
+      "name": "Scaleway",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.scaleway.ai/v1"
+      ],
+      "status": "active",
+      "quota": "1M tokens + 60 分钟音频转写",
+      "notes": "官方 FAQ：免费额度先抵扣最贵的 token；多项目按消费比例分摊；端点官方写法为 `api.scaleway.ai/{project_id}/v1/...`，单项目可直接用 `/v1`；欧洲机房、GDPR"
+    },
+    {
+      "name": "Alibaba Cloud (Model Studio 国际站)",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+      ],
+      "status": "active",
+      "quota": "1M tokens/模型（每个 Qwen 模型独立额度）",
+      "notes": "仅新加坡国际站有免费额度；官方定价页核实；建议开启「Free Quota Only」开关防止超额扣费；Batch 调用与上下文缓存不计入免费额度"
+    },
+    {
+      "name": "xAI",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.x.ai/v1"
+      ],
+      "status": "degraded",
+      "quota": "$25 注册赠金（政策不稳定，时有时无）",
+      "notes": "无永久免费层；数据共享计划曾提供 $150/月（需 opt-in 数据训练 + 先期 $5 消费），但 2026-09 起 docs.x.ai 已无任何记载，视作历史政策；采用前 console.x.ai 实测"
+    },
+    {
+      "name": "Cerebras",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.cerebras.ai/v1"
+      ],
+      "status": "active",
+      "quota": "$5 试用赠金",
+      "notes": "冲突已裁决（官方文档证实）：无永久免费层；注册需验证支付方式，否则 API/Playground 不可用；试用层限速 5 RPM / 30K TPM / 1M TPD，仅 gpt-oss-120b 与 zai-glm-4.7"
+    },
+    {
+      "name": "B.AI（聚合路由平台）",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.b.ai/v1"
+      ],
+      "status": "expired",
+      "quota": "0 Credits 全免款已全面退出（2026-09-25 起 Hy3/MiMo-V2.5/Qwen3.8-Flash/GLM-5.3-Flash 全部退出 0 价、转为 10–30% 折扣档，免费层归零）",
+      "notes": "2026-09-18 新增。免费款三个月内连撤：DeepSeek-V4-Flash 与 V4-Flash-Vision-Exp 于 2026-09-03 17:00 SGT 退出免费层转 5 折/2.5 折计价；GLM-5.3-Flash 曾于 8-27 入 0 credits、9-09 延长，但 2026-09-12 10:00 SGT 免费结束转 9 折。平台 15 天处理 8.19 万亿 tokens、注册用户 230 万——高热度正是免费款快速收回的原因，不宜作为长期预算项；2026-10-19 双周巡检：据 iadecider（逐条读 b.ai 官方公告页，本环境不可直连复核）0-Credit 免费层已于 2026-09-25 全面退出，所有原免费模型转为折扣档、免费渠道归零 → 状态转 expired。建议采用前 console.b.ai 实测确认"
+    },
+    {
+      "name": "Inception（Mercury 扩散式 LLM）",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.inceptionlabs.ai/v1"
+      ],
+      "status": "active",
+      "quota": "免费 token 100M（一次性启动池，官方已统一口径）；原 docs 快速开始页/旧 onboarding 曾写 1000 万，2026-10-19 复核官方 get-started/FAQ/blog 一致确认为 1 亿（up from 10M），冲突裁决为 100M",
+      "notes": "2026-09-18 新增。主模型 mercury-2.5（260K 上下文、可调推理强度、并行工具调用、JSON Schema）；额度为 Mercury 2/2.5/Edit 2 共用的一次性启动池，用完须绑卡按折后价 $0.04/$0.15 每百万续用。官方实测吞吐与宣传差一个量级（宣传 1107 tok/s，OpenRouter 实测 P50 仅 68、均值 245），结构化输出错误率 11.25%；OpenRouter 上的 `inception/mercury-2.5` 是付费档、无 `:free` 变体；2026-10-19 冲突裁决：官方 get-started、FAQ、blog（mercury-2-10x-free-tokens）三处一致确认每新账号 1 亿免费 token（一次性、跨模型共用、无需绑卡），旧 1000 万为过期 onboarding 文案 → 状态由 degraded 升 active"
+    },
+    {
+      "name": "Ollama Cloud",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://ollama.com"
+      ],
+      "status": "unverified",
+      "quota": "官方未正式公布；社区实推测周限约 5M tokens、时限约 165K tokens",
+      "notes": "2026-09-18 新增。云端开源模型（deepseek-v3.1:671b、gpt-oss:120b、kimi-k2:1t、qwen3-coder:480b 等）；官方文档只写「有小时与日限制以避免容量问题」，无具体数值；本条按 unverified 收录，不得用于容量规划，采用前实测"
+    },
+    {
+      "name": "Z.ai（智谱国际站）",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [
+        "https://api.z.ai/api/paas/v4",
+        "https://open.bigmodel.cn/api/paas/v4"
+      ],
+      "status": "active",
+      "quota": "GLM Flash 系列定价页标零价格",
+      "notes": "2026-09-18 新增。官方定价页 Flash 模型输入输出均为 0；并发限制为 1 个请求——串行脚本可用，并行 Agent 会直接撞墙；端点分国际/国内两套"
+    },
+    {
+      "name": "LongCat（美团）",
+      "section": "二、试用额度渠道（一次性/限期 credits）",
+      "endpoints": [],
+      "status": "unverified",
+      "quota": "LongCat Flash 及 thinking 变体：基线 500K tokens/日，填表后升至 5M",
+      "notes": "2026-09-18 新增。支持 `/chat/completions` 与 Anthropic messages 两种格式；额度提升依赖表单申请，官方未公布标准条款，标 unverified 待实测"
+    },
+    {
+      "name": "GitHub Models",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "整体停服",
+      "effective_date": "2026-07-30"
+    },
+    {
+      "name": "Google Gemini 2.5 Pro / 3.1 Pro",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "退出免费层（Pro 需绑卡）",
+      "effective_date": "2026-04-01"
+    },
+    {
+      "name": "Groq Llama 系列（llama-3.3-70b / llama-3.1-8b）",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "转入 Enterprise，免费层移除",
+      "effective_date": "2026-08"
+    },
+    {
+      "name": "Cerebras 永久免费层（1M tokens/日 不绑卡）",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "官方确认取消，改为 $5/30 天试用赠金（需验证支付方式）",
+      "effective_date": "2026-08"
+    },
+    {
+      "name": "Together AI 新用户免费额度（$1）",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "取消，改为 $5 预存门槛",
+      "effective_date": "2025-07"
+    },
+    {
+      "name": "B.AI DeepSeek-V4-Flash / V4-Flash-Vision-Exp",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "退出 0 Credits 全免，转 5 折（高峰时段）/ 2.5 折（闲时）计价",
+      "effective_date": "2026-09-03 17:00 SGT"
+    },
+    {
+      "name": "B.AI GLM-5.3-Flash",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "8-27 入 0 credits、9-09 延长，最终于 9-12 退出，转 9 折（0.015 / 0.05 credits 每 token）",
+      "effective_date": "2026-09-12 10:00 SGT"
+    },
+    {
+      "name": "B.AI 0 Credits 全免款（Hy3 / MiMo-V2.5 / Qwen3.8-Flash / GLM-5.3-Flash 等）",
+      "section": "三、已停服 / 退出免费层（expired，保留追溯）",
+      "status": "expired",
+      "event": "退出 0 Credits 全免，全部转为 10–30% 折扣档（无 0 价模型，免费层归零）",
+      "effective_date": "2026-09-25（据 iadecider 逐条读官方公告页）"
+    }
+  ]
+}

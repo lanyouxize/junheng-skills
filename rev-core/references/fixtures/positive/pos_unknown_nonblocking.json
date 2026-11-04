@@ -1,0 +1,26 @@
+{
+  "blocking": false,
+  "id": "uk-1001",
+  "kind": "unknown",
+  "owner_module": "rev-runtime",
+  "produced_at": "2026-11-01T22:40:00+08:00",
+  "produced_by": "rev-core",
+  "provenance": {
+    "command": "analyzeHeadless ... -postScript Xrefs.py",
+    "inputs_sha256": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "tool": "ghidra",
+    "version": "11.3.2"
+  },
+  "question": "帧尾 2 字节是 CRC16-Modbus 还是累加和",
+  "refs": [],
+  "schema": "reva/1",
+  "status": "ok",
+  "target_id": "tgt-abc123",
+  "tried": [
+    "差分采样 3 组"
+  ],
+  "unblock_condition": "再采 20 组不同载荷",
+  "why_unknown": "只采到 3 组样本，不足以区分"
+}

@@ -1,0 +1,35 @@
+# wechat-article-collector 配置示例
+# 用法：python collect.py --config config.yaml <mode> ...
+# 所有项可缺省，未填时使用 scripts/common.py DEFAULT_CONFIG 内置值。
+
+rate_limit:
+  min_delay_seconds: 3.0      # 请求间隔下限（秒）
+  max_delay_seconds: 8.0      # 请求间隔上限（秒，抖动）
+  max_per_day: 200            # 单账号单日上限，超限即停
+
+library:
+  # library skill 的 space_api.py CLI 入口（写库转发器）；换机时改这里
+  api_cli: "D:\\workbuddy安装运行位置\\resources\\app.asar.unpacked\\resources\\plugins\\workbuddy-builtin\\skills\\library\\space_api.py"
+  node_id: ""                 # 智库节点 id（运行期 --library-node 或此项，推荐直接传 id）
+  node_title: ""              # 尽力回退：按标题枚举解析 node id（KB 容器可能枚举不到）
+  space: "铭衍·元典"           # 回退解析时的空间名
+  database_name_prefix: "公众号采集归档"   # 建表名前缀，实际名 = <prefix>-<UTC时间戳>
+  batch_size: 50              # batch-add-records 每批条数（50–100）
+
+l2:
+  cookie_file: ""             # L2 按号采集的 cookie JSON 路径
+
+l3:
+  wechat_path: ""             # PC 微信可执行文件路径（默认自动探测常见安装位置）
+  proxy_port: 8080            # mitmproxy local 模式监听端口
+
+exe:
+  path: ""                    # 闭源 exe 兜底路径（微信公众号批量下载工具4.0.exe 等）
+  output_dir: ""              # exe 输出目录（扫描归一化用）
+  # 体积上限（ADR-003）：单产物 / 单轮总产出。留空 = 默认 32 / 512 MB；
+  # 写 0 或负数 = 关闭该项上限（函数层以 `limit > 0` 判定，0/负数直接跳过检查）。
+  max_file_mb: 32             # 单文件上限 MB（0 = 不限）
+  max_total_mb: 512           # 单轮总产出上限 MB（0 = 不限）
+
+compliance:
+  attestation: "collector-attestation: authorized-only"   # 写库时固化到 license 列

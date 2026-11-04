@@ -1,0 +1,15 @@
+{
+  "slug": "tiangong-skill",
+  "name": "天工.skill",
+  "version": "1.0.9",
+  "installedAt": 1791906987106,
+  "source": "skillhub",
+  "namespace": "indiv-ebandao",
+  "canonicalName": "@indiv-ebandao/tiangong-skill",
+  "iconSource": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/81015f94-5620-494e-bbd6-ac3268e7ccd3.png",
+  "labels": {
+    "requires_api_key": "false"
+  },
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\tiangong-skill__skillhub\\_icon.png",
+  "iconDownloadedFrom": "https://cloudcache.tencent-cloud.com/qcloud/ui/static/other_external_resource/81015f94-5620-494e-bbd6-ac3268e7ccd3.png"
+}

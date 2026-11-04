@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>证据分布三图 · 交付样本（v4.11）</title>
+<style>
+  :root{
+    --ink:#1f2328; --sub:#57606a; --line:#d0d7de; --bg:#ffffff; --soft:#f6f8fa;
+    --warn:#9a6700; --warnbg:#fff8e5; --ok:#1a7f37;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--soft);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;font-size:14px;line-height:1.6}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:22px;margin:0 0 6px}
+  .lead{color:var(--sub);margin:0 0 18px;font-size:13px}
+  .note{background:var(--warnbg);border:1px solid #d4a72c;border-radius:8px;padding:12px 14px;margin:0 0 22px;color:var(--warn);font-size:12.5px}
+  .note b{color:#7d4e00}
+  h2{font-size:16px;margin:34px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
+  h2 .tag{font-size:11px;font-weight:500;color:var(--sub);border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+  .cap{color:var(--sub);font-size:12.5px;margin:0 0 10px}
+  .shot{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 6px}
+  .shot img{display:block;width:100%;height:auto}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .pair{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .pair .h{font-size:12px;color:var(--sub);padding:6px 10px;background:var(--soft);border-bottom:1px solid var(--line)}
+  .pair img{display:block;width:100%;height:auto}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;margin:10px 0 0;background:var(--bg)}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  th{background:var(--soft);font-weight:600}
+  code{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:12px}
+  .ok{color:var(--ok);font-weight:600}
+  footer{margin-top:34px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>证据分布三图 · 交付样本</h1>
+  <p class="lead"><code>evidence-charts/v1</code> · 900px 固定画布 · 纯 SVG 零依赖 · 由 <code>build-sample.cjs</code> 生成，<code>check-svg.py</code> 独立校验</p>
+
+  <div class="note">
+    <b>数据性质：拟真夹具，不是真实检索产物。</b>
+    分布形状（A 2 / B 5 / C 8 / D 54）、年份跨度（1998–2026）、物种构成按 2026-10-21 实测形状复刻，
+    目的是把三条边界情形一次摆出来：全候选（<code>needsReview</code> 恒 true）、年份缺失（<code>null</code> 与 <code>n.d.</code> 并存）、跨度 29 年触发 5 年分段。
+    文件名与真实运行一致，可直接替换比对。
+  </div>
+
+  <h2>① 全候选（needsReview 恒 true）<span class="tag">默认态</span></h2>
+  <p class="cap">69 条全部未经人工确认：图顶挂警示带、所有段用斜纹。这是工具的<b>默认产出形态</b>——它的作用是「待审清单的分布」，不是「证据结论」。</p>
+  <figure class="shot"><img src="evidence-grade-dist.svg" alt="证据等级分布（全候选）"></figure>
+  <figure class="shot"><img src="evidence-grade-species.svg" alt="证据等级 × 物种相关性（全候选）"></figure>
+  <figure class="shot"><img src="evidence-year-grade.svg" alt="发表年份 × 证据等级（全候选）"></figure>
+
+  <h2>② 部分确认（reviewed: true 共 3 条）<span class="tag">对照</span></h2>
+  <p class="cap">只把前 3 条（2 条 A + 1 条 B）标为已确认：警示带消失、相应段变为实色，其余仍为斜纹。<b>同一份数据、只改确认态</b>，用来验证「候选 ≠ 已确认」在视觉上真的可分辨。</p>
+  <div class="grid">
+    <div class="pair"><div class="h">等级分布 · 全候选</div><img src="evidence-grade-dist.svg" alt=""></div>
+    <div class="pair"><div class="h">等级分布 · 部分确认</div><img src="evidence-grade-dist--partly-reviewed.svg" alt=""></div>
+  </div>
+
+  <h2>③ 判据与边界</h2>
+  <table>
+    <tr><th style="width:150px">判据</th><th>本样本中的体现</th></tr>
+    <tr><td>各档之和 = 总数</td><td class="ok">A2 + B5 + C8 + D54 = 69 ✓（不守恒则抛错，不出图）</td></tr>
+    <tr><td>候选 + 已确认 = 总数</td><td class="ok">69 + 0 = 69 / 66 + 3 = 69 ✓</td></tr>
+    <tr><td>矩阵行和 = 该档计数</td><td class="ok">图② 每一行与图① 对应档位数逐值相等 ✓</td></tr>
+    <tr><td>年份三态之和 = 总数</td><td class="ok">合法 67 + 未标注 1 + 非法 1 = 69 ✓</td></tr>
+    <tr><td>年份缺失 ≠ 某一年</td><td>图③ 右侧「未标注」列与时间轴之间画虚线断开；<code>n.d.</code> 计入「非法」，单独在脚注登记，两列互不混同</td></tr>
+    <tr><td>空年份不压缩时间轴</td><td>1998–2026 中未出现的年份保留为零高柱（基线细线），不是被跳过</td></tr>
+    <tr><td>全候选不得画成确定等级</td><td>图① 全候选版无任何实色等级柱（测试逐色断言）；图例明写「斜纹 = 候选待人工确认」</td></tr>
+    <tr><td>D 档成因分开</td><td>图① 脚注区分「设计未识别」（信息不足）与「已判定但薄弱」——这两类混读会把「没读出来」当成「结论弱」</td></tr>
+    <tr><td>几何不越界</td><td class="ok">6 个文件、JS <code>geomCheck</code> 与 Python <code>check-svg.py</code> 双路径各 0 违规 ✓</td></tr>
+  </table>
+
+  <footer>
+    <code>check-svg.py</code> 的判据 S1–S6 均已用注入坏样本证伪：未转义 <code>&amp;</code>（S1）、rect 越界（S3）、超长文字（S4）、
+    <code>undefined</code>/<code>NaN</code>/<code>[object Object]</code> 分别注入 <code>&lt;title&gt;</code> / <code>&lt;desc&gt;</code> / <code>text</code> / <code>aria-label</code>（S6）——
+    全部报错。恒绿的检查器等于没有检查器。
+  </footer>
+</div>
+</body>
+</html>

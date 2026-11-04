@@ -1,0 +1,15 @@
+{
+  "slug": "workbuddy-speedup-diagnosis",
+  "name": "WorkBuddy 变慢卡顿诊断 · 提速手册",
+  "version": "1.4.0",
+  "installedAt": 1791907109374,
+  "source": "skillhub",
+  "namespace": "user_738c00b9",
+  "canonicalName": "@user_738c00b9/workbuddy-speedup-diagnosis",
+  "iconSource": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skill-icons/uploads/434346/6e955eca26a245f58f063cf3f6454932.png",
+  "labels": {
+    "requires_api_key": "false"
+  },
+  "iconLocalPath": "C:\\Users\\Administrator\\.workbuddy\\skills\\workbuddy-speedup-diagnosis__skillhub\\_icon.png",
+  "iconDownloadedFrom": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skill-icons/uploads/434346/6e955eca26a245f58f063cf3f6454932.png"
+}

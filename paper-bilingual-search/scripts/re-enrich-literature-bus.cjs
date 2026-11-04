@@ -1,0 +1,172 @@
+#!/usr/bin/env node
+/* eslint-disable */
+/**
+ * re-enrich-literature-bus.cjs — 对「存量文献总线」补跑 Europe PMC 元数据补全（M-A 落地脚本）
+ *
+ * 动因（一手实测，2026-10-30）：
+ *   literature 总线 141 条记录里 0 条带 pmcid，但 121 条 isOA=True。根因是字段名错位——
+ *   `export-bus.mapRecord` 把英文题名存为 `title`，而 `enrich.cjs` 只读 `rec.titleEn`
+ *   （见 enrich.cjs enrichOne line 52）。总线记录无 `titleEn` ⇒ enrich 对全部记录返回
+ *   `no_title` ⇒ pmcid 永不回填 ⇒ 全文通道（fulltext-chain）拿不到入口 ⇒ 评审卡在 B 级。
+ *   本脚本即是 M-A「打通全文通道」的闭环动作：把 enrich 真正跑到存量语料上，回填 pmcid。
+ *
+ * 纪律（与总线契约 / 项目铁律一致）：
+ *   1. **默认 dry-run**：不传 --apply 绝不写总线，只打印将要发生的变更与统计。
+ *   2. **只更新契约内字段**：pmcid / isOa / oaStatus / oaUrl（均在 export-bus FIELDS 白名单内）。
+ *      license / funders / pubTypes 等 COI 字段**不进总线**，只写旁路报告（enrich-report.jsonl），
+ *      避免扩张总线 schema（那应独立评审）。
+ *   3. **幂等**：重跑结果一致；已带 pmcid 的记录若 enrich 仍解析到则保持（EPMC 权威），否则保留原值。
+ *   4. **不静默降级**：enrich 失败（429 / no_response / unmatched）逐条计入报告并显式点名；
+ *      isOA=True 但 pmcid=null 的「矛盾态」必须带 reason，不得假装已覆盖（设计文档 M-A「谁在守」①）。
+ *   5. **记录数守恒**：141 进 141 出，丢一条即退出（fail-closed）。
+ *   6. **字段顺序**：逐条保留原记录键序，只改值，避免 130 行级 diff 噪音（沿用 export-bus 顺序纪律）。
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const { enrichAll } = require('./lib/enrich.cjs');
+
+const DEFAULT_BUS = 'D:/petfood-platform/data/bus/literature/records.jsonl';
+
+function parseArgs(argv) {
+  const a = { bus: DEFAULT_BUS, apply: false, concurrency: 4, intervalMs: 300, limit: null };
+  for (let i = 2; i < argv.length; i++) {
+    const x = argv[i];
+    if (x === '--apply') a.apply = true;
+    else if (x === '--bus') a.bus = argv[++i];
+    else if (x === '--concurrency') a.concurrency = Number(argv[++i]) || 4;
+    else if (x === '--interval-ms') a.intervalMs = Number(argv[++i]) || 300;
+    else if (x === '--limit') a.limit = Number(argv[++i]) || null;
+  }
+  return a;
+}
+
+function readJsonl(p) {
+  if (!fs.existsSync(p)) throw new Error('总线文件不存在: ' + p);
+  const out = [];
+  for (const [i, line] of fs.readFileSync(p, 'utf8').split('\n').entries()) {
+    const t = line.trim();
+    if (!t) continue;
+    try { out.push(JSON.parse(t)); } catch { throw new Error('第 ' + (i + 1) + ' 行非法 JSON: ' + p); }
+  }
+  return out;
+}
+
+/** 旁路报告：把「矛盾态」「失败」「COI」落到总线之外，使门禁可机检、不污染契约。 */
+function reasonForOaNoPmcid(enrich) {
+  if (!enrich) return '无 enrich 结果';
+  switch (enrich.status) {
+    case 'unmatched': return 'EPMC 未匹配（预印本/未在 EPMC 索引）';
+    case 'no_title': return '题名缺失（enrich 未运行）';
+    case 'error:429': return 'enrich 限流失败';
+    case 'error:no_response': return 'enrich 无响应';
+    case 'error:timeout': return 'enrich 超时';
+    default:
+      if (String(enrich.status || '').startsWith('error:')) return 'enrich 失败: ' + enrich.status;
+      // matched 但 pmcid 仍空 = EPMC 命中却无 PMC 全文 id（不在 PMC OA 子集）
+      return 'EPMC 命中但无 PMC 全文 id（不在 PMC OA 子集）';
+  }
+}
+
+async function run() {
+  const a = parseArgs(process.argv);
+  const recs = readJsonl(a.bus);
+  const total = recs.length;
+  console.error('[re-enrich] 读取总线 ' + total + ' 条 → bus=' + a.bus + (a.apply ? ' (--apply)' : ' (dry-run)'));
+
+  // ① 归一化：总线英文题名在 `title`，enrich 期望 `titleEn`。只给「喂给 enrich 的副本」补，
+  //    **不污染总线记录 r 本身**（总线契约 FIELDS 不含 titleEn，落盘会破坏白名单纪律）。
+  const slice = a.limit ? recs.slice(0, a.limit) : recs;
+  const enrichRecs = slice.map((r) => (r.titleEn || !r.title ? r : Object.assign({}, r, { titleEn: r.title })));
+
+  // ② 跑 enrich（用库内 enrichAll：有界并发 + 429 自动降级，零新增请求——字段在同一 EPMC core 响应体）
+  const { stat } = await enrichAll(enrichRecs, { intervalMs: a.intervalMs, concurrency: a.concurrency });
+  for (let i = 0; i < slice.length; i++) slice[i]._enrich = enrichRecs[i].enrich;
+
+  // ③ 合并：回填 pmcid + 顺带刷新 OA 字段（均属契约内字段）
+  const report = [];
+  let updated = 0, pmcidAdded = 0;
+  for (const r of recs) {
+    const e = r._enrich || null;
+    const row = {
+      id: r.id,
+      title: (r.title || '').slice(0, 70),
+      status: e ? e.status : 'skipped',
+      enrichIsOA: e ? e.isOA : null,
+      // pmcid 口径：本条记录的**最终** pmcid，而不是「本次 enrich 恰好查到的那一个」。
+      // 为什么必须沿用总线值：C6 判据比对「总线带 pmcid 条数 == 报告 enrichPmcid 非空条数」。
+      // 若 enrich 因限流/索引波动未匹配（如 DOI 10.1007/s00438-021-01842-6 实测 EPMC 有
+      // PMC8803678 却偶发 unmatched），旧写法会让报告凭空少一条，判据报「回填不一致」——
+      // 那是报告的缺陷，不是数据的缺陷。来源记在 pmcidSource，仍可追溯。
+      enrichPmcid: (e && e.pmcid) || r.pmcid || null,
+      pmcidSource: (e && e.pmcid) ? 'enrich' : (r.pmcid ? 'bus' : null),
+      oaWithoutPmcid: false,
+      reason: null,
+      license: e ? e.license : null,
+      funders: e ? e.funders : null,
+      pubTypes: e ? e.pubTypes : null,
+    };
+
+    // pmcid：EPMC 权威。解析到就覆盖（已带则保持），否则保留原值。
+    const prevPmcid = r.pmcid || '';
+    if (e && e.pmcid && !prevPmcid) {
+      if (a.apply) r.pmcid = e.pmcid;
+      pmcidAdded++;
+      updated++;
+    }
+
+    // isOa：偏好 true（OpenAlex 或 EPMC 任一说 OA 即为 OA）。
+    const prevOa = r.isOa;
+    const wantOa = (prevOa === true) ? true : (e && e.isOA === true ? true : prevOa);
+    if (a.apply && wantOa !== prevOa) { r.isOa = wantOa; updated++; }
+
+    // oaUrl：enrich 给了可用全文入口且原值缺失时补。
+    if (a.apply && e && e.fullTextUrl && !r.oaUrl) { r.oaUrl = e.fullTextUrl; updated++; }
+
+    // 矛盾态可追溯（设计文档 M-A「谁在守」①）
+    if (r.isOa === true && !(r.pmcid || (a.apply && e && e.pmcid))) {
+      row.oaWithoutPmcid = true;
+      row.reason = reasonForOaNoPmcid(e);
+    }
+    report.push(row);
+  }
+
+  // ④ 写回（仅 --apply）。保留原键序，仅改值。
+  if (a.apply) {
+    const dir = path.dirname(a.bus);
+    const sorted = [...recs].sort((x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+    const body = sorted.map((r) => {
+      const { _enrich, titleEn, ...clean } = r; // 剔除内部字段与非契约 titleEn（防止污染总线白名单）
+      return JSON.stringify(clean);
+    }).join('\n');
+    fs.writeFileSync(a.bus, body ? body + '\n' : '', 'utf8');
+
+    // 旁路报告（总线之外）
+    const repDir = path.join(dir, '_extract');
+    fs.mkdirSync(repDir, { recursive: true });
+    fs.writeFileSync(path.join(repDir, 'enrich-report.jsonl'), report.map((x) => JSON.stringify(x)).join('\n') + '\n', 'utf8');
+    console.error('[re-enrich] 已写回总线 ' + sorted.length + ' 条；旁路报告 → ' + path.join(repDir, 'enrich-report.jsonl'));
+  } else {
+    console.error('[re-enrich] dry-run：未写总线。去掉 --apply 前请先核对下方统计。');
+  }
+
+  // ⑤ 统计与 fail-closed 自检
+  const oaNoPmcid = report.filter((x) => x.oaWithoutPmcid).length;
+  const byStatus = {};
+  for (const x of report) byStatus[x.status] = (byStatus[x.status] || 0) + 1;
+  console.log(JSON.stringify({
+    total,
+    apply: a.apply,
+    recordsChanged: updated,
+    pmcidAdded,
+    oaWithoutPmcid: oaNoPmcid,
+    enrichStatus: byStatus,
+    oaNoPmcidSamples: report.filter((x) => x.oaWithoutPmcid).slice(0, 8).map((x) => ({ id: x.id, reason: x.reason })),
+  }, null, 2));
+
+  // fail-closed：记录数守恒
+  if (recs.length !== total) { console.error('[FAIL] 记录数不守恒'); process.exit(1); }
+}
+
+run().catch((e) => { console.error('[FAIL] ' + (e && e.stack || e)); process.exit(1); });

@@ -1,0 +1,59 @@
+{
+  "skill": "memory-manager-v2",
+  "version": "4.0.6",
+  "generated": "2026-09-14",
+  "runtime": "python>=3.9",
+  "dependencies": [
+    {
+      "name": "tiktoken",
+      "version_range": ">=0.13.0,<1.0.0",
+      "type": "optional",
+      "note": "精确 BPE 分词计量；缺失时自动回退字符估算，功能不受影响。下限取 0.13.0：该版本修复了 RUSTSEC-2026-0176 / RUSTSEC-2026-0177（PyO3 升级至 0.29 一并修复），见 Fedora 安全更新 FEDORA-2026-e0bcb90c9f。上界 <1.0.0 用于挡住未经验证的主版本跃迁。",
+      "known_cves": "RUSTSEC-2026-0176 / RUSTSEC-2026-0177 在 0.13.0 已修复；本用法（本地分词计量）未发现可利用路径。",
+      "advisory_checked_on": "2026-09-14",
+      "advisory_sources": [
+        "https://bodhi.fedoraproject.org/updates/FEDORA-2026-e0bcb90c9f",
+        "https://www.tenable.com/plugins/nessus/327223"
+      ],
+      "name_confusion_warning": "同名但不同分发包 `tiktoken-mcp` 于 2026-06-08 被投毒（MAL-2026-5326 / PYSEC-2026-1075 / GHSA-wj5q-fgqm-2wv6，受影响 0.13.1 / 0.13.2，无补丁版本）——该包伪装 tiktoken 的元数据，经 .pth 启动钩子下载 Bun 运行时并执行 JavaScript infostealer。安装时务必认准包名 tiktoken，绝不安装 tiktoken-mcp。"
+    },
+    {
+      "name": "colorama",
+      "version_range": ">=0.4.0",
+      "type": "optional",
+      "note": "终端彩色输出；由 config.py 顶层 try/except 包裹，缺失时颜色退化为空串",
+      "known_cves": "未检索到影响本用法的公告（2026-09-14 检索）",
+      "advisory_checked_on": "2026-09-14"
+    },
+    {
+      "name": "jieba",
+      "version_range": ">=0.42.0",
+      "type": "optional",
+      "note": "中文分词；缺失时回退字符 bigram，功能不受影响",
+      "known_cves": "未检索到影响本用法的公告（2026-09-14 检索）",
+      "advisory_checked_on": "2026-09-14"
+    },
+    {
+      "name": "python-standard-library",
+      "components": [
+        "argparse",
+        "json",
+        "re",
+        "pathlib",
+        "hashlib",
+        "zipfile",
+        "logging",
+        "tempfile"
+      ],
+      "type": "required",
+      "known_cves": "none"
+    }
+  ],
+  "declared_third_party": [
+    "tiktoken",
+    "colorama",
+    "jieba"
+  ],
+  "supply_chain": "无网络外发；无构建/安装步骤；全部操作为本地文件读写；三者均为可选依赖，缺失时功能自动回退（本机实测：三者均未安装，self-test 5/5 通过）。declared_third_party / dependencies 必须覆盖 memory_manager/ 下的全部非标准库 import ——由 tests/test_dependency_manifest.py 强制校验（此前只声明了 tiktoken，漏了 colorama 与 jieba）。",
+  "verified_by": "self-test (memory_manager.py self-test) + tests/test_dependency_manifest.py + skill-tool-evaluator"
+}

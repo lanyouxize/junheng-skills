@@ -1,0 +1,301 @@
+#!/usr/bin/env python3
+"""
+引用格式化工具
+
+支持 GB/T 7714-2015 格式
+
+著者录入规范（canonical input）
+--------------------------------
+英文著者一律采用「姓 + 名缩写」形式，且缩写后不加缩写点，例如 ``"Smith J"``、``"LeCun Y"``。
+本模块会归一无歧义的其它写法：:
+
+    "Smith, John"  -> "Smith J"     # 逗号式
+    "Smith, J."    -> "Smith J"     # 逗号 + 缩写点
+    "Y LeCun"      -> "LeCun Y"     # 缩写在前式
+    "Smith J"      -> "Smith J"     # 已是规范形式，原样保留
+
+著录规则（依 references/gb-t-7714-2015.md 「作者著录规则」）
+----------------------------------------------------------
+* 3 人以内：全部列出，用逗号分隔
+* 超过 3 人：只列前 3 人，中文加 ``等``、英文加 ``et al.``
+"""
+
+from typing import Dict, List, Optional
+
+#: 超过该人数即触发「只列前 3 人 + 等/et al.」规则
+MAX_LISTED_AUTHORS = 3
+
+#: 截断后缀（依语言区分）
+TRUNCATION_SUFFIX = {"zh": "等", "en": "et al."}
+
+
+def _is_initial_token(token: str) -> bool:
+    """判断单个 token 是否为「名缩写」（如 ``J`` / ``J.`` / ``RG``）。
+
+    规则：字母数 ≤ 2 且全大写。``Li`` / ``Smith`` 这类词不算缩写。
+    """
+    letters = "".join(ch for ch in token if ch.isalpha())
+    return bool(letters) and len(letters) <= 2 and letters.isupper()
+
+
+def _to_initials(tokens: List[str]) -> str:
+    """把一组「名」token 归并为连续缩写串（不加缩写点）。
+
+    - 已是缩写（``J.`` / ``RG``）→ 去点后原样
+    - 完整名字（``John``）→ 取首字母
+    """
+    out: List[str] = []
+    for token in tokens:
+        letters = "".join(ch for ch in token if ch.isalpha())
+        if not letters:
+            continue
+        if _is_initial_token(token):
+            out.append(letters.upper())
+        else:
+            out.append(letters[0].upper())
+    return "".join(out)
+
+
+def format_author_name(name: str, lang: str = "en") -> str:
+    """格式化单个作者姓名。
+
+    英文规范形式为「姓 + 名缩写」（如 ``Smith J``）；本函数会归一逗号式与
+    缩写在前式，其余情况原样保留（判定有歧义时不猜测 —— 例如 ``John Smith``
+    与中文拼音 ``Li Wei`` 无法可靠区分，一律保留，由上游按规范录入）。
+
+    Args:
+        name: 作者姓名
+        lang: 语言 (zh/en)
+
+    Returns:
+        格式化后的作者名
+    """
+    if not name:
+        return ""
+
+    if lang == "zh":
+        # 中文：保持原样
+        return name.strip()
+
+    raw = " ".join(name.split())
+    if not raw:
+        return ""
+
+    # 形式一：逗号式 —— "Smith, John" / "Smith, J."
+    if "," in raw:
+        parts = [p.strip() for p in raw.split(",") if p.strip()]
+        if not parts:
+            return ""
+        if len(parts) == 1:
+            return parts[0]
+        surname = parts[0]
+        initials = _to_initials(parts[1:])
+        return f"{surname} {initials}".strip()
+
+    tokens = raw.split()
+
+    # 形式二：缩写在前 —— "Y LeCun" / "A Vaswani"
+    if (
+        len(tokens) >= 2
+        and all(_is_initial_token(t) for t in tokens[:-1])
+        and not _is_initial_token(tokens[-1])
+    ):
+        surname = tokens[-1]
+        initials = _to_initials(tokens[:-1])
+        return f"{surname} {initials}".strip()
+
+    # 形式三：已是「姓 + 名缩写」或存在歧义 —— 原样保留
+    return raw
+
+
+def format_authors(authors: List[str], lang: str = "en") -> str:
+    """格式化作者列表（GB/T 7714-2015）。
+
+    3 人以内全部列出、逗号分隔；超过 3 人只列前 3 人，中文加 ``等``、
+    英文加 ``et al.``（依 references/gb-t-7714-2015.md）。
+
+    Args:
+        authors: 作者列表
+        lang: 语言
+
+    Returns:
+        格式化后的作者字符串
+    """
+    if not authors:
+        return ""
+
+    formatted = [format_author_name(a, lang) for a in authors if a and a.strip()]
+    formatted = [f for f in formatted if f]
+    if not formatted:
+        return ""
+
+    if len(formatted) > MAX_LISTED_AUTHORS:
+        head = formatted[:MAX_LISTED_AUTHORS]
+        suffix = TRUNCATION_SUFFIX.get(lang, TRUNCATION_SUFFIX["en"])
+        return ", ".join(head) + ", " + suffix
+
+    # 3 人以内：全部列出，逗号分隔
+    return ", ".join(formatted)
+
+
+def format_citation_gb7714(paper: Dict, index: str = "") -> str:
+    """
+    格式化为 GB/T 7714-2015 格式
+    
+    Args:
+        paper: 文献字典
+        index: 文献编号 (如 C1, E1)
+    
+    Returns:
+        GB/T 7714-2015 格式的引文
+    """
+    lang = paper.get("language", "en")
+    authors = paper.get("authors", [])
+    title = paper.get("title", "")
+    journal = paper.get("journal", "")
+    year = paper.get("year", "")
+    volume = paper.get("volume", "")
+    issue = paper.get("issue", "")
+    pages = paper.get("pages", "")
+    doi = paper.get("doi", "")
+    
+    # 格式化作者
+    author_str = format_authors(authors, lang)
+    
+    # 构建卷期页字符串
+    vol_issue = ""
+    if volume:
+        vol_issue = volume
+        if issue:
+            vol_issue += f"({issue})"
+        if pages:
+            vol_issue += f": {pages}"
+    elif pages:
+        vol_issue = pages
+    
+    # 作者段与题名之间的分隔：
+    # 英文「et al.」自带句点，此时仅需一个空格，避免双句点（"et al.. Title"）；
+    # 中文「等」不含句点，仍按常规补 ". "（"张三, 李四, 王五, 等. 题名"）。
+    if not author_str:
+        author_sep = ""
+    elif author_str.endswith("et al."):
+        author_sep = " "
+    else:
+        author_sep = ". "
+
+    # 构建引文（中英文的期刊条目结构一致，共用一条装配路径）
+    citation = f"[{index}] {author_str}{author_sep}{title}[J]. {journal}"
+    if year:
+        citation += f", {year}"
+    if vol_issue:
+        citation += f", {vol_issue}"
+    if doi:
+        citation += f". DOI:{doi}"
+    citation += "."
+
+    return citation
+
+
+def format_citation_list(papers: List[Dict], prefix: str = "E") -> List[str]:
+    """
+    格式化文献列表
+    
+    Args:
+        papers: 文献列表
+        prefix: 编号前缀 (C/E)
+    
+    Returns:
+        格式化后的引文列表
+    """
+    citations = []
+    for i, paper in enumerate(papers, 1):
+        index = f"{prefix}{i}"
+        citation = format_citation_gb7714(paper, index)
+        citations.append(citation)
+    
+    return citations
+
+
+def generate_reference_md(papers_zh: List[Dict], papers_en: List[Dict]) -> str:
+    """
+    生成参考文献 Markdown 文档
+    
+    Args:
+        papers_zh: 中文文献列表
+        papers_en: 英文文献列表
+    
+    Returns:
+        Markdown 格式的参考文献
+    """
+    lines = ["# 参考文献\n"]
+    
+    # 中文文献
+    if papers_zh:
+        lines.append("## 中文文献\n")
+        for i, paper in enumerate(papers_zh, 1):
+            citation = format_citation_gb7714(paper, f"C{i}")
+            lines.append(f"{citation}\n")
+        lines.append("")
+    
+    # 英文文献
+    if papers_en:
+        lines.append("## 英文文献\n")
+        for i, paper in enumerate(papers_en, 1):
+            citation = format_citation_gb7714(paper, f"E{i}")
+            lines.append(f"{citation}\n")
+        lines.append("")
+    
+    return "\n".join(lines)
+
+
+if __name__ == "__main__":
+    # 测试示例 —— 覆盖 GB/T 7714-2015 著者著录的四种情形
+    cases = [
+        ("中文·3人", {
+            "id": "C1",
+            "title": "基于深度学习的医学图像诊断研究",
+            "authors": ["张三", "李四", "王五"],
+            "journal": "计算机学报",
+            "year": 2023, "volume": "46", "issue": "5", "pages": "1023-1035",
+            "doi": "10.xxxx", "language": "zh",
+        }),
+        ("中文·超3人", {
+            "id": "C2",
+            "title": "样例题名",
+            "authors": ["张三", "李四", "王五", "赵六"],
+            "journal": "计算机学报",
+            "year": 2023, "volume": "46", "issue": "5", "pages": "1-9",
+            "doi": "", "language": "zh",
+        }),
+        ("英文·3人", {
+            "id": "E1",
+            "title": "Deep learning for medical image analysis",
+            "authors": ["Smith J", "Johnson K", "Lee M"],
+            "journal": "Nature Medicine",
+            "year": 2022, "volume": "28", "issue": "8", "pages": "1500-1510",
+            "doi": "10.1038/s41591-022-01900-0", "language": "en",
+        }),
+        ("英文·超3人", {
+            "id": "E2",
+            "title": "Deep Learning for Educational Data Mining: A Survey",
+            "authors": ["Chen X", "Li Y", "Liu Z", "Wang Q"],
+            "journal": "IEEE Transactions on Learning Technologies",
+            "year": 2023, "volume": "16", "issue": "2", "pages": "234-248",
+            "doi": "10.1109/TLT.2023.1234567", "language": "en",
+        }),
+    ]
+
+    for label, paper in cases:
+        print(f"{label}:")
+        print(format_citation_gb7714(paper, paper["id"]))
+        print()
+
+    print("著者归一化（无歧义写法）:")
+    for raw, lang in [
+        ("Smith, John", "en"),
+        ("Smith, J.", "en"),
+        ("Y LeCun", "en"),
+        ("Smith J", "en"),
+        ("Li Wei", "en"),          # 有歧义 -> 原样保留，不猜测
+    ]:
+        print(f"  {raw!r:16} -> {format_author_name(raw, lang)!r}")

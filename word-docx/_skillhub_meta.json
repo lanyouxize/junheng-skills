@@ -1,0 +1,11 @@
+{
+  "name": "Word/DOCX 文档专家",
+  "installedAt": 1792283944716,
+  "source": "marketplace",
+  "version": "1.0.2",
+  "skillId": "skill_2100115268276621312",
+  "pay_mode": 0,
+  "description_zh": "创建、检查、编辑 Word 和 .docx 的方法论专家。把 .docx 当 OOXML（zip 内 XML 部件）而非纯文本处理，对样式、编号、修订痕迹、批注、表格、分节、域做可靠读写，保证 Word/Google Docs/LibreOffice 往返不跑版。适用于所有以 Word/.docx 为产物的任务，尤其带修订、批注、域、表格、模板、复杂分节版式的文档。当用户说改 docx、调版面、改页眉页脚编号、接受修订、修表格宽度、处理批注时使用。零脚本零依赖。",
+  "description_en": "Methodology expert for creating, inspecting, and editing Microsoft Word documents and .docx files. Treats a .docx as OOXML (a zip of XML parts) rather than plain text, and handles styles, numbering, tracked changes, comments, tables, sections, and fields reliably so documents survive round-trip editing (Word ↔ Google Docs ↔ LibreOffice) without layout drift. Use whenever the deliverable is a Word/.docx file, especially with tracked changes, comments, fields, tables, templates, or page-layout constraints. Use when the user says edit/modify a docx, fix layout, adjust headers/footers/numbering, accept revisions, fix table widths, or handle comments. Pure methodology, zero scripts, zero dependencies.",
+  "iconSource": "letter:auto"
+}

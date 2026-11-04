@@ -1,0 +1,78 @@
+[
+  {
+    "id": "C1",
+    "desc": "全有价配方：missingPrice 为空，成本行含 ratio 与 unitPrice（支撑 deliverable=usable）",
+    "skill": "junheng-cost",
+    "cmd": "lines",
+    "args": { "items": [{ "code": "01010001", "weight": 700 }, { "code": "01010011", "weight": 300 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "empty", "path": "data.missingPrice" },
+        { "type": "range", "path": "data.lines.0.ratio", "value": [0.69, 0.71] },
+        { "type": "eq", "path": "data.lines.0.unitPrice", "value": 9.5 }
+      ]
+    }
+  },
+  {
+    "id": "C2",
+    "desc": "含无价原料（鸭大胸 01010003）：missingPrice 必须非空（支撑 usable_with_caveat）",
+    "skill": "junheng-cost",
+    "cmd": "lines",
+    "args": { "items": [{ "code": "01010001", "weight": 700 }, { "code": "01010003", "weight": 300 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "non_empty", "path": "data.missingPrice" }
+      ]
+    }
+  },
+  {
+    "id": "C3",
+    "desc": "跨命令串联：lines.data.lines → by-mode(general) 必须出原料单位成本",
+    "skill": "junheng-cost",
+    "cmd": "lines",
+    "args": {},
+    "pipeline": [
+      {
+        "skill": "junheng-cost",
+        "cmd": "lines",
+        "args": { "items": [{ "code": "01010001", "weight": 700 }, { "code": "01010011", "weight": 300 }] },
+        "as": "cost_lines",
+        "pick": "data.lines"
+      },
+      {
+        "skill": "junheng-cost",
+        "cmd": "by-mode",
+        "args": {
+          "mode": "general",
+          "productName": "验收集测试",
+          "lines": "$cost_lines",
+          "batchCount": 10,
+          "gramPerBag": 1000
+        }
+      }
+    ],
+    "expect": {
+      "exit": 0,
+      "assert": [
+        { "type": "eq", "path": "ok", "value": true },
+        { "type": "range", "path": "data.materialUnitCost", "value": [1, 500] },
+        { "type": "eq", "path": "data.totalKg", "value": 10 }
+      ]
+    }
+  },
+  {
+    "id": "C4",
+    "desc": "未知物料必须进 unknown（支撑 deliverable=not_usable）",
+    "skill": "junheng-cost",
+    "cmd": "lines",
+    "args": { "items": [{ "code": "88888888", "weight": 500 }] },
+    "expect": {
+      "exit": 0,
+      "assert": [{ "type": "non_empty", "path": "data.unknown" }]
+    }
+  }
+]

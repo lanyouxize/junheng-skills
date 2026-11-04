@@ -1,0 +1,1417 @@
+{
+  "$schema": "petfood-keywords/v1",
+  "source": {
+    "file": "宠物食品行业专业文章检索关键词组合清单（修订完整版）.doc",
+    "title": "宠物食品行业专业文章检索关键词组合清单（修订完整版）",
+    "parsedAt": "2026-10-04T11:59:08.105Z",
+    "lines": 176
+  },
+  "sections": [
+    {
+      "key": 2,
+      "no": "二",
+      "title": "营养成分类",
+      "groups": [
+        {
+          "id": "S2.1.1",
+          "label": "蛋白质与氨基酸",
+          "sectionTitle": "营养成分类",
+          "subNo": "2.1",
+          "subTitle": "宏量营养素",
+          "zh": [
+            "蛋白质",
+            "粗蛋白",
+            "氨基酸",
+            "必需氨基酸",
+            "牛磺酸",
+            "精氨酸",
+            "赖氨酸",
+            "蛋氨酸",
+            "苏氨酸",
+            "色氨酸",
+            "亮氨酸",
+            "异亮氨酸",
+            "缬氨酸",
+            "组氨酸",
+            "苯丙氨酸",
+            "甘氨酸",
+            "半胱氨酸",
+            "谷氨酰胺",
+            "鸟氨酸",
+            "瓜氨酸",
+            "蛋白质原料",
+            "动物蛋白",
+            "植物蛋白",
+            "昆虫蛋白",
+            "水解蛋白",
+            "发酵蛋白",
+            "动物副产品",
+            "肉粉",
+            "肉骨粉",
+            "血浆蛋白",
+            "酵母蛋白",
+            "蛋白消化率",
+            "氨基酸平衡",
+            "氨基酸拮抗"
+          ],
+          "en": [
+            "protein",
+            "crude protein",
+            "amino acid",
+            "essential amino acid",
+            "taurine",
+            "arginine",
+            "lysine",
+            "methionine",
+            "threonine",
+            "tryptophan",
+            "leucine",
+            "isoleucine",
+            "valine",
+            "histidine",
+            "phenylalanine",
+            "glycine",
+            "cysteine",
+            "glutamine",
+            "protein hydrolysate",
+            "insect protein",
+            "novel protein",
+            "fermented protein",
+            "animal by-product",
+            "meat meal",
+            "meat-and-bone meal",
+            "plasma protein",
+            "yeast protein",
+            "protein digestibility",
+            "amino acid balance",
+            "amino acid antagonism"
+          ]
+        },
+        {
+          "id": "S2.1.2",
+          "label": "脂肪与脂肪酸",
+          "sectionTitle": "营养成分类",
+          "subNo": "2.1",
+          "subTitle": "宏量营养素",
+          "zh": [
+            "脂肪",
+            "粗脂肪",
+            "脂肪酸",
+            "必需脂肪酸",
+            "亚油酸",
+            "花生四烯酸",
+            "α-亚麻酸",
+            "DHA",
+            "EPA",
+            "Omega-3",
+            "Omega-6",
+            "Omega-9",
+            "n-3 多不饱和脂肪酸",
+            "n-6 多不饱和脂肪酸",
+            "共轭亚油酸",
+            "中链甘油三酯",
+            "鱼油",
+            "亚麻籽油",
+            "鸡油",
+            "动物脂肪",
+            "油脂氧化",
+            "酸价",
+            "过氧化值",
+            "猪油",
+            "鸭油",
+            "棕榈油",
+            "脂肪消化率",
+            "油脂稳定性"
+          ],
+          "en": [
+            "fat",
+            "crude fat",
+            "fatty acid",
+            "essential fatty acid",
+            "linoleic acid",
+            "arachidonic acid",
+            "α-linolenic acid",
+            "DHA",
+            "EPA",
+            "omega-3",
+            "omega-6",
+            "omega-9",
+            "n-3 PUFA",
+            "n-6 PUFA",
+            "conjugated linoleic acid",
+            "medium-chain triglyceride",
+            "fish oil",
+            "flaxseed oil",
+            "poultry fat",
+            "lipid oxidation",
+            "acid value",
+            "peroxide value",
+            "lard",
+            "duck fat",
+            "palm oil",
+            "fat digestibility",
+            "lipid stability"
+          ]
+        },
+        {
+          "id": "S2.1.3",
+          "label": "碳水化合物与纤维素",
+          "sectionTitle": "营养成分类",
+          "subNo": "2.1",
+          "subTitle": "宏量营养素",
+          "zh": [
+            "碳水化合物",
+            "淀粉",
+            "膳食纤维",
+            "纤维素",
+            "可溶性纤维",
+            "不可溶性纤维",
+            "抗性淀粉",
+            "甜菜粕",
+            "菊粉",
+            "果寡糖",
+            "甘露寡糖",
+            "β-葡聚糖",
+            "低聚果糖",
+            "低聚半乳糖",
+            "糊化淀粉",
+            "非淀粉多糖",
+            "寡糖",
+            "糖原"
+          ],
+          "en": [
+            "carbohydrate",
+            "starch",
+            "dietary fiber",
+            "cellulose",
+            "soluble fiber",
+            "insoluble fiber",
+            "resistant starch",
+            "beet pulp",
+            "inulin",
+            "fructooligosaccharide",
+            "mannanoligosaccharide",
+            "β-glucan",
+            "oligofructose",
+            "galacto-oligosaccharide",
+            "gelatinized starch",
+            "non-starch polysaccharide",
+            "oligosaccharide",
+            "glycogen"
+          ]
+        },
+        {
+          "id": "S2.2.1",
+          "label": "矿物质元素",
+          "sectionTitle": "营养成分类",
+          "subNo": "2.2",
+          "subTitle": "微量营养素",
+          "zh": [
+            "矿物质",
+            "钙",
+            "磷",
+            "钙磷比",
+            "钾",
+            "钠",
+            "氯",
+            "镁",
+            "铁",
+            "铜",
+            "锌",
+            "锰",
+            "硒",
+            "碘",
+            "铬",
+            "有机微量元素",
+            "螯合矿物质",
+            "矿物质利用率",
+            "矿物中毒",
+            "矿物质拮抗",
+            "植酸"
+          ],
+          "en": [
+            "mineral",
+            "calcium",
+            "phosphorus",
+            "Ca:P ratio",
+            "potassium",
+            "sodium",
+            "chloride",
+            "magnesium",
+            "iron",
+            "copper",
+            "zinc",
+            "manganese",
+            "selenium",
+            "iodine",
+            "chromium",
+            "organic trace mineral",
+            "chelated mineral",
+            "mineral bioavailability",
+            "mineral toxicity",
+            "mineral antagonism",
+            "phytic acid"
+          ]
+        },
+        {
+          "id": "S2.2.2",
+          "label": "维生素",
+          "sectionTitle": "营养成分类",
+          "subNo": "2.2",
+          "subTitle": "微量营养素",
+          "zh": [
+            "维生素 A",
+            "维生素 D",
+            "维生素 E",
+            "维生素 K",
+            "维生素 B 族",
+            "维生素 B1（硫胺素）",
+            "维生素 B2（核黄素）",
+            "维生素 B6",
+            "维生素 B12",
+            "烟酸",
+            "泛酸",
+            "叶酸",
+            "生物素",
+            "胆碱",
+            "维生素 C",
+            "维生素稳定性",
+            "维生素损失",
+            "维生素灭活"
+          ],
+          "en": [
+            "vitamin A",
+            "vitamin D",
+            "vitamin E",
+            "vitamin K",
+            "vitamin B complex",
+            "thiamine",
+            "riboflavin",
+            "pyridoxine",
+            "cobalamin",
+            "niacin",
+            "pantothenic acid",
+            "folic acid",
+            "biotin",
+            "choline",
+            "vitamin C",
+            "vitamin stability",
+            "vitamin loss",
+            "vitamin degradation"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "zh": "(犬 OR 猫 OR 宠物 OR 伴侣动物) AND (蛋白质 OR 氨基酸 OR 脂肪 OR 脂肪酸) AND (营养 OR 需要量 OR 消化率 OR 生物利用率)",
+          "en": "(dog OR cat OR canine OR feline OR pet OR companion animal) AND (protein OR amino acid OR fat OR fatty acid) AND (nutrition OR requirement OR digestibility OR bioavailability)",
+          "scope": "2.2 微量营养素"
+        }
+      ]
+    },
+    {
+      "key": 3,
+      "no": "三",
+      "title": "功能性成分类",
+      "groups": [
+        {
+          "id": "S3.1.1",
+          "label": "关节与骨骼健康",
+          "sectionTitle": "功能性成分类",
+          "subNo": "3.1",
+          "subTitle": "关节与骨骼健康",
+          "zh": [
+            "透明质酸钠",
+            "氨基葡萄糖",
+            "硫酸软骨素",
+            "胶原蛋白肽",
+            "鱼胶原蛋白肽",
+            "蛋壳膜",
+            "绿唇贻贝",
+            "MSM（二甲基砜）",
+            "姜黄素",
+            "关节健康",
+            "骨关节炎",
+            "髋关节",
+            "钙肽",
+            "骨肽",
+            "维生素 K2"
+          ],
+          "en": [
+            "sodium hyaluronate",
+            "glucosamine",
+            "chondroitin sulfate",
+            "collagen peptide",
+            "fish collagen peptide",
+            "eggshell membrane",
+            "green-lipped mussel",
+            "methylsulfonylmethane",
+            "curcumin",
+            "joint health",
+            "osteoarthritis",
+            "hip joint",
+            "calcium peptide",
+            "bone peptide",
+            "vitamin K2"
+          ]
+        },
+        {
+          "id": "S3.2.1",
+          "label": "肠道健康",
+          "sectionTitle": "功能性成分类",
+          "subNo": "3.2",
+          "subTitle": "肠道健康",
+          "zh": [
+            "益生菌",
+            "益生元",
+            "合生元",
+            "后生元",
+            "蛋白质水解物",
+            "丝兰提取物",
+            "肠道菌群",
+            "肠道微生物区系",
+            "短链脂肪酸",
+            "肠道屏障",
+            "丁酸",
+            "乳酸菌",
+            "双歧杆菌",
+            "粪肠球菌",
+            "枯草芽孢杆菌",
+            "肠易激",
+            "粪便粘稠度",
+            "产气",
+            "酵母",
+            "芽孢杆菌制剂"
+          ],
+          "en": [
+            "probiotics",
+            "prebiotics",
+            "synbiotics",
+            "postbiotics",
+            "protein hydrolysate",
+            "yucca extract",
+            "gut microbiota",
+            "intestinal microflora",
+            "short-chain fatty acid",
+            "gut barrier",
+            "butyrate",
+            "Lactobacillus",
+            "Bifidobacterium",
+            "Enterococcus faecalis",
+            "Bacillus subtilis",
+            "irritable bowel",
+            "faecal consistency",
+            "gas production",
+            "yeast",
+            "bacillus preparation"
+          ]
+        },
+        {
+          "id": "S3.3.1",
+          "label": "皮肤与毛发健康",
+          "sectionTitle": "功能性成分类",
+          "subNo": "3.3",
+          "subTitle": "皮肤与毛发健康",
+          "zh": [
+            "水解角蛋白",
+            "蛋黄卵磷脂",
+            "多不饱和脂肪酸",
+            "生物素",
+            "锌",
+            "亚油酸",
+            "毛发健康",
+            "皮肤屏障",
+            "毛发光泽",
+            "皮肤含水量",
+            "经皮水分流失",
+            "异位性皮炎",
+            "食物过敏",
+            "特应性",
+            "必需脂肪酸缺乏"
+          ],
+          "en": [
+            "hydrolyzed keratin",
+            "egg yolk lecithin",
+            "polyunsaturated fatty acid",
+            "biotin",
+            "zinc",
+            "linoleic acid",
+            "coat health",
+            "skin barrier",
+            "coat glossiness",
+            "skin hydration",
+            "transepidermal water loss",
+            "atopic dermatitis",
+            "food allergy",
+            "atopy",
+            "essential fatty acid deficiency"
+          ]
+        },
+        {
+          "id": "S3.4.1",
+          "label": "免疫调节与抗氧化",
+          "sectionTitle": "功能性成分类",
+          "subNo": "3.4",
+          "subTitle": "免疫调节与抗氧化",
+          "zh": [
+            "黄芪多糖",
+            "枸杞多糖",
+            "人参皂苷",
+            "白藜芦醇",
+            "花青素",
+            "多酚类",
+            "黄酮类",
+            "抗氧化",
+            "免疫调节",
+            "抗炎",
+            "Nrf2 通路",
+            "NF-κB 通路",
+            "氧化应激",
+            "SOD",
+            "谷胱甘肽"
+          ],
+          "en": [
+            "astragalus polysaccharide",
+            "goji polysaccharide",
+            "ginsenoside",
+            "resveratrol",
+            "anthocyanin",
+            "polyphenols",
+            "flavonoids",
+            "antioxidant",
+            "immune regulation",
+            "anti-inflammatory",
+            "Nrf2 pathway",
+            "NF-κB pathway",
+            "oxidative stress",
+            "SOD",
+            "glutathione"
+          ]
+        },
+        {
+          "id": "S3.5.1",
+          "label": "心血管与泌尿系统",
+          "sectionTitle": "功能性成分类",
+          "subNo": "3.5",
+          "subTitle": "心血管与泌尿系统",
+          "zh": [
+            "辅酶 Q10",
+            "左旋肉碱",
+            "牛磺酸",
+            "Omega-3 脂肪酸",
+            "心血管健康",
+            "心脏功能",
+            "肾脏健康",
+            "泌尿系统",
+            "慢性肾病",
+            "草酸钙",
+            "尿石症",
+            "尿酸",
+            "胱氨酸结石",
+            "心肌肥厚"
+          ],
+          "en": [
+            "coenzyme Q10",
+            "L-carnitine",
+            "taurine",
+            "omega-3 fatty acid",
+            "cardiovascular health",
+            "cardiac function",
+            "kidney health",
+            "urinary system",
+            "chronic kidney disease",
+            "calcium oxalate",
+            "urolithiasis",
+            "uric acid",
+            "cystine urolith",
+            "myocardial hypertrophy"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "zh": "(犬 OR 猫 OR 伴侣动物) AND (透明质酸 OR 氨基葡萄糖 OR 软骨素 OR 胶原蛋白肽) AND (关节 OR 皮肤 OR 肠道)",
+          "en": "(dog OR cat OR companion animal) AND (hyaluronic acid OR glucosamine OR chondroitin OR collagen peptide) AND (joint OR skin OR gut) AND (health OR supplementation)",
+          "scope": "3.5 心血管与泌尿系统"
+        }
+      ]
+    },
+    {
+      "key": 4,
+      "no": "四",
+      "title": "水果、蔬菜及中药材类",
+      "groups": [
+        {
+          "id": "S4.1.1",
+          "label": "水果类",
+          "sectionTitle": "水果、蔬菜及中药材类",
+          "subNo": "4.1",
+          "subTitle": "水果类",
+          "zh": [
+            "蓝莓",
+            "蔓越莓",
+            "苹果",
+            "石榴",
+            "猕猴桃",
+            "柑橘",
+            "番茄",
+            "沙棘",
+            "枸杞",
+            "葡萄籽",
+            "黑莓"
+          ],
+          "en": [
+            "blueberry",
+            "cranberry",
+            "apple",
+            "pomegranate",
+            "kiwi",
+            "citrus",
+            "tomato",
+            "sea buckthorn",
+            "goji berry",
+            "grape seed",
+            "blackberry"
+          ]
+        },
+        {
+          "id": "S4.2.1",
+          "label": "蔬菜类",
+          "sectionTitle": "水果、蔬菜及中药材类",
+          "subNo": "4.2",
+          "subTitle": "蔬菜类",
+          "zh": [
+            "胡萝卜",
+            "南瓜",
+            "菠菜",
+            "西兰花",
+            "羽衣甘蓝",
+            "甜菜根",
+            "菊苣根",
+            "红薯",
+            "豌豆",
+            "鹰嘴豆",
+            "海藻",
+            "螺旋藻"
+          ],
+          "en": [
+            "carrot",
+            "pumpkin",
+            "spinach",
+            "broccoli",
+            "kale",
+            "beetroot",
+            "chicory root",
+            "sweet potato",
+            "pea",
+            "chickpea",
+            "seaweed",
+            "spirulina"
+          ]
+        },
+        {
+          "id": "S4.3.1",
+          "label": "中药材类",
+          "sectionTitle": "水果、蔬菜及中药材类",
+          "subNo": "4.3",
+          "subTitle": "中药材类",
+          "zh": [
+            "黄芪",
+            "枸杞",
+            "党参",
+            "白术",
+            "茯苓",
+            "薏苡仁",
+            "当归",
+            "甘草",
+            "丹参",
+            "菊花",
+            "决明子",
+            "蒲公英",
+            "薄荷",
+            "姜黄",
+            "人参",
+            "灵芝",
+            "五味子",
+            "山楂",
+            "陈皮",
+            "山药"
+          ],
+          "en": [
+            "Astragalus membranaceus",
+            "goji berry (Lycium barbarum)",
+            "Codonopsis pilosula",
+            "Atractylodes macrocephala",
+            "Poria cocos",
+            "Coix seed",
+            "Angelica sinensis",
+            "licorice root",
+            "Salvia miltiorrhiza",
+            "chrysanthemum",
+            "cassia seed",
+            "dandelion",
+            "mint",
+            "turmeric",
+            "ginseng",
+            "reishi mushroom",
+            "Schisandra chinensis",
+            "hawthorn",
+            "tangerine peel",
+            "Chinese yam"
+          ]
+        },
+        {
+          "id": "S4.4.1",
+          "label": "天然植物提取物",
+          "sectionTitle": "水果、蔬菜及中药材类",
+          "subNo": "4.4",
+          "subTitle": "天然植物提取物",
+          "zh": [
+            "葡萄籽提取物",
+            "松树皮提取物",
+            "迷迭香",
+            "牛至",
+            "百里香",
+            "植物提取物"
+          ],
+          "en": [
+            "grape seed extract",
+            "pine bark extract",
+            "rosemary",
+            "oregano",
+            "thyme",
+            "plant extract"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "zh": "(犬 OR 猫 OR 伴侣动物) AND (蓝莓 OR 蔓越莓 OR 胡萝卜 OR 南瓜 OR 黄芪 OR 枸杞 OR 人参) AND (健康 OR 免疫 OR 抗氧化)",
+          "en": "(dog OR cat OR companion animal) AND (blueberry OR cranberry OR carrot OR pumpkin OR astragalus OR ginseng OR goji) AND (health OR immunity OR antioxidant)",
+          "scope": "4.4 天然植物提取物"
+        }
+      ]
+    },
+    {
+      "key": 5,
+      "no": "五",
+      "title": "健康功效维度",
+      "groups": [
+        {
+          "id": "S5.1.1",
+          "label": "肠道健康",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.1",
+          "subTitle": "肠道健康",
+          "zh": [
+            "肠道菌群",
+            "肠道微生物",
+            "消化率",
+            "粪便评分",
+            "短链脂肪酸",
+            "肠道屏障功能",
+            "炎症性肠病",
+            "菌群失调",
+            "益生菌定植"
+          ],
+          "en": [
+            "gut microbiota",
+            "intestinal microflora",
+            "digestibility",
+            "fecal score",
+            "short-chain fatty acid",
+            "intestinal barrier function",
+            "inflammatory bowel disease",
+            "dysbiosis",
+            "probiotic colonization"
+          ]
+        },
+        {
+          "id": "S5.2.1",
+          "label": "皮肤与毛发健康",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.2",
+          "subTitle": "皮肤与毛发健康",
+          "zh": [
+            "毛发质量",
+            "毛发光泽度",
+            "皮肤屏障",
+            "皮肤水分",
+            "经皮水分流失",
+            "皮屑",
+            "瘙痒",
+            "脱毛",
+            "毛囊再生"
+          ],
+          "en": [
+            "coat quality",
+            "coat glossiness",
+            "skin barrier",
+            "skin hydration",
+            "transepidermal water loss",
+            "dandruff",
+            "pruritus",
+            "alopecia",
+            "hair follicle regeneration"
+          ]
+        },
+        {
+          "id": "S5.3.1",
+          "label": "心脏健康",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.3",
+          "subTitle": "心脏健康",
+          "zh": [
+            "心脏功能",
+            "心肌",
+            "牛磺酸缺乏",
+            "扩张型心肌病",
+            "心血管保护",
+            "Omega-3"
+          ],
+          "en": [
+            "cardiac function",
+            "myocardium",
+            "taurine deficiency",
+            "dilated cardiomyopathy",
+            "cardiovascular protection",
+            "omega-3"
+          ]
+        },
+        {
+          "id": "S5.4.1",
+          "label": "泌尿系统健康",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.4",
+          "subTitle": "泌尿系统健康",
+          "zh": [
+            "肾脏功能",
+            "慢性肾病",
+            "泌尿系统",
+            "尿石症",
+            "草酸钙",
+            "鸟粪石",
+            "尿液 pH",
+            "肾小球滤过率"
+          ],
+          "en": [
+            "renal function",
+            "chronic kidney disease",
+            "urinary system",
+            "urolithiasis",
+            "calcium oxalate",
+            "struvite",
+            "urine pH",
+            "glomerular filtration rate"
+          ]
+        },
+        {
+          "id": "S5.5.1",
+          "label": "口腔健康",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.5",
+          "subTitle": "口腔健康",
+          "zh": [
+            "牙菌斑",
+            "牙龈炎",
+            "牙结石",
+            "口臭",
+            "洁齿",
+            "口腔微生物"
+          ],
+          "en": [
+            "dental plaque",
+            "gingivitis",
+            "tartar",
+            "halitosis",
+            "dental cleaning",
+            "oral microbiome"
+          ]
+        },
+        {
+          "id": "S5.6.1",
+          "label": "体重管理与代谢",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.6",
+          "subTitle": "体重管理与代谢",
+          "zh": [
+            "肥胖",
+            "体重管理",
+            "体脂率",
+            "能量代谢",
+            "胰岛素抵抗",
+            "糖尿病",
+            "左旋肉碱",
+            "共轭亚油酸"
+          ],
+          "en": [
+            "obesity",
+            "weight management",
+            "body fat percentage",
+            "energy metabolism",
+            "insulin resistance",
+            "diabetes",
+            "L-carnitine",
+            "conjugated linoleic acid"
+          ]
+        },
+        {
+          "id": "S5.7.1",
+          "label": "认知功能与情绪",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.7",
+          "subTitle": "认知功能与情绪",
+          "zh": [
+            "认知功能",
+            "认知障碍",
+            "应激",
+            "焦虑",
+            "情绪行为",
+            "色氨酸",
+            "5-羟色胺",
+            "犬认知功能障碍综合征"
+          ],
+          "en": [
+            "cognitive function",
+            "cognitive dysfunction",
+            "stress",
+            "anxiety",
+            "emotional behavior",
+            "tryptophan",
+            "serotonin",
+            "canine cognitive dysfunction syndrome"
+          ]
+        },
+        {
+          "id": "S5.8.1",
+          "label": "食物过敏与不耐受",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.8",
+          "subTitle": "食物过敏与不耐受",
+          "zh": [
+            "食物过敏",
+            "食物不耐受",
+            "水解脱敏",
+            "低敏",
+            "限蛋白",
+            "过敏原",
+            "抗原表位"
+          ],
+          "en": [
+            "food allergy",
+            "food intolerance",
+            "hydrolyzed hypoallergenic",
+            "hypoallergenic",
+            "limited-antigen",
+            "allergen",
+            "epitope"
+          ]
+        },
+        {
+          "id": "S5.9.1",
+          "label": "衰老与老龄营养",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.9",
+          "subTitle": "衰老与老龄营养",
+          "zh": [
+            "老龄犬猫",
+            "衰老",
+            "衰老营养",
+            "氧化衰老",
+            "老年综合征"
+          ],
+          "en": [
+            "aged dog cat",
+            "senescence",
+            "geriatric nutrition",
+            "oxidative aging",
+            "geriatric syndrome"
+          ]
+        },
+        {
+          "id": "S5.10.1",
+          "label": "繁育与生殖营养",
+          "sectionTitle": "健康功效维度",
+          "subNo": "5.10",
+          "subTitle": "繁育与生殖营养",
+          "zh": [
+            "妊娠期",
+            "哺乳期",
+            "繁育营养",
+            "泌乳",
+            "幼崽发育",
+            "日粮"
+          ],
+          "en": [
+            "gestation",
+            "lactation",
+            "reproductive nutrition",
+            "milk production",
+            "puppy/kitten development",
+            "diet formula"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "zh": "(犬 OR 猫 OR 伴侣动物) AND (功能性 OR 保健) AND (肠道 OR 毛发 OR 心脏 OR 泌尿 OR 口腔) AND (健康 OR 功效)",
+          "en": "(dog OR cat OR canine OR feline OR companion animal) AND (functional OR nutraceutical) AND (gut OR coat OR cardiac OR urinary OR dental) AND (health OR efficacy)",
+          "scope": "5.10 繁育与生殖营养"
+        }
+      ]
+    },
+    {
+      "key": 6,
+      "no": "六",
+      "title": "加工工艺类",
+      "groups": [
+        {
+          "id": "S6.1.1",
+          "label": "产品形态与工艺",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.1",
+          "subTitle": "产品形态与工艺",
+          "zh": [
+            "膨化粮",
+            "烘焙粮",
+            "冻干",
+            "湿粮",
+            "罐头",
+            "软包",
+            "鲜粮",
+            "半湿粮",
+            "风干粮",
+            "低温烘焙",
+            "挤压膨化",
+            "真空冻干",
+            "升华脱水",
+            "冷压粮",
+            "挤压工艺参数",
+            "模头温度",
+            "螺杆转速",
+            "回生淀粉"
+          ],
+          "en": [
+            "extruded food",
+            "baked food",
+            "freeze-dried",
+            "wet food",
+            "canned food",
+            "pouch",
+            "fresh food",
+            "semi-moist food",
+            "air-dried food",
+            "low-temperature baking",
+            "extrusion",
+            "vacuum freeze-drying",
+            "sublimation dehydration",
+            "cold-pressed pet food",
+            "extrusion parameter",
+            "die temperature",
+            "screw speed",
+            "retrograded starch"
+          ]
+        },
+        {
+          "id": "S6.2.1",
+          "label": "杀菌与保鲜",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.2",
+          "subTitle": "杀菌与保鲜",
+          "zh": [
+            "杀菌",
+            "灭菌",
+            "巴氏杀菌",
+            "高温杀菌",
+            "低温杀菌",
+            "超高压杀菌",
+            "HPP（高压处理）",
+            "辐照杀菌",
+            "微波杀菌",
+            "F0 值",
+            "商业无菌"
+          ],
+          "en": [
+            "sterilization",
+            "pasteurization",
+            "high-temperature sterilization",
+            "low-temperature sterilization",
+            "high pressure processing",
+            "HPP",
+            "irradiation",
+            "microwave sterilization",
+            "F0 value",
+            "commercial sterility"
+          ]
+        },
+        {
+          "id": "S6.3.1",
+          "label": "防腐与抗氧化",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.3",
+          "subTitle": "防腐与抗氧化",
+          "zh": [
+            "防腐剂",
+            "山梨酸钾",
+            "双乙酸钠",
+            "亚硝酸钠",
+            "抗氧化剂",
+            "BHA",
+            "BHT",
+            "生育酚（维生素 E）",
+            "迷迭香提取物",
+            "异抗坏血酸钠",
+            "没食子酸丙酯",
+            "天然抗氧化",
+            "复合抗氧化体系"
+          ],
+          "en": [
+            "preservative",
+            "potassium sorbate",
+            "sodium diacetate",
+            "sodium nitrite",
+            "antioxidant",
+            "BHA",
+            "BHT",
+            "tocopherol",
+            "rosemary extract",
+            "sodium erythorbate",
+            "propyl gallate",
+            "natural antioxidant",
+            "compound antioxidant system"
+          ]
+        },
+        {
+          "id": "S6.4.1",
+          "label": "乳化、保水与质构",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.4",
+          "subTitle": "乳化、保水与质构",
+          "zh": [
+            "乳化剂",
+            "卵磷脂",
+            "单甘酯",
+            "卡拉胶",
+            "黄原胶",
+            "瓜尔胶",
+            "保水剂",
+            "甘油",
+            "山梨醇",
+            "磷酸盐",
+            "增稠剂",
+            "胶凝剂",
+            "稳定剂"
+          ],
+          "en": [
+            "emulsifier",
+            "lecithin",
+            "monoglyceride",
+            "carrageenan",
+            "xanthan gum",
+            "guar gum",
+            "water retention agent",
+            "glycerol",
+            "sorbitol",
+            "phosphate",
+            "thickener",
+            "gelling agent",
+            "stabilizer"
+          ]
+        },
+        {
+          "id": "S6.5.1",
+          "label": "加工新技术",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.5",
+          "subTitle": "加工新技术",
+          "zh": [
+            "酶解技术",
+            "鲜肉酶解",
+            "美拉德反应",
+            "三重喷涂（triple-coating）",
+            "微胶囊化",
+            "纳米包埋",
+            "发酵技术",
+            "3D 打印宠物食品",
+            "脉冲电场"
+          ],
+          "en": [
+            "enzymatic hydrolysis",
+            "fresh meat hydrolysis",
+            "Maillard reaction",
+            "triple-coating",
+            "microencapsulation",
+            "nano-encapsulation",
+            "fermentation",
+            "3D-printed pet food",
+            "pulsed electric field"
+          ]
+        },
+        {
+          "id": "S6.6.1",
+          "label": "适口性与风味加工",
+          "sectionTitle": "加工工艺类",
+          "subNo": "6.6",
+          "subTitle": "适口性与风味加工",
+          "zh": [
+            "诱食剂",
+            "风味剂",
+            "适口性",
+            "风味酶解",
+            "美拉德反应产物",
+            "适口性提升",
+            "动物水解物",
+            "味觉",
+            "嗅觉"
+          ],
+          "en": [
+            "palatant",
+            "flavor agent",
+            "palatability",
+            "flavor enzymatic hydrolysis",
+            "maillard reaction product",
+            "palatability improvement",
+            "animal hydrolysate",
+            "taste",
+            "smell"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "zh": "(宠物食品 OR 犬粮 OR 猫粮 OR 日粮) AND (膨化 OR 烘焙 OR 冻干 OR 湿粮) AND (杀菌 OR 防腐 OR 乳化 OR 保水)",
+          "en": "(pet food OR dog food OR cat food) AND (extrusion OR baking OR freeze-drying OR retorting) AND (sterilization OR preservation OR emulsification)",
+          "scope": "6.6 适口性与风味加工"
+        }
+      ]
+    },
+    {
+      "key": 7,
+      "no": "七",
+      "title": "动物试验与检测评价指标",
+      "groups": [
+        {
+          "id": "S7.1.1",
+          "label": "动物试验模型",
+          "sectionTitle": "动物试验与检测评价指标",
+          "subNo": "7.1",
+          "subTitle": "动物试验模型",
+          "zh": [
+            "饲喂试验",
+            "动物试验",
+            "体内试验",
+            "体外模型",
+            "体外消化",
+            "粪便试验",
+            "交叉试验",
+            "拉丁方试验"
+          ],
+          "en": [
+            "feeding trial",
+            "animal experiment",
+            "in-vivo",
+            "in-vitro model",
+            "in-vitro digestion",
+            "fecal trial",
+            "crossover trial",
+            "latin-square design"
+          ]
+        },
+        {
+          "id": "S7.2.1",
+          "label": "检测指标",
+          "sectionTitle": "动物试验与检测评价指标",
+          "subNo": "7.2",
+          "subTitle": "检测指标",
+          "zh": [
+            "表观消化率",
+            "全肠道消化率",
+            "氨基酸消化率",
+            "血清生化",
+            "血液指标",
+            "粪便指标",
+            "微生物测序",
+            "16S rRNA 测序"
+          ],
+          "en": [
+            "apparent digestibility",
+            "total tract digestibility",
+            "amino acid digestibility",
+            "serum biochemistry",
+            "blood parameter",
+            "faecal index",
+            "microbiota sequencing",
+            "16S rRNA sequencing"
+          ]
+        }
+      ],
+      "examples": []
+    },
+    {
+      "key": 8,
+      "no": "八",
+      "title": "原料安全与风险因子",
+      "groups": [
+        {
+          "id": "S8.0.1",
+          "label": "原料安全与风险因子",
+          "sectionTitle": "原料安全与风险因子",
+          "subNo": null,
+          "subTitle": null,
+          "zh": [
+            "黄曲霉毒素",
+            "呕吐毒素",
+            "霉菌毒素",
+            "抗营养因子",
+            "植酸",
+            "单宁",
+            "重金属",
+            "沙门氏菌",
+            "微生物污染"
+          ],
+          "en": [
+            "aflatoxin",
+            "deoxynivalenol",
+            "mycotoxin",
+            "anti-nutritional factor",
+            "phytic acid",
+            "tannin",
+            "heavy metal",
+            "salmonella",
+            "microbial contamination"
+          ]
+        }
+      ],
+      "examples": []
+    },
+    {
+      "key": 9,
+      "no": "九",
+      "title": "标准法规与行业规范",
+      "groups": [
+        {
+          "id": "S9.0.1",
+          "label": "标准法规与行业规范",
+          "sectionTitle": "标准法规与行业规范",
+          "subNo": null,
+          "subTitle": null,
+          "zh": [
+            "宠物食品标准",
+            "AAFCO",
+            "FEDIAF",
+            "国标",
+            "饲料卫生标准",
+            "营养标准",
+            "标签规范"
+          ],
+          "en": [
+            "pet food standard",
+            "AAFCO",
+            "FEDIAF",
+            "national standard",
+            "feed hygiene standard",
+            "nutritional standard",
+            "labelling regulation"
+          ]
+        }
+      ],
+      "examples": []
+    },
+    {
+      "key": 10,
+      "no": "十",
+      "title": "前沿新兴主题词",
+      "groups": [
+        {
+          "id": "S10.0.1",
+          "label": "前沿新兴主题词",
+          "sectionTitle": "前沿新兴主题词",
+          "subNo": null,
+          "subTitle": null,
+          "zh": [
+            "精准营养",
+            "个性化宠物食品",
+            "昆虫基宠物食品",
+            "细胞培养肉宠物食品",
+            "可持续宠物食品",
+            "低碳宠物食品"
+          ],
+          "en": [
+            "precision nutrition",
+            "personalized pet food",
+            "insect-based pet food",
+            "cultivated meat pet food",
+            "sustainable pet food",
+            "low-carbon pet food"
+          ]
+        }
+      ],
+      "examples": []
+    }
+  ],
+  "presets": [
+    {
+      "id": "P1",
+      "theme": "功能性成分与肠道健康",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (益生菌 OR 益生元 OR 透明质酸 OR 丝兰提取物) AND 肠道健康"
+    },
+    {
+      "id": "P2",
+      "theme": "天然植物与毛发改善",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (多不饱和脂肪酸 OR 水解角蛋白 OR 蛋黄卵磷脂) AND (毛发 OR 皮肤)"
+    },
+    {
+      "id": "P3",
+      "theme": "中药材与免疫调节",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (黄芪 OR 枸杞 OR 人参 OR 甘草) AND (免疫 OR 抗氧化)"
+    },
+    {
+      "id": "P4",
+      "theme": "加工工艺与营养保留",
+      "query": "(冻干 OR 烘焙 OR 膨化) AND 宠物食品 AND (营养保留 OR 消化率 OR 适口性)"
+    },
+    {
+      "id": "P5",
+      "theme": "关节健康功能食品",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (透明质酸 OR 氨糖 OR 软骨素) AND (关节 OR 骨关节炎)"
+    },
+    {
+      "id": "P6",
+      "theme": "心血管营养干预",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (牛磺酸 OR Omega-3 OR 辅酶 Q10) AND (心脏 OR 心血管)"
+    },
+    {
+      "id": "P7",
+      "theme": "低敏水解宠物食品研究",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (水解蛋白 OR 低敏 OR 食物过敏) AND (消化 OR 皮肤)"
+    },
+    {
+      "id": "P8",
+      "theme": "老龄犬猫营养干预",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (老龄 OR 老年) AND (抗氧化 OR 关节 OR 认知)"
+    },
+    {
+      "id": "P9",
+      "theme": "加工工艺-适口性关系",
+      "query": "(宠物食品 OR 日粮) AND (膨化 OR 烘焙 OR 酶解) AND (适口性 OR 诱食)"
+    },
+    {
+      "id": "P10",
+      "theme": "宠物食品霉菌毒素风险",
+      "query": "(犬 OR 猫 OR 伴侣动物) AND (宠物食品) AND (霉菌毒素 OR 黄曲霉毒素)"
+    }
+  ],
+  "notes": [
+    "CNKI / 万方 / 维普：建议以中文关键词为核心，采用\"犬\"或\"猫\"或\"宠物\"或\"伴侣动物\"作为物种限定词，结合具体功能成分及健康功效词进行组合检索。可关注《经济动物学报》《中国畜牧兽医》《饲料工业》《中国畜牧杂志》《饲料博览》《饲料与畜牧》等期刊；可使用高级检索语法：主题 = 宠物 OR 伴侣动物 AND 成分 AND 功效。",
+    "PubMed / Web of Science / Scopus：建议使用 MeSH 主题词（如 \"Dogs\" \"Cats\" \"Animal Nutritional Physiological Phenomena\" \"Dietary Supplements\"）结合自由词检索。注意犬猫在英文文献中常用表述包括 dog, canine, cat, feline, companion animal 等；可重点关注主题词：hypoallergenic pet food、geriatric nutrition、pet food safety、anti-nutrient、formulation、diet formula。",
+    "中文检索时增加\"伴侣动物\"作为同义词，可提高查全率；",
+    "英文检索时增加 \"companion animal\" 作为同义词；",
+    "功能成分检索时建议同时检索其别名和商品名；",
+    "加工工艺检索时可结合具体设备/技术名词提高查准率；",
+    "建议定期跟踪 PubMed 中 \"functional pet food\" \"bioactive compounds\" \"precision nutrition\" 等新兴主题词的相关文献；",
+    "检索时注意区分体内研究与体外试验，可添加限定词做筛选；",
+    "检索可增加文献类型限定：临床试验、饲喂试验，筛除纯综述；",
+    "注意检索结果中会混杂猪、鸡等畜禽饲料文献，检索后需要人工排除非伴侣动物相关文献。",
+    "使用提示: 本清单可直接复制检索式粘贴至各数据库高级检索框；Word 文档可按自身研究方向删减或扩充关键词条目；中文检索建议将\"猫粮、犬粮、伴侣动物、宠物、日粮\"全部用 OR 并列，进一步提升查全率。"
+  ]
+}
