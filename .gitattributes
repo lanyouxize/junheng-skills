@@ -1,0 +1,21 @@
+# 字节保真优先（2026-11-04 建立）
+#
+# 为什么必须写这条：
+#
+# 1. 本机系统级配置 `core.autocrlf=true`（Git for Windows 安装器写进 --system），
+#    而 core.* 配置**不会被 git clone 继承**。
+# 2. 实测：不加这条属性时 clone 到干净目录，1117 个文件被 LF→CRLF 重写，
+#    字节全变（例 GOVERNANCE.md 11370 → 11497 B，CRLF 0 → 127）。
+# 3. 本目录行尾本来就混排：468 个文件是 CRLF，1124 个是 LF。
+#    任何统一的 `eol=crlf` 或 `eol=lf` 规则都必然改坏另一侧。
+#
+# `-text` = 该文件按二进制处理，git 在 add / checkout 两个方向都不做行尾转换，
+# 工作区字节、索引字节、blob 字节三者永远相等。这是「换台电脑能一模一样恢复」
+# 的唯一保证，属性随仓库走，不依赖任何人的本地配置。
+#
+# 代价（必须知道）：git diff 对文本文件默认报「Binary files ... differ」。
+# 看内容差异用：
+#     git diff --text -- <path>
+#     git show --text <commit> -- <path>
+# 详见 _governance/VCS.md。
+* -text
