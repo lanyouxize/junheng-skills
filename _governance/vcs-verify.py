@@ -11,6 +11,10 @@
     python -X utf8 vcs-verify.py            # 工作区 vs HEAD，全量比对
     python -X utf8 vcs-verify.py --clone     # 额外做一次克隆演练，验完自动删除
     python -X utf8 vcs-verify.py --json      # 机器可读
+    python -X utf8 vcs-verify.py --root ~/.workbuddy/tools   # 校验别的仓库
+
+--root 是为 tools / rules 两个仓库加的：校验逻辑完全相同，没必要复制三份脚本
+（复制就会漂移，漂移的判据比没有判据更糟）。
 
 退出码：0 全量一致 / 1 有差异 / 2 环境错误
 """
@@ -124,7 +128,14 @@ def main():
     ap.add_argument("--clone", action="store_true", help="额外做克隆演练")
     ap.add_argument("--json", action="store_true", help="机器可读输出")
     ap.add_argument("--ref", default="HEAD", help="对标引用，默认 HEAD")
+    ap.add_argument("--root", default=None,
+                    help="被校验的仓库目录，默认本脚本所属仓库（skills）")
     args = ap.parse_args()
+
+    if args.root:
+        global ROOT
+        ROOT = os.path.abspath(os.path.expanduser(args.root))
+        print("目标仓库：%s" % ROOT)
 
     if not os.path.isdir(os.path.join(ROOT, ".git")):
         print("环境错误：%s 下没有 .git" % ROOT)
