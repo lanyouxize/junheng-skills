@@ -30,7 +30,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_governance", "SNAPSHOT.json")
 
 EXCLUDE_DIRS = {"_prune_backup", "__pycache__", "node_modules", ".git", "_trash"}
-INCLUDE_EXT = {".md", ".py", ".json", ".yaml", ".yml", ".txt", ".sh", ".cmd"}
+# 2026-11-04 补脚本类扩展名。此前只有 .md/.py/.json/.yaml/.yml/.txt/.sh/.cmd，
+# 于是**整类 JS 脚本不在指纹里** —— 实测漏掉 223 个（.js 61 / .cjs 45 / .mjs 117），
+# 其中包括 paper-bilingual-search/scripts/export-bus.cjs（文献总线唯一写方）。
+# 那个文件 34,907 → 41,350 B 的改动，本快照全程报「无差异」——判据没覆盖它。
+# 教训：指纹器的扩展名清单就是它的观察窗口，窗口外的改动一律「干净」，
+# 和 baseline 冻结、V5 只验子串是同一类失效。
+INCLUDE_EXT = {".md", ".py", ".json", ".yaml", ".yml", ".txt", ".sh", ".cmd",
+               ".js", ".cjs", ".mjs", ".ts", ".ps1", ".bat"}
 # 快照自身不参与指纹，否则每次生成都会自变
 EXCLUDE_FILES = {"SNAPSHOT.json", "lint-report-20261102.json"}
 
