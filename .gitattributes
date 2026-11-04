@@ -13,9 +13,8 @@
 # 工作区字节、索引字节、blob 字节三者永远相等。这是「换台电脑能一模一样恢复」
 # 的唯一保证，属性随仓库走，不依赖任何人的本地配置。
 #
-# 代价（必须知道）：git diff 对文本文件默认报「Binary files ... differ」。
-# 看内容差异用：
-#     git diff --text -- <path>
-#     git show --text <commit> -- <path>
-# 详见 _governance/VCS.md。
+# 代价（实测已排除担心）：原本担心 `-text` 会让 git diff 把文本文件当二进制、
+# 只报「Binary files differ」。实测 git 2.55 不这样：`-text` 只关行尾转换，
+# diff 的二进制判定仍走内容启发式（有无 NUL 字节），文本文件照常出 hunk。
+# 所以 `git diff` / `git show` 用法完全不变，不需要额外的 --text。
 * -text
