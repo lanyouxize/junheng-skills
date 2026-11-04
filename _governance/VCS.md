@@ -8,9 +8,9 @@
 
 | 仓库 | 工作区 | 内容 | 为什么单独建 |
 |---|---|---|---|
-| skills | `~/.workbuddy/skills/` | 186 个技能源码与文档（1,595 文件 / 23.5 MB） | 主战场 |
-| tools | `~/.workbuddy/tools/` | 判定脚本：`skill_audit.py` / `rules_lint.py` / `node_credit.py` 等（12 文件） | **判据比被判定对象更需要历史** |
-| rules | `~/.workbuddy/rules/` | 九条铁律正文 `.mdc` + 历史 `.bak` + 全文参考（14 文件） | 铁律坏了是所有会话一起失灵 |
+| skills | `~/.workbuddy/skills/` | 186 个技能源码与文档（1,597 文件 / 23.5 MB） | 主战场 |
+| tools | `~/.workbuddy/tools/` | 判定脚本：`skill_audit.py` / `rules_lint.py` / `node_credit.py` / `skill_hardening_kit.py` 等（14 文件） | **判据比被判定对象更需要历史** |
+| rules | `~/.workbuddy/rules/` | 九条铁律正文 `.mdc` + 全文参考（11 文件） | 铁律坏了是所有会话一起失灵 |
 
 三者共用同一份 `.gitattributes`（字节相同）与同一套校验器，**不各写一份脚本**——
 复制就会漂移，而漂移的判据比没有判据更糟（tools 那次事故的起因正是判据被单点改动）。
