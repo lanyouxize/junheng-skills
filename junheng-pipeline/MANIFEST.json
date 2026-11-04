@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-pipeline/SKILL.md",
       "kind": "template",
-      "sha256": "315b918afa51c8e05ce66f7988efc910f149c468151745100e9c70ce5a72a0e6"
+      "sha256": "fe8787d58cb89da432f58316e305b1116e32cbc3badc497afffde3377118aa84"
     },
     {
       "dest": "scripts/cli.mjs",

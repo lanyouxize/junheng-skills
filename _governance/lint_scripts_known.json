@@ -1,0 +1,14 @@
+{
+  "_schema": {
+    "purpose": "lint_scripts.py 的豁免清单。每条必须带 reason 与 review_by（YYYY-MM-DD）。",
+    "why_not_baseline": "lint_skills.py 的 baseline.json 把违规永久冻结，--new-only 之后永不报红——那是把判据的观察窗口收窄成只看向未来。此处每条豁免有寿命，过期自动重新报红。",
+    "fields": {
+      "rule": "S1 / S2 / S3 / S4 / S5",
+      "target": "技能目录名（S1/S2/S3/S5）或相对路径（S4）",
+      "reason": "为什么这个不是缺陷，必须写具体原因",
+      "review_by": "复核截止日 YYYY-MM-DD，过了这天该项重新变红"
+    },
+    "empty_is_good": "当前为空。7 条 S1 是真实缺陷（junheng-* 引用镜像里不存在的 sync-skills.mjs），应当修掉而不是豁免。"
+  },
+  "items": []
+}

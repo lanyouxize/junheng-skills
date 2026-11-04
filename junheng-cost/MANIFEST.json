@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-cost/SKILL.md",
       "kind": "template",
-      "sha256": "d0881f506fd1cc2d3fe2b11dce9385b553cc66b5499f163479a9a9d1f3ec5947"
+      "sha256": "c1d0675333fc93edbc7512685e6f5ddf2afe87bcebf688f746bf78c4bca4e35a"
     },
     {
       "dest": "scripts/cli.mjs",

@@ -53,7 +53,7 @@ compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network acc
 在技能根目录下执行 `node scripts/cli.mjs <命令> '<JSON 参数>'`（或 `--stdin` / 管道传参；
 `--help` 与 `<命令> --help` 分别看全部命令与该命令的参数表）。
 
-> ⚠ 依赖共享内核 `junheng-core`。报「找不到源码目录」时先跑 `node scripts/sync-skills.mjs`。
+> ⚠ 依赖共享内核 `junheng-core`。报「找不到源码目录」时，到项目根 `packages/nutrition-agent-work` 跑 `node scripts/sync-skills.mjs`——技能目录是只读镜像，不含该脚本。
 
 ## 命令一览
 
@@ -160,7 +160,7 @@ by name with `exit 2`, rather than producing a half draft.
 Run `node scripts/cli.mjs <command> '<JSON args>'` in the skill root (or pass args via `--stdin` / a pipe;
 `--help` and `<command> --help` show all commands and that command's parameter table).
 
-> ⚠ Depends on the shared core `junheng-core`. If "source directory not found" appears, run `node scripts/sync-skills.mjs` first.
+> ⚠ Depends on the shared core `junheng-core`. If "source directory not found" appears, run `node scripts/sync-skills.mjs` **from the project root** `packages/nutrition-agent-work` — the skill directory is a read-only mirror and does not contain that script.
 
 ## Commands
 

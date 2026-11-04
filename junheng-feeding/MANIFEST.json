@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-feeding/SKILL.md",
       "kind": "template",
-      "sha256": "69cf2e807fbff6d299df7970447bce7a3aa2299d8d4fe23d7bd544497da5b1fb"
+      "sha256": "e65c88b19eeb3d776d07642132dd09834668bc5eb9f3bc2dec4be91e7e7ee0a8"
     },
     {
       "dest": "scripts/cli.mjs",

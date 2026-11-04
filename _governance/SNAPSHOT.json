@@ -1,5 +1,5 @@
 {
-  "file_count": 1277,
+  "file_count": 1279,
   "files": {
     ".disable_to_model_invocation_migration.json": {
       "bytes": 114,
@@ -76,6 +76,14 @@
     "_governance/lint-report-20261102.md": {
       "bytes": 6069,
       "sha256": "94eeb6644dc8afe59e93d5e432c32c836f6345f89b68a9f27dc0efc260db992f"
+    },
+    "_governance/lint_scripts.py": {
+      "bytes": 17162,
+      "sha256": "55d67f8040e123ebcab6cd91e57b5b1ce0d483d63abe54a408b4c0bffe79dfd0"
+    },
+    "_governance/lint_scripts_known.json": {
+      "bytes": 825,
+      "sha256": "47c14a6e80dfdcd479befcbe4934cb68922917634530fddb99dba6b665dc8d60"
     },
     "_governance/lint_skills.py": {
       "bytes": 9702,
@@ -1163,11 +1171,11 @@
     },
     "junheng-attainment/MANIFEST.json": {
       "bytes": 2314,
-      "sha256": "cb5e986954587830eed1ea6e3b686164becdf0126af2ab14336590002c5bfd1b"
+      "sha256": "4ef25b09a6ce245d8d221cad45255058febaac650c8450c0aab874a5fe2ba31b"
     },
     "junheng-attainment/SKILL.md": {
-      "bytes": 6061,
-      "sha256": "1094f0e8646b3133572478c9416b94b5fe5ec773bdb9cb148dec90b2bbc39c73"
+      "bytes": 6157,
+      "sha256": "591d5031b91c83b47aecacb11b03be1a7638e84b6442970c46359b69d078b51a"
     },
     "junheng-attainment/references/interface-reference.md": {
       "bytes": 3627,
@@ -1347,11 +1355,11 @@
     },
     "junheng-cost/MANIFEST.json": {
       "bytes": 2290,
-      "sha256": "f5d38b8f4af89634138082e250f2fb8015f7c2bde1230897e4e6ebf07c6fc9a4"
+      "sha256": "43af355431412e75ce7d88b5e6082ba2a385d79b9facb295a2bbc16245684b08"
     },
     "junheng-cost/SKILL.md": {
-      "bytes": 7723,
-      "sha256": "d0881f506fd1cc2d3fe2b11dce9385b553cc66b5499f163479a9a9d1f3ec5947"
+      "bytes": 7819,
+      "sha256": "c1d0675333fc93edbc7512685e6f5ddf2afe87bcebf688f746bf78c4bca4e35a"
     },
     "junheng-cost/references/interface-reference.md": {
       "bytes": 5219,
@@ -1451,11 +1459,11 @@
     },
     "junheng-feeding/MANIFEST.json": {
       "bytes": 2302,
-      "sha256": "21b667cf0db0540047fd958b6a1c2bd59c4bd7400978dba06d32b6d9488e2f71"
+      "sha256": "a526ed4db48a030d60a8ab609d1fc0c21463a90d454856a732783a07e1ae0054"
     },
     "junheng-feeding/SKILL.md": {
-      "bytes": 7036,
-      "sha256": "69cf2e807fbff6d299df7970447bce7a3aa2299d8d4fe23d7bd544497da5b1fb"
+      "bytes": 7132,
+      "sha256": "e65c88b19eeb3d776d07642132dd09834668bc5eb9f3bc2dec4be91e7e7ee0a8"
     },
     "junheng-feeding/references/interface-reference.md": {
       "bytes": 7635,
@@ -1499,11 +1507,11 @@
     },
     "junheng-labeling/MANIFEST.json": {
       "bytes": 2306,
-      "sha256": "042ffed17828cb4d7fe0aa7cca559ec9a8d558151ae5ee00fd141f317909d86b"
+      "sha256": "87730cb18658d3c1c0397552cd2e2bd1952a84a8429a419a8259032f4fc67387"
     },
     "junheng-labeling/SKILL.md": {
-      "bytes": 13293,
-      "sha256": "a24babea62c713fa2796034dd56e71393c97da97ac78fa3d57db145a4d08fc5c"
+      "bytes": 13520,
+      "sha256": "a0f90051ba9fcd5ce3f2813d377590172823c84bd6d18268da010d130ce381e1"
     },
     "junheng-labeling/references/interface-reference.md": {
       "bytes": 4244,
@@ -1547,11 +1555,11 @@
     },
     "junheng-nutrition/MANIFEST.json": {
       "bytes": 2310,
-      "sha256": "9c278fe32d151631bc01a6ebbdbc069481459648659cc0234bc66f5ce0cdf1e1"
+      "sha256": "2af93f4c1170c555615f4d137bc5892a0aaa1b3a06226be38694eef93cfc6409"
     },
     "junheng-nutrition/SKILL.md": {
-      "bytes": 6041,
-      "sha256": "4f1550ea16f9347ec153ca2970a40190ff31e85e41452e9275ec5cbd9ecbd4a3"
+      "bytes": 6120,
+      "sha256": "ea489550b476ff7234fe14d317feb9a761e525cab9232485fe673a6e8acc7846"
     },
     "junheng-nutrition/references/interface-reference.md": {
       "bytes": 5980,
@@ -1651,11 +1659,11 @@
     },
     "junheng-pipeline/MANIFEST.json": {
       "bytes": 2306,
-      "sha256": "600562c4d5a353720a740b43cbefcfcd9bcbf7665ddb8cba84d6a4e6982ade7f"
+      "sha256": "052f9e844dd6d451586910e3b8d61f3567285f848c9e7e2ee0894e393e7ce2a6"
     },
     "junheng-pipeline/SKILL.md": {
-      "bytes": 5923,
-      "sha256": "315b918afa51c8e05ce66f7988efc910f149c468151745100e9c70ce5a72a0e6"
+      "bytes": 6019,
+      "sha256": "fe8787d58cb89da432f58316e305b1116e32cbc3badc497afffde3377118aa84"
     },
     "junheng-pipeline/references/interface-reference.md": {
       "bytes": 6026,
@@ -5110,8 +5118,8 @@
       "sha256": "fcf7b13ec24fe99285a075e74e8869a210548ac97579dfcd20e65731683db50c"
     }
   },
-  "generated_at": "2026-11-04T13:39:55Z",
+  "generated_at": "2026-11-04T13:58:30Z",
   "root": "C:/Users/Administrator/.workbuddy/skills",
   "schema": 1,
-  "total_bytes": 14656795
+  "total_bytes": 14675472
 }

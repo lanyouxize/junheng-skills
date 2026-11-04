@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-labeling/SKILL.md",
       "kind": "template",
-      "sha256": "a24babea62c713fa2796034dd56e71393c97da97ac78fa3d57db145a4d08fc5c"
+      "sha256": "a0f90051ba9fcd5ce3f2813d377590172823c84bd6d18268da010d130ce381e1"
     },
     {
       "dest": "scripts/cli.mjs",

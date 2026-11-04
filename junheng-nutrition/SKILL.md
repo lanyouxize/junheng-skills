@@ -41,7 +41,7 @@ node scripts/cli.mjs --help
 node scripts/cli.mjs <命令> --help
 ```
 
-> ⚠ 本技能依赖共享内核 `junheng-core`。若报「找不到源码目录」，先同步：`node scripts/sync-skills.mjs`。
+> ⚠ 依赖共享内核 `junheng-core`。报「找不到源码目录」时，到项目根 `packages/nutrition-agent-work` 跑 `node scripts/sync-skills.mjs`——技能目录是只读镜像，不含该脚本。
 
 ## 命令一览
 

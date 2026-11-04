@@ -52,7 +52,7 @@ node scripts/cli.mjs targets '{}'        # 先看有哪些目标口径可选，�
 node scripts/cli.mjs --help
 ```
 
-> ⚠ 依赖共享内核 `junheng-core`。报「找不到源码目录」时先跑 `node scripts/sync-skills.mjs`。
+> ⚠ 依赖共享内核 `junheng-core`。报「找不到源码目录」时，到项目根 `packages/nutrition-agent-work` 跑 `node scripts/sync-skills.mjs`——技能目录是只读镜像，不含该脚本。
 
 ## 命令一览
 
