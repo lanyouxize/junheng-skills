@@ -18,6 +18,15 @@
 ## 一、一句话用法
 
 ```bash
+~/.workbuddy/tools/vcs-all.sh status     # 三仓库状态一次看完（谁被改了）
+~/.workbuddy/tools/vcs-all.sh verify     # 三仓库全量字节校验 + clone 演练
+~/.workbuddy/tools/vcs-all.sh bundle     # 打三份 bundle 到 D:/skill-vcs/ 并逐份校验
+~/.workbuddy/tools/vcs-all.sh all        # verify + bundle，收尾用这个
+```
+
+单仓库操作（需要看细节时）：
+
+```bash
 cd ~/.workbuddy/skills
 git status                 # 谁被改了（这一条就能抓「sync-skills 静默覆盖」那类事故）
 git diff                   # 改了什么（文本差异正常可读）
