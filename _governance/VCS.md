@@ -19,7 +19,8 @@
 
 ```bash
 ~/.workbuddy/tools/vcs-all.sh status     # 三仓库状态一次看完（谁被改了）
-~/.workbuddy/tools/vcs-all.sh verify     # 三仓库全量字节校验 + clone 演练
+~/.workbuddy/tools/vcs-all.sh verify     # 三仓库全量字节校验 + clone 演练 + 判定自体检
+~/.workbuddy/tools/vcs-all.sh lint       # 只跑判定自体检（rules_lint + lint_scripts）
 ~/.workbuddy/tools/vcs-all.sh bundle     # 打三份 bundle 到 D:/skill-vcs/ 并逐份校验
 ~/.workbuddy/tools/vcs-all.sh all        # verify + bundle，收尾用这个
 ```
@@ -97,6 +98,18 @@ python -X utf8 _governance/vcs-verify.py --clone   # 克隆到临时目录再全
 python -X utf8 _governance/vcs-verify.py --root ~/.workbuddy/tools --clone
 python -X utf8 _governance/vcs-verify.py --root ~/.workbuddy/rules --clone
 ```
+
+**判定自体检（2026-11-05 接入 `vcs-all.sh verify`）**：字节校验之后，`verify` 还会跑
+两个版本化在仓库内的 linter，确保「判据自己没坏」：
+
+- `~/.workbuddy/tools/rules_lint.py` —— 铁律正文的 `.py` 脚本引用必须解析到实体（T5 抓所有
+  引用；坏引用 exit 1，`verify` 随之失败）。
+- `~/.workbuddy/skills/_governance/lint_scripts.py` —— 86 个技能的脚本语法 + 引用悬空
+  （S1–S5；仅 E 级违规 exit 1，S5 语义重叠警告放行）。
+
+这两个脚本本身就在 `tools/` 与 `skills/_governance/` 仓库里，受同一套 git + bundle 兜底。
+判据坏了是所有会话一起失灵，而它最易被漏检，故放进每次 `verify` 当门禁。
+单独跑：`vcs-all.sh lint`。
 
 `--clone` 是真正的「换机恢复」演练：它证明的不是「git 认为文件没变」，
 而是「新克隆出来的文件与现有文件每一个字节都相同」。
