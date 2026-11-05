@@ -22,6 +22,7 @@
     S3 no-scripts-dir SKILL.md 写了 `node scripts/x` 但目录里没有 scripts/
     S4 hidden-skill   隐藏目录下存在 SKILL.md，主 lint 因 startswith(".") 跳过
     S5 fm-overlap     frontmatter 存在语义重叠字段组（platform 读哪个未知）
+    S6 fm-whitelist  frontmatter 含非白名单顶层字段（以官方文档并集为合法集）
 
 E = 必须修；W = 需人工判断。
 
@@ -98,6 +99,30 @@ FM_OVERLAP_GROUPS = [
     ("tags", "triggers", "trigger_words", "auto_trigger"),  # 触发线索四套命名
 ]
 
+# frontmatter 合法字段白名单（S6 判据）。
+#
+# 来源 = 两份官方文档的并集（任务 x 已核实），外加第三方跨平台工具需要的 2 个字段：
+#   - 开放平台 open.workbuddy.cn/docs/skill
+#   - CLI      workbuddy.ai/docs/cli/skills
+#
+# 关键：白名单取**两份文档的并集**，包含当前 93 个技能里尚未使用的合法字段
+# （context / agent / model / hooks / examples_zh / examples_en 等）。这样 S6 不会把
+# 「官方合法但本机未用」的字段误判为死字段——避免检查器学会说谎（同 S1/S5 的收敛教训）。
+# 机器真源即此常量；人读规范见 _governance/FRONTMATTER-WHITELIST.md。
+FM_WHITELIST = {
+    # 开放平台标准字段
+    "name", "display_name", "display_name_en", "description", "description_zh",
+    "description_en", "version", "author", "allowed-tools", "examples_zh", "examples_en",
+    # CLI 标准字段
+    "disable-model-invocation", "user-invocable", "context", "agent", "model", "hooks",
+    # 第三方跨平台工具需要（保留）
+    "license", "metadata",
+}
+
+# metadata 内容约束：若把 author/version 塞进 metadata（junheng-core 现状），
+# 第三方工具读不到、平台也读不到——应提升为顶层字段。
+METADATA_SHOULD_BE_TOPLEVEL = ("author", "version")
+
 # 输出动词：句子在描述「写到哪」时，路径是运行时产物，不该要求已存在。
 # 实测依据：nuwa-skill 写「调研结果必须写入 references/research/0X-xxx.md」、
 # luobo-ppt 写「assets/manifest.json 记录错误」——两者目录里本就没有该文件。
@@ -138,6 +163,27 @@ def frontmatter_keys(text):
         if mm:
             out.append(mm.group(1))
     return out
+
+
+def metadata_subkeys(text):
+    """返回 frontmatter 里 `metadata:` 容器下的直接子键（一层）。无则空列表。"""
+    m = re.match(r"^\ufeff?---\r?\n(.*?)\r?\n---", text, re.S)
+    if not m:
+        return []
+    in_meta = False
+    subs = []
+    for line in m.group(1).split("\n"):
+        if re.match(r"^metadata\s*:\s*$", line):
+            in_meta = True
+            continue
+        if in_meta:
+            # 遇到下一个顶层 key（缩进 0 的非空行）即退出 metadata 块
+            if line and not line[0].isspace():
+                break
+            mm = re.match(r"^\s+([A-Za-z_][\w-]*)\s*:", line)
+            if mm:
+                subs.append(mm.group(1))
+    return subs
 
 
 def iter_scripts(skill_dir):
@@ -271,6 +317,21 @@ def scan(root, do_syntax=True, workers=8):
             present = [k for k in group if k in keys]
             if len(present) > 1:
                 findings.append(("W", "S5", name, "语义重叠字段并存: %s" % " / ".join(present)))
+
+        # S6：frontmatter 非白名单字段（判据 = FM_WHITELIST 并集）。
+        # 只对顶层 key 做差集；嵌套合法（如 metadata 容器本身合法，但其子键受下方约束）。
+        for key in keys:
+            if key not in FM_WHITELIST:
+                findings.append(
+                    ("W", "S6", name, "非白名单 frontmatter 字段: %s（建议删除或并入合法字段）" % key)
+                )
+        # metadata 内容约束：author/version 应提升为顶层
+        if "metadata" in keys:
+            for sub in metadata_subkeys(text):
+                if sub in METADATA_SHOULD_BE_TOPLEVEL:
+                    findings.append(
+                        ("W", "S6", name, "metadata.%s 应提升为顶层字段（平台/工具读不到）" % sub)
+                    )
     return findings, skills, skipped
 
 
