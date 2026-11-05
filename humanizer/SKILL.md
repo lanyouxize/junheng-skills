@@ -1,19 +1,18 @@
 ---
 name: humanizer
 description: 润色文本以去除 AI 写作痕迹（浮夸象征、套路化表述等），使表达更自然、更像真人写作。当用户要改写、审校文稿或降低文本的机器感时用。
-description_zh: "去除文本中的 AI 写作痕迹"
-description_en: "Remove AI writing patterns from text"
+description_zh: 去除文本中的 AI 写作痕迹
+description_en: Remove AI writing patterns from text
 version: 2.1.1
 allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - AskUserQuestion
-display_name: "humanizer"
-display_name_en: "humanizer"
-visibility: "public"
+- Read
+- Write
+- Edit
+- Grep
+- Glob
+- AskUserQuestion
+display_name: humanizer
+display_name_en: humanizer
 ---
 
 # Humanizer: Remove AI Writing Patterns

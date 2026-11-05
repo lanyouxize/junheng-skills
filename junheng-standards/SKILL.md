@@ -2,10 +2,8 @@
 name: junheng-standards
 description: 宠物营养法规限值查询。按目标市场、物种、生命阶段与水分形态返回应同时满足的合并限值（蛋白、脂肪、灰分、纤维、钙磷、赖氨酸、牛磺酸、代谢能等），每项带条款出处与各体系原值；也可单查条款原文。问 AAFCO 下限、国标要求时使用。
 description_en: Chinese and international pet food nutrient limit lookup (GB/T 31216, GB/T 31217, AAFCO, FEDIAF) by market mode, species, life stage and moisture class; returns merged limits with clause citations, or a single clause's original text.
-metadata:
-  author: Junheng NutriAgent
-  version: "1.0.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+author: Junheng NutriAgent
+version: 1.0.0
 ---
 
 # 法规限值查询（junheng-standards）

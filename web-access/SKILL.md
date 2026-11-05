@@ -1,16 +1,13 @@
 ---
 name: web-access
 license: MIT
-github: https://github.com/eze-is/web-access
 description: 需要真实浏览器环境完成任务时：搜索信息、抓取网页与社交内容（小红书/微博等）、处理登录态与动态渲染页面；经 CDP 直连本地 Chrome 执行，产出抓取或操作结果。
-metadata:
-  author: 一泽Eze
 version: 2.5.4
-display_name: "Web Access（浏览器自动化）"
-display_name_en: "Web Access"
-description_zh: "CDP 直连本地 Chrome，智能调度联网工具，支持登录态、并行批量操作"
-description_en: "CDP-based web access: search, scrape, login-aware browsing, parallel ops"
-visibility: "public"
+display_name: Web Access（浏览器自动化）
+display_name_en: Web Access
+description_zh: CDP 直连本地 Chrome，智能调度联网工具，支持登录态、并行批量操作
+description_en: 'CDP-based web access: search, scrape, login-aware browsing, parallel ops'
+author: 一泽Eze
 ---
 
 # web-access Skill

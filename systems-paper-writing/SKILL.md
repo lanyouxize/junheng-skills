@@ -4,7 +4,6 @@ description: 面向 OSDI/SOSP/ASPLOS/NSDI/EuroSys 的系统类论文写作。用
 version: 1.1.0
 author: Orchestra Research
 license: MIT
-tags: [Systems Paper Writing, OSDI, SOSP, ASPLOS, NSDI, EuroSys, Structural Blueprint, Academic Writing, LaTeX]
 ---
 
 # Systems Paper Writing: Paragraph-Level Structural Blueprint

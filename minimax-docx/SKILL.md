@@ -1,33 +1,20 @@
 ---
 name: minimax-docx
 description: 用 OpenXML SDK 处理 Word 文档：支持从零新建、向既有文档填充内容、按样式规范格式化三类流水线，产出 .docx。当用户要生成、编辑或排版 docx 文档时用。
-description_zh: "Word 文档生成与编辑"
-description_en: "Generate and edit Word documents from scratch"
+description_zh: Word 文档生成与编辑
+description_en: Generate and edit Word documents from scratch
 version: 1.0.0
 license: MIT
 metadata:
-  version: "1.0.0"
   category: document-processing
-  author: MiniMaxAI
   sources:
-    - "ECMA-376 Office Open XML File Formats"
-    - "GB/T 9704-2012 Layout Standard for Official Documents"
-    - "IEEE / ACM / APA / MLA / Chicago / Turabian Style Guides"
-    - "Springer LNCS / Nature / HBR Document Templates"
-triggers:
-  - Word
-  - docx
-  - document
-  - 文档
-  - Word文档
-  - 报告
-  - 合同
-  - 公文
-  - 排版
-  - 套模板
-display_name: "minimax-docx"
-display_name_en: "minimax-docx"
-visibility: "public"
+  - ECMA-376 Office Open XML File Formats
+  - GB/T 9704-2012 Layout Standard for Official Documents
+  - IEEE / ACM / APA / MLA / Chicago / Turabian Style Guides
+  - Springer LNCS / Nature / HBR Document Templates
+display_name: minimax-docx
+display_name_en: minimax-docx
+author: MiniMaxAI
 ---
 
 # minimax-docx

@@ -3,20 +3,18 @@ name: totorosir-workbuddy-score
 display_name: WorkBuddy积分助手
 display_name_en: WorkBuddy Credit Assistant
 description: WorkBuddy 积分助手。查询并播报积分余额、连续登录天数、当月活跃地图、本周进度与活动奖励分档；只读展示成长计划任务进度与派猫猫旅行状态；支持一键签到（幂等）与旅行全自动闭环。支持 Windows、macOS、Linux。
-description_zh: "WorkBuddy积分助手：读取本机登录态，接口直查 Buddy 加油站数据生成每日积分播报；只读展示成长计划与派猫猫旅行状态，支持一键幂等自动签到与旅行全自动闭环（先领后派，需显式 --travel-auto），并可把播报推送至自有渠道（12 渠道，复用消息推送技能配置，--no-push 可关）。提供三通道授权：A 本机登录态（零配置，典型 Windows）、B 一次性网页会话授权（macOS/Linux 等无法本地解密时）、C 长效令牌自续期（客户端可不开）。跨平台 Windows/macOS/Linux；以只读为主，写操作仅限签到与旅行领取/派出，不打印 token，不修改登录态。兼容 WorkBuddy 5.6.2+ 客户端：登录态 accessToken 为 AES-256-GCM 信封，自动识别并解密。"
-description_en: "WorkBuddy Credit Assistant queries Buddy Station via API for a daily credit report (balance, streak, calendar, weekly progress, event, streak rewards), shows the read-only growth plan and Buddy travel status, supports one-click idempotent auto check-in and a fully automated travel loop (claim first, then depart; needs explicit --travel-auto), and pushes the report to 12 channels mirroring totorosir-push-message (disable with --no-push). Three channels are chosen automatically: a usable local login state (typically Windows) needs zero config; if it cannot be decrypted (typically macOS), a one-time ~30s web-session authorization applies; or save a long-lived refresh token once for self-renewal that works even with the client closed. Cross-platform Windows/macOS/Linux. Read-only by default; write calls limited to check-in and travel claim/depart; never prints the token. Compatible with WorkBuddy 5.6.2+: the accessToken became an AES-256-GCM envelope, auto-detected and decrypted."
+description_zh: WorkBuddy积分助手：读取本机登录态，接口直查 Buddy 加油站数据生成每日积分播报；只读展示成长计划与派猫猫旅行状态，支持一键幂等自动签到与旅行全自动闭环（先领后派，需显式 --travel-auto），并可把播报推送至自有渠道（12 渠道，复用消息推送技能配置，--no-push 可关）。提供三通道授权：A 本机登录态（零配置，典型 Windows）、B 一次性网页会话授权（macOS/Linux 等无法本地解密时）、C 长效令牌自续期（客户端可不开）。跨平台 Windows/macOS/Linux；以只读为主，写操作仅限签到与旅行领取/派出，不打印 token，不修改登录态。兼容 WorkBuddy 5.6.2+ 客户端：登录态 accessToken 为 AES-256-GCM 信封，自动识别并解密。
+description_en: 'WorkBuddy Credit Assistant queries Buddy Station via API for a daily credit report (balance, streak, calendar, weekly progress, event, streak rewards), shows the read-only growth plan and Buddy travel status, supports one-click idempotent auto check-in and a fully automated travel loop (claim first, then depart; needs explicit --travel-auto), and pushes the report to 12 channels mirroring totorosir-push-message (disable with --no-push). Three channels are chosen automatically: a usable local login state (typically Windows) needs zero config; if it cannot be decrypted (typically macOS), a one-time ~30s web-session authorization applies; or save a long-lived refresh token once for self-renewal that works even with the client closed. Cross-platform Windows/macOS/Linux. Read-only by default; write calls limited to check-in and travel claim/depart; never prints the token. Compatible with WorkBuddy 5.6.2+: the accessToken became an AES-256-GCM envelope, auto-detected and decrypted.'
 category: automation
 version: 3.1.7
 author: totorosir
-agent_created: true
-visibility: public
 license: MIT-0
 metadata:
   openclaw:
-    emoji: "💰"
+    emoji: 💰
     requires:
       bins:
-        - python3
+      - python3
       env: []
 allowed-tools: Bash
 ---

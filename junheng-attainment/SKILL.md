@@ -2,10 +2,8 @@
 name: junheng-attainment
 description: 配方达成度评估。给定配方与目标画像（物种/月龄/体况/目标市场）对照法规限值，输出达标/未达标/数据不足/无法判定四态、缺口与配比建议。当用户问「这个配方达不达标」「钙磷比够不够」「按国标能不能过」时使用。
 description_en: Recipe attainment evaluation. Compares a formula against regulatory limits for a target profile (species / age / market) and reports per-nutrient status, the shortfall list and mixing suggestions.
-metadata:
-  author: Junheng NutriAgent
-  version: "1.0.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+author: Junheng NutriAgent
+version: 1.0.0
 ---
 
 # 目标达成度评估（junheng-attainment）

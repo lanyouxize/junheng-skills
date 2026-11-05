@@ -2,13 +2,11 @@
 name: pdfkit-py
 description: 处理已存在的 .pdf 文件：读取提取、编辑、合并拆分、格式转换、水印、加密、表单、签名、OCR。仅当输入对象是 .pdf 时触发；不处理 docx/xlsx/pptx/html 等非 PDF 文件。
 version: 1.0.1
-description_zh: "PDF全能工具箱，覆盖阅读分析、自然语言编辑、格式转换、表单处理、加密签名、OCR、IR等全场景"
-description_en: "All-in-one PDF toolkit: read, edit, convert, fill forms, encrypt, sign, OCR, and IR."
-display_name: "腾讯文档 PDFKit"
-display_name_en: "Pdfkit Py"
+description_zh: PDF全能工具箱，覆盖阅读分析、自然语言编辑、格式转换、表单处理、加密签名、OCR、IR等全场景
+description_en: 'All-in-one PDF toolkit: read, edit, convert, fill forms, encrypt, sign, OCR, and IR.'
+display_name: 腾讯文档 PDFKit
+display_name_en: Pdfkit Py
 allowed-tools: Bash, Read, Write, Glob
-argument-hint: <操作描述或 PDF 文件路径>
-visibility: "public"
 ---
 
 # pdfkit — AI 原生 PDF 处理工具

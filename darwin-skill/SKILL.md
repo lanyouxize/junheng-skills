@@ -1,11 +1,10 @@
 ---
 name: darwin-skill
 description: 自主优化 SKILL.md 的元技能：按 8 维度评分并配合 git 做爬山式迭代，产出更高质量的技能文件。当要评估或改进某个 skill 的触发准确性与结构时用。
-display_name: "darwin-skill"
-display_name_en: "darwin-skill"
-description_zh: "Darwin Skill (达尔文.skill): autonomous skill optimizer inspired by Karpathy's autoresearch. Evaluates SKILL.md files using an 8-dimension rubric (structure + effectiveness), runs hill-climbing with git version control, validates improvements through test prompts, and generates visual result cards. Use when user mentions \\\"优化skill\\\", \\\"skill评分\\\", \\\"自动优化\\\", \\\"auto optimize\\\", \\\"skill质量检查\\\", \\\"达尔文\\\", \\\"darwin\\\", \\\"帮我改改skill\\\", \\\"skill怎么样\\\", \\\"提升skill质量\\\", \\\"skill review\\\", \\\"skill打分\\\"."
-description_en: "Darwin Skill (达尔文.skill): autonomous skill optimizer inspired by Karpathy's autoresearch. Evaluates SKILL.md files using an 8-dimension rubric (structure + effectiveness), runs hill-climbing with git version control, validates improvements through test prompts, and generates visual result cards. Use when user mentions \\\"优化skill\\\", \\\"skill评分\\\", \\\"自动优化\\\", \\\"auto optimize\\\", \\\"skill质量检查\\\", \\\"达尔文\\\", \\\"darwin\\\", \\\"帮我改改skill\\\", \\\"skill怎么样\\\", \\\"提升skill质量\\\", \\\"skill review\\\", \\\"skill打分\\\"."
-visibility: "public"
+display_name: darwin-skill
+display_name_en: darwin-skill
+description_zh: 'Darwin Skill (达尔文.skill): autonomous skill optimizer inspired by Karpathy''s autoresearch. Evaluates SKILL.md files using an 8-dimension rubric (structure + effectiveness), runs hill-climbing with git version control, validates improvements through test prompts, and generates visual result cards. Use when user mentions \"优化skill\", \"skill评分\", \"自动优化\", \"auto optimize\", \"skill质量检查\", \"达尔文\", \"darwin\", \"帮我改改skill\", \"skill怎么样\", \"提升skill质量\", \"skill review\", \"skill打分\".'
+description_en: 'Darwin Skill (达尔文.skill): autonomous skill optimizer inspired by Karpathy''s autoresearch. Evaluates SKILL.md files using an 8-dimension rubric (structure + effectiveness), runs hill-climbing with git version control, validates improvements through test prompts, and generates visual result cards. Use when user mentions \"优化skill\", \"skill评分\", \"自动优化\", \"auto optimize\", \"skill质量检查\", \"达尔文\", \"darwin\", \"帮我改改skill\", \"skill怎么样\", \"提升skill质量\", \"skill review\", \"skill打分\".'
 ---
 
 # Darwin Skill

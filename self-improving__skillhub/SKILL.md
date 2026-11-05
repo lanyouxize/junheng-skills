@@ -1,12 +1,23 @@
 ---
 name: Self-Improving + Proactive Agent
-slug: self-improving
 version: 1.2.16
-homepage: https://clawic.com/skills/self-improving
 description: 让 Agent 自省、自评、自学习并自组织记忆：评估自身产出、捕获错误并沉淀为永久改进。在非平凡任务开始时读取记忆，收尾时落一条带来源的教训记录。
-changelog: "Clarifies the setup flow for proactive follow-through and safer installation behavior."
-metadata: {"clawdbot":{"emoji":"🧠","requires":{"bins":[]},"os":["linux","darwin","win32"],"configPaths":["~/self-improving/"],"configPaths.optional":["./AGENTS.md","./SOUL.md","./HEARTBEAT.md"]}}
-displayName: Self-Improving + Proactive Agent
+metadata:
+  clawdbot:
+    emoji: 🧠
+    requires:
+      bins: []
+    os:
+    - linux
+    - darwin
+    - win32
+    configPaths:
+    - ~/self-improving/
+    configPaths.optional:
+    - ./AGENTS.md
+    - ./SOUL.md
+    - ./HEARTBEAT.md
+display_name: Self-Improving + Proactive Agent
 ---
 
 ## When to Use

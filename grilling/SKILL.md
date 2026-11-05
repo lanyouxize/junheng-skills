@@ -1,12 +1,9 @@
 ---
 name: grilling
 display_name: Grilling
-display_name_zh: 拷问式需求澄清
-description: "Grill the user relentlessly about a plan, decision or idea until you reach a shared understanding. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase."
-description_zh: "方案/决策/想法当决策树逐轮拷问至共识：每轮只问已定前提的问题并附推荐答案；事实自查、用户拍板，共识前不动手。触发：拷问我、质询我、审问、grill me/third degree/interrogate、压测这个方案、压力测试、极限情况、这设计哪里会翻车、隐患、靠不靠谱、先问清楚再动手、问明白。"
-tags: [需求澄清, 拷问, 决策树, 方案评审, grilling, grill-me, requirement-clarification, stress-test]
+description: Grill the user relentlessly about a plan, decision or idea until you reach a shared understanding. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase.
+description_zh: 方案/决策/想法当决策树逐轮拷问至共识：每轮只问已定前提的问题并附推荐答案；事实自查、用户拍板，共识前不动手。触发：拷问我、质询我、审问、grill me/third degree/interrogate、压测这个方案、压力测试、极限情况、这设计哪里会翻车、隐患、靠不靠谱、先问清楚再动手、问明白。
 version: 1.0.0-local.1
-source: "https://github.com/mattpocock/skills @ 49dd158 (skills/productivity/grilling)"
 ---
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.

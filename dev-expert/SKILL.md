@@ -1,25 +1,23 @@
 ---
 name: dev-expert
 description: 编程专家：P8 级编程助手。覆盖项目总控、代码生成/审查/重构、Bug 根因诊断、API 与前端设计、MySQL、测试与性能基准、技术选型、文档生成、任务拆解、Spec 驱动、CMS 二次开发、项目记忆管理与知识图谱，以及工程纪律层专项。含苏格拉底式需求锁定门控。支持 @标识 显式调用。
-version: "1.18.2"
-author: "智能系统工程专家"
+version: 1.18.2
+author: 智能系统工程专家
 license: MIT
 allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Shell
-  - Bash
-  - Edit
-  - Write
-  - Task
-  - WebSearch
-slug: dev-expert
-displayName: dev-expert
+- Read
+- Grep
+- Glob
+- Shell
+- Bash
+- Edit
+- Write
+- Task
+- WebSearch
 display_name: 编程专家
 display_name_en: Code Expert
 description_zh: 编程专家：P8 级编程助手。覆盖项目总控、代码生成/审查/重构、Bug 根因诊断、API 与前端设计、MySQL、测试与性能基准、技术选型、文档生成、任务拆解、Spec 驱动、CMS 二次开发、项目记忆管理与知识图谱，以及工程纪律层专项。含苏格拉底式需求锁定门控。支持 @标识 显式调用。
-description_en: "Code Expert: a P8-level programming assistant. Covers project orchestration, code generation/review/refactoring, root-cause bug diagnosis, API and frontend design, MySQL, testing and performance benchmarking, tech stack selection, documentation generation, task decomposition, spec-driven development, CMS secondary development, project memory management and knowledge graphs, plus engineering-discipline modules. Includes a Socratic requirement-locking gate. Supports explicit @-mention invocation."
+description_en: 'Code Expert: a P8-level programming assistant. Covers project orchestration, code generation/review/refactoring, root-cause bug diagnosis, API and frontend design, MySQL, testing and performance benchmarking, tech stack selection, documentation generation, task decomposition, spec-driven development, CMS secondary development, project memory management and knowledge graphs, plus engineering-discipline modules. Includes a Socratic requirement-locking gate. Supports explicit @-mention invocation.'
 ---
 
 # 编程专家.Skill -- P8级编程专家

@@ -4,8 +4,6 @@ description: 把各类研究输入（论文 PDF、代码仓库、实验日志、
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [ARA, Research Artifacts, Knowledge Extraction, Paper Ingestion, Exploration Graph, Provenance, Research Tooling, Epistemic Compilation]
-dependencies: []
 ---
 
 # Universal ARA Compiler

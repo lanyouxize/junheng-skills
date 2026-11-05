@@ -1,19 +1,20 @@
 ---
 name: lark-unified
 description: 飞书与 Lark 的统一 CLI 套件：覆盖消息、文档、表格、多维表格、日历、邮件、任务、知识库、会议、OKR、审批等模块。当用户要通过命令行操作飞书任一能力时用。
-description_zh: "飞书/Lark 全能套件：消息、文档、表格、多维表格、日历、邮件、任务、Wiki、幻灯片、会议、OKR、审批等 18 个业务域；飞书项目（Meegle）工作项按需转子技能"
-description_en: "Lark/Feishu unified CLI: messaging, docs, sheets, base, calendar, mail, tasks, wiki, slides & more; routes Feishu Project (Meegle) to an on-demand sub-skill"
-version: "2.3.0"
+description_zh: 飞书/Lark 全能套件：消息、文档、表格、多维表格、日历、邮件、任务、Wiki、幻灯片、会议、OKR、审批等 18 个业务域；飞书项目（Meegle）工作项按需转子技能
+description_en: 'Lark/Feishu unified CLI: messaging, docs, sheets, base, calendar, mail, tasks, wiki, slides & more; routes Feishu Project (Meegle) to an on-demand sub-skill'
+version: 2.3.0
 allowed-tools: Bash, Read
-display_name: "lark-unified"
-display_name_en: "lark-unified"
-visibility: "public"
+display_name: lark-unified
+display_name_en: lark-unified
 metadata:
   requires:
-    bins: ["lark-cli"]
-  optionalBins: ["meegle"]
-  cliHelp: "lark-cli --help"
-  alignedWith: "larksuite/cli v1.0.82; larksuite/meegle-cli v1.0.19"
+    bins:
+    - lark-cli
+  optionalBins:
+  - meegle
+  cliHelp: lark-cli --help
+  alignedWith: larksuite/cli v1.0.82; larksuite/meegle-cli v1.0.19
 ---
 
 # Lark Unified

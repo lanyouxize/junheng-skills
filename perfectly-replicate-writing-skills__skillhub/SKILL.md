@@ -1,25 +1,12 @@
 ---
 name: perfectly-replicate-writing-skills
-slug: perfectly-replicate-writing-skills
 version: 5.0.0
 author: 夜秣
-displayName: 完美复刻蒸馏技能
-summary: 给你一个人的全部文章，还你一个想得一样、写得一样的写作分身
-description: "给同一作者的多篇文章，蒸馏出「思维 + 写作风格」双引擎提示词与可安装分身：思维引擎提取价值观与思维习惯，写作引擎提取词汇/句式/篇章/修辞 7+1 维，交叉验证；分身内置 14 种写作公式与双重复检。适用于拆解喜欢的作者、批量生产同风格内容，素材建议 10 篇以上。"
-description_zh: "双引擎蒸馏写作分身：思维引擎提取价值观 / 世界观 / 思维习惯，写作引擎提取 7+1 维写作风格，交叉验证后生成「思维+写作风格提示词」与可安装的写作分身子技能。分身内置 14 种写作公式，并强制执行文风指纹 + 思想一致性双重强制复检。"
-description_en: "A dual-engine writing persona distiller. Feed it multiple articles by the same author: the thinking engine extracts values, worldview and reasoning habits, while the writing engine extracts a 7+1 dimensional style profile (vocabulary, syntax, structure, rhetoric, emotion, viewpoint, tone, thinking frame). The two are cross-validated to produce a style prompt plus an installable persona sub-skill. The persona ships 14 writing formulas (PAS / SCAR / QUEST / AIDA) and enforces a dual review gate: a style fingerprint check and a worldview consistency check before any output. Works with WeChat, Xiaohongshu, Weibo, novels and blogs; 10+ articles recommended."
-tags:
-  - 写作
-  - 文风蒸馏
-  - 写作分身
-  - 风格分析
-  - 思维蒸馏
-  - 双引擎
-  - 写作公式
-  - 公众号
-  - 内容创作
+description: 给同一作者的多篇文章，蒸馏出「思维 + 写作风格」双引擎提示词与可安装分身：思维引擎提取价值观与思维习惯，写作引擎提取词汇/句式/篇章/修辞 7+1 维，交叉验证；分身内置 14 种写作公式与双重复检。适用于拆解喜欢的作者、批量生产同风格内容，素材建议 10 篇以上。
+description_zh: 双引擎蒸馏写作分身：思维引擎提取价值观 / 世界观 / 思维习惯，写作引擎提取 7+1 维写作风格，交叉验证后生成「思维+写作风格提示词」与可安装的写作分身子技能。分身内置 14 种写作公式，并强制执行文风指纹 + 思想一致性双重强制复检。
+description_en: 'A dual-engine writing persona distiller. Feed it multiple articles by the same author: the thinking engine extracts values, worldview and reasoning habits, while the writing engine extracts a 7+1 dimensional style profile (vocabulary, syntax, structure, rhetoric, emotion, viewpoint, tone, thinking frame). The two are cross-validated to produce a style prompt plus an installable persona sub-skill. The persona ships 14 writing formulas (PAS / SCAR / QUEST / AIDA) and enforces a dual review gate: a style fingerprint check and a worldview consistency check before any output. Works with WeChat, Xiaohongshu, Weibo, novels and blogs; 10+ articles recommended.'
 license: MIT
-agent_created: true
+display_name: 完美复刻蒸馏技能
 ---
 # 完美复刻蒸馏技能 v5.0
 

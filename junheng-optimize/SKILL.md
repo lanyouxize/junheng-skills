@@ -2,10 +2,8 @@
 name: junheng-optimize
 description: 宠物食品配方最低成本逆解。给定原料成本与线性约束求最省配比，返回最优解、目标值、变量取值与边际、约束影子价格；不可行时给出极小冲突集与最小松弛量。只解连续线性模型，不做营养折算与法规判定。问怎么配最省钱时使用。
 description_en: Minimum-cost reverse solver for pet food formulas. Given ingredient costs and linear constraints, returns the cheapest feasible ratio plus dual information (shadow prices, reduced costs), or an infeasibility diagnosis with the minimal conflict set (drop any one member and the model becomes feasible) and the minimal relaxation amount. Continuous linear models only — no nutrient conversion, no unit conversion, no regulatory checks.
-metadata:
-  author: Junheng NutriAgent
-  version: "1.0.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+author: Junheng NutriAgent
+version: 1.0.0
 ---
 
 # 配方最低成本逆解（junheng-optimize）

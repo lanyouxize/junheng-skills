@@ -4,8 +4,6 @@ description: 用认知科学的创造性思维框架（组合式创意、类比�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Creative Thinking, Research Ideation, Analogical Reasoning, Problem Reformulation, Cognitive Science]
-dependencies: []
 ---
 
 # Creative Thinking for Research

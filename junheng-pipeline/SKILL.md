@@ -2,10 +2,8 @@
 name: junheng-pipeline
 description: 跨技能串联编排。一次调用跑完配方营养、个体需求、标签底稿、成本与喂食计划全套计算，替代手工搬运中间结果；多宠入口一次产出逐宠喂食量、合计采购清单与分装排期标签。问把配方完整评估一遍、一条命令跑全套时使用。
 description_en: Cross-skill orchestration. Computes recipe nutrition, individual requirements, label draft, cost sheet and feeding plan in a single call, replacing manual shuttling of 5-6 KB intermediate objects between skills. A multi-pet entry (run-multi) additionally goes from each pet's raw ingredients to per-pet feeding amounts, a combined purchase list, and same-day portioning schedules with printable labels.
-metadata:
-  author: Junheng NutriAgent
-  version: "1.1.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+author: Junheng NutriAgent
+version: 1.1.0
 ---
 
 # 跨技能串联编排（junheng-pipeline）

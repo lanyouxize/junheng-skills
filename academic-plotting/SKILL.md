@@ -4,8 +4,6 @@ description: 为 ML 论文生成出版级插图：从论文章节或描述中抽
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Academic Writing, Visualization, Matplotlib, Seaborn, Plotting, Figures, Diagrams, NeurIPS, ICML, ICLR, LaTeX]
-dependencies: [matplotlib>=3.8.0, seaborn>=0.13.0, numpy, google-genai>=1.0.0]
 ---
 
 # Academic Plotting for ML Papers

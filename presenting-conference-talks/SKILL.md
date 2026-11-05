@@ -4,8 +4,6 @@ description: 从已完成的论文生成会议演讲幻灯片：产出 Beamer �
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Presenting Conference Talks, Beamer, PPTX, Slides, Speaker Notes, OSDI, SOSP, ASPLOS, NeurIPS, ICML]
-dependencies: [python-pptx>=0.6.21]
 ---
 
 # Presenting Conference Talks: From Paper to Slides

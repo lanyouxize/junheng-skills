@@ -3,15 +3,11 @@ name: repo-retrieval-governance
 display_name: 仓库检索面治理
 display_name_en: Repo Retrieval Governance
 description: 诊断并治理 AI 协作项目越用越贵的问题：量化检索面污染、常驻大文档、记忆层膨胀、会话累积与备份堆积五类 token 泄漏源，给出产物体检与处置方案。当用户问为何对话越来越贵、仓库暴涨、检索被副本淹没时用。
-description_zh: |-
-  诊断并治理「AI 协作项目越用越贵」——当用户问「为什么每次对话 token 越来越大 / 怎么省 token / 越用越慢」，或发现仓库体积几个月涨了几百 MB、检索被重复副本淹没、备份与归档目录堆在源码树里时使用。覆盖：五类 token 泄漏源的量化方法（检索面污染 / 常驻大文档 / 记忆层膨胀 / 会话累积 / .bak 备份堆积）；「体积产物体检 → 只移可重建项出仓 → 立会红的断言」三步治理流水线；散落污染的归档 SOP（动手前先查守卫是否依赖它、归档落点必须在集合树之外）；源头治理：备份「不留原地」铁律 + 配套工具 safe_backup.py（--check 报落点是否在树内）+ 备份义务分级。附两种被实测推翻的错误直觉（工具会读 .gitignore / 看起来像垃圾就可弃）。触发词：token 消耗、越用越贵、省 token、仓库太大、检索太慢、dist 巨兽、检索面、体积产物出仓、sweep_artifacts、.bak 归档、备份不留原地、safe_backup。
-description_en: |-
-  Diagnose and fix AI-collaboration projects that get more expensive over time: quantify five token leak sources (retrieval pollution, resident large docs, memory bloat, session accumulation, backup piles), then run a three-step governance pipeline that only moves rebuildable artifacts out of the repo tree.
+description_zh: 诊断并治理「AI 协作项目越用越贵」——当用户问「为什么每次对话 token 越来越大 / 怎么省 token / 越用越慢」，或发现仓库体积几个月涨了几百 MB、检索被重复副本淹没、备份与归档目录堆在源码树里时使用。覆盖：五类 token 泄漏源的量化方法（检索面污染 / 常驻大文档 / 记忆层膨胀 / 会话累积 / .bak 备份堆积）；「体积产物体检 → 只移可重建项出仓 → 立会红的断言」三步治理流水线；散落污染的归档 SOP（动手前先查守卫是否依赖它、归档落点必须在集合树之外）；源头治理：备份「不留原地」铁律 + 配套工具 safe_backup.py（--check 报落点是否在树内）+ 备份义务分级。附两种被实测推翻的错误直觉（工具会读 .gitignore / 看起来像垃圾就可弃）。触发词：token 消耗、越用越贵、省 token、仓库太大、检索太慢、dist 巨兽、检索面、体积产物出仓、sweep_artifacts、.bak 归档、备份不留原地、safe_backup。
+description_en: 'Diagnose and fix AI-collaboration projects that get more expensive over time: quantify five token leak sources (retrieval pollution, resident large docs, memory bloat, session accumulation, backup piles), then run a three-step governance pipeline that only moves rebuildable artifacts out of the repo tree.'
 category: 02-Engineering
 version: 1.0.1
 author: 彬总
-title: 仓库检索面治理（AI 对话越用越贵的根因与解法）
-agent_created: true
 ---
 
 # 仓库检索面治理 · 让 AI 协作成本不随时间上涨

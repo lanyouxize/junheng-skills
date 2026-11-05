@@ -1,7 +1,6 @@
 ---
 name: publish-to-workbuddy-openplatform
 description: 将专家 / 技能 / 连接器 / Buddy 应用打包成 WorkBuddy 开放平台「发布管理」可上传的 zip 代码包（≤20MB，平台自动开包解析并校验）。当用户要"上传到开放平台 / 发布专家 / 发布技能 / 发布连接器 / 发布 Buddy 应用 / 把 XXX 做成可发布的包 / 发布管理上传报错怎么办"时使用。覆盖 plugin.json 字段对齐、PNG 手搓头像、分离布局打包、以及"按平台报错逐字修正"的完整迭代流程。即使用户只说"发布一下"、"做成能上传的包"、"上传失败"，也应触发本 Skill。
-agent_created: true
 version: 1.0.0
 ---
 

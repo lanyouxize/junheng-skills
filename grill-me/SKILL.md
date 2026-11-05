@@ -1,12 +1,9 @@
 ---
 name: grill-me
 display_name: Grill Me
-display_name_zh: 拷问我
-description: "A relentless interview to sharpen a plan or design. User-invoked entry point: it runs a grilling session."
-description_zh: "用户显式调用的入口：对方案或设计发起一场不留情面的拷问，直到达成共识。当用户说「grill me」「拷问我」「拷问我的方案」时使用；AI 不得自行发起。"
-tags: [grill-me, 拷问, 需求澄清, interview]
+description: 'A relentless interview to sharpen a plan or design. User-invoked entry point: it runs a grilling session.'
+description_zh: 用户显式调用的入口：对方案或设计发起一场不留情面的拷问，直到达成共识。当用户说「grill me」「拷问我」「拷问我的方案」时使用；AI 不得自行发起。
 version: 1.0.0-local.1
-source: "https://github.com/mattpocock/skills @ 49dd158 (skills/productivity/grill-me)"
 disable-model-invocation: true
 ---
 

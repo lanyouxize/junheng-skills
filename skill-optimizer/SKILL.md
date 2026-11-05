@@ -6,11 +6,7 @@ description_zh: 一套标准化的 skill 技能优化协作体系，提供多维
 description_en: A standardized skill optimization collaboration system that provides multi-dimensional quality assessment, requirement elicitation and change management, structured task instruction generation, and hard-criteria acceptance standards, helping users and AI collaboratively iterate any skill from usable to excellent.
 version: 1.0.1
 description: 优化其他 skill 的元技能：提供多维度质量评估清单、需求挖掘方法与迭代终止判据，把某个 skill 从能用改到优秀。当要评估或系统性改进一个 skill 时用。
-displayName: Skill 优化大师
-summary: 标准化 skill 优化协作体系：15 维度质量评估 + 六步需求管理 + 结构化指令生成 + 硬判据验收，让 skill 从"能用"到"优秀"
 user-invocable: true
-visibility: "public"
-tags: [skill优化, 质量评估, 需求管理, 指令生成, 验收测试, 迭代优化, 代码审查, 最佳实践, Skill Optimizer, Quality Assurance, Requirement Management]
 ---
 
 # Skill 优化大师（Skill Optimizer）

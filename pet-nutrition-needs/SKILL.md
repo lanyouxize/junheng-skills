@@ -1,7 +1,6 @@
 ---
 name: pet-nutrition-needs
 description: 核算犬猫营养需要量与比对安全红线：覆盖能量、粗蛋白、必需氨基酸、牛磺酸、钙磷比与维生素，按生理阶段分列，支持干物质、每千千卡与代谢体重三种基准换算。当用户要查宠物营养标准、做配方核算、比对 AAFCO 与 FEDIAF 时用。
-agent_created: true
 ---
 
 # 宠物营养需要知识库（Pet Nutrition Needs）

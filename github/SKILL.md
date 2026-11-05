@@ -1,12 +1,11 @@
 ---
 name: github
-description: "Interact with GitHub using the `gh` CLI. Use `gh issue`, `gh pr`, `gh run`, and `gh api` for issues, PRs, CI runs, and advanced queries."
-description_zh: "管理 GitHub Issues、PR 和 CI"
-description_en: "Manage GitHub issues, PRs, and CI runs"
+description: Interact with GitHub using the `gh` CLI. Use `gh issue`, `gh pr`, `gh run`, and `gh api` for issues, PRs, CI runs, and advanced queries.
+description_zh: 管理 GitHub Issues、PR 和 CI
+description_en: Manage GitHub issues, PRs, and CI runs
 version: 1.0.0
-display_name: "github"
-display_name_en: "github"
-visibility: "public"
+display_name: github
+display_name_en: github
 ---
 
 # GitHub Skill

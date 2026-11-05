@@ -4,8 +4,6 @@ description: 用结构化创意框架引导研究者找高价值选题：探索�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Research Ideation, Brainstorming, Problem Discovery, Creative Thinking, Research Strategy]
-dependencies: []
 ---
 
 # Research Idea Brainstorming

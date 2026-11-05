@@ -7,7 +7,6 @@ description: 把本地文档、网页或微信公众号文章转换成交互式�
 description_zh: 把本地文档（docx/pdf/pptx/txt/md/html）、网页或微信公众号文章转换成交互式脑图。严格两步：先提取纯文字正文并剔除图片、广告等非核心内容，再提炼为带约 200 字摘要的结构化脑图，产出为自包含 HTML，支持导出 PNG 与 SVG。当用户要求生成脑图、做思维导图、把某份文档或链接画成脑图/知识图谱/结构图、总结成导图时使用。
 description_en: Convert local documents (docx, pdf, pptx, txt, md, html), web pages, or WeChat official-account articles into an interactive mind map with an approximately 200-word summary. Two strict steps - first extract the plain body text and strip images, ads, QR codes and other non-core content, then distill it into a structured mind map rendered as a self-contained offline HTML file with PNG and SVG export. Trigger this skill when the user asks to generate a mind map, make a mind map or knowledge graph or structure chart from a document or link, or summarize content into a mind map.
 category: 文档处理
-agent_created: true
 ---
 
 # 帮我生成脑图

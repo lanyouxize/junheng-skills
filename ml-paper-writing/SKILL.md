@@ -4,8 +4,6 @@ description: 撰写可投稿的 ML/AI 论文（NeurIPS、ICML、ICLR、ACL、AAA
 version: 1.2.0
 author: Orchestra Research
 license: MIT
-tags: [Academic Writing, NeurIPS, ICML, ICLR, ACL, AAAI, COLM, LaTeX, Paper Writing, Citations, Research]
-dependencies: [semanticscholar, arxiv, habanero, requests]
 ---
 
 # ML Paper Writing for Top AI Conferences
@@ -266,4 +264,4 @@ Main file keeps the philosophy, the no-hallucination rule, Workflow 0 and the co
 **LaTeX Templates:** See [templates/](templates/) directory for all conference templates.
 
 ---
-
+

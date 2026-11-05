@@ -4,8 +4,6 @@ description: 用 SAELens 训练与分析稀疏自编码器：把神经网络激�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Sparse Autoencoders, SAE, Mechanistic Interpretability, Feature Discovery, Superposition]
-dependencies: [sae-lens>=6.0.0, transformer-lens>=2.0.0, torch>=2.0.0]
 ---
 
 # SAELens: Sparse Autoencoders for Mechanistic Interpretability

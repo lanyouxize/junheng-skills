@@ -1,12 +1,11 @@
 ---
 name: multi-search-engine
 description: 多引擎聚合检索：覆盖 8 个国内与 9 个国际引擎，支持高级检索语法、时间过滤、站内检索与知识问答。当用户要联网搜索、跨平台交叉验证或找最新资料时用。
-description_zh: "集成 17 个搜索引擎（8 国内 + 9 国际），无需 API"
-description_en: "Multi search engine integration with 17 engines (8 CN + 9 Global). Supports adva..."
+description_zh: 集成 17 个搜索引擎（8 国内 + 9 国际），无需 API
+description_en: Multi search engine integration with 17 engines (8 CN + 9 Global). Supports adva...
 version: 2.4.1
-display_name: "multi-search-engine"
-display_name_en: "multi-search-engine"
-visibility: "public"
+display_name: multi-search-engine
+display_name_en: multi-search-engine
 ---
 
 # Multi Search Engine

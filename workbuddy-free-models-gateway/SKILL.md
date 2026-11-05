@@ -3,14 +3,11 @@ name: workbuddy-free-models-gateway
 display_name: WorkBuddy 免费模型接入本地网关
 display_name_en: WorkBuddy Free Models to Local Gateway
 description: 把 WorkBuddy 免费模型额度（GLM、Kimi、DeepSeek、MiniMax、混元）接入本地网关，暴露为 3000 端口的 OpenAI 兼容 API 并完成接线。当用户要把免费额度接到本地或第三方客户端、需要兼容端点时使用。
-description_zh: "把 WorkBuddy 免费模型额度（GLM-5.3、Kimi K3、DeepSeek V4、MiniMax M3、Hunyuan 等）通过 workbuddy_to_api 暴露为本地 OpenAI 兼容 API（3000 端口），再作为 openai 通道接入本地 LLM 网关（8000）。覆盖三大常见故障修复：WorkBuddy 装在非默认盘（如 D 盘）、本机 HTTP_PROXY 拦截 127.0.0.1、wb-* 别名 400 报错；并区分永久/限时免费、一键启动 3000+8000。触发词：把 WorkBuddy 免费模型接入网关、workbuddy_to_api 配置、免费大模型接入 OpenAI 兼容 API、wb-* 模型 400/502。"
-description_en: "Expose WorkBuddy free model credits (GLM-5.3, Kimi K3, DeepSeek V4, MiniMax M3, Hunyuan) as a local OpenAI-compatible API on port 3000 via workbuddy_to_api, then wire it into a local LLM gateway (8000) as an openai channel. Fixes three common failures (non-default install drive, HTTP_PROXY intercepting 127.0.0.1, wb-* alias 400), labels permanent vs time-limited free models, and one-click launches 3000+8000."
+description_zh: 把 WorkBuddy 免费模型额度（GLM-5.3、Kimi K3、DeepSeek V4、MiniMax M3、Hunyuan 等）通过 workbuddy_to_api 暴露为本地 OpenAI 兼容 API（3000 端口），再作为 openai 通道接入本地 LLM 网关（8000）。覆盖三大常见故障修复：WorkBuddy 装在非默认盘（如 D 盘）、本机 HTTP_PROXY 拦截 127.0.0.1、wb-* 别名 400 报错；并区分永久/限时免费、一键启动 3000+8000。触发词：把 WorkBuddy 免费模型接入网关、workbuddy_to_api 配置、免费大模型接入 OpenAI 兼容 API、wb-* 模型 400/502。
+description_en: Expose WorkBuddy free model credits (GLM-5.3, Kimi K3, DeepSeek V4, MiniMax M3, Hunyuan) as a local OpenAI-compatible API on port 3000 via workbuddy_to_api, then wire it into a local LLM gateway (8000) as an openai channel. Fixes three common failures (non-default install drive, HTTP_PROXY intercepting 127.0.0.1, wb-* alias 400), labels permanent vs time-limited free models, and one-click launches 3000+8000.
 category: 开发者工具
 version: 1.0.0
 author: 12168
-slug: wb-free-models-gateway
-tags: ["workbuddy_to_api", "免费模型", "LLM网关", "OpenAI兼容", "glm-5.3", "kimi-k3", "deepseek-v4"]
-agent_created: true
 ---
 
 # WorkBuddy 免费模型 → 本地 LLM 网关

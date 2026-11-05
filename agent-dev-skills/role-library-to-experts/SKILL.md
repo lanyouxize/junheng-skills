@@ -1,6 +1,5 @@
 ---
 name: role-library-to-experts
-agent_created: true
 description: 将外部 GitHub 角色库（如 agency-agents-zh、岗位库、人设集）批量转换为 WorkBuddy 专家包——生成独立 Agent 型专家，并按部门聚合为 Team 型专家团，注册进专家市场。可复用于任意类似角色库。
 ---
 

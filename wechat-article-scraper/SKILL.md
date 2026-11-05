@@ -3,28 +3,9 @@ name: wechat-article-scraper
 display_name: 微信公众号图文爬取与知识库导出
 display_name_en: WeChat Article Scraper
 description_zh: 微信公众号图文内容爬取与多平台知识库导出工具 v1.2.0：搜狗微信搜索发现文章 + URL直接抓取全文、按公众号名称/关键词/时间范围组合检索、文章全文解析（标题/作者/日期/摘要/正文/图片）、Markdown/Text/HTML/JSON四种格式、ZIP打包导出、纯文本Markdown目录导出、IMA知识库/Dify Dataset/Obsidian Vault三大知识库一键同步（凭证走环境变量）、智能去重（规范链接+内容哈希+标题相似度并给出重复原因）、日期范围过滤+关键词过滤+相关性排序、离线抽取式摘要与关键词统计、爬取历史记账支持增量采集、图片本地化、请求限速+瞬时故障自动重试（遵守Retry-After）+缓存TTL+反爬验证页与429限流识别+导出目录越界防护。
-description_en: "WeChat Official Account article scraping and multi-platform knowledge base export v1.2.0: Sogou WeChat search discovery + direct URL full-text fetch, search by account name / keyword / date range, article parsing (title/author/date/summary/body/images), Markdown/Text/HTML/JSON formats, ZIP packaging plus text-only Markdown folder export, IMA/Dify/Obsidian sync (credentials from environment variables), intelligent dedup (canonical link + content hash + title similarity with reasons), date/keyword filtering + relevance ranking, offline extractive summarization and keyword extraction, scrape-history journal for incremental crawling, local image download, rate limiting + transient retry honoring Retry-After + cache TTL + anti-bot and HTTP 429 detection + export path containment."
+description_en: 'WeChat Official Account article scraping and multi-platform knowledge base export v1.2.0: Sogou WeChat search discovery + direct URL full-text fetch, search by account name / keyword / date range, article parsing (title/author/date/summary/body/images), Markdown/Text/HTML/JSON formats, ZIP packaging plus text-only Markdown folder export, IMA/Dify/Obsidian sync (credentials from environment variables), intelligent dedup (canonical link + content hash + title similarity with reasons), date/keyword filtering + relevance ranking, offline extractive summarization and keyword extraction, scrape-history journal for incremental crawling, local image download, rate limiting + transient retry honoring Retry-After + cache TTL + anti-bot and HTTP 429 detection + export path containment.'
 version: 1.2.0
 description: 微信公众号图文爬取与多平台知识库导出。支持搜狗搜索发现、URL 直抓与批量一体化三种模式；输出 Markdown/Text/HTML/JSON；可一键同步到 IMA、Dify、Obsidian（API Key 优先读环境变量）并智能去重。
-auto_trigger:
-  keywords: [微信公众号, 公众号文章, 微信图文, 爬取公众号, 微信爬取, 公众号搜索,
-    微信文章导出, 微信文章下载, 公众号内容, 微信知识库, 公众号批量, 微信ZIP,
-    IMA导入, Dify导入, Obsidian同步, 微信全文, 公众号爬虫, 微信采集, 图文采集,
-    搜狗微信, 微信文章归档, 微信文章整理, 公众号归档, 微信打包, 公众号打包,
-    微信备份, 公众号备份, 微信公众号整理, 微信文章合集, 公众号合集,
-    知识库同步, 微信到IMA, 微信到Dify, 微信到Obsidian, 公众号知识库,
-    图文爬取, 公众号图文下载, 微信内容抓取, 公众号内容采集, 微信全文获取,
-    微信文章摘要, 公众号增量爬取, 爬取历史, 微信图片下载, 文章去重,
-    微信反爬, 搜狗验证码, 微信限流, 微信文章重试]
-  patterns:
-    - "(爬|抓|采集|获取|下载).{0,6}(微信|公众号).{0,6}(文章|图文|内容)"
-    - "(微信|公众号).{0,4}(爬|抓|采集|导出|下载|打包)"
-    - "(搜|查|找).{0,4}(公众号|微信).{0,4}(文章|图文|内容)"
-    - "(导出|同步|导入).{0,4}(IMA|Dify|Obsidian|知识库)"
-    - "(全量|批量|全部).{0,4}(爬取|采集|导出|下载).{0,4}(公众号|微信)"
-    - "(微信|公众号).{0,4}(备份|归档|整理|合集)"
-    - "(公众号|微信).{0,4}(时间|日期|期间|最近|近).{0,4}(爬|抓|文章)"
-    - "(微信|公众号).{0,4}(摘要|总结|关键词|历史|增量|去重|图片)"
 ---
 
 # wechat-article-scraper v1.2.0 — 微信公众号图文爬取与知识库导出

@@ -1,14 +1,13 @@
 ---
 name: wechat-article-archive
-display_name: "公众号整站归档"
-display_name_en: "WeChat Article Archive"
-description_zh: "把公众号历史文章抓成全量语料，交付可点读的 HTML 阅读器、TXT 文章包与带书签的 Word 全集。"
-description_en: "Archive a full WeChat official-account article history into a clickable HTML reader, a TXT package and a bookmarked Word collection."
+display_name: 公众号整站归档
+display_name_en: WeChat Article Archive
+description_zh: 把公众号历史文章抓成全量语料，交付可点读的 HTML 阅读器、TXT 文章包与带书签的 Word 全集。
+description_en: Archive a full WeChat official-account article history into a clickable HTML reader, a TXT package and a bookmarked Word collection.
 category: content-creation
 version: 1.0.1
-author: "WorkBuddy"
+author: WorkBuddy
 description: 把微信公众号的整站历史文章抓成全量语料，交付三种归档件：可点读的单文件 HTML 阅读器、按账号分文件夹的 TXT 文章包（可打包 zip）、带书签目录的 Word 全集。当用户要把某公众号文章整理成可读档时使用。
-agent_created: true
 ---
 
 # 公众号文章全量归档

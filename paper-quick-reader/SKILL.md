@@ -2,12 +2,14 @@
 name: paper-quick-reader
 version: 1.0.0
 description: 论文速读与对比：提供裸读、引导、精读三档深度，回答带页码级溯源以防幻觉，支持多篇横向对比。当用户要速读论文、抓核心观点、比对多篇或问第几页提到什么时用。
-allowed-tools: [read_file, execute_command, write_to_file]
-display_name: "论文速读"
-display_name_en: "Paper Quick Reader"
-description_zh: "面向学生和研究者的 AI 论文速读工具，支持裸读/引导/精读三档深度，页码级可追溯防幻觉，可多篇对比，输出结构化笔记与核心观点摘要。"
-description_en: "AI paper reading tool with three depth modes (skim / guided / deep), page-level provenance to prevent hallucination, multi-paper comparison, and structured note output for students and researchers."
-visibility: "public"
+allowed-tools:
+- read_file
+- execute_command
+- write_to_file
+display_name: 论文速读
+display_name_en: Paper Quick Reader
+description_zh: 面向学生和研究者的 AI 论文速读工具，支持裸读/引导/精读三档深度，页码级可追溯防幻觉，可多篇对比，输出结构化笔记与核心观点摘要。
+description_en: AI paper reading tool with three depth modes (skim / guided / deep), page-level provenance to prevent hallucination, multi-paper comparison, and structured note output for students and researchers.
 ---
 
 # AI 论文速读

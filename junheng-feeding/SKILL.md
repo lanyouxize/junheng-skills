@@ -2,10 +2,8 @@
 name: junheng-feeding
 description: 宠物喂食指南与体况管理。按个体档案与配方算每日喂食计划（kcal、克/日、餐次）、体况策略、理想体重、换粮过渡与监测计划；支持多宠聚合产出合并采购清单与按每袋 N 天的分装排期标签。问猫每天吃多少克、BCS 7 分怎么喂时使用。
 description_en: Pet feeding guide and body condition management (Junheng NutriAgent). Compute daily feeding plan (kcal, grams/day, meals), BCS-based energy adjustment, ideal weight estimate, diet transition schedule, monitoring plan and vet-visit signals. Also aggregates multiple pets' plans, produces a combined purchase list merged by material code, and splits daily amounts into labelled portion bags (recipe name, grams per portion, packaging date, use-by date, thawing note).
-metadata:
-  author: Junheng NutriAgent
-  version: "1.2.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+author: Junheng NutriAgent
+version: 1.2.0
 ---
 
 # 喂食指南与体况管理（junheng-feeding）

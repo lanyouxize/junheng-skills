@@ -104,6 +104,8 @@ FM_OVERLAP_GROUPS = [
 # 来源 = 两份官方文档的并集（任务 x 已核实），外加第三方跨平台工具需要的 2 个字段：
 #   - 开放平台 open.workbuddy.cn/docs/skill
 #   - CLI      workbuddy.ai/docs/cli/skills
+# 另含 1 个本地治理保留字段 `category`（重叠组 {category,domain,type} 经 (x) 裁决选定为规范字段，
+# 平台官方未列但保留为本地分类约定，见 FRONTMATTER-WHITELIST.md §3）。
 #
 # 关键：白名单取**两份文档的并集**，包含当前 93 个技能里尚未使用的合法字段
 # （context / agent / model / hooks / examples_zh / examples_en 等）。这样 S6 不会把
@@ -115,6 +117,8 @@ FM_WHITELIST = {
     "description_en", "version", "author", "allowed-tools", "examples_zh", "examples_en",
     # CLI 标准字段
     "disable-model-invocation", "user-invocable", "context", "agent", "model", "hooks",
+    # 本地治理保留：重叠组 {category, domain, type} 经 (x) 裁决选定 category 为规范字段（见白皮书 §3）
+    "category",
     # 第三方跨平台工具需要（保留）
     "license", "metadata",
 }

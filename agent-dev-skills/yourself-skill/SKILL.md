@@ -1,10 +1,9 @@
 ---
 name: yourself-skill
-description: "Distill yourself into an AI Skill. Deconstruct chat history, diaries, social media, and photos into a runnable digital self with persona and memory models. Use when user wants to create a digital twin, self-reflection mirror, or personal knowledge archive."
-description_zh: "把自己蒸馏成 AI Skill，解构聊天记录与日记生成数字分身"
-description_en: "Distill yourself into an AI Skill — digital twin with persona and memory"
-version: "1.0.0"
-homepage: https://github.com/notdog1998/yourself-skill
+description: Distill yourself into an AI Skill. Deconstruct chat history, diaries, social media, and photos into a runnable digital self with persona and memory models. Use when user wants to create a digital twin, self-reflection mirror, or personal knowledge archive.
+description_zh: 把自己蒸馏成 AI Skill，解构聊天记录与日记生成数字分身
+description_en: Distill yourself into an AI Skill — digital twin with persona and memory
+version: 1.0.0
 allowed-tools: Read, Write, Edit, Bash
 ---
 

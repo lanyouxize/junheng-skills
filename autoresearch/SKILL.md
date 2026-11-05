@@ -4,7 +4,6 @@ description: 端到端自主 AI 研究编排：内循环快速实验迭代、外
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [Autonomous Research, Two-Loop Architecture, Experiment Orchestration, Research Synthesis, Project Management]
 ---
 
 # Autoresearch
@@ -281,4 +280,4 @@ When you have something meaningful to share, create a research presentation — 
 For Claude Code: generate HTML and `open` it. If HTML fails to open or render, convert to PDF as fallback (use `weasyprint`, `playwright pdf`, or `wkhtmltopdf`). For OpenClaw: generate PDF directly.
 
 See [references/progress-reporting.md](references/progress-reporting.md) for template scaffolding and the optimization plot approach. Use the template as a starting point — be creative with what you show.
-
+

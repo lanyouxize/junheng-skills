@@ -4,8 +4,6 @@ description: 在研究或编码会话收尾时记录研究溯源：扫描对话�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
-tags: [ARA, Research Recording, Provenance, Session Logging, Knowledge Management, Exploration Tree, Research Tooling]
-dependencies: []
 ---
 
 # Live Research Project Manager (Live PM)

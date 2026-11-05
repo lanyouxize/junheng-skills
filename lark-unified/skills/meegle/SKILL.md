@@ -1,16 +1,17 @@
 ---
 name: meegle
-description: |
-  飞书项目（Meegle / Meego，原飞书项目）操作工具。支持查询和管理工作项、节点流转、视图查询、个人待办、排期统计等功能。 Use when user needs to work with Feishu/Lark Meego project management — including querying work items, creating/updating work items, completing workflow nodes, checking views, listing todos, analyzing schedules/workloads, or searching with MQL. 关键词：飞书项目、meego、meegle、工作项、需求、任务、缺陷、排期、视图、待办、节点。
-version: "1.0.19"
-parentSkill: lark-unified
+description: '飞书项目（Meegle / Meego，原飞书项目）操作工具。支持查询和管理工作项、节点流转、视图查询、个人待办、排期统计等功能。 Use when user needs to work with Feishu/Lark Meego project management — including querying work items, creating/updating work items, completing workflow nodes, checking views, listing todos, analyzing schedules/workloads, or searching with MQL. 关键词：飞书项目、meego、meegle、工作项、需求、任务、缺陷、排期、视图、待办、节点。
+
+  '
+version: 1.0.19
 allowed-tools: Bash, Read
 metadata:
   requires:
-    bins: ["meegle"]
-  cliHelp: "meegle --help"
-  alignedWith: "larksuite/meegle-cli v1.0.19"
-  upstream: "https://github.com/larksuite/meegle-cli/tree/main/skills/meegle"
+    bins:
+    - meegle
+  cliHelp: meegle --help
+  alignedWith: larksuite/meegle-cli v1.0.19
+  upstream: https://github.com/larksuite/meegle-cli/tree/main/skills/meegle
 ---
 
 # 飞书项目 (Meego/Meegle) 操作指南

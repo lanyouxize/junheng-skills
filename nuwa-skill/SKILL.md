@@ -1,12 +1,11 @@
 ---
 name: nuwa-skill
-description: "Distill thinking frameworks from people and generate runnable persona Skills"
+description: Distill thinking frameworks from people and generate runnable persona Skills
 version: 1.0.6
-display_name: "女娲"
-display_name_en: "Nuwa Skill"
-description_zh: "蒸馏人物思维框架，生成可运行的人物 Skill"
-description_en: "Distill thinking frameworks from people and generate runnable persona Skills"
-visibility: "public"
+display_name: 女娲
+display_name_en: Nuwa Skill
+description_zh: 蒸馏人物思维框架，生成可运行的人物 Skill
+description_en: Distill thinking frameworks from people and generate runnable persona Skills
 ---
 
 # 女娲 · Skill造人术

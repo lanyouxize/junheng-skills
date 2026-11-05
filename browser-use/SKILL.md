@@ -3,12 +3,10 @@ name: browser-use
 description: Automates browser interactions for web testing, form filling, screenshots, and data extraction.
 version: 2.0.7
 allowed-tools: Bash(browser-use:*)
-display_name: "浏览器自动化"
-display_name_en: "Browser Use"
-description_zh: "浏览器自动化（导航、点击、截图、数据提取、多会话、云浏览器）"
-description_en: "Automates browser interactions for web testing, form filling, screenshots, and data extraction."
-visibility: "public"
-icon: "https://openplatform-cdn.codebuddy.cn/public/skills/icons/browser-use.svg"
+display_name: 浏览器自动化
+display_name_en: Browser Use
+description_zh: 浏览器自动化（导航、点击、截图、数据提取、多会话、云浏览器）
+description_en: Automates browser interactions for web testing, form filling, screenshots, and data extraction.
 ---
 
 # Browser Automation with browser-use CLI

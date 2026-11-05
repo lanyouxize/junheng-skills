@@ -1,13 +1,11 @@
 ---
 name: ima-skills
-description: "IMA notes & knowledge base management (read, write, search)"
+description: IMA notes & knowledge base management (read, write, search)
 version: 1.1.9
-homepage: "https://ima.qq.com"
-display_name: "腾讯ima"
-display_name_en: "Ima Skills"
-description_zh: "ima笔记与知识库管理（读取、写入、检索）"
-description_en: "IMA notes & knowledge base management (read, write, search)"
-visibility: "public"
+display_name: 腾讯ima
+display_name_en: Ima Skills
+description_zh: ima笔记与知识库管理（读取、写入、检索）
+description_en: IMA notes & knowledge base management (read, write, search)
 ---
 
 # ima-skill

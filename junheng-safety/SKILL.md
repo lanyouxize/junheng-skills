@@ -2,10 +2,8 @@
 name: junheng-safety
 description: 宠物食品有毒有害物质安全闸。按物种筛查配方中的禁用与慎用物质，返回禁用、慎用、安全、未收录四态结论并带来源机构与判定依据；可批量筛查并在命中禁用时阻断。未收录一律判未收录，绝不当作安全。问巧克力能不能喂狗时使用。
 description_en: Toxic-substance safety gate for pet food. Screens a recipe or a single ingredient for banned and caution substances (chocolate, xylitol, lilies, allium, grapes, macadamia, permethrin) by species, in four states — banned / caution / ok / unknown; unlisted substances are never reported as safe, and a banned hit blocks the recipe.
-metadata:
-  author: Junheng NutriAgent
-  version: "1.0.0"
-compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+author: Junheng NutriAgent
+version: 1.0.0
 ---
 
 # 有毒有害物质安全闸（junheng-safety）
