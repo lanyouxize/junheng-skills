@@ -52,6 +52,15 @@ export const NUTRIENT_META = {
   taurine: { label: '牛磺酸', unit: '%DM', dataField: null, kind: 'min' },
   caP: { label: '钙磷比（干物质基）', unit: '', dataField: null, kind: 'range', computed: 'caP' },
   me: { label: '代谢能（干物质基）', unit: 'kcal/kg DM', dataField: null, kind: 'min', computed: 'me' },
+  // —— 以下 6 项由任务 A1 从 pawcook AAFCO 数据吸收（批 A），dataField:null 表示
+  //    原料库当前无氨基酸/脂肪酸分析字段，仅登记标准、系统暂无法自动判定（与 lysine/taurine 同机制）。
+  //    出处：SirAllap/pawcook aafco.json / aafco-cat.json 转译；AAFCO 集整体 verified:false，待官核。
+  linoleic_acid: { label: '亚油酸', unit: '%DM', dataField: null, kind: 'min' },
+  ala: { label: 'α-亚麻酸', unit: '%DM', dataField: null, kind: 'min' },
+  epa_dha: { label: 'EPA+DHA', unit: '%DM', dataField: null, kind: 'min' },
+  arachidonic_acid: { label: '花生四烯酸', unit: '%DM', dataField: null, kind: 'min' },
+  arginine: { label: '精氨酸', unit: '%DM', dataField: null, kind: 'min' },
+  methionine: { label: '蛋氨酸', unit: '%DM', dataField: null, kind: 'min' },
 }
 
 /**
@@ -138,6 +147,9 @@ export const STANDARD_SETS = {
         growth: {
           crude_protein: { min: 22.5 },
           crude_fat: { min: 8.5 },
+          linoleic_acid: { min: 1.3, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
+          ala: { min: 0.08, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
+          epa_dha: { min: 0.05, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
           calcium: { min: 1.2 },
           phosphorus: { min: 1.0 },
           chloride: { min: 0.3 },
@@ -147,8 +159,9 @@ export const STANDARD_SETS = {
         adult: {
           crude_protein: { min: 18.0 },
           crude_fat: { min: 5.5 },
-          calcium: { min: 0.6 },
-          phosphorus: { min: 0.5 },
+          linoleic_acid: { min: 1.1, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
+          calcium: { min: 0.5 },
+          phosphorus: { min: 0.4 },
           chloride: { min: 0.3 },
           caP: { min: 1.0, max: 2.0 },
           me: { min: 3250 },
@@ -158,6 +171,13 @@ export const STANDARD_SETS = {
         growth: {
           crude_protein: { min: 30.0 },
           crude_fat: { min: 9.0 },
+          linoleic_acid: { min: 0.55, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          arachidonic_acid: { min: 0.02, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          epa_dha: { min: 0.012, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          arginine: { min: 1.24, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          methionine: { min: 0.20, max: 1.50, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          lysine: { min: 1.20, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO 2014 猫（干粮≥0.10%/湿粮≥0.20% DM；参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
           calcium: { min: 1.2 },
           phosphorus: { min: 1.0 },
           chloride: { min: 0.3 },
@@ -167,6 +187,12 @@ export const STANDARD_SETS = {
         adult: {
           crude_protein: { min: 26.0 },
           crude_fat: { min: 9.0 },
+          linoleic_acid: { min: 0.55, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          arachidonic_acid: { min: 0.02, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          arginine: { min: 1.04, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          methionine: { min: 0.20, max: 1.50, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          lysine: { min: 0.34, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
+          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO 2014 猫（干粮≥0.10%/湿粮≥0.20% DM；参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
           calcium: { min: 0.6 },
           phosphorus: { min: 0.5 },
           chloride: { min: 0.3 },
