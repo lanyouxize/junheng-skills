@@ -124,7 +124,37 @@ python -X utf8 _governance/vcs-verify.py --root ~/.workbuddy/rules --clone
    且各自 clone 出来与工作区逐字节一致。
 2. **系统级 `core.autocrlf=true` 仍然存在**，但 `.gitattributes` 已覆盖它；
    若哪天在别的机器上 clone 后发现文件变大，先查 `git check-attr -a -- <path>`。
-3. **覆盖范围与未覆盖项**：已覆盖 `skills/` `tools/` `rules/`。
-   **仍未覆盖**：`settings.json`、`.skill-list-cache.json`、`workbuddy.db`（平台数据库）、
-   `projects/`（会话日志）。前两者是配置，动它属平台行为；后者体量大且由平台自动管理。
+3. **覆盖范围与未覆盖项**：已覆盖 `skills/` `tools/` `rules/`，以及通过 `state` 命令覆盖的
+   `settings.json`、`.skill-list-cache.json`、`workbuddy.db`、`projects/`（见第八节）。
    `agents/` `commands/` `hooks/` 三个目录本机不存在，无从覆盖。
+
+## 八、状态保护（2026-11-05 新增 `state` 子命令）
+
+`~/.workbuddy/` 下还有四份「丢了会出大事但此前无版本控制」的资产。它们**不能一刀切进 git**：
+
+| 资产 | 体积 | 类型 | 保护手段 |
+|---|---|---|---|
+| `settings.json` | 43 KB | 文本 | **git**（config-vcs 仓库，有差异价值） |
+| `.skill-list-cache.json` | 167 KB | 文本（可重建） | **git**（作「已装技能」快照） |
+| `workbuddy.db` | 19 MB | SQLite 二进制，每次会话变 | **快照备份**（非 git） |
+| `projects/` | 1.9 GB | 会话日志 `.jsonl` 为主 | **快照备份**（非 git，进 git 会爆仓） |
+
+**为什么分层**：git 对二进制/巨型追加文件既无有意义 diff，又会无限膨胀仓库。故文本进 git、
+二进制与巨型目录只做时间点快照（gzip），落 `D:/skill-vcs/state-snapshots/`，保留最近 3 份。
+
+**用法**：
+
+```bash
+~/.workbuddy/tools/vcs-all.sh state            # 文本进 git + db/projects 全部快照
+~/.workbuddy/tools/vcs-all.sh state --no-projects   # 跳过 1.9GB 的 projects 快照
+~/.workbuddy/tools/vcs-all.sh state --keep 5  # 每种快照保留 5 份
+```
+
+**两个已踩的坑（实现时）**：
+- `D:/skill-vcs` 这种 Windows 盘符路径，`cp`/`git bundle` 能认，但 `tar` 的子进程（gzip）
+  解析不了（`Cannot connect to D: resolve failed`）。脚本里已用 `cygpath -u` 把
+  `VCS_BUNDLE_DIR` 转成 POSIX `/d/skill-vcs` 形式。
+- `tar` 失败时不能只靠 `&& echo` 链——失败会被静默吞掉、整体仍报 exit 0。
+  `cmd_state` 现在显式捕获 tar 退出码并置 `fail=1`。
+- config-vcs 仓库**不能**建在 `~/.workbuddy/state/`：该目录已被某个「证明计数」工具的
+  游标文件 `b4_proofcount_cursor.json` 占用，建仓会污染他人工作区。故改用 `~/.workbuddy/config-vcs/`。
