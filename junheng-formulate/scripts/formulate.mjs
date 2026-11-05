@@ -144,58 +144,148 @@ export function solveLP(prob) {
 }
 
 /**
- * 把 junheng 营养约束 + 原料清单构建为 LP 并求解最低成本配方。
+ * 把 junheng 营养约束 + 原料清单构建为 LP 并求解配方。
  *
  * @param {object} args
  *   ingredients  {Array<{id:string, name:string, price:number, nutrients:{[k]:number}}>}
  *                nutrients 为 %DM 基准的营养值
- *   constraints  {Array<{key:string, label:string, min?:number, max?:number, unit:string}>}
- *                来自 resolveStandard(...).items（已 available 过滤）
- *   species/stage/moistureClass 仅用于报告
- * @returns 求解结果 + 可读性报告
+ *   constraints  {Array<{key:string, label:string, min?:number, max?:number, unit:string,
+ *                         ratio?:{num:string,den:string}}>}
+ *                来自 resolveStandard(...).items（已 available 过滤）；
+ *                比值类（如钙磷比 caP）用 ratio:{num,den} 标记，其 min/max 作用于 num/den 之比。
+ *   ingredientMax {Object<string|number, number>}  原料 id（或下标）=> 最大添加比例（0~1）
+ *   strategy     {'least_cost'|'balanced'|'nutrient_max'}  默认 'least_cost'
+ *   budget       {number}  nutrient_max 策略的预算上限（单位成本上限）；缺省取上限估算
+ *   devWeight    {number}  balanced 策略的偏差惩罚权重（默认 1.0）
+ * @returns 求解结果 + 可读性报告 + 质量门禁 diagnostics
  */
 export function formulateLeastCost(args) {
-  const { ingredients, constraints } = args
+  const {
+    ingredients,
+    constraints,
+    ingredientMax = {},
+    strategy = 'least_cost',
+    budget = null,
+    devWeight = 1.0,
+  } = args
   const n = ingredients.length
   const used = constraints.filter((c) => c.min != null || c.max != null)
+  const price = ingredients.map((g) => g.price)
 
-  // 目标：最小成本
-  const objective = ingredients.map((g) => g.price)
-
-  // 约束：营养 min/max（用 %DM 营养矩阵）+ Σ=1
-  const lpConstraints = []
-  const binding = []
+  // 基础营养约束（min/max/比值）统一为 coeffs/op/rhs 三元组
+  const nutrientConstrs = []
   for (const c of used) {
-    const coeffs = ingredients.map((g) => +(g.nutrients[c.key] ?? 0))
-    if (c.min != null) {
-      lpConstraints.push({ coeffs, op: '>=', rhs: c.min })
-      binding.push({ key: c.key, op: '>=', rhs: c.min, label: c.label })
+    if (c.ratio) {
+      const { num, den } = c.ratio
+      if (c.min != null) {
+        const coeffs = ingredients.map((g) => (g.nutrients[num] ?? 0) - c.min * (g.nutrients[den] ?? 0))
+        nutrientConstrs.push({ coeffs, op: '>=', rhs: 0, key: c.key, label: c.label, kind: 'ratio-min' })
+      }
+      if (c.max != null) {
+        const coeffs = ingredients.map((g) => (g.nutrients[num] ?? 0) - c.max * (g.nutrients[den] ?? 0))
+        nutrientConstrs.push({ coeffs, op: '<=', rhs: 0, key: c.key, label: c.label, kind: 'ratio-max' })
+      }
+      continue
     }
-    if (c.max != null) {
-      lpConstraints.push({ coeffs, op: '<=', rhs: c.max })
-      binding.push({ key: c.key, op: '<=', rhs: c.max, label: c.label })
+    const coeffs = ingredients.map((g) => +(g.nutrients[c.key] ?? 0))
+    if (c.min != null) nutrientConstrs.push({ coeffs, op: '>=', rhs: c.min, key: c.key, label: c.label, kind: 'min' })
+    if (c.max != null) nutrientConstrs.push({ coeffs, op: '<=', rhs: c.max, key: c.key, label: c.label, kind: 'max' })
+  }
+
+  const ones = (len) => new Array(len).fill(1)
+  const oneHot = (len, i) => { const a = new Array(len).fill(0); a[i] = 1; return a }
+
+  // ---- least_cost / nutrient_max：纯营养硬约束 + Σ=1 + 可选预算上限 ----
+  if (strategy === 'least_cost' || strategy === 'nutrient_max') {
+    const lp = nutrientConstrs.map((nc) => ({ coeffs: nc.coeffs, op: nc.op, rhs: nc.rhs }))
+    for (let i = 0; i < n; i++) {
+      const cap = ingredientMax[ingredients[i].id] ?? ingredientMax[i]
+      if (cap != null) lp.push({ coeffs: oneHot(n, i), op: '<=', rhs: cap })
+    }
+    lp.push({ coeffs: ones(n), op: '=', rhs: 1 })
+    if (strategy === 'nutrient_max') {
+      const b = budget != null ? budget : Math.ceil(Math.max(...price) * 100) / 100
+      lp.push({ coeffs: price.slice(), op: '<=', rhs: b })
+    }
+    const res = solveLP({ nVars: n, objective: price, constraints: lp })
+    return finalize(res, { ingredients, used, strategy, n, deviationVars: null })
+  }
+
+  // ---- balanced：硬安全下限/上限 + 软偏差（向目标剖面收敛） ----
+  if (strategy === 'balanced') {
+    const K = used.length
+    const N = n + 2 * K
+    const objective = new Array(N).fill(0)
+    for (let i = 0; i < n; i++) objective[i] = price[i]
+    for (let k = 0; k < K; k++) { objective[n + 2 * k] = devWeight; objective[n + 2 * k + 1] = devWeight }
+    const lp = []
+    const deviationVars = []
+    for (let k = 0; k < K; k++) {
+      const c = used[k]
+      const a = ingredients.map((g) => +(g.nutrients[c.key] ?? 0))
+      const dUp = n + 2 * k
+      const dDn = n + 2 * k + 1
+      const target = c.min != null && c.max != null ? (c.min + c.max) / 2 : (c.min != null ? c.min : c.max)
+      const coeffs = a.concat(new Array(2 * K).fill(0))
+      coeffs[dUp] = -1; coeffs[dDn] = 1
+      lp.push({ coeffs, op: '=', rhs: target }) // 软等式：Σa_jx_j - d_up + d_dn = target
+      if (c.min != null) lp.push({ coeffs: a.slice(), op: '>=', rhs: c.min }) // 硬安全下限
+      if (c.max != null) lp.push({ coeffs: a.slice(), op: '<=', rhs: c.max }) // 硬安全上限
+      deviationVars.push({ k, dUp, dDn, target })
+    }
+    for (let i = 0; i < n; i++) {
+      const cap = ingredientMax[ingredients[i].id] ?? ingredientMax[i]
+      if (cap != null) lp.push({ coeffs: oneHot(N, i), op: '<=', rhs: cap })
+    }
+    lp.push({ coeffs: ones(N), op: '=', rhs: 1 })
+    const res = solveLP({ nVars: N, objective, constraints: lp })
+    return finalize(res, { ingredients, used, strategy, n, deviationVars })
+  }
+
+  throw new Error('未知 strategy: ' + strategy)
+}
+
+// 解后整理：配方、单位成本、实际营养达成度、质量门禁诊断
+function finalize(res, ctx) {
+  const { ingredients, used, strategy, n, deviationVars } = ctx
+  if (res.status !== 'optimal') {
+    return {
+      status: res.status,
+      recipe: [],
+      unitCost: null,
+      strategy,
+      diagnostics: { status: res.status, note: '不可行或无界：请核查营养约束、原料上限或预算是否冲突' },
     }
   }
-  lpConstraints.push({ coeffs: ingredients.map(() => 1), op: '=', rhs: 1 })
-  binding.push({ key: '__sum', op: '=', rhs: 1, label: '配方总占比' })
-
-  const res = solveLP({ nVars: n, objective, constraints: lpConstraints })
-
-  // 解后校验：实际营养达成度
+  const x = res.x.slice(0, n)
+  const recipe = ingredients.map((g, i) => ({ id: g.id, name: g.name, share: +x[i].toFixed(4), price: g.price }))
+  const unitCost = +res.objective.toFixed(4)
   const achieved = {}
+  let deficit = 0, overshoot = 0
   for (const c of used) {
     let v = 0
-    for (let i = 0; i < n; i++) v += (ingredients[i].nutrients[c.key] ?? 0) * (res.x[i] ?? 0)
-    achieved[c.key] = { label: c.label, value: +v.toFixed(4), min: c.min ?? null, max: c.max ?? null, unit: c.unit }
+    for (let i = 0; i < n; i++) v += (ingredients[i].nutrients[c.key] ?? 0) * (x[i] ?? 0)
+    const a = +v.toFixed(4)
+    achieved[c.key] = { label: c.label, value: a, min: c.min ?? null, max: c.max ?? null, unit: c.unit }
+    if (c.min != null && a < c.min - 1e-3) deficit++
+    if (c.max != null && a > c.max + 1e-3) overshoot++
   }
-
+  let devSum = 0
+  if (deviationVars) for (const dv of deviationVars) devSum += (x[dv.dUp] ?? 0) + (x[dv.dDn] ?? 0)
   return {
-    status: res.status,
-    recipe: ingredients.map((g, i) => ({
-      id: g.id, name: g.name, share: +(res.x[i] ?? 0).toFixed(4), price: g.price,
-    })),
-    unitCost: res.status === 'optimal' ? +res.objective.toFixed(4) : null,
-    constraints: binding,
+    status: 'optimal',
+    strategy,
+    recipe,
+    unitCost,
     achieved,
+    deviationSum: deviationVars ? +devSum.toFixed(4) : null,
+    diagnostics: {
+      status: 'optimal',
+      constraintCount: used.length,
+      minCount: used.filter((c) => c.min != null).length,
+      maxCount: used.filter((c) => c.max != null).length,
+      deficitCount: deficit,
+      overshootCount: overshoot,
+    },
   }
 }
