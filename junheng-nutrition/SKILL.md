@@ -25,8 +25,8 @@ version: 1.1.0
 1. **全部为理论计算值，不是检测值**。每次输出带 `basis: "theoretical"`。
 2. **缺数据必须显式**。缺成分的原料进 `zeroData`，无价格的进 `cost.missingPrice`；覆盖率不足时结果会标低可靠度。**先看这几个字段再看数值**。
 3. **未匹配的原料不静默丢弃**。`unknown` 列出所有没找到的原料名/编号。
-4. **总重为 0 不出数**。返回 `data.ok:false` + `data.reason`（如 `zero_total_weight`），而不是给一堆 0。
-   ⚠ **两层 ok 不同义**：外层 `ok:true` 只表示「命令执行成功」，不代表算出了数；**判断是否出数必须看 `data.ok`**。这个同名不同义是本项目最容易误读的一处，读结果时先看 `data.ok`。
+4. **总重为 0 不出数**。返回 `data.computed:false` + `data.reason`（如 `zero_total_weight`），而不是给一堆 0。
+   ⚠ **两层 ok 不同义**：外层 `ok:true` 只表示「命令执行成功」，不代表算出了数；**判断是否出数必须看 `data.computed`**。这个同名不同义是本项目最容易误读的一处，读结果时先看 `data.computed`。
 
 ## 用法
 

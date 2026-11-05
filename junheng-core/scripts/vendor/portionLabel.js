@@ -322,7 +322,7 @@ export function computePortionLabels(entries = [], opts = {}) {
   const list = Array.isArray(entries) ? entries : []
   if (!list.length) {
     return {
-      ok: false,
+      computed: false,
       reason: '没有分装条目：至少给一只宠物的每日用量（克/日）才能排期与出标签',
       filledDate, days, portionDays, form,
       labels: [], schedules: [], warnings, note,
@@ -383,7 +383,7 @@ export function computePortionLabels(entries = [], opts = {}) {
   }
 
   return {
-    ok: labels.length > 0,
+    computed: labels.length > 0,
     reason: labels.length ? '' : '所有条目都未能分装（每日用量为 0 或缺失）',
     filledDate, days, portionDays, form,
     labels,

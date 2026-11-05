@@ -55,7 +55,7 @@
       "exit": 0,
       "assert": [
         { "type": "eq", "path": "ok", "value": true },
-        { "type": "eq", "path": "data.ok", "value": false },
+        { "type": "eq", "path": "data.computed", "value": false },
         { "type": "eq", "path": "data.reason", "value": "zero_total_weight" }
       ]
     }

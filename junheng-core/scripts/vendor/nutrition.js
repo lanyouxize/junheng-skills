@@ -905,7 +905,7 @@ export function computeRecipe(items, priceOverrides = {}, opts = {}) {
   })()
 
   return {
-    ok: true,
+    computed: true,
     lines,
     totalWeight: totalW,
     asFed,
@@ -1654,7 +1654,7 @@ export function cnToNumber(str = '') {
  *   · 配比建议在覆盖率过低时**不给出具体添加量**（避免在数据不可靠时给出精确数字）。
  */
 export function evaluateRecipe(recipe, req) {
-  if (!recipe?.ok || !req) return null
+  if (!recipe?.computed || !req) return null
   const dm = recipe.dm
   const cov = recipe.coverage || {}
   const moistureClass = classifyMoisture(100 - recipe.dmPercent)
@@ -1862,7 +1862,7 @@ const r0 = (n) => Math.round(n)
 
 /** 由代谢能与 MER 计算每日饲喂量（g/天） */
 export function dailyFeeding(recipe, req) {
-  if (!recipe?.ok || !req?.mer) return null
+  if (!recipe?.computed || !req?.mer) return null
   const me = recipe.energy.meModified // kcal/kg 原样
   if (me < 100) return null
   const gramsPerDay = (req.mer / me) * 1000
