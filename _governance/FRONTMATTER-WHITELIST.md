@@ -68,8 +68,59 @@ license, metadata
 - S6 **不自动改写任何 `SKILL.md`**；改写需人工逐条裁决后单独授权（破坏性）。
 - 机器真源 = `lint_scripts.py` 的 `FM_WHITELIST` 常量（单一事实源，避免与本文档漂移）；本文档仅作人读规范。
 
-## 5. 裁决进度（由 S6 输出填充，待人工逐条确认）
+## 5. 裁决清单（由 S6 输出 + 7 个嵌套技能手工补齐，共 93 个技能的真实影响数）
 
-| 字段 | 分类 | 建议处置 | 影响技能数 | 裁决状态 |
-|---|---|---|---|---|
-| （运行 `python lint_scripts.py` 的 S6 输出后填充） | | | | |
+> 计数口径：扁平 linter 覆盖 86/93 用户技能（遗漏 7 个嵌套技能）；下方数字已用
+> `agent-dev-skills/*`（6 个）与 `lark-unified/skills/meegle` 补齐。其中
+> `agent_created` 86 视图为 9、补嵌套 +2 → 11；`homepage` 2 +1 → 3；`parentSkill` 0 +1 → 1。
+> **除这 3 个字段外，其余与 `lint_scripts.py` S6 直接输出一致。**
+
+### D 类（语义重叠，统一到一个合法字段）
+
+| 字段 | 影响技能数 | 建议处置 |
+|---|---:|---|
+| `tags` | 16 | 删，触发线索并入 `description` |
+| `category` | 10 | 保留 `category`，删 `domain`/`type` |
+| `slug` | 5 | 删，标识用 `name` |
+| `displayName` | 5 | 统一为 `display_name` |
+| `summary` | 3 | 删，并入 `description` |
+| `domain` | 1 | 删，并入 `category` |
+| `type` | 1 | 删，并入 `category` |
+| `triggers` | 1 | 删 |
+| `trigger_words` | 1 | 删 |
+| `auto_trigger` | 1 | 删 |
+
+### E 类（死字段，任何消费方均未读取，建议删除）
+
+| 字段 | 影响技能数 | 建议处置 |
+|---|---:|---|
+| `visibility` | 16 | 删 |
+| `agent_created` | 11 | 删 |
+| `dependencies` | 9 | 删 |
+| `homepage` | 3 | 删 |
+| `display_name_zh` | 2 | 删，并入 `display_name` |
+| `source` | 2 | 删 |
+| `changelog` | 1 | 删 |
+| `emoji` | 1 | 删 |
+| `github` | 1 | 删 |
+| `parentSkill` | 1 | 删 |
+| `title` | 1 | 删 |
+| `argument-hint` | 1 | 删 |
+| `icon` | 1 | 删 |
+
+### C 类（第三方字段，平台不读）
+
+| 字段 | 影响技能数 | 建议处置 |
+|---|---:|---|
+| `compatibility` | 12 | 删（junheng-core 写成整段字符串，平台不读） |
+
+### metadata 子键违规（应提升为顶层）
+
+| 字段 | 影响技能数 | 建议处置 |
+|---|---:|---|
+| `metadata.author` | 14 | 提升为顶层 `author` |
+| `metadata.version` | 13 | 提升为顶层 `version` |
+
+---
+
+**裁决状态（待用户确认后回填）**：全部 26 项问题（24 顶层字段 + 2 metadata 子键）默认处置如上，**未授权改写任何 SKILL.md**。改写须用户显式确认，并作为单一 git 提交以便回滚。
