@@ -8,8 +8,10 @@
 
     raw, text = read_text(md)      # 全文唯一一次读文件
 
-`scan()` 只 listdir 根目录一层，不进子目录、不递归。九条规则（E1–E5 / W1–W4）
-全部作用在 frontmatter 与 SKILL.md 字节数上。实测规模：86 个技能里 59 个带脚本、
+`scan()` 递归遍历技能根，发现全部 SKILL.md（含嵌套技能如
+lark-unified/skills/meegle），但按设计跳过隐藏目录（.agents 等系统目录显式豁免）。
+九条规则（E1–E5 / W1–W4）全部作用在 frontmatter 与 SKILL.md 字节数上。
+实测规模：86 个技能里 59 个带脚本、
 共 601 个脚本、72 个在 SKILL.md 里写了路径引用 —— 这些它一个字节都没看过。
 
 它的文档也诚实写着「不在本检查器内」的只有两条（触发词命中、语义重复），
@@ -195,7 +197,32 @@ def iter_scripts(skill_dir):
         dn[:] = [d for d in dn if d not in SKIP_DIRS]
         for f in fn:
             if os.path.splitext(f)[1].lower() in SCRIPT_EXT:
-                yield os.path.join(dp, f)
+                full = os.path.join(dp, f)
+                # templates/ 是「拷贝即用」片段容器（含中文说明与 bookmarklet 前缀），
+                # 不是可独立执行的脚本，跳过语法检查避免误报（如 totorosir 授权码片段）。
+                if "templates" in os.path.relpath(full, skill_dir).replace("\\", "/").split("/"):
+                    continue
+                yield full
+
+
+def ref_exists(ref, base):
+    """引用路径存在性判定：同时接受规范形式 a/b.py 与仓库扁平化形式 a__b.py。"""
+    if os.path.exists(os.path.join(base, ref)):
+        return True
+    flat = ref.replace("/", "__")
+    if flat != ref and os.path.exists(os.path.join(base, flat)):
+        return True
+    return False
+
+
+def has_scripts_target(skill_dir):
+    """技能是否具备 scripts 入口：规范 scripts/ 目录，或扁平化 scripts__*.py。"""
+    if os.path.isdir(os.path.join(skill_dir, "scripts")):
+        return True
+    try:
+        return any(f.startswith("scripts__") for f in os.listdir(skill_dir))
+    except OSError:
+        return False
 
 
 def check_syntax(path):
@@ -223,23 +250,23 @@ def check_syntax(path):
 
 def scan(root, do_syntax=True, workers=8):
     skills, findings, skipped = [], [], []
-    for name in sorted(os.listdir(root)):
-        path = os.path.join(root, name)
-        if not os.path.isdir(path):
+    # 递归发现全部 SKILL.md：覆盖嵌套技能（如 lark-unified/skills/meegle），
+    # 而非只扫 root 一层。隐藏目录（任意路径分量以 . 开头）按设计跳过——
+    # 其中 .agents 等系统目录显式豁免，不再报 S4；其余隐藏技能仍报 S4 保留信号。
+    for dp, dn, fn in os.walk(root):
+        dn[:] = [d for d in dn if d not in SKIP_DIRS]
+        if "SKILL.md" not in fn:
             continue
-
-        # S4：隐藏目录下的技能，主 lint 完全看不见
-        if name.startswith("."):
-            for dp, dn, fn in os.walk(path):
-                dn[:] = [d for d in dn if d not in SKIP_DIRS]
-                if "SKILL.md" in fn:
-                    rel = os.path.relpath(os.path.join(dp, "SKILL.md"), root).replace("\\", "/")
-                    findings.append(("W", "S4", rel, "隐藏目录下的技能，lint_skills.py 不扫描"))
+        path = dp  # 技能目录（可能是嵌套目录）
+        rel_parts = os.path.relpath(path, root).replace("\\", "/").split("/")
+        if any(p.startswith(".") for p in rel_parts):
+            if ".agents" in rel_parts:  # .agents 系统目录：显式豁免
+                continue
+            rel = os.path.relpath(os.path.join(path, "SKILL.md"), root).replace("\\", "/")
+            findings.append(("W", "S4", rel, "隐藏目录下的技能，lint_skills.py 不扫描"))
             continue
-
+        name = os.path.relpath(path, root).replace("\\", "/")
         md = os.path.join(path, "SKILL.md")
-        if not os.path.isfile(md):
-            continue
         text = read_text(md)
         skills.append(name)
 
@@ -247,7 +274,7 @@ def scan(root, do_syntax=True, workers=8):
         # 先算 S3，再算 S1：两者会命同一行（无 scripts 目录 ⇒ 引用必然不存在），
         # 重复报红会让「6 条问题」看起来像 12 条，修的人会以为漏了一半。
         lines = text.split("\n")
-        has_scripts_dir = os.path.isdir(os.path.join(path, "scripts"))
+        has_scripts_dir = has_scripts_target(path)
         calls = re.findall(r"(?:node|python3?|py|bash|sh)\s+([\w./\-]*scripts/[\w.\-/]+)", text)
         calls = [c for c in calls if not PLACEHOLDER_RE.search(c)]
         suppress_refs = set()
@@ -274,10 +301,10 @@ def scan(root, do_syntax=True, workers=8):
             if PLACEHOLDER_RE.search(ref):
                 skipped.append(("S1", name, ref, "占位示例"))
                 continue
-            if os.path.exists(os.path.join(path, ref)):
+            if ref_exists(ref, path):
                 continue
             # 允许解析到技能根（少数技能引用平级目录）
-            if os.path.exists(os.path.join(root, ref)):
+            if ref_exists(ref, root):
                 continue
             # 上下文取「命中行 + 前 8 行」：路径性质往往由段首的声明决定，
             # 只看命中行本身会漏掉「以下命令均在项目根运行」这类前提。
