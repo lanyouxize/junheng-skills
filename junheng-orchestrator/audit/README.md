@@ -101,7 +101,9 @@
 - `humanCheckpoints` 非空且 `approvedBy` 缺失 → 视为未授权，编排不得继续高风险动作。
 - `evidence[].source` 必须是**文献名**而非文件名（对齐用户铁律）。
 
-## 阶段 B 待实现
+## 阶段 B 待实现 / 已实现
 
-- `state.json` 断点续跑（上下文恢复）
-- self-reflect 自动提取回写 `knowledge/*.jsonl`
+- `state.json` 断点续跑（上下文恢复）—— **已实现**（阶段 B，`scripts/orchestrate.mjs` 的 `init/next/record/status/resume/finalize` 子命令管理 `.junheng/state.json` 持久化与 DAG 门禁）。
+- self-reflect 自动提取回写 `knowledge/*.jsonl` —— **已实现**（阶段 C，`scripts/reflect.mjs`：`--lesson/--lessons` 收整理条目、`--auto` 从审计派生，schema 校验 + 按 id 去重追加）。
+- `recover` 上下文恢复增强 —— **已实现**（阶段 C，`orchestrate.mjs recover`：压缩式恢复简报 + state 缺失时从审计重建）。
+- `adversarial-check.mjs`（独立重算对抗验证，Fresh Reviewer，铁律②/③）—— **已实现**（阶段 B），供阶段③/④ VALIDATE/REVIEW 调用。

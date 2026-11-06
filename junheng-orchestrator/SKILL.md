@@ -102,6 +102,80 @@ node scripts/prime.mjs 钙磷比 脂肪酸      # 按关键词匹配 knowledge/*
 
 每次编排运行结束（或阶段完成）落盘 `.junheng/run-<ts>.json`，结构见 `audit/README.md`。包含任务 / 阶段 / 门禁结果 / 证据 / 人类检查点，使流程可回放。
 
+## 运行时代码（阶段 B 落地）
+
+阶段 A 仅固化纪律与审计格式；阶段 B 落地两个零依赖 Node 工具（纯 Node + 现有 skill 真源，可在其他电脑直接运行）。
+
+### 1. `scripts/adversarial-check.mjs` — 对抗验证引擎（Fresh Reviewer，铁律②/③）
+
+编排 VALIDATE / ADVERSARIAL REVIEW 阶段的「独立审查者」：**不读阶段自报的 achieved / unitCost**，独立从 `junheng-core` 的 `ingredient_db.js` + `junheng-standards` 的 `resolveStandard` 重算；每条 check 输出 expected/actual + 证据（文献 cite / 原料行 / 数值公式）。用 ingredient-outer 与 nutrient-outer 两条不同代码路径重算互为交叉验证，捕获任一方索引 bug。
+
+```bash
+# 合成手算可验用例（不依赖外部真源，验证引擎自身）
+node scripts/adversarial-check.mjs selftest
+
+# 对一份配方做独立重算校验（从真源重新拉标准+原料）
+node scripts/adversarial-check.mjs verify \
+  --recipe recipe.json --market intl --species dog --stage adult --moisture dry
+# recipe.json = junheng-formulate formulateLeastCost 输出 {recipe, unitCost, achieved}
+```
+
+校验对象：Σ 占比=1（4dp 舍入容差 1e-3）、全部配方行溯源到原料库、双路径重算一致、各营养 min/max 达标（独立重算）、钙磷比∈[min,max]、阶段自报与独立重算偏差≤1e-2（捕获误报）、单位成本=Σ(price·share)。任一项 FAIL → 退出码 1。阶段④（达成度验证）必须用它产出 `independentCheck:true` 才能通过 COMMIT 门禁。
+
+### 2. `scripts/orchestrate.mjs` — 编排状态机（DAG + 状态文件 + 审计落盘）
+
+只做「串联与门禁」，不执行域逻辑。阶段结果由编排者(AI)提供，本脚本负责 DAG 依赖校验（门禁三铁律①）、`state.json` 持久化（断点续跑，蓝图§2.7）、质量门禁三铁律校验、`.junheng/run-<ts>.json` 审计落盘。
+
+```bash
+node scripts/orchestrate.mjs init --task "排毛配方 v3" --market intl --species dog --stage adult --moisture dry
+node scripts/orchestrate.mjs next                       # 下一可执行阶段 + DoD + 子任务
+node scripts/orchestrate.mjs record --stage 3 --gate PASS --result '{...}'   # 记录阶段结果
+node scripts/orchestrate.mjs record --stage 1 --subtask 1.1 --gate PASS     # 递归子任务粒度
+node scripts/orchestrate.mjs approve-checkpoint --stage 2   # 人工检查点授权（标准值改动）
+node scripts/orchestrate.mjs status | resume | finalize --lint "PASS(95 技能 0E0W)"
+```
+
+七阶段 DAG（①证据→②标准→③配方→④达成度→⑤标签→⑥合规→⑦报告）含两级分解：阶段=epic，subtasks=工作单元。门禁三铁律硬约束：依赖未 PASS 拒绝记录（①）、阶段②含人工检查点须先批准（②）、finalize 须 freshReviewer(阶段④ independentCheck)+evidenceBacked 全满足（③）。
+
+### 3. `scripts/reflect.mjs` — self-reflect 自动回写（阶段 C 落地）
+
+关闭「自我改进」闭环：阶段运行后，编排者(AI)整理教训，本脚本把教训**结构化校验 + 按 type 路由 + 按 id 去重**持久化到正确的知识库文件，避免人工手改 JSONL 出错（对齐记忆治理 M3：原始 fact 只追加、不覆盖）。
+
+路由表：`gotcha→knowledge/gotchas.jsonl`、`pattern→patterns.jsonl`、`decision→decisions.jsonl`、`anti-pattern→anti-patterns.jsonl`。
+
+```bash
+# 方式一：AI 在 run 收尾时整理的单条/批量教训
+node scripts/reflect.mjs --lesson '{"id":"GOT-005","type":"gotcha","fact":"...","recommendation":"...","provenance":"B1 阶段C 实测","tags":["x"],"affectedFiles":["junheng-orchestrator/scripts/orchestrate.mjs"]}'
+node scripts/reflect.mjs --lessons '[{...},{...}]'
+
+# 方式二：从最新 .junheng/run-*.json 审计确定性派生（仅产出有真源支撑的条目）
+node scripts/reflect.mjs --auto
+```
+
+校验规则（任一不满足即拒绝并 exit 1，符合「检查器必须可被证伪」）：`id` 非空、`type` ∈ 四值、`fact/recommendation/provenance` 非空字符串、`tags/affectedFiles` 为数组；`provenance` 缺失直接判失败（强制标注来源）。去重：按 `id` 精确匹配，已存在则跳过不覆盖。`--auto` 仅从审计派生三类有真源支撑的条目：全流程 PASS + Fresh Reviewer 生效→`pattern`；任一阶段 FAIL→`gotcha`；已批准人工检查点→`decision`；id 形如 `REF-<runId>-<type>-<n>` 保证跨 run 唯一。
+
+### 4. `recover` 子命令 — 上下文恢复增强（阶段 C 落地）
+
+在 `orchestrate.mjs` 新增 `recover`，输出**压缩式恢复简报**（目标/已完成/关键结论/待办/标识符/当前阶段），供断点续跑；**状态文件缺失时自动从最新审计重建 `state.json`**（审计真源优先于报错退出），满足「上下文恢复增强」。
+
+```bash
+node scripts/orchestrate.mjs recover          # 输出恢复简报；state 缺失时从审计重建
+```
+
+### 5. `check-agentskills.mjs` — agentskills.io 兼容性核查（B2 落地）
+
+跨技能核查本地 `junheng-*` 是否兼容 [agentskills.io](https://agentskills.io) 开放标准；零依赖、可证伪、可 CI 门禁：
+- **Tier1 强制**（agentskills.io 已抓取验证）：`SKILL.md` 存在、frontmatter 合法、`name`/`description` 非空、含指令正文；
+- **Tier2 推荐**（Anthropic 开放标准惯例，明确非强制）：`name`==目录名、`name` 符合 `^[a-z0-9]+(-[a-z0-9]+)*$`、`description` ≤1024 字符且含触发词、双语 `description_en`、`author`/`version` 存在。
+
+任一 T1 = FAIL → 退出码 `1`（阻断，不兼容）；仅 T2 WARN → 退出码 `0`（兼容，WARN 供人工跟进）。清单与运行快照见 `docs/agentskills-compat.md`。
+
+```bash
+node scripts/check-agentskills.mjs                  # 查默认 $HOME/.workbuddy/skills
+node scripts/check-agentskills.mjs /path/to/skills  # 查指定根目录
+node scripts/check-agentskills.mjs --json           # 机器可读输出
+```
+
 ## 不照搬项（适配判断）
 
 | metaswarm 项 | 本地替代 | 理由 |
