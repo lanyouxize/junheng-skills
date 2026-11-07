@@ -421,7 +421,7 @@ export const STANDARD_SETS = {
     label: 'NRC 2006',
     fullLabel: "NRC 2006\u300a\u72ac\u732b\u8425\u517b\u9700\u8981\u300b(Nutrient Requirements of Dogs and Cats, \u4e2d\u6587\u7248)",
     verified: true,
-    verifyNote: 'NRC 2006 六档均已落库：表15-3 幼犬生长 dog.growth(43)、表15-5 犬维持 dog.adult(18)、表15-8 母犬繁殖 dog.reproduction(41)、表15-10 断奶幼猫生长 cat.growth(32)、表15-12 成年猫维持 cat.adult(24)、表15-14 母猫繁殖 cat.reproduction(44)。单位双基准(per 100g DM 的 min 与 per 1000 kcal ME 的 minME)对齐 FEDIAF；NRC.min 为最低需要量科学下限，resolveStandard 取多体系 max(min) 时自动成为硬地板。猫繁殖期表15-14 按妊娠期+哺乳期合并 max（哺乳期主导），minME 按 1kg DM≡4000 kcal 的 4:1 推导；犬繁殖期（表15-8）与犬生长（表15-3）脂溶性维生素 A/D/E/K 于 2026-11-07 二次核对 NRC 2006 原文并修正 OCR 污染：A=121.2/303、D=1.1/2.75、K=0.132/0.33 两档相同；E 生长=3.0/7.5、繁殖=2.4/6.0（各依其表），均满足 4:1（min×2.5=minME）。GB/AAFCO/FEDIAF 无独立 reproduction 档，resolveStandard 自动回退其 growth 档（繁殖数据已并入 growth）。',
+    verifyNote: 'NRC 2006 六档均已落库：表15-3 幼犬生长 dog.growth(43)、表15-5 犬维持 dog.adult(18)、表15-8 母犬繁殖 dog.reproduction(41)、表15-10 断奶幼猫生长 cat.growth(32)、表15-12 成年猫维持 cat.adult(24)、表15-14 母猫繁殖 cat.reproduction(44)。单位双基准(per 100g DM 的 min 与 per 1000 kcal ME 的 minME)对齐 FEDIAF；NRC.min 为最低需要量科学下限，resolveStandard 取多体系 max(min) 时自动成为硬地板。猫繁殖期表15-14 按妊娠期+哺乳期合并 max（哺乳期主导），minME 按 1kg DM≡4000 kcal 的 4:1 推导；犬繁殖期（表15-8）与犬生长（表15-3）脂溶性维生素 A/D/E/K 于 2026-11-07 二次核对 NRC 2006 原文并修正 OCR 污染：A=121.2/303、D=55.2/138（原 1.1/2.75 实为 µg 误标 IU，差 40×，2026-11-07 修正）、K=0.132/0.33 两档相同；E 生长=3.0/7.5、繁殖=2.4/6.0（各依其表），均满足 4:1（min×2.5=minME）。猫维生素D 于 2026-11-07 复核：原落库值系 OCR 污染+µg/IU 单位错乱+阶段错位，现按 NRC 2006 推荐量 RA 修正为 生长 22.4/56、维持 28.0/70、繁殖 28.0/70（均满足 4:1，与 FEDIAF 猫维持 28.0 一致）。GB/AAFCO/FEDIAF 无独立 reproduction 档，resolveStandard 自动回退其 growth 档（繁殖数据已并入 growth）。',
     stages: {
       dog: {
         growth: {
@@ -457,7 +457,7 @@ export const STANDARD_SETS = {
           selenium_wet: { min: 21.0, minME: 52.5, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.088, minME: 220, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_a: { min: 121.2, minME: 303, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 1.1, minME: 2.75, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-3 幼犬生长维生素D：RA=552 IU/kg DM=55.2 IU/100g DM、138 IU/1000 kcal（4:1）；原 1.1/2.75 系 µg 误标 IU（小 40×），2026-11-07 修正；per-100g-DM 口径对齐 FEDIAF' },
           vitamin_e: { min: 3.0, minME: 7.5, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_k: { min: 0.132, minME: 0.33, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.108, minME: 0.27, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -518,7 +518,7 @@ export const STANDARD_SETS = {
           selenium_dry: { min: 35.0, minME: 87.5, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.088, minME: 220.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_a: { min: 121.2, minME: 303.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 1.1, minME: 2.75, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-8 母犬繁殖维生素D：同犬生长 RA=552 IU/kg DM=55.2 IU/100g DM、138 IU/1000 kcal（与 dog.growth 同源）；原 1.1/2.75 系 µg 误标 IU，2026-11-07 修正' },
           vitamin_e: { min: 2.4, minME: 6.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_k: { min: 0.132, minME: 0.33, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.18, minME: 0.45, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -565,7 +565,7 @@ export const STANDARD_SETS = {
           vitamin_b5: { min: 0.46, minME: 1.15, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.2, minME: 0.5, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b9: { min: 60.0, minME: 150.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 11.0, minME: 0.7, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 22.4, minME: 56.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫生长维生素D：RA=224 IU/kg DM=22.4 IU/100g DM、56 IU/1000 kcal（4:1）；原 11.0/0.7 系 OCR 污染（≈正确值½）且单位错乱，2026-11-07 修正' },
           choline: { min: 204.0, minME: 510.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
         },
         adult: {
@@ -591,7 +591,7 @@ export const STANDARD_SETS = {
           vitamin_b5: { min: 0.46, minME: 1.15, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.2, minME: 0.5, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b9: { min: 60.0, minME: 150.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 22.4, minME: 1.4, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维持维生素D：RA=280 IU/kg DM=28.0 IU/100g DM、70 IU/1000 kcal（4:1）；原 22.4/1.4 系误填生长值且单位错乱，2026-11-07 修正' },
           choline: { min: 204.0, minME: 510.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
         },
         reproduction: {
@@ -627,7 +627,7 @@ export const STANDARD_SETS = {
           selenium_dry: { min: 30.0, minME: 75.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.18, minME: 450.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_a: { min: 160.0, minME: 400.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 0.56, minME: 1.4, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-14 母猫繁殖维生素D：RA=280 IU/kg DM=28.0 IU/100g DM、70 IU/1000 kcal（维持与繁殖同值，Hand et al.）；原 0.56/1.4 系误填生长值且单位错乱，2026-11-07 修正' },
           vitamin_e: { min: 3.0, minME: 7.5, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_k: { min: 0.1, minME: 0.25, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.5, minME: 1.25, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
