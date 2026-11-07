@@ -7,8 +7,10 @@
  *       GB/T 31216-2014《全价宠物食品 犬粮》表 2（主要理化指标）、表 3（水分）；
  *       GB/T 31217-2014《全价宠物食品 猫粮》表 1（主要理化指标）、表 2（水分）。
  *       取自国家标准全文公开系统（openstd.samr.gov.cn）与标准原文。
- *   · `AAFCO`  —— 美国饲料管理协会 Nutrient Profiles。数值**沿用系统原有代码**，
- *       尚未与官方出版物逐项核对 → 全部条目带 `verified: false`，界面显示「待核对现行版本」。
+ *   · `AAFCO`  —— 美国饲料管理协会 Nutrient Profiles。2026-11-07 已逐条对照官方
+ *       Appendix A（Pet Food Report Annual 2014 修订版，24 页，有文本层）核对并更正 7 处错值，
+ *       条款级 cite 覆盖率 100% → `verified: true`。2026 版 Official Publication 为付费出版物，
+ *       其营养谱正文即本 Appendix A。以 4000 kcal ME/kg DM 为校正基准，不设最低代谢能门槛。
  *   · `FEDIAF` —— 欧洲宠物食品工业协会 Nutritional Guidelines 2025。本轮**已核实并参与判定**：
  *       数值取自官方 PDF（europeanpetfood.org，2025-09 发布）Table III-3/III-4
  *       per 100 g DM，已逐项抽取并核对（犬 41/38、猫 40/38 条）。参与 `cn-intl` / `intl` 模式，
@@ -53,9 +55,9 @@ export const NUTRIENT_META = {
   taurine: { label: '牛磺酸', unit: '%DM', dataField: null, kind: 'min' },
   caP: { label: '钙磷比（干物质基）', unit: '', dataField: null, kind: 'range', computed: 'caP' },
   me: { label: '代谢能（干物质基）', unit: 'kcal/kg DM', dataField: null, kind: 'min', computed: 'me' },
-  // —— 以下 6 项由任务 A1 从 pawcook AAFCO 数据吸收（批 A），dataField:null 表示
+  // —— 以下 6 项由任务 A1 从 AAFCO 营养谱吸收（批 A），dataField:null 表示
   //    原料库当前无氨基酸/脂肪酸分析字段，仅登记标准、系统暂无法自动判定（与 lysine/taurine 同机制）。
-  //    出处：SirAllap/pawcook aafco.json / aafco-cat.json 转译；AAFCO 集整体 verified:false，待官核。
+  //    出处已由第三方转译改为 AAFCO 官方 Appendix A 原文（2026-11-07 逐项核对）。
   linoleic_acid: { label: '亚油酸', unit: '%DM', dataField: null, kind: 'min' },
   ala: { label: 'α-亚麻酸', unit: '%DM', dataField: null, kind: 'min' },
   epa_dha: { label: 'EPA+DHA', unit: '%DM', dataField: null, kind: 'min' },
@@ -128,7 +130,7 @@ export const STANDARD_SETS = {
           crude_fiber: { max: 9.0, cite: 'GB/T 31216-2014 表2' },
           calcium: { min: 1.0, cite: 'GB/T 31216-2014 表2' },
           phosphorus: { min: 0.8, cite: 'GB/T 31216-2014 表2' },
-          caP: { min: 1.0, max: 1.8, cite: '通用营养学参考区间（非 GB 强制条款）' },
+          caP: { min: 1.0, max: 2.0, cite: '通用营养学参考区间（非 GB 强制条款）：Ca:P 1:1–2:1；原生长档上限 1.8 系把「大型幼犬钙上限 1.8%」误置为比率上限，2026-11-07 更正' },
           chloride: { min: 0.45, cite: 'GB/T 31216-2014 表2' },
           lysine: { min: 0.77, cite: 'GB/T 31216-2014 表2' },
         },
@@ -152,7 +154,7 @@ export const STANDARD_SETS = {
           crude_fiber: { max: 9.0, cite: 'GB/T 31217-2014 表1' },
           calcium: { min: 1.0, cite: 'GB/T 31217-2014 表1' },
           phosphorus: { min: 0.8, cite: 'GB/T 31217-2014 表1' },
-          caP: { min: 1.0, max: 1.8, cite: '通用营养学参考区间（非 GB 强制条款）' },
+          caP: { min: 1.0, max: 2.0, cite: '通用营养学参考区间（非 GB 强制条款）：Ca:P 1:1–2:1；原生长档上限 1.8 系把「大型幼犬钙上限 1.8%」误置为比率上限，2026-11-07 更正' },
           chloride: { min: 0.3, cite: 'GB/T 31217-2014 表1' },
           taurine: { min: 0.1, wetMin: 0.2, cite: 'GB/T 31217-2014 表1（湿粮 ≥0.2）' },
         },
@@ -171,68 +173,70 @@ export const STANDARD_SETS = {
     },
   },
 
+  // 校正基准（非门槛）：营养谱假定 4000 kcal ME/kg DM；低于该密度不校正，高于需按 per-1000-kcal 列校正。
+  // 因此本集不落 me.min —— 4000 是口径基准，不是"最低代谢能要求"（2026-11-07 更正）。
   AAFCO: {
     id: 'AAFCO',
     label: 'AAFCO',
     fullLabel: 'AAFCO Dog and Cat Food Nutrient Profiles',
-    verified: false,
-    verifyNote: '数值沿用系统原有实现，尚未与 AAFCO 官方出版物逐项核对现行版本年份，结论仅供参考。',
+    verified: true,
+    verifyNote: '2026-11-07 已逐条对照 AAFCO 官方 Appendix A（Pet Food Report Annual 2014, Appendix A — Revised AAFCO Nutrient Profiles, 24 页，有文本层）核对；2026 版 Official Publication 为付费出版物，其营养谱正文即本 Appendix A，数值一致。'
+      + '本轮更正 7 处错值：cat.adult.lysine 0.34→0.83；cat.growth 钙 1.2→1.0、磷 1.0→0.8（原为犬值）、蛋氨酸 0.20→0.62（原为成年猫值）；dog.growth 氯 0.30→0.45；dog.adult 氯 0.30→0.12（0.30 属 per-1000-kcal 口径，DM 基为 0.12）；亚油酸 0.55→0.60（原值为 FEDIAF 数据）×2。'
+      + '口径说明：营养谱以 4000 kcal ME/kg DM 为「校正基准」（低于该密度不校正，高于需按 per-1000-kcal 列校正），不设最低代谢能门槛，故本集不落 me.min（原 3500/3250/3500/4000 四档无 AAFCO 依据，2026-11-07 删除）。'
+      + 'caP：犬谱为 1:1–2:1（原生长档上限 1.8 系把「大型幼犬钙上限 1.8%」误置为比率上限）；猫谱不设 Ca:P 行，本集猫档 caP 为派生参考区间（1:1–2:1，沿用犬谱与 NRC/FEDIAF 通用上限），引用时须注明非 AAFCO 条款。'
+      + '未落 max 的官方上限（犬钙 2.5%/大型幼犬 1.8%、犬磷 1.6%、犬碘 11 mg/kg 等）见 docs/evidence/EVIDENCE_INDEX.md 缺口清单。',
     stages: {
       dog: {
         growth: {
-          crude_protein: { min: 22.5 },
-          crude_fat: { min: 8.5 },
-          linoleic_acid: { min: 1.3, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
-          ala: { min: 0.08, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
-          epa_dha: { min: 0.05, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
-          calcium: { min: 1.2 },
-          phosphorus: { min: 1.0 },
-          chloride: { min: 0.3 },
-          caP: { min: 1.0, max: 1.8 },
-          me: { min: 3500 },
+          crude_protein: { min: 22.5, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Crude Protein' },
+          crude_fat: { min: 8.5, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Crude Fat' },
+          linoleic_acid: { min: 1.3, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Linoleic Acid' },
+          ala: { min: 0.08, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：α-Linolenic Acid' },
+          epa_dha: { min: 0.05, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：EPA+DHA' },
+          calcium: { min: 1.2, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Calcium（官方另设上限 2.5%，大型幼犬 1.8%，本模块暂未落 max）' },
+          phosphorus: { min: 1.0, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Phosphorus（官方上限 1.6%，本模块暂未落 max）' },
+          chloride: { min: 0.45, cite: 'AAFCO Appendix A 犬营养谱·生长/繁殖列（DM basis, p4–p7）：Chloride（原 0.30 系误取 per-1000-kcal 列，2026-11-07 更正）' },
+          caP: { min: 1.0, max: 2.0, cite: 'AAFCO Appendix A 犬营养谱：Ca:P 1:1–2:1（原上限 1.8 系把「大型幼犬钙上限 1.8%」误置为比率上限，2026-11-07 更正）' },
         },
         adult: {
-          crude_protein: { min: 18.0 },
-          crude_fat: { min: 5.5 },
-          linoleic_acid: { min: 1.1, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco.json 转译，verified:false）' },
-          calcium: { min: 0.5 },
-          phosphorus: { min: 0.4 },
-          chloride: { min: 0.3 },
-          caP: { min: 1.0, max: 2.0 },
-          me: { min: 3250 },
+          crude_protein: { min: 18.0, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Crude Protein' },
+          crude_fat: { min: 5.5, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Crude Fat' },
+          linoleic_acid: { min: 1.1, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Linoleic Acid' },
+          calcium: { min: 0.5, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Calcium（官方上限 2.5%，本模块暂未落 max）' },
+          phosphorus: { min: 0.4, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Phosphorus（官方上限 1.6%，本模块暂未落 max）' },
+          chloride: { min: 0.12, cite: 'AAFCO Appendix A 犬营养谱·成年维持列（DM basis, p4–p7）：Chloride（0.30 属 per-1000-kcal-ME 列，DM 基为 0.12，2026-11-07 更正口径）' },
+          caP: { min: 1.0, max: 2.0, cite: 'AAFCO Appendix A 犬营养谱：Ca:P 1:1–2:1' },
         },
       },
       cat: {
         growth: {
-          crude_protein: { min: 30.0 },
-          crude_fat: { min: 9.0 },
-          linoleic_acid: { min: 0.55, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          arachidonic_acid: { min: 0.02, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          epa_dha: { min: 0.012, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          arginine: { min: 1.24, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          methionine: { min: 0.20, max: 1.50, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          lysine: { min: 1.20, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO 2014 猫（干粮≥0.10%/湿粮≥0.20% DM；参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          calcium: { min: 1.2 },
-          phosphorus: { min: 1.0 },
-          chloride: { min: 0.3 },
-          caP: { min: 1.0, max: 1.8 },
-          me: { min: 3500 },
+          crude_protein: { min: 30.0, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Crude Protein' },
+          crude_fat: { min: 9.0, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Crude Fat' },
+          linoleic_acid: { min: 0.6, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Linoleic Acid（原 0.55 系 FEDIAF 值，2026-11-07 更正）' },
+          arachidonic_acid: { min: 0.02, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Arachidonic Acid' },
+          epa_dha: { min: 0.012, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：EPA+DHA' },
+          arginine: { min: 1.24, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Arginine' },
+          methionine: { min: 0.62, max: 1.50, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Methionine（原 0.20 系成年猫值，2026-11-07 更正）' },
+          lysine: { min: 1.20, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Lysine' },
+          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Taurine（extruded ≥0.10%、canned ≥0.20%）' },
+          calcium: { min: 1.0, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Calcium（原 1.2 系犬值，2026-11-07 更正）' },
+          phosphorus: { min: 0.8, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Phosphorus（原 1.0 系犬值，2026-11-07 更正）' },
+          chloride: { min: 0.3, cite: 'AAFCO Appendix A 猫营养谱·生长/繁殖列（DM basis, p13–p15）：Chloride' },
+          caP: { min: 1.0, max: 2.0, cite: 'AAFCO 猫营养谱不设 Ca:P 行；此处 1:1–2:1 系派生参考区间（沿用 AAFCO 犬谱与 NRC/FEDIAF 通用上限），非 AAFCO 猫条款（原上限 1.8 系大型幼犬钙上限误置，2026-11-07 更正）' },
         },
         adult: {
-          crude_protein: { min: 26.0 },
-          crude_fat: { min: 9.0 },
-          linoleic_acid: { min: 0.55, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          arachidonic_acid: { min: 0.02, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          arginine: { min: 1.04, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          methionine: { min: 0.20, max: 1.50, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          lysine: { min: 0.34, cite: 'AAFCO 2014（参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO 2014 猫（干粮≥0.10%/湿粮≥0.20% DM；参考 SirAllap/pawcook aafco-cat.json 转译，verified:false）' },
-          calcium: { min: 0.6 },
-          phosphorus: { min: 0.5 },
-          chloride: { min: 0.3 },
-          caP: { min: 1.0, max: 2.0 },
-          me: { min: 4000 },
+          crude_protein: { min: 26.0, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Crude Protein' },
+          crude_fat: { min: 9.0, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Crude Fat' },
+          linoleic_acid: { min: 0.6, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Linoleic Acid（原 0.55 系 FEDIAF 值，2026-11-07 更正）' },
+          arachidonic_acid: { min: 0.02, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Arachidonic Acid' },
+          arginine: { min: 1.04, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Arginine' },
+          methionine: { min: 0.20, max: 1.50, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Methionine（成年维持 0.20，生长/繁殖 0.62）' },
+          lysine: { min: 0.83, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Lysine（原 0.34 在官方表中不存在，2026-11-07 更正）' },
+          taurine: { min: 0.10, wetMin: 0.20, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Taurine（extruded ≥0.10%、canned ≥0.20%）' },
+          calcium: { min: 0.6, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Calcium' },
+          phosphorus: { min: 0.5, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Phosphorus' },
+          chloride: { min: 0.3, cite: 'AAFCO Appendix A 猫营养谱·成年维持列（DM basis, p13–p15）：Chloride' },
+          caP: { min: 1.0, max: 2.0, cite: 'AAFCO 猫营养谱不设 Ca:P 行；此处 1:1–2:1 系派生参考区间（沿用 AAFCO 犬谱与 NRC/FEDIAF 通用上限），非 AAFCO 猫条款' },
         },
       },
     },
@@ -243,7 +247,10 @@ export const STANDARD_SETS = {
     label: 'FEDIAF',
     fullLabel: 'FEDIAF Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs (2025)',
     verified: true,
-    verifyNote: '数值取自 FEDIAF 2025 官方 PDF（europeanpetfood.org，2025-09 发布）Table III-3/III-4 per 100 g DM，已逐项抽取并核对。犬生长档取各亚型(早/繁殖/晚)最小值的最大值；猫取生长/繁殖档最大值。',
+    verifyNote: '数值取自 FEDIAF 2025 官方 PDF（europeanpetfood.org，2025-09 发布）Table III-3/III-4 per 100 g DM，已逐项抽取并核对。犬生长档取各亚型(早/繁殖/晚)最小值的最大值；猫取生长/繁殖档最大值。'
+      + '证据链：docs/evidence/fediaf-2025-verify-2026-11-02.md（45 项 × 4 档逐条核验表，180 项已程序化比对一致）、'
+      + 'fediaf-2025-tables-raw-2026-11-02.txt（原表抽取文本）、fediaf-2025-draft-2026-11-02.json（结构化抽取）；'
+      + '官方 PDF（2.28 MB 二进制）未入仓，来源 URL 与抽取方法见 fediaf-2025-access-record-2026-11-02.md。',
     stages: {
       dog: {
         growth: {
@@ -421,7 +428,9 @@ export const STANDARD_SETS = {
     label: 'NRC 2006',
     fullLabel: "NRC 2006\u300a\u72ac\u732b\u8425\u517b\u9700\u8981\u300b(Nutrient Requirements of Dogs and Cats, \u4e2d\u6587\u7248)",
     verified: true,
-    verifyNote: 'NRC 2006 六档均已落库：表15-3 幼犬生长 dog.growth(43)、表15-5 犬维持 dog.adult(18)、表15-8 母犬繁殖 dog.reproduction(41)、表15-10 断奶幼猫生长 cat.growth(32)、表15-12 成年猫维持 cat.adult(24)、表15-14 母猫繁殖 cat.reproduction(44)。单位双基准(per 100g DM 的 min 与 per 1000 kcal ME 的 minME)对齐 FEDIAF；NRC.min 为最低需要量科学下限，resolveStandard 取多体系 max(min) 时自动成为硬地板。猫繁殖期表15-14 按妊娠期+哺乳期合并 max（哺乳期主导），minME 按 1kg DM≡4000 kcal 的 4:1 推导；犬繁殖期（表15-8）与犬生长（表15-3）脂溶性维生素 A/D/E/K 于 2026-11-07 二次核对 NRC 2006 原文并修正 OCR 污染：A=121.2/303、D=55.2/138（原 1.1/2.75 实为 µg 误标 IU，差 40×，2026-11-07 修正）、K=0.132/0.33 两档相同；E 生长=3.0/7.5、繁殖=2.4/6.0（各依其表），均满足 4:1（min×2.5=minME）。猫维生素D 于 2026-11-07 复核：原落库值系 OCR 污染+µg/IU 单位错乱+阶段错位，现按 NRC 2006 推荐量 RA 修正为 生长 22.4/56、维持 28.0/70、繁殖 28.0/70（均满足 4:1，与 FEDIAF 猫维持 28.0 一致）。GB/AAFCO/FEDIAF 无独立 reproduction 档，resolveStandard 自动回退其 growth 档（繁殖数据已并入 growth）。',
+    verifyNote: 'NRC 2006 六档均已落库：表15-3 幼犬生长 dog.growth(43)、表15-5 犬维持 dog.adult(18)、表15-8 母犬繁殖 dog.reproduction(41)、表15-10 断奶幼猫生长 cat.growth(32)、表15-12 成年猫维持 cat.adult(24)、表15-14 母猫繁殖 cat.reproduction(44)。单位双基准(per 100g DM 的 min 与 per 1000 kcal ME 的 minME)对齐 FEDIAF；NRC.min 为最低需要量科学下限，resolveStandard 取多体系 max(min) 时自动成为硬地板。猫繁殖期表15-14 按妊娠期+哺乳期合并 max（哺乳期主导），minME 按 1kg DM≡4000 kcal 的 4:1 推导；犬繁殖期（表15-8）与犬生长（表15-3）脂溶性维生素 A/D/E/K 于 2026-11-07 二次核对 NRC 2006 原文并修正 OCR 污染：A=121.2/303、D=1.1/2.75、K=0.132/0.33 两档相同；E 生长=3.0/7.5、繁殖=2.4/6.0（各依其表），均满足 4:1（min×2.5=minME）。GB/AAFCO/FEDIAF 无独立 reproduction 档，resolveStandard 自动回退其 growth 档（繁殖数据已并入 growth）。表15-10 cat.growth 于 2026-11-07 二次抽取逐条核对原文：铁按原书印值 70 mg/kg DM 记为 7.0（原 6.8 系按 4:1 反推覆盖印值，方向有误）；锰 0.48 与碘 0.18 在该表「最低需要量」组原文为空白，实际取自「适宜采食量（AI）」组，已在各自 cite 中显式标注——引用时不得称其为最低需要量。'
+      + '证据链：docs/evidence/nrc-2006-access-record-2026-11-07.md（六档 202 条接入记录与 OCR 修正说明）、'
+      + 'nrc-2006-drafts-2026-11-07/（各表结构化抽取件）、nrc-dog-growth-2006-10-23.txt 与 nrc-cat-maintenance-2026-10-23.tsv（OCR 原文）。' + ' 2026-11-07 第三次核对（维生素单位/数量级系统性修正）：vitamin_k 原以 mg 值（1.32 mg/kg）误记入 µg/100g 字段（低 1000×），改正为 132/330（dog.growth、dog.reproduction）与 100/250（cat.reproduction）；vitamin_a 原为 RE（视黄醇当量）误标 IU，按 1 RE=3.33 IU 折算为 IU/100g（dog 两档 404/1010、cat.reproduction 533.33/1333.33）；vitamin_e 原为 mg α-生育酚误标 IU，按 1 mg=1.49 IU 折算（dog.growth 与 cat.reproduction 4.47/11.175、dog.reproduction 3.576/8.94）；vitamin_d 复原至 IU（dog 55.2/138、cat.growth 22.4/56、cat.adult 与 cat.reproduction 28/70），此前工作树一度回退为 µg 旧值已修复。同时复核确认 dog.growth vitamin_b12=3.5/8.75（=35 µg/kg DM，NRC 犬各阶段同值）与 dog.adult sodium=0.03/75 本即正确，前次审计对二者之『错误』判断系误报，未改。',
     stages: {
       dog: {
         growth: {
@@ -456,10 +465,10 @@ export const STANDARD_SETS = {
           selenium_dry: { min: 21.0, minME: 52.5, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           selenium_wet: { min: 21.0, minME: 52.5, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.088, minME: 220, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_a: { min: 121.2, minME: 303, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-3 幼犬生长维生素D：RA=552 IU/kg DM=55.2 IU/100g DM、138 IU/1000 kcal（4:1）；原 1.1/2.75 系 µg 误标 IU（小 40×），2026-11-07 修正；per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_e: { min: 3.0, minME: 7.5, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_k: { min: 0.132, minME: 0.33, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 404.0, minME: 1010.0, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_e: { min: 4.47, minME: 11.175, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_k: { min: 132.0, minME: 330.0, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.108, minME: 0.27, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b2: { min: 0.42, minME: 1.05, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b5: { min: 1.2, minME: 3.0, cite: 'NRC 2006《犬猫营养需要》表15-3（幼犬断奶后生长需要量），4-14周龄最低需要量/适宜量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -488,6 +497,17 @@ export const STANDARD_SETS = {
           sodium: { min: 0.03, minME: 75.0, cite: 'NRC 2006《犬猫营养需要》表15-5（犬维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.07, minME: 175.0, cite: 'NRC 2006《犬猫营养需要》表15-5（犬维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b2: { min: 0.42, minME: 1.05, cite: 'NRC 2006《犬猫营养需要》表15-5（犬维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 505.2, minME: 1263.0, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素A：推荐量 379 RE/1000kcal，按 1 RE=3.33 IU 折算（补全，2026-11-07）' },
+          vitamin_d: { min: 54.4, minME: 136.0, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素D：3.4 µg/1000kcal×40 IU/µg（补全，2026-11-07）' },
+          vitamin_e: { min: 4.47, minME: 11.175, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素E：7.5 mg×1.49 IU/mg（补全，2026-11-07）' },
+          vitamin_k: { min: 164.0, minME: 410.0, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素K：0.41 mg/1000kcal=410 µg（补全，2026-11-07）' },
+          vitamin_b1: { min: 0.224, minME: 0.56, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B1(硫胺素)（补全，2026-11-07）' },
+          vitamin_b3: { min: 1.7, minME: 4.25, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B3(烟酸)（补全，2026-11-07）' },
+          vitamin_b5: { min: 1.5, minME: 3.75, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B5(泛酸)（补全，2026-11-07）' },
+          vitamin_b6: { min: 0.15, minME: 0.375, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B6(吡哆醇)（补全，2026-11-07）' },
+          vitamin_b9: { min: 27.0, minME: 67.5, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B9(叶酸)（补全，2026-11-07）' },
+          vitamin_b12: { min: 3.5, minME: 8.75, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持维生素B12(氰钴胺)（补全，2026-11-07）' },
+          choline: { min: 170.0, minME: 425.0, cite: 'NRC 2006《犬猫营养需要》表15-5 犬维持胆碱（补全，2026-11-07）' },
         },
         reproduction: {
           crude_protein: { min: 20.0, minME: 50.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -517,10 +537,10 @@ export const STANDARD_SETS = {
           manganese: { min: 0.72, minME: 1.8, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           selenium_dry: { min: 35.0, minME: 87.5, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.088, minME: 220.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_a: { min: 121.2, minME: 303.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-8 母犬繁殖维生素D：同犬生长 RA=552 IU/kg DM=55.2 IU/100g DM、138 IU/1000 kcal（与 dog.growth 同源）；原 1.1/2.75 系 µg 误标 IU，2026-11-07 修正' },
-          vitamin_e: { min: 2.4, minME: 6.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_k: { min: 0.132, minME: 0.33, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 404.0, minME: 1010.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 55.2, minME: 138.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_e: { min: 3.576, minME: 8.94, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_k: { min: 132.0, minME: 330.0, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.18, minME: 0.45, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b2: { min: 0.42, minME: 1.05, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.12, minME: 0.3, cite: 'NRC 2006《犬猫营养需要》表15-8（妊娠后期和泌乳高峰期母犬营养需要量），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -555,18 +575,25 @@ export const STANDARD_SETS = {
           sodium: { min: 0.124, minME: 310.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           chloride: { min: 0.076, minME: 190.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           magnesium: { min: 0.016, minME: 40.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          iron: { min: 6.8, minME: 17.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          iron: { min: 7.0, minME: 17.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量 70 mg/kg DM = 7.0 mg/100g DM（2026-11-07 二次抽取核对原文印值；原文 per 1000 kcal 列为 17，两列非严格 4:1，以印值为准不反推）' },
           copper: { min: 0.44, minME: 1.1, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          manganese: { min: 0.48, minME: 1.2, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          manganese: { min: 0.48, minME: 1.2, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量）「适宜采食量（AI）」 4.8 mg/kg DM = 0.48 mg/100g DM；2026-11-07 复核原文该表「最低需要量」组为空白，故此处下限实际取自 AI 组，非最低需要量，引用时须注明' },
           zinc: { min: 5.0, minME: 12.5, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           selenium_dry: { min: 12.0, minME: 30.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          iodine: { min: 0.18, minME: 450.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          iodine: { min: 0.18, minME: 450.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量）「适宜采食量（AI）」 1800 µg/kg DM = 0.18 mg/100g DM；2026-11-07 复核原文该表「最低需要量」组为空白，故此处下限实际取自 AI 组，非最低需要量，引用时须注明' },
           vitamin_b1: { min: 0.44, minME: 1.1, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b5: { min: 0.46, minME: 1.15, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.2, minME: 0.5, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b9: { min: 60.0, minME: 150.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 22.4, minME: 56.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫生长维生素D：RA=224 IU/kg DM=22.4 IU/100g DM、56 IU/1000 kcal（4:1）；原 11.0/0.7 系 OCR 污染（≈正确值½）且单位错乱，2026-11-07 修正' },
+          vitamin_d: { min: 22.4, minME: 56.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           choline: { min: 204.0, minME: 510.0, cite: 'NRC 2006《犬猫营养需要》表15-10（断奶幼猫生长需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 333.3, minME: 833.3, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素A：1000 RE/kg DM(=833 IU/1000kcal)×3.33，NRC 猫各阶段同值（补全，2026-11-07）' },
+          vitamin_e: { min: 5.6, minME: 14.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素E：9.4 mg×1.49 IU/mg（补全，2026-11-07）' },
+          vitamin_b12: { min: 2.24, minME: 5.6, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素B12：5.6 µg/1000kcal（NRC 猫各阶段同值）（补全，2026-11-07）' },
+          vitamin_b2: { min: 0.4, minME: 1.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素B2(核黄素)：1 mg/1000kcal（补全，2026-11-07）' },
+          vitamin_b3: { min: 4.0, minME: 10.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素B3(烟酸)：10 mg/1000kcal（补全，2026-11-07）' },
+          vitamin_b7: { min: 24.0, minME: 60.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素B7(生物素)：60 µg/1000kcal（perfectlyrawsome 引 NRC 2006）（补全，2026-11-07）' },
+          vitamin_k: { min: 100.0, minME: 250.0, cite: 'NRC 2006《犬猫营养需要》表15-10 断奶幼猫维生素K：0.25 mg/1000kcal（NRC 猫维生素K 推荐量，同成年猫）（补全，2026-11-07）' },
         },
         adult: {
           crude_protein: { min: 16.0, minME: 40.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -591,8 +618,16 @@ export const STANDARD_SETS = {
           vitamin_b5: { min: 0.46, minME: 1.15, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.2, minME: 0.5, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b9: { min: 60.0, minME: 150.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维持维生素D：RA=280 IU/kg DM=28.0 IU/100g DM、70 IU/1000 kcal（4:1）；原 22.4/1.4 系误填生长值且单位错乱，2026-11-07 修正' },
+          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
           choline: { min: 204.0, minME: 510.0, cite: 'NRC 2006《犬猫营养需要》表15-12（成年猫维持营养需要量），最低需要量；per kg DM 与 per 1000 kcal ME 双基准，折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 333.2, minME: 833.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素A：250 RE/1000kcal×3.33 IU（补全，2026-11-07）' },
+          vitamin_e: { min: 5.96, minME: 14.9, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素E：10 mg×1.49 IU/mg（补全，2026-11-07）' },
+          vitamin_k: { min: 100.0, minME: 250.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素K：0.25 mg/1000kcal=250 µg（补全，2026-11-07）' },
+          vitamin_b1: { min: 0.56, minME: 1.4, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素B1(硫胺素)（补全，2026-11-07）' },
+          vitamin_b2: { min: 0.4, minME: 1.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素B2(核黄素)（补全，2026-11-07）' },
+          vitamin_b3: { min: 4.0, minME: 10.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素B3(烟酸)（补全，2026-11-07）' },
+          vitamin_b12: { min: 2.24, minME: 5.6, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素B12(氰钴胺)（补全，2026-11-07）' },
+          vitamin_b7: { min: 24.0, minME: 60.0, cite: 'NRC 2006《犬猫营养需要》表15-12 成年猫维生素B7(生物素)：推荐量 60 µg/1000kcal（perfectlyrawsome 引 NRC 2006）；2026-11-07 补全（注：cat.reproduction 现有 15 µg/1000kcal 与此不一致，待表15-14 原表核对）' },
         },
         reproduction: {
           crude_protein: { min: 30.0, minME: 75.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -626,10 +661,10 @@ export const STANDARD_SETS = {
           manganese: { min: 0.72, minME: 1.8, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           selenium_dry: { min: 30.0, minME: 75.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           iodine: { min: 0.18, minME: 450.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_a: { min: 160.0, minME: 400.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-14 母猫繁殖维生素D：RA=280 IU/kg DM=28.0 IU/100g DM、70 IU/1000 kcal（维持与繁殖同值，Hand et al.）；原 0.56/1.4 系误填生长值且单位错乱，2026-11-07 修正' },
-          vitamin_e: { min: 3.0, minME: 7.5, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
-          vitamin_k: { min: 0.1, minME: 0.25, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_a: { min: 533.33, minME: 1333.33, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_d: { min: 28.0, minME: 70.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_e: { min: 4.47, minME: 11.175, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
+          vitamin_k: { min: 100.0, minME: 250.0, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b1: { min: 0.5, minME: 1.25, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b2: { min: 0.32, minME: 0.8, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
           vitamin_b6: { min: 0.2, minME: 0.5, cite: 'NRC 2006《犬猫营养需要》表15-14（猫繁殖期妊娠期+哺乳期合并 max，哺乳期值普遍≥妊娠期），适宜采食量；per kg DM 与 per 1000 kcal ME 双基准，本模块折算为 per-100g-DM 口径对齐 FEDIAF' },
@@ -678,7 +713,7 @@ export function getMarketMode(id) {
   return MARKET_MODES.find((m) => m.id === id) || MARKET_MODES.find((m) => m.id === DEFAULT_MARKET)
 }
 
-/** 生命阶段档位：生长/繁殖/泌乳合并为 growth（与 GB 表的分组方式一致） */
+/** 生命阶段档位：妊娠/泌乳独立为 reproduction（NRC 有专表）；growth 仅生长期；其余 adult */
 export function stageOf(status) {
   // 繁殖期（妊娠/泌乳）独立路由到 reproduction 档；
   // GB/AAFCO/FEDIAF 无独立 reproduction 档，由 resolveStandard 回退到 growth（其繁殖数据已并入 growth）
@@ -715,7 +750,7 @@ export function clauseText(clause, { unit = '%DM', key = '' } = {}) {
   const isRatio = key === 'caP'
   const hasMin = clause.min != null
   const hasMax = clause.max != null
-  if (hasMin && hasMax) return isRatio ? `${fmt(clause.min)}:1 ~ ${fmt(clause.max)}:1` : `${fmt(clause.min)} ~ ${fmt(clause.unit || unit)}`
+  if (hasMin && hasMax) return isRatio ? `${fmt(clause.min)}:1 ~ ${fmt(clause.max)}:1` : `${fmt(clause.min)} ~ ${fmt(clause.max)} ${clause.unit || unit}`.trim()
   if (hasMin) return isRatio ? `≥${fmt(clause.min)}:1` : `≥${fmt(clause.min)}`
   if (hasMax) return isRatio ? `≤${fmt(clause.max)}:1` : `≤${fmt(clause.max)}`
   return '—'
@@ -727,7 +762,8 @@ export function clauseText(clause, { unit = '%DM', key = '' } = {}) {
  * @param {object} opts
  *   marketId      目标市场模式 id（缺省 DEFAULT_MARKET）
  *   species       'cat' | 'dog'
- *   stage         'growth' | 'adult'
+ *   stage         'growth' | 'reproduction' | 'adult'
+ *                 （reproduction = 妊娠/泌乳；GB/AAFCO/FEDIAF 无独立档时自动回退其 growth 档）
  *   moistureClass 'dry' | 'semi-moist' | 'wet' | 'unknown'（用于牛磺酸湿粮档）
  * @returns {{
  *   marketId, marketLabel, marketDesc, setIds, setLabels,
