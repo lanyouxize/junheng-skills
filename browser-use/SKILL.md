@@ -7,6 +7,8 @@ display_name: 浏览器自动化
 display_name_en: Browser Use
 description_zh: 浏览器自动化（导航、点击、截图、数据提取、多会话、云浏览器）
 description_en: Automates browser interactions for web testing, form filling, screenshots, and data extraction.
+license: Proprietary
+compatibility: 浏览器（内置 IAB 或浏览器扩展）.
 ---
 
 # Browser Automation with browser-use CLI

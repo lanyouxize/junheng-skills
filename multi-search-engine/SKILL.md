@@ -6,6 +6,8 @@ description_en: Multi search engine integration with 17 engines (8 CN + 9 Global
 version: 2.4.1
 display_name: multi-search-engine
 display_name_en: multi-search-engine
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # Multi Search Engine

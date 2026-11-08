@@ -6,6 +6,8 @@ description_zh: 微信公众号图文内容爬取与多平台知识库导出工�
 description_en: 'WeChat Official Account article scraping and multi-platform knowledge base export v1.2.0: Sogou WeChat search discovery + direct URL full-text fetch, search by account name / keyword / date range, article parsing (title/author/date/summary/body/images), Markdown/Text/HTML/JSON formats, ZIP packaging plus text-only Markdown folder export, IMA/Dify/Obsidian sync (credentials from environment variables), intelligent dedup (canonical link + content hash + title similarity with reasons), date/keyword filtering + relevance ranking, offline extractive summarization and keyword extraction, scrape-history journal for incremental crawling, local image download, rate limiting + transient retry honoring Retry-After + cache TTL + anti-bot and HTTP 429 detection + export path containment.'
 version: 1.2.0
 description: 微信公众号图文爬取与多平台知识库导出。支持搜狗搜索发现、URL 直抓与批量一体化三种模式；输出 Markdown/Text/HTML/JSON；可一键同步到 IMA、Dify、Obsidian（API Key 优先读环境变量）并智能去重。
+license: Proprietary
+compatibility: Python 3.9+; pip 可安装第三方包; 需网络访问.
 ---
 
 # wechat-article-scraper v1.2.0 — 微信公众号图文爬取与知识库导出

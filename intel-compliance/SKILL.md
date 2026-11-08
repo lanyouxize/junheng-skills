@@ -2,6 +2,8 @@
 name: intel-compliance
 description: 文案宣称合规检查。扫描文案中的绝对化用语、疗效宣称、安全性断言、成分与特性声称等 20 类踩线措辞，逐条给出条款号、风险等级与抑制依据，并判定功能声称的可声称性四态。当用户问这句能不能这么写、有没有踩线时使用。
 description_en: Marketing-claim compliance review checklist — scan copy for risky wording across 20 rule categories with exact clause numbers and severity, plus four-state assessability of a functional claim and legal wording tiers by ingredient ratio.
+license: Proprietary
+compatibility: Node.js 18+.
 ---
 
 # 宣称合规待核对清单（intel-compliance）

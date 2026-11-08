@@ -4,6 +4,7 @@ description: 撰写可投稿的 ML/AI 论文（NeurIPS、ICML、ICLR、ACL、AAA
 version: 1.2.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # ML Paper Writing for Top AI Conferences

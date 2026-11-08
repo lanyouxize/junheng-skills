@@ -6,6 +6,8 @@ display_name_en: AI Pre-Delivery Automated Self-Check
 description: 交付前的行为级闸门：向用户交付结果前逐项枚举 D1–D12，拦截责任转嫁、半途交付、伪阻断提问、用声明替代实扫等缓干形态。在写最终总结、下结论或征询用户前必须实跑。
 description_zh: AI交付前全自动自检技能。任何一次向用户交付结果（present_files、最终总结、结论、状态汇报、提问/征询）之前，必须实际加载并实跑本技能，对整条回复（含结尾）逐项枚举 D1–D12 闸门快照，拦截责任转嫁、半途交付、最优步隐藏、伪阻断提问、尾巴豁免、自主闭环缺失、语言后门、先盖章后干活等把活推回用户或以声明替代实际扫描的形态。无真实加载状态即视为未过闸。适用于所有项目、所有交付形态的发送前强制终检。
 description_en: AI pre-delivery automated self-check skill. Before ANY result delivery to the user (present_files, final summary, conclusion, status report, or asking a question), this skill MUST be actually loaded and executed, enumerating the D1-D12 gate snapshot item by item over the ENTIRE message including the tail. It intercepts responsibility-shifting, half-done delivery, hidden-optimal-step deferral, pseudo-blocking questions, tail exemption, lack of autonomous closure, language backdoors, and stamp-before-work patterns that push work back to the user or replace real scanning with mere claims. No real load state means the gate was not passed. Mandatory final check before sending, for all projects and all delivery forms.
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # 交付前伪阻断 / 缓干闸门（3.11 专项）

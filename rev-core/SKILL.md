@@ -5,6 +5,8 @@ description_zh: 逆向分析入口与证据闸：授权开单、形态识别、�
 description_en: "Reverse-engineering pipeline entry with authorization gate, triage, evidence ledger and report projection"
 version: 1.0.0
 display_name: rev-core
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # rev-core

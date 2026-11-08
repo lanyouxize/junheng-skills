@@ -8,6 +8,8 @@ description_en: Create, analyze, proofread, and modify Word, Excel, and PowerPoi
 category: writing
 version: 2.0.0
 author: linxianmiao
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Office 办公文档工具

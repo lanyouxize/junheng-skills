@@ -8,6 +8,8 @@ description: WorkBuddy 跨机器资产迁移助手。换电脑时把旧机的 sk
 description_zh: WorkBuddy 国内版跨机器资产迁移助手：换电脑时一键导出/导入全部个人资产（技能、记忆、对话、配置、连接器凭证、会话产物索引等），两包分离快速传输、路径自动映射、导入后自动校验，跟着主线六步完成搬家。
 description_en: Cross-machine asset migration assistant for WorkBuddy China edition. Export and restore all personal assets (skills, memory, conversations, configs, connector credentials, artifact index) when switching computers, with a two-package layout, automatic path remapping and post-import verification in six guided steps.
 author: 该影
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # WorkBuddy迁移助手

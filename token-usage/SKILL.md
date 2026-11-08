@@ -7,6 +7,8 @@ description: 统计 WorkBuddy/CodeBuddy 的 token 消耗并生成可视化用量
 description_zh: "统计 WorkBuddy/CodeBuddy 的 Token 消耗：实时面板（30 秒自刷新）、热力图、每日趋势、模型用量占比、当前会话拆分、JSON 导出。纯本地处理，不上传任何数据，离线可用。"
 description_en: "Token usage dashboard for WorkBuddy/CodeBuddy: live panel (30s auto-refresh), heatmap, daily trend, model breakdown, per-session stats, JSON export. 100% local processing, zero data upload, works offline."
 allowed-tools: "Bash, Read"
+license: Proprietary
+compatibility: Python 3.9+; Node.js 18+.
 ---
 
 # WorkBuddy Token 使用统计 Skill

@@ -4,6 +4,7 @@ description: 端到端自主 AI 研究编排：内循环快速实验迭代、外
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: pip 可安装第三方包.
 ---
 
 # Autoresearch

@@ -1,9 +1,12 @@
 ---
 name: junheng-bcs
 description: 宠物体况评分 BCS 9 分制查询与参考图生成。按物种取逐分判定表，判断某分是否落在理想区（犬 4-5、猫仅 5）或肥胖区（7-9），给出易误判点与体脂率区间，生成侧视加俯视矢量参考图。当用户问猫狗胖不胖、算几分时使用。
-description_en: 'Pet body condition score (BCS 9-point scale) lookup and reference figure generation for dogs and cats: per-score criteria (lateral/dorsal/palpation), ideal range and obesity screening zone, species-specific pitfalls, estimated body-fat ranges, and a self-drawn side/top SVG reference figure.'
-author: Junheng NutriAgent
-version: 1.0.0
+description_en: "Pet body condition score (BCS 9-point scale) lookup and reference figure generation for dogs and cats: per-score criteria (lateral/dorsal/palpation), ideal range and obesity screening zone, species-specific pitfalls, estimated body-fat ranges, and a self-drawn side/top SVG reference figure."
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+license: Proprietary
 ---
 
 # 体况评分参考（junheng-bcs）

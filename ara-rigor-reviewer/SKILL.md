@@ -4,6 +4,7 @@ description: 对 ARA 研究工件做严谨度评审：按证据相关性、可�
 version: 3.0.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # ARA Seal Level 2: Semantic Epistemic Review

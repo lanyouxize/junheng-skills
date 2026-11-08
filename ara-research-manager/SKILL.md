@@ -4,6 +4,7 @@ description: 在研究或编码会话收尾时记录研究溯源：扫描对话�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Live Research Project Manager (Live PM)

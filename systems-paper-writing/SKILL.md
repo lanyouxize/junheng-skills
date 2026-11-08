@@ -4,6 +4,7 @@ description: 面向 OSDI/SOSP/ASPLOS/NSDI/EuroSys 的系统类论文写作。用
 version: 1.1.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Systems Paper Writing: Paragraph-Level Structural Blueprint

@@ -1,6 +1,8 @@
 ---
 name: ui-auto-click
 description: 把人工在桌面软件上的点击流程固化为可复现的自动点击步骤表。用 Windows UIA 模式驱动控件，不抢焦点、不误点；支持干跑定位、可逆自检与证据留痕。内置公众号文章采集清洗到入库导站的一条命令全链路。
+license: Proprietary
+compatibility: Python 3.9+; 浏览器（内置 IAB 或浏览器扩展）; 需网络访问.
 ---
 
 # ui-auto-click · 桌面自动点击

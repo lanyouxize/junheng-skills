@@ -6,6 +6,8 @@ description_en: Security-first skill vetting before install
 version: 1.0.0
 display_name: skill-vetter
 display_name_en: skill-vetter
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Skill Vetter

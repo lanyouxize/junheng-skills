@@ -8,6 +8,8 @@ description_en: 'Diagnose and fix AI-collaboration projects that get more expens
 category: 02-Engineering
 version: 1.0.1
 author: 彬总
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # 仓库检索面治理 · 让 AI 协作成本不随时间上涨

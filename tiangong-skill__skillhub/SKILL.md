@@ -11,6 +11,8 @@ metadata:
   openclaw:
     runtime: standalone
 category: tiangong-skill
+license: Proprietary
+compatibility: Python 3.9+; 需网络访问.
 ---
 
 

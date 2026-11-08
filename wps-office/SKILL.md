@@ -8,6 +8,8 @@ description_en: Full-cycle WPS Office assistant — from basics to automation, w
 category: office
 version: 1.0.0
 author: 河南曜威信息科技有限公司
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 # WPS 办公 设计助手
 

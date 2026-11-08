@@ -15,6 +15,7 @@ metadata:
 display_name: minimax-docx
 display_name_en: minimax-docx
 author: MiniMaxAI
+compatibility: POSIX shell.
 ---
 
 # minimax-docx

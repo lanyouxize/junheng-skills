@@ -4,6 +4,7 @@ description: 用 SAELens 训练与分析稀疏自编码器：把神经网络激�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: pip 可安装第三方包.
 ---
 
 # SAELens: Sparse Autoencoders for Mechanistic Interpretability

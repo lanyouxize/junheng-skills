@@ -2,8 +2,11 @@
 name: junheng-standards
 description: 宠物营养法规限值查询。按目标市场、物种、生命阶段与水分形态返回应同时满足的合并限值（蛋白、脂肪、灰分、纤维、钙磷、赖氨酸、牛磺酸、代谢能等），每项带条款出处与各体系原值；也可单查条款原文。问 AAFCO 下限、国标要求时使用。
 description_en: Chinese and international pet food nutrient limit lookup (GB/T 31216, GB/T 31217, AAFCO, FEDIAF) by market mode, species, life stage and moisture class; returns merged limits with clause citations, or a single clause's original text.
-author: Junheng NutriAgent
-version: 1.0.0
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+license: Proprietary
 ---
 
 # 法规限值查询（junheng-standards）
@@ -17,7 +20,7 @@ version: 1.0.0
 - **不判定某个配方是否达标** —— 本技能只给限值，不给配方结论。需要判定请用配方营养计算能力。
 - **不返回检测值** —— 全部是条文引用值。
 - **不提供 AAFCO 现行版本年份的结论** —— AAFCO 数值尚未与官方出版物逐项核对（`verified: false`）。
-- **FEDIAF 不参与判定** —— 其主表以「每 MJ 代谢能」为基准，本轮数值待补，只登记不判。
+- **不替代厂商自行核证 FEDIAF** —— FEDIAF 2025 数值已按官方 PDF（Table III-3/III-4，per 100 g DM）逐项抽取并核验，参与 `cn-intl` / `intl` 判定；但个别**上限**条款因分档复杂尚未全部录入，涉及上限结论时仍须回查原文。
 
 ## 诚实性红线
 

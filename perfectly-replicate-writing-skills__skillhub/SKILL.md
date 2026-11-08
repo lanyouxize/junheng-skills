@@ -7,6 +7,7 @@ description_zh: 双引擎蒸馏写作分身：思维引擎提取价值观 / 世�
 description_en: 'A dual-engine writing persona distiller. Feed it multiple articles by the same author: the thinking engine extracts values, worldview and reasoning habits, while the writing engine extracts a 7+1 dimensional style profile (vocabulary, syntax, structure, rhetoric, emotion, viewpoint, tone, thinking frame). The two are cross-validated to produce a style prompt plus an installable persona sub-skill. The persona ships 14 writing formulas (PAS / SCAR / QUEST / AIDA) and enforces a dual review gate: a style fingerprint check and a worldview consistency check before any output. Works with WeChat, Xiaohongshu, Weibo, novels and blogs; 10+ articles recommended.'
 license: MIT
 display_name: 完美复刻蒸馏技能
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 # 完美复刻蒸馏技能 v5.0
 

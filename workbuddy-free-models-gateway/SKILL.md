@@ -8,6 +8,8 @@ description_en: Expose WorkBuddy free model credits (GLM-5.3, Kimi K3, DeepSeek 
 category: 开发者工具
 version: 1.0.0
 author: 12168
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # WorkBuddy 免费模型 → 本地 LLM 网关

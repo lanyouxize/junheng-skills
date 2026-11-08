@@ -1,6 +1,8 @@
 ---
 name: token-saver-qclaw
 description: token智能省流助手（安全加固版 6.1.0-hardened）。仅对「纯自然语言、长文本」做显式压缩；内置硬门禁，代码/URL/颜色值/路径/密钥/YAML 一律拒绝并返回原文。切勿作为输入预处理器自动全量生效。
+license: Proprietary
+compatibility: Python 3.9+; POSIX shell.
 ---
 
 > **安全加固说明（2026-10-14 本地加固，基线备份见 outputs/_governance/_skill_backup_20261014_0022）**

@@ -2,6 +2,8 @@
 name: intel-formula
 description: 配方剂量核对。把带单位的剂量归一到质量分数（%/‰/ppm/mg-kg/g-kg 互算），显式化口径（占总重/占干物质）后与参照区间比对，输出档位结论，支持整张配方表批量核对。当用户问添加量换算、高低判定或口径归属时使用。
 description_en: Formulation dose cross-check — normalize dosed amounts to mass fraction across units, make the basis (product weight vs dry matter) explicit, locate the value within reference bands, and batch-check a whole formulation table row by row.
+license: Proprietary
+compatibility: Node.js 18+.
 ---
 
 # 配方剂量核对（intel-formula）

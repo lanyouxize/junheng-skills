@@ -11,6 +11,8 @@ description_en: |
   the bsk CLI and browser extension.
 description_zh: |
   BrowserSkill 是腾讯开源的一个智能浏览器自动化工具，让 WorkBuddy 能够像人一样操作网页——自动填表、点击、翻页、截图，完成任何需要浏览器的复杂任务。
+license: Proprietary
+compatibility: 浏览器（内置 IAB 或浏览器扩展）.
 ---
 
 # browser-skill

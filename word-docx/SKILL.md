@@ -8,6 +8,8 @@ description_en: Methodology expert for creating, inspecting, and editing Microso
 category: productivity
 version: 1.0.2
 author: 开心一点
+license: Proprietary
+compatibility: LibreOffice.
 ---
 
 # Word / DOCX 文档专家

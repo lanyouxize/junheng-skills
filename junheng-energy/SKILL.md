@@ -2,8 +2,11 @@
 name: junheng-energy
 description: 宠物食品能量计算。按常规成分算总能 GE、消化能 DE、代谢能 ME（改良 Atwater、经典 Atwater、NRC 三步法三种口径）、ME:GE 比、供能比、能量消化率与静息能量需求 RER；也可单查能量系数与出处。问配方代谢能、RER 怎么算时使用。
 description_en: Pet food energy computation (GE/DE/ME with modified-Atwater, classic Atwater and NRC three-step methods, ME:GE ratio, energy source distribution, digestibility, resting energy requirement) from as-fed proximate composition; plus coefficient and citation lookup.
-author: Junheng NutriAgent
-version: 1.0.0
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Self-contained CLI facade; no dependency on other junheng-* skills.
+license: Proprietary
 ---
 
 # 能量计算（junheng-energy）

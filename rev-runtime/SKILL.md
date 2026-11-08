@@ -5,6 +5,8 @@ description_zh: 动态观测：纯标准库 CDP 客户端 + Windows 进程/模�
 description_en: "Dynamic observation with a stdlib-only CDP client, Windows process enumeration, and thin Frida/mitmproxy wrappers"
 version: 1.0.0
 display_name: rev-runtime
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # rev-runtime

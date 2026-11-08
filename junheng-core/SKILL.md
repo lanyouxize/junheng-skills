@@ -2,8 +2,11 @@
 name: junheng-core
 description: 钧衡 NutriAgent 共享内核（内部）。nutrition/-labeling/-cost/-feeding 四技能共同依赖的源码镜像与 286 条种子库，无业务命令。当出现「junheng-nutrition 报前置条件缺失」「技能找不到源码目录」或需更新法规/原料库并同步时使用。
 description_en: Shared computation core for Junheng NutriAgent skills. Holds the single copy of the mirrored source closure (nutrition/standards/energy/bcsChart/labeling/costModes/feedingGuide) and the 286-ingredient seed database, consumed by junheng-nutrition, -labeling, -cost and -feeding. Not user-facing; no business commands of its own.
-author: Junheng NutriAgent
-version: 1.0.0
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Holds the mirrored source closure (vendor modules) and the ingredient seed database shared by the junheng-* skill family.
+license: Proprietary
 ---
 
 # 共享计算内核（junheng-core）

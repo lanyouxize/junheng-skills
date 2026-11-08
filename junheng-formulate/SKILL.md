@@ -4,6 +4,8 @@ description: 宠物食品最低成本配方求解（钧衡 NutriAgent 出品）�
 description_en: Pet food least-cost formulation (Junheng NutriAgent). Given an ingredient list (price + %DM nutrients) and nutrient constraints (from junheng-standards resolveStandard), solve the least-cost recipe with a zero-dependency pure-JS two-phase simplex, with constraint attainment and feasibility diagnostics.
 author: Junheng NutriAgent
 version: 0.2.0
+license: Proprietary
+compatibility: Node.js 18+.
 ---
 
 # 最低成本配方求解（junheng-formulate）

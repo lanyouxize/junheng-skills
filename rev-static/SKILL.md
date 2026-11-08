@@ -5,6 +5,8 @@ description_zh: 静态解构：零依赖的字符串/PE 通道 + 外部工具通
 description_en: "Static deconstruction with zero-dependency strings/PE channels plus external tool channels"
 version: 1.0.0
 display_name: rev-static
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # rev-static

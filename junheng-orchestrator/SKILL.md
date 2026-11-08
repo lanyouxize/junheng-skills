@@ -4,6 +4,8 @@ description: 钧衡 NutriAgent 配方研发多技能编排框架（非运行时�
 description_en: Junheng NutriAgent recipe-R&D multi-skill orchestration framework (not a runtime). Chains existing junheng domain skills (evidence→standards→formulation→attainment→labeling→compliance→report) into an auditable pipeline with quality gates. Use when the user wants a one-shot auditable recipe-R&D flow or to add quality gates/audit trails to a formulation task.
 author: Junheng NutriAgent
 version: 0.1.0
+license: Proprietary
+compatibility: Node.js 18+; 需网络访问.
 ---
 
 # 配方研发编排框架（junheng-orchestrator）

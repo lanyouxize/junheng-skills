@@ -8,6 +8,7 @@ display_name_en: Web Access
 description_zh: CDP 直连本地 Chrome，智能调度联网工具，支持登录态、并行批量操作
 description_en: 'CDP-based web access: search, scrape, login-aware browsing, parallel ops'
 author: 一泽Eze
+compatibility: Node.js 18+; 浏览器（内置 IAB 或浏览器扩展）; 需网络访问.
 ---
 
 # web-access Skill

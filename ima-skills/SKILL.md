@@ -6,6 +6,8 @@ display_name: 腾讯ima
 display_name_en: Ima Skills
 description_zh: ima笔记与知识库管理（读取、写入、检索）
 description_en: IMA notes & knowledge base management (read, write, search)
+license: Proprietary
+compatibility: 需网络访问.
 ---
 
 # ima-skill

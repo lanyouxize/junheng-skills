@@ -7,6 +7,8 @@ description_en: A standardized skill optimization collaboration system that prov
 version: 1.0.1
 description: 优化其他 skill 的元技能：提供多维度质量评估清单、需求挖掘方法与迭代终止判据，把某个 skill 从能用改到优秀。当要评估或系统性改进一个 skill 时用。
 user-invocable: true
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Skill 优化大师（Skill Optimizer）

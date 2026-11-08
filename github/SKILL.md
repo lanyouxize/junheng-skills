@@ -6,6 +6,8 @@ description_en: Manage GitHub issues, PRs, and CI runs
 version: 1.0.0
 display_name: github
 display_name_en: github
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # GitHub Skill

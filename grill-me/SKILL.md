@@ -5,6 +5,8 @@ description: 'A relentless interview to sharpen a plan or design. User-invoked e
 description_zh: 用户显式调用的入口：对方案或设计发起一场不留情面的拷问，直到达成共识。当用户说「grill me」「拷问我」「拷问我的方案」时使用；AI 不得自行发起。
 version: 1.0.0-local.1
 disable-model-invocation: true
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 Call the Skill tool with "grilling".

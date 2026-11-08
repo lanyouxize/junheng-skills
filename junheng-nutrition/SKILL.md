@@ -2,8 +2,11 @@
 name: junheng-nutrition
 description: 宠物食品原料库查询与配方营养计算。按名称或物料编号查 286 条原料（成分/价格/数据状态），或按配方加权算营养素组成、多口径能量、钙磷比与成本并给出数据覆盖率与缺口；也可算 RER/MER。问原料含量、配方营养时使用。
 description_en: Pet food ingredient database lookup and recipe nutrient computation (Junheng NutriAgent). Look up any of 286 ingredients by name or code, or compute a recipe's nutrient profile, energy (GE/DE/ME with multiple methods), Ca:P ratio, cost, plus data coverage and gaps; also computes individual requirements (RER/MER).
-author: Junheng NutriAgent
-version: 1.1.0
+metadata:
+  author: Junheng NutriAgent
+  version: "1.1.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+license: Proprietary
 ---
 
 # 原料库与配方计算（junheng-nutrition）
@@ -25,8 +28,8 @@ version: 1.1.0
 1. **全部为理论计算值，不是检测值**。每次输出带 `basis: "theoretical"`。
 2. **缺数据必须显式**。缺成分的原料进 `zeroData`，无价格的进 `cost.missingPrice`；覆盖率不足时结果会标低可靠度。**先看这几个字段再看数值**。
 3. **未匹配的原料不静默丢弃**。`unknown` 列出所有没找到的原料名/编号。
-4. **总重为 0 不出数**。返回 `data.computed:false` + `data.reason`（如 `zero_total_weight`），而不是给一堆 0。
-   ⚠ **两层 ok 不同义**：外层 `ok:true` 只表示「命令执行成功」，不代表算出了数；**判断是否出数必须看 `data.computed`**。这个同名不同义是本项目最容易误读的一处，读结果时先看 `data.computed`。
+4. **总重为 0 不出数**。返回 `data.ok:false` + `data.reason`（如 `zero_total_weight`），而不是给一堆 0。
+   ⚠ **两层 ok 不同义**：外层 `ok:true` 只表示「命令执行成功」，不代表算出了数；**判断是否出数必须看 `data.ok`**。这个同名不同义是本项目最容易误读的一处，读结果时先看 `data.ok`。
 
 ## 用法
 

@@ -1,6 +1,8 @@
 ---
 name: memory-manager-v2
 description: 管理 .workbuddy/memory/ 的记忆治理与 Token 节流工具：提供写入审计、快照回滚、自适应压实、Token 看板与五维体检，写入型命令带确认门并自动建快照。当要治理项目记忆、压缩上下文、回滚记忆改动时用。
+license: MIT
+compatibility: Python 3.9+.
 ---
 
 # 记忆管家 Memory Manager V4.0.4（AI 记忆加速器 / Token 节流阀）

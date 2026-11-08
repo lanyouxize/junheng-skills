@@ -7,6 +7,8 @@ display_name_en: WorkBuddy Token Usage Analysis
 description_zh: 本地只读分析 WorkBuddy 每次 AI 调用的 Token 消耗与成本。统计总览、按模型/会话/Agent/机器拆分、缓存命中率、每日趋势、时段分布、Top-N 异常会话，并按 DeepSeek 官方价换算费用，生成自包含 HTML 报表与 CSV，支持日期区间与多维筛选。
 description_en: Locally analyze (read-only) the Token consumption and cost of every WorkBuddy AI call. Summarizes totals, breaks down by model/session/agent/worker, cache hit rate, daily trend, hourly distribution, and Top-N costly sessions, then converts to cost using official DeepSeek pricing and produces a self-contained HTML report and CSV with date-range and multi-dimension filters.
 category: skill
+license: Proprietary
+compatibility: Python 3.9+; 需网络访问.
 ---
 
 # WorkBuddy Token 消耗分析

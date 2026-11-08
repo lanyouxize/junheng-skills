@@ -8,6 +8,8 @@ description_en: "Generate editable native PPTX decks from a topic or article, or
 category: office
 version: 2.7.3
 author: 周萝卜
+license: MIT
+compatibility: Python 3.9+; LibreOffice; 需网络访问.
 ---
 
 # 萝卜 PPT（luobo-ppt）

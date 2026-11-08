@@ -1,9 +1,12 @@
 ---
 name: junheng-labeling
 description: 配方 → 合规标签底稿：营养保证值表（法规项目与顺序，带条款出处）、配料表（按重量递减）、合规结论与风险提示。当用户问「帮我做一份标签底稿」「营养保证值怎么写」「这个配方合不合规」时使用。
-description_en: 'Generate a compliant pet food label draft from a recipe: guaranteed analysis table (regulated items in order, with clause citations), ingredient list (descending by weight), per-item compliance status, risk notes and mandatory disclaimers.'
-author: Junheng NutriAgent
-version: 1.0.0
+description_en: "Generate a compliant pet food label draft from a recipe: guaranteed analysis table (regulated items in order, with clause citations), ingredient list (descending by weight), per-item compliance status, risk notes and mandatory disclaimers."
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+license: Proprietary
 ---
 
 # 标签底稿生成（junheng-labeling）

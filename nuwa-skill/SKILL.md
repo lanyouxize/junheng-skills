@@ -6,6 +6,8 @@ display_name: 女娲
 display_name_en: Nuwa Skill
 description_zh: 蒸馏人物思维框架，生成可运行的人物 Skill
 description_en: Distill thinking frameworks from people and generate runnable persona Skills
+license: MIT
+compatibility: Python 3.9+; POSIX shell; 需网络访问.
 ---
 
 # 女娲 · Skill造人术

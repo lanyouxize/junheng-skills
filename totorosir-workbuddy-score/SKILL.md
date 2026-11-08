@@ -17,6 +17,7 @@ metadata:
       - python3
       env: []
 allowed-tools: Bash
+compatibility: Python 3.9+; Node.js 18+; 需网络访问.
 ---
 
 # WorkBuddy积分助手（每日积分播报 + 成长计划 + 派猫猫旅行 + 自动签到）

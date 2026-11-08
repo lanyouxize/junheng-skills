@@ -5,6 +5,8 @@ description_zh: 验证对拍：fixture 冻结与零容忍重放，区分静态 e
 description_en: "Verification by replay: frozen fixtures compared with zero tolerance, exact for static and subset for dynamic"
 version: 1.0.0
 display_name: rev-verify
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # rev-verify

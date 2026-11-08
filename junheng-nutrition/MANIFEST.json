@@ -7,7 +7,13 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-nutrition/SKILL.md",
       "kind": "template",
-      "sha256": "ea489550b476ff7234fe14d317feb9a761e525cab9232485fe673a6e8acc7846"
+      "sha256": "a6a84b7468ecec4016da6dca3c1bf892aa8ed766aa45891a98968aae04479be6"
+    },
+    {
+      "dest": "CHANGELOG.md",
+      "origin": "cli/skills/junheng-nutrition/CHANGELOG.md",
+      "kind": "changelog",
+      "sha256": "2524962255dd5f4a950193af4d08a2865381040c53bb9cfb862bcbcb06b8512f"
     },
     {
       "dest": "scripts/cli.mjs",
@@ -43,7 +49,7 @@
       "dest": "scripts/lib/paramSchema.mjs",
       "origin": "cli/lib/paramSchema.mjs",
       "kind": "cli-lib",
-      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+      "sha256": "f0eaf4a11d404bdf2472732b802077479d63b7fcc23f3bc33ef8016b8369bd63"
     },
     {
       "dest": "scripts/lib/runner.mjs",
@@ -66,6 +72,6 @@
   ],
   "coreRef": {
     "name": "junheng-core",
-    "manifestSha": "3fa4f07cb6584c0ca1bdb7f05b1b73f47bab30619f5b02ed2475be85713cc614"
+    "manifestSha": "6d77129706f28744d5deb0ccdeb7f46de300933e6da3facd3224cb7970d00964"
   }
 }

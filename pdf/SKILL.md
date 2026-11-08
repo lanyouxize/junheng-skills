@@ -7,6 +7,7 @@ description: PDF 处理工具箱：提取文本与表格、新建 PDF、合并�
 description_zh: PDF 文档处理工具，支持文本与表格提取、PDF 创建、合并拆分、表单填写及批量分析。
 description_en: Process PDF documents by extracting text and tables, creating, merging, splitting, filling forms, and performing batch analysis.
 license: Proprietary. LICENSE.txt has complete terms
+compatibility: Python 3.9+; pip 可安装第三方包.
 ---
 
 # PDF Processing Guide

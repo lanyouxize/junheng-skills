@@ -4,6 +4,7 @@ description: 从已完成的论文生成会议演讲幻灯片：产出 Beamer �
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Presenting Conference Talks: From Paper to Slides

@@ -1,6 +1,8 @@
 ---
 name: literature-reviewer-skill
 description: 系统性中英文文献回顾：8 阶段工作流，经浏览器自动化检索 CNKI、Web of Science、ScienceDirect 等库，产出含 GB/T 7714-2015 引文的 Markdown 综述。当用户要检索文献、写综述、找证据时用。
+license: MIT
+compatibility: Python 3.9+.
 ---
 
 # 文献回顾（Literature Survey）

@@ -4,6 +4,7 @@ description: 为 ML 论文生成出版级插图：从论文章节或描述中抽
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Academic Plotting for ML Papers

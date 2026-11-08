@@ -13,6 +13,8 @@ metadata:
       - node
 display_name: wechat-article-search
 display_name_en: wechat-article-search
+license: Proprietary
+compatibility: Node.js 18+.
 ---
 
 # 微信公众号文章搜索说明

@@ -6,6 +6,8 @@ display_name_en: GLM Vision PDF RAG
 description_zh: 基于智谱GLM-5.3-Flash视觉大模型的PDF深度问答与检索（vision RAG）。当用户提到 PDF、文档、资料、报告、论文、电子书、手册、说明书，并想提问、查找、搜索、总结或理解其内容，或问"在哪一页"、"引用原文"、要页面截图时，使用本skill。支持扫描版、图表、表格、代码的视觉理解；回答带物理页码引用，并把命中页原图展示给用户。（GLM 版本；DeepSeek 版为 deepseek-v4-flash-vision-rag）
 description_en: Deep question answering and retrieval over PDFs using the Zhipu GLM-5.3-Flash vision model. Use when the user mentions a PDF, document, report, paper, ebook, manual or specification and wants to ask about, search, summarize or understand its contents, asks which page something is on, wants an exact quote, or asks to see a page screenshot. Handles scanned pages, charts, tables and code through visual understanding. Answers carry physical page-number citations and the matched page image is shown to the user. This is the GLM variant; the DeepSeek counterpart is deepseek-v4-flash-vision-rag.
 description: 基于 GLM 视觉大模型的 PDF 深度问答与检索：支持扫描件、图表、表格、代码的视觉理解，回答带物理页码引用并展示命中页原图。当用户就 PDF、报告、论文、手册提问或要定位某一页时用。
+license: Proprietary
+compatibility: Python 3.9+; ffmpeg.
 ---
 
 

@@ -4,6 +4,7 @@ description: 用结构化创意框架引导研究者找高价值选题：探索�
 version: 1.0.0
 author: Orchestra Research
 license: MIT
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Research Idea Brainstorming

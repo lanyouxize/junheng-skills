@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/intel-formula/SKILL.md",
       "kind": "template",
-      "sha256": "8a2a48abbf92f7080c9087f3bb34a6774793d61b51bf1fabfb3f73c0b823c474"
+      "sha256": "20553e98c4f391e7b7915e2b19018dee582222badd6b309622006d1d68176da3"
     },
     {
       "dest": "scripts/cli.mjs",
@@ -31,7 +31,7 @@
       "dest": "scripts/lib/locate.mjs",
       "origin": "cli/lib/locate.mjs",
       "kind": "cli-lib",
-      "sha256": "4dd4a54b27ec8ec709bdb3782c928b07947028870f2692100eb195d6390f6c62"
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
     },
     {
       "dest": "scripts/lib/output.mjs",

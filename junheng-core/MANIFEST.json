@@ -7,13 +7,19 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-core/SKILL.md",
       "kind": "template",
-      "sha256": "242a2c14aff8c5e937acd9c47d81279f4cda70a055ce1972fb4223e0f7e5a7ea"
+      "sha256": "1b06bd1fb9290d0a6d497a1276c26cad697b5dd14d400b358dcfd6fcd5799195"
+    },
+    {
+      "dest": "CHANGELOG.md",
+      "origin": "cli/skills/junheng-core/CHANGELOG.md",
+      "kind": "changelog",
+      "sha256": "deddee2e7b74661639af0e5593c247c8b9eb6432b0ebe532fe26fd0eb608113a"
     },
     {
       "dest": "scripts/vendor/nutrition.js",
       "origin": "src/lib/nutrition.js",
       "kind": "vendor",
-      "sha256": "ab6679f7257eae07b01c82dbfb3cec6bf3b427830a05c38367d10c614ced4919"
+      "sha256": "8844fae4c2a6327e706777482ad601127edd4db90b3ddd833904a3631e9e741b"
     },
     {
       "dest": "scripts/vendor/dataQuality.js",
@@ -25,7 +31,7 @@
       "dest": "scripts/vendor/standards.js",
       "origin": "src/lib/standards.js",
       "kind": "vendor",
-      "sha256": "2e7cb54b5b8cc0711bd7911f42bd8339e44427620d66d2de77f3b1f3aaf1732b"
+      "sha256": "99dfbfc45e9b24f364a0682cba79916b15ac1115499c14ff6814c1787bcdd66d"
     },
     {
       "dest": "scripts/vendor/energy.js",
@@ -43,7 +49,7 @@
       "dest": "scripts/vendor/labeling.js",
       "origin": "src/lib/labeling.js",
       "kind": "vendor",
-      "sha256": "6ffe9b729c8ea053a142eb4784ee89ef6f8cb9594d97fe86af5db33ff94f297c"
+      "sha256": "dd1e0a40eadbd3b4dd6656e7fffbe86557adf0b96bca1c599d610db596ba818f"
     },
     {
       "dest": "scripts/vendor/costModes.js",

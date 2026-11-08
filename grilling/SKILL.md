@@ -4,6 +4,8 @@ display_name: Grilling
 description: Grill the user relentlessly about a plan, decision or idea until you reach a shared understanding. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrase.
 description_zh: 方案/决策/想法当决策树逐轮拷问至共识：每轮只问已定前提的问题并附推荐答案；事实自查、用户拍板，共识前不动手。触发：拷问我、质询我、审问、grill me/third degree/interrogate、压测这个方案、压力测试、极限情况、这设计哪里会翻车、隐患、靠不靠谱、先问清楚再动手、问明白。
 version: 1.0.0-local.1
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.

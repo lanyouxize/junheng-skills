@@ -7,7 +7,7 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/intel-compliance/SKILL.md",
       "kind": "template",
-      "sha256": "eda319416e74740c0629fb9601ce4fcd130e83a2deab0b8e591b7c6ee12b25e9"
+      "sha256": "00cfac06baf706c9f61c22a3ea1e4a03172294e0cc04ae0ccfb4904962e6a0b5"
     },
     {
       "dest": "scripts/cli.mjs",
@@ -31,7 +31,7 @@
       "dest": "scripts/lib/locate.mjs",
       "origin": "cli/lib/locate.mjs",
       "kind": "cli-lib",
-      "sha256": "4dd4a54b27ec8ec709bdb3782c928b07947028870f2692100eb195d6390f6c62"
+      "sha256": "687e224ec3f70cbcb6e6f7fb4814ce3dd7cdc2f4d2c4f898cfd46be0618be037"
     },
     {
       "dest": "scripts/lib/output.mjs",

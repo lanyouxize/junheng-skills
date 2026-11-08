@@ -2,6 +2,8 @@
 name: wechat-article-collector
 description: 自动采集微信公众号文章（图文/视频元数据）并归档写入「铭衍·元典」资料库数据表。当用户要求采集/保存/批量下载公众号文章、按公众号批量抓历史、把微信文章入库或导出 JSONL 时触发；四层采集 url/account/desktop/exe + write 写库，仅限本机、仅限已授权内容。
 disable-model-invocation: true
+license: Proprietary
+compatibility: Python 3.9+; pip 可安装第三方包.
 ---
 
 # wechat-article-collector 公众号文章采集器

@@ -4,15 +4,11 @@ description: 润色文本以去除 AI 写作痕迹（浮夸象征、套路化表
 description_zh: 去除文本中的 AI 写作痕迹
 description_en: Remove AI writing patterns from text
 version: 2.1.1
-allowed-tools:
-- Read
-- Write
-- Edit
-- Grep
-- Glob
-- AskUserQuestion
+allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 display_name: humanizer
 display_name_en: humanizer
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Humanizer: Remove AI Writing Patterns

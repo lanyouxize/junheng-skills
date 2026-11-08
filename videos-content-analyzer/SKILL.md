@@ -65,6 +65,7 @@ metadata:
       command: 'node scripts/video2text/index.js --file "/path/to/video.mp4" --prompt "改写成小红书风格的文案"'
     - name: 复用刚才的任务，提取视频所有金句
       command: 'node scripts/video2text/index.js --id last --prompt "提取视频中的所有金句"'
+compatibility: Node.js 18+; ffmpeg.
 ---
 
 # 🎬 视频内容智能分析工具

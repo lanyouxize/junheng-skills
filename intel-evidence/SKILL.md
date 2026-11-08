@@ -2,6 +2,8 @@
 name: intel-evidence
 description: 证据颗粒度抽取。从原文抽研究设计/样本量/试验动物/终点类型/亚组限定/利益相关六字段，给出未识别清单与展示排序。当用户问「这段研究里样本量是多少」「用的什么动物做的」「哪些字段没识别出来」时使用。
 description_en: Evidence granularity extraction — pull study design, sample size, test species, endpoint type, subgroup qualifier and conflict-of-interest out of a source text; report unrecognized fields and provide display ordering.
+license: Proprietary
+compatibility: Node.js 18+.
 ---
 
 # 证据颗粒度（intel-evidence）

@@ -8,6 +8,8 @@ category: content-creation
 version: 1.0.1
 author: WorkBuddy
 description: 把微信公众号的整站历史文章抓成全量语料，交付三种归档件：可点读的单文件 HTML 阅读器、按账号分文件夹的 TXT 文章包（可打包 zip）、带书签目录的 Word 全集。当用户要把某公众号文章整理成可读档时使用。
+license: Proprietary
+compatibility: Python 3.9+; Node.js 18+; 需网络访问.
 ---
 
 # 公众号文章全量归档

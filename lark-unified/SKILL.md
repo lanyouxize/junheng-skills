@@ -15,6 +15,8 @@ metadata:
   - meegle
   cliHelp: lark-cli --help
   alignedWith: larksuite/cli v1.0.82; larksuite/meegle-cli v1.0.19
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # Lark Unified

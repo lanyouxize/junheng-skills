@@ -8,6 +8,8 @@ description_en: "Humanizer Studio: rewrite AI-generated or robotic text into nat
 category: marketing
 version: 1.0.0
 author: 汪老师
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # Humanizer Studio（去AI味·文本人化工坊）

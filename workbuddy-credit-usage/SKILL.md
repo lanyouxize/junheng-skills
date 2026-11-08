@@ -1,6 +1,8 @@
 ---
 name: workbuddy-credit-usage
 description: 读取 WorkBuddy 本节点与当前会话消耗的官方积分（credit）。用于任务收尾核对积分消耗、判断是否超过熔断阈值，或查当前会话累计与逐模型积分。数据源为本机会话日志的 rawUsage.credit，与 App 账单同源。
+license: Proprietary
+compatibility: Python 3.9+.
 ---
 
 # WorkBuddy 本节点消耗积分（官方 credit）

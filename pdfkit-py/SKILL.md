@@ -7,6 +7,8 @@ description_en: 'All-in-one PDF toolkit: read, edit, convert, fill forms, encryp
 display_name: 腾讯文档 PDFKit
 display_name_en: Pdfkit Py
 allowed-tools: Bash, Read, Write, Glob
+license: Proprietary
+compatibility: Python 3.9+; POSIX shell; Tesseract OCR（含语言包）; LibreOffice.
 ---
 
 # pdfkit — AI 原生 PDF 处理工具

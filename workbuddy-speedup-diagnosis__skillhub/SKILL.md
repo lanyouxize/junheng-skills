@@ -4,6 +4,7 @@ version: 1.4.0
 license: MIT
 description: WorkBuddy 变慢、卡死、转圈、卡思考中不出字、越聊越慢、上下文圈过半或爆满、积分掉得快、报错码（11115/6003/6004/3002/1001/11133）时的诊断提速技能。定位瓶颈后给出压缩、场景模式开关、精简技能等处置建议。
 display_name: WorkBuddy 变慢卡顿诊断 · 提速手册
+compatibility: Python 3.9+.
 ---
 
 # WorkBuddy 提速诊断

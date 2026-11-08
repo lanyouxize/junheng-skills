@@ -7,6 +7,8 @@ metadata:
       "emoji": "🧷"
     }
   }
+license: Proprietary
+compatibility: 依赖 agent 内置工具，无独立脚本.
 ---
 
 # Handoff (shared)

@@ -2,8 +2,11 @@
 name: junheng-cost
 description: 宠物食品配方成本核算（钧衡 NutriAgent 出品）。把配方（原料+用量）换算成成本行，再按通用（烘焙粮/产品明细表）、冻干、猫条三种口径算成本，含各项加工费、损耗率、收得率与单位成本（元/kg、元/支）。当用户问「这个配方成本多少钱一公斤」「冻干出成率和成本怎么算」「猫条一支成本多少」「加工费怎么摊」「损耗算进去没」时使用。
 description_en: Pet food recipe cost accounting (Junheng NutriAgent). Convert a recipe into cost lines, then compute cost under general / freeze-dry / cat-stick modes with processing fees, loss rate, yield rate and unit cost.
-author: Junheng NutriAgent
-version: 1.0.0
+metadata:
+  author: Junheng NutriAgent
+  version: "1.0.0"
+compatibility: Requires Node.js 18+ (ESM) and a UTF-8 filesystem. No network access and no third-party dependencies. Loads its computation closure from the sibling shared-core skill junheng-core via the relative path ../../junheng-core/.
+license: Proprietary
 ---
 
 # 配方成本核算（junheng-cost）

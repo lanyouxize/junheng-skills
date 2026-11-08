@@ -6,6 +6,8 @@ display_name: 免费模型超市
 description: "查免费大模型 API 与厂商额度、免 Key 直接用、按场景选模型、排查 API 配置报错、统计用量与省钱金额。在册 45 条渠道的额度/限速/端点/状态逐条可查，每个数字标注来源与核实日期；探测只读、默认 dry-run 不落盘。"
 description_zh: "免费大模型 API 超市：零成本用上大模型，也清楚自己省了多少。在册 45 条渠道记录，额度、限速、端点、状态、信源逐条可查；Kilo AI Gateway 免注册、免 Key。五项能力：① 一键接入——一条命令写进 WorkBuddy，不填 Key、不记模型名；② 按场景选型，degraded / expired 不进推荐池；③ 配置排障 doctor 与货架巡检 watch；④ 零依赖可视化看板；⑤ 用量账本——调了多少次、烧了多少 token、按市场牌价省了多少钱、谁在替你干活、你几点最活跃，价格实时取自公开接口。安全可靠：探测只读、默认 dry-run 不落盘、不代管不存储你的 Key、每个数字标注来源与核实日期，实测优先于文档。当用户问有哪些免费大模型 API、想要免费 Key、找免费模型列表、查厂商免费额度、想免 Key 直接用、要模型推荐、排查 API 配置报错、统计用量与省钱时使用。"
 description_en: "Zero-cost access to large models, with a clear view of how much you saved. 45 channel records (incl. 8 retired) with quotas, rate limits, endpoints, status and sources; Kilo needs no signup and no API key, with 16 free models, 14 verified to return content. Five capabilities: (1) one-click connect into WorkBuddy, no key or model name to remember; (2) scenario-based picks that never surface degraded or expired channels; (3) a config doctor and catalog watch; (4) a zero-dependency offline dashboard; (5) a usage ledger on calls, tokens, equivalent cost at live market rates, load share and active hours. Safe and reliable: read-only probes, dry-run by default, keys never stored or proxied, every figure carries a source and verification date. Use when users ask for free LLM APIs, free API keys, free model lists, free tier quotas, models without a key, model recommendations, API config troubleshooting, or usage and savings stats."
+license: Proprietary
+compatibility: Python 3.9+; 需网络访问.
 ---
 
 # 免费模型超市（SKILL）

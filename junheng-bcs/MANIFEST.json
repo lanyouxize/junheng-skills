@@ -7,7 +7,13 @@
       "dest": "SKILL.md",
       "origin": "cli/skills/junheng-bcs/SKILL.md",
       "kind": "template",
-      "sha256": "6322de14bf47e13b0abc85db9a7d4da29728ecaf632acba92535a4e1c30fed54"
+      "sha256": "782c9b22b4ca8a0a800bd1378421e52646a63dd7b92d032a4154fdb14c3b84f4"
+    },
+    {
+      "dest": "CHANGELOG.md",
+      "origin": "cli/skills/junheng-bcs/CHANGELOG.md",
+      "kind": "changelog",
+      "sha256": "a373877a4447884a82e815c29847a1f09e2be586aaab37dc42d96ae151f7b49c"
     },
     {
       "dest": "scripts/cli.mjs",
@@ -43,7 +49,7 @@
       "dest": "scripts/lib/paramSchema.mjs",
       "origin": "cli/lib/paramSchema.mjs",
       "kind": "cli-lib",
-      "sha256": "8785e76143b9e6eadb83fc7dc91db0899db009c6626ff3c60993980b8c6a2675"
+      "sha256": "f0eaf4a11d404bdf2472732b802077479d63b7fcc23f3bc33ef8016b8369bd63"
     },
     {
       "dest": "scripts/lib/runner.mjs",
