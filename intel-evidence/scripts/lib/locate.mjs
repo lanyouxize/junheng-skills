@@ -59,7 +59,8 @@ export async function importFromVendor(here, probe, file) {
       + vendorCandidates(here).map((d) => `      ${d}`).join('\n')
       + `\n      期望其中包含：${[].concat(probe).join('、')}\n`
       + '      项目内运行：确认 src/lib/ 存在。\n'
-      + '      技能目录内运行：先执行 node scripts/sync-skills.mjs 同步镜像'
+      + '      技能目录内运行：技能侧是只读镜像，不含本同步脚本；请到项目根执行\n'
+      + '        node scripts/sync-skills.mjs   同步镜像'
       + `（依赖共享核心的技能还需要同步 ${CORE_DIR_NAME}）。`,
     )
     err.code = 'VENDOR_NOT_FOUND'

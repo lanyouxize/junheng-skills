@@ -77,9 +77,9 @@ export function marketEnum(api) {
 
 /**
  * 生命阶段档。取值与 `standards.js` 的 `stageOf()` 产出一致
- * （生长/繁殖/泌乳合并为 `growth`，其余 `adult`）—— 该函数只判不列，故列表在此声明。
+ * （`growth` 生长期 / `reproduction` 妊娠·泌乳期 / `adult` 其余）—— 该函数只判不列，故列表在此声明。
  */
-export const STAGES = ['growth', 'adult']
+export const STAGES = ['growth', 'reproduction', 'adult']
 
 /**
  * 水分形态（GB 表 3 / 表 2 的三档 + `unknown` 未判定）。

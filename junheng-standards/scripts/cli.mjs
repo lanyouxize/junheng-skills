@@ -27,8 +27,9 @@ export const VERSION = '1.0.0'
 export const SUMMARY = '宠物营养法规限值查询：按目标市场 / 物种 / 生命阶段 / 水分形态，解析应同时满足的合并限值（每项带条款出处）'
 export const PROBE = ['standards.js', 'species.js']
 export const DISCLAIMER = '限值是法规条文的理论引用值，不是检测值；CN-GB 条款已逐条核对，'
-  + 'AAFCO 数值沿用系统原有实现、尚未与官方现行出版物核对（verified=false），'
-  + 'FEDIAF 数值待补、不参与判定 —— 引用前请自行核对现行标准原文。'
+  + 'FEDIAF 2025 数值已按官方 PDF（Table III-3/III-4, per 100 g DM）逐项抽取并核验（证据见 docs/evidence/fediaf-2025-verify-2026-11-02.md），'
+  + 'NRC 2006 六档数值取自官方中文版并已核验；'
+  + 'AAFCO 数值沿用系统原有实现、尚未与官方现行出版物核对（verified=false）—— 引用前请自行核对现行标准原文。'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 

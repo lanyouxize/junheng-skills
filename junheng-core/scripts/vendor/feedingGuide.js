@@ -952,7 +952,7 @@ export function computeFeedingPlan(profile = {}, recipe = null, req = null, opts
   const ok = weightKg != null && gramsPerDay != null
 
   return {
-    computed: ok,
+    ok,
     species,
     speciesLabel: sLabel,
     pet: {

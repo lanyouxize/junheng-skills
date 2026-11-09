@@ -168,7 +168,7 @@ export function buildGuaranteedTable(recipe, req) {
  * @returns {{ items:Array, totalShare:number, needsReview:Array }}
  */
 export function buildIngredientList(recipe) {
-  if (!recipe?.computed) return { items: [], totalShare: 0, needsReview: [] }
+  if (!recipe?.ok) return { items: [], totalShare: 0, needsReview: [] }
 
   const rows = recipe.lines.map((l, i) => ({
     index: i,
@@ -202,10 +202,10 @@ export function buildIngredientList(recipe) {
  * @returns {object} 标签稿（纯数据，可 JSON 序列化 / 渲染 / 导出）
  */
 export function buildLabelDraft({ recipe, req, meta = {} } = {}) {
-  if (!recipe?.computed || !req) {
+  if (!recipe?.ok || !req) {
     return {
-      computed: false,
-      reason: !recipe?.computed ? '配方未计算成功（computeRecipe 返回空）' : '缺少营养需求对象（req）',
+      ok: false,
+      reason: !recipe?.ok ? '配方未计算成功（computeRecipe 返回空）' : '缺少营养需求对象（req）',
       formatVersion: LABEL_FORMAT_VERSION,
     }
   }
@@ -242,7 +242,7 @@ export function buildLabelDraft({ recipe, req, meta = {} } = {}) {
   }
 
   return {
-    computed: true,
+    ok: true,
     formatVersion: LABEL_FORMAT_VERSION,
     generatedAt: new Date().toISOString(),
 
@@ -264,7 +264,7 @@ export function buildLabelDraft({ recipe, req, meta = {} } = {}) {
       species,
       speciesLabel: species === 'dog' ? '犬' : '猫',
       stage,
-      stageLabel: stage === 'growth' ? '生长期' : '成年期',
+      stageLabel: stage === 'growth' ? '生长期' : stage === 'reproduction' ? '繁殖期' : '成年期',
       moistureClass: moistureClass.id,
       moistureClassLabel: moistureClass.label,
       moisturePercent: Math.round(moisturePercent * 100) / 100,
@@ -325,7 +325,7 @@ export function buildLabelDraft({ recipe, req, meta = {} } = {}) {
  *   若悄悄省略，使用者会误以为「法规只要求这几项」。
  */
 export function renderLabelText(draft) {
-  if (!draft?.computed) return `标签稿生成失败：${draft?.reason || '未知原因'}`
+  if (!draft?.ok) return `标签稿生成失败：${draft?.reason || '未知原因'}`
   const L = []
   const p = draft.product
   const b = draft.basis
@@ -416,7 +416,7 @@ export function downloadLabelText(text, filename) {
  * @returns {{ required:number, printable:number, missing:Array<{label,target,note}> }}
  */
 export function labelCoverage(draft) {
-  if (!draft?.computed) return { required: 0, printable: 0, missing: [] }
+  if (!draft?.ok) return { required: 0, printable: 0, missing: [] }
   const rows = draft.guaranteed.rows
   return {
     required: rows.length,

@@ -262,7 +262,7 @@ export function computeMultiPetPlan(entries = [], opts = {}) {
     const profile = (e && e.profile) || {}
     const recipe = (e && e.recipe) || null
     const plan = computeFeedingPlan(profile, recipe, (e && e.req) || null, {}) || {}
-    const ok = Boolean(plan.computed)
+    const ok = Boolean(plan.ok)
     const gp = num(plan.energy && plan.energy.gramsPerDay)
     const kcal = num(plan.energy && plan.energy.mer)
     const costDay = plan.cost && plan.cost.perDay != null ? num(plan.cost.perDay) : null
@@ -333,7 +333,7 @@ export function computeMultiPetPlan(entries = [], opts = {}) {
   }
 
   return {
-    computed: okPets.length > 0,
+    ok: okPets.length > 0,
     days,
     petCount: pets.length,
     okCount: okPets.length,

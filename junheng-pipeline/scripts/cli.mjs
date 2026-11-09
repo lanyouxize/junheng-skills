@@ -178,7 +178,7 @@ export function buildCommands(api) {
   const step = (name, fn) => {
     try {
       const data = fn()
-      const failed = data && data.computed === false
+      const failed = data && data.ok === false
       return { step: name, status: failed ? 'failed' : 'ok', reason: failed ? (data.reason || data.note || '') : '', data }
     } catch (e) {
       return { step: name, status: 'error', reason: (e && e.message) || String(e), data: null }
@@ -267,7 +267,7 @@ export function buildCommands(api) {
         } else {
           const r = step('recipe', () => api.computeRecipe(resolved, {}, { species }))
           steps.push(r)
-          recipe = r.data && r.data.computed ? r.data : null
+          recipe = r.data && r.data.ok ? r.data : null
         }
 
         // ② 个体需求
@@ -275,7 +275,7 @@ export function buildCommands(api) {
         if (profile && Number.isFinite(Number(profile.weightKg))) {
           const r = step('requirements', () => api.computeRequirements(profile))
           steps.push(r)
-          req = r.data && r.data.computed !== false ? r.data : r.data
+          req = r.data && r.data.ok !== false ? r.data : r.data
         } else {
           steps.push({ step: 'requirements', status: 'skipped', reason: '未提供 profile.weightKg', data: null })
         }
@@ -390,7 +390,7 @@ export function buildCommands(api) {
             row.recipeReason = 'no_ingredient_matched'
           } else {
             const r = step('recipe', () => api.computeRecipe(resolved, {}, { species }))
-            recipe = r.data && r.data.computed ? r.data : null
+            recipe = r.data && r.data.ok ? r.data : null
             row.recipeOk = Boolean(recipe)
             if (!recipe) row.recipeReason = r.reason || 'compute_failed'
           }
@@ -413,8 +413,8 @@ export function buildCommands(api) {
         const plan = api.computeMultiPetPlan(entries, { days })
         steps.push({
           step: 'multiPlan',
-          status: plan.computed ? 'ok' : 'failed',
-          reason: plan.computed ? '' : plan.reason,
+          status: plan.ok ? 'ok' : 'failed',
+          reason: plan.ok ? '' : plan.reason,
           data: plan,
         })
 
@@ -433,7 +433,7 @@ export function buildCommands(api) {
         const failedPets = (plan.pets || []).filter((x) => !x.ok).map((x) => ({ label: x.label, failReason: x.failReason }))
         steps.push({
           step: 'portions',
-          status: okPets.length ? (portions.computed ? 'ok' : 'failed') : 'skipped',
+          status: okPets.length ? (portions.ok ? 'ok' : 'failed') : 'skipped',
           reason: okPets.length ? portions.reason : '没有宠物算出喂食量，无可分装内容',
           data: { ...portions, failedPets },
         })
