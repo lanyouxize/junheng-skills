@@ -6,7 +6,7 @@
 
 > 改了某个技能之后，它还是原来那个技能吗？
 
-当前规模：**24 个模块 / 124 条断言**，正常态 124 通过 / 0 失败，`--fault` 24/24 全部能检出。
+当前规模：**25 个模块 / 157 条断言**，正常态 157 通过 / 0 失败，`--fault` 25/25 全部能检出。
 
 ## 快速使用
 
@@ -56,6 +56,7 @@ git -C .. hook run pre-commit       # 手动触发提交闸门（等价 commit �
 - 有 `MANIFEST.entries` 的技能 → 篡改 `MANIFEST.json` 的 `sha256` 键
 - 无 entries 的技能 → 篡改 `SKILL.md` 的 `description:` 键
 - 批 B 的 5 个模块 → 各自专属注入（4:1 违例、非法 JSON、语法错误、自动清理开启等）
+- T4 拆分模块（`_t4_split` / `_t4b_split`）→ 全局替换导航区块内的 references 路径（只替换 1 处会漏检，因同一路径常出现多次）
 
 ## 断言分组
 
@@ -65,6 +66,7 @@ git -C .. hook run pre-commit       # 手动触发提交闸门（等价 commit �
 | `_bg_adoption`（横切） | 1 模块 | 5 个长任务技能必须含 `--declare/--complete/--resume`，且 `bg_check.py --selftest` 通过 |
 | 批 C-2 生成 | 17 模块 | frontmatter 严格 YAML、顶层 JSON 数与可解析性、`scripts/*.py` AST 可编译、MANIFEST entries 数与 sha256 一致 |
 | `_t4_split`（横切） | 1 模块 | 拆分后主体 <500 行、导航表覆盖 5 个 references、外置文件非空、断点段落与 frontmatter 未丢 |
+| `_t4b_split`（横切） | 1 模块 / 33 断言 | 另 3 个超大技能：主体 <500 行、导航区块覆盖、外置文件行数与首行逐字契约、frontmatter、围栏、自指路由/L0 闸门仍留主体、CRLF 全量保持 |
 
 > 生成器的反作弊纪律：`MANIFEST.entries` 为 0 时**跳过** sha 判据并明示原因——0 条断言等于没检查，不能算作有效覆盖。判据基准全部来自 `t5_probe_candidates.py` 的真实探测，不写猜测值。
 
@@ -95,3 +97,4 @@ def checks(ctx):
 2. **`paper-quick-reader`/`dev-expert` 的 `allowed-tools` 含 6 个宿主不存在的工具名** —— 批 A 已修。
 3. **批 1 的「8 组重复安装」为误判** —— 7 个 `*__skillhub` 目录均为唯一样本，`__skillhub` 是安装器命名规则（`{包名}__{来源}`）。
 4. **`bg_check.py --declare` 的 exit=1 是「满足 T4 → 应派发」语义，不是失败**；`--complete` 会拒绝缺失/空的交付物（反作弊设计）。
+5. **「章节标题多重集相等」是假判据** —— 导航表本身会新增一个 `##` 标题，必然多 1；正确写法是「原标题零丢失 + 只允许新增导航标题」。另：切片前必须检查代码围栏配对（`nuwa-skill` 的 469/499 是一对围栏，切开即损坏）。
