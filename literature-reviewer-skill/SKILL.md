@@ -894,3 +894,21 @@ Requirements:
 - "写综述"
 - "literature survey"
 - "systematic review"
+
+## 长任务断点登记（bg_check）
+
+适用：任务可拆成 >=3 个独立分片，或预计跨多轮、批量处理 >=5 项时。
+
+开始前一次性登记：
+1. `python ~/.workbuddy/tools/bg_check.py --template` 取声明模板。
+2. 写声明 JSON：`shards[].deliverable` 用绝对路径，`write`/`read` 列全读写集。
+3. `python ~/.workbuddy/tools/bg_check.py --declare <声明.json>` 登记。
+   exit=1 且输出「满足 T3/T4，按规则派发」是派发语义，不是失败。
+
+每个分片完成后（交付物必须真实存在且非空，否则工具拒记）：
+4. `python ~/.workbuddy/tools/bg_check.py --complete --id <id> --shard <sN>`
+
+中断后恢复（已完成且产物在的分片列入「复用」，只重跑未完成/产物丢失的）：
+5. `python ~/.workbuddy/tools/bg_check.py --resume --id <id>`
+
+不做什么：单步任务、纯问答、只读检索不登记；不手工编造完成状态，不用空文件冒充交付物。

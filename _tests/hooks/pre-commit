@@ -1,0 +1,24 @@
+#!/bin/sh
+# skills repo pre-commit contract gate.
+# Source is version-controlled at _tests/hooks/pre-commit; enabled via core.hooksPath.
+# Emergency bypass (leaves a trace): SKIP_SKILLS_VERIFY=1 git commit ...
+set -u
+
+if [ "${SKIP_SKILLS_VERIFY:-0}" = "1" ]; then
+  echo "[pre-commit] SKIPPED: SKIP_SKILLS_VERIFY=1 (emergency bypass, logged)" >&2
+  exit 0
+fi
+
+root=$(git rev-parse --show-toplevel) || exit 1
+cd "$root" || exit 1
+
+python _tests/verify.py --quiet
+rc=$?
+if [ "$rc" -ne 0 ]; then
+  echo "" >&2
+  echo "[pre-commit] BLOCKED: skill contract verification failed (exit=$rc)" >&2
+  echo "[pre-commit] detail: python _tests/verify.py" >&2
+  echo "[pre-commit] bypass: SKIP_SKILLS_VERIFY=1 git commit ... (traced)" >&2
+  exit "$rc"
+fi
+exit 0

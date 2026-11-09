@@ -314,3 +314,21 @@ python scripts/connect.py --connect all --apply --yes   # 一键接入全部
 推荐结果用表格呈现：渠道 | 模型 | 免费额度 | 限速 | 核实日期 | 来源。末尾固定附一句：*免费额度随时可能调整，正式使用前请点击来源链接复核最新政策。*
 
 **不要在推荐结果末尾追加账本摘要或「你已经省了多少钱」** —— 除非用户当次问的就是用量或花费。推荐回答干净收尾，比带一句花絮更专业。同样地，用户正在做具体任务（写代码、改文档、排查报错）时，不要插入任何用量或省钱话题。
+
+## 长任务断点登记（bg_check）
+
+适用：任务可拆成 >=3 个独立分片，或预计跨多轮、批量处理 >=5 项时。
+
+开始前一次性登记：
+1. `python ~/.workbuddy/tools/bg_check.py --template` 取声明模板。
+2. 写声明 JSON：`shards[].deliverable` 用绝对路径，`write`/`read` 列全读写集。
+3. `python ~/.workbuddy/tools/bg_check.py --declare <声明.json>` 登记。
+   exit=1 且输出「满足 T3/T4，按规则派发」是派发语义，不是失败。
+
+每个分片完成后（交付物必须真实存在且非空，否则工具拒记）：
+4. `python ~/.workbuddy/tools/bg_check.py --complete --id <id> --shard <sN>`
+
+中断后恢复（已完成且产物在的分片列入「复用」，只重跑未完成/产物丢失的）：
+5. `python ~/.workbuddy/tools/bg_check.py --resume --id <id>`
+
+不做什么：单步任务、纯问答、只读检索不登记；不手工编造完成状态，不用空文件冒充交付物。
