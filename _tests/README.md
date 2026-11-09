@@ -6,7 +6,7 @@
 
 > 改了某个技能之后，它还是原来那个技能吗？
 
-当前规模：**23 个模块 / 117 条断言**，正常态 117 通过 / 0 失败，`--fault` 23/23 全部能检出。
+当前规模：**24 个模块 / 124 条断言**，正常态 124 通过 / 0 失败，`--fault` 24/24 全部能检出。
 
 ## 快速使用
 
@@ -64,6 +64,7 @@ git -C .. hook run pre-commit       # 手动触发提交闸门（等价 commit �
 | 批 B 原有 | 5 模块 | NRC 4:1 自洽、防无人值守清理、MANIFEST sha、引擎台账、仅标准库 |
 | `_bg_adoption`（横切） | 1 模块 | 5 个长任务技能必须含 `--declare/--complete/--resume`，且 `bg_check.py --selftest` 通过 |
 | 批 C-2 生成 | 17 模块 | frontmatter 严格 YAML、顶层 JSON 数与可解析性、`scripts/*.py` AST 可编译、MANIFEST entries 数与 sha256 一致 |
+| `_t4_split`（横切） | 1 模块 | 拆分后主体 <500 行、导航表覆盖 5 个 references、外置文件非空、断点段落与 frontmatter 未丢 |
 
 > 生成器的反作弊纪律：`MANIFEST.entries` 为 0 时**跳过** sha 判据并明示原因——0 条断言等于没检查，不能算作有效覆盖。判据基准全部来自 `t5_probe_candidates.py` 的真实探测，不写猜测值。
 
