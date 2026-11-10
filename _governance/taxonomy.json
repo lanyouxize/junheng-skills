@@ -76,6 +76,8 @@
     "intel-evidence": "petfood",
     "intel-formula": "petfood",
     "pet-nutrition-needs": "petfood",
+    "junheng-formulate": "petfood",
+    "junheng-orchestrator": "petfood",
     "academic-plotting": "research",
     "ara-compiler": "research",
     "ara-research-manager": "research",
@@ -181,6 +183,8 @@
     "rev-core": "逆向分析入口与证据闸：授权开单、形态识别、证据校验、报告投影",
     "rev-static": "静态解构：零依赖字符串/PE 通道 + 外部工具通道（Ghidra/jadx/ilspycmd）",
     "rev-runtime": "动态观测：标准库 CDP 客户端、进程模块枚举、Frida 与代理薄封装",
-    "rev-verify": "验证对拍：fixture 冻结与零容忍重放（静态 exact / 动态 subset）"
+    "rev-verify": "验证对拍：fixture 冻结与零容忍重放（静态 exact / 动态 subset）",
+    "junheng-formulate": "宠物食品最低成本配方求解：给定原料与营养约束，纯 JS 两阶段单纯形求最优配比",
+    "junheng-orchestrator": "钧衡配方研发多技能编排框架：把 junheng 域技能串成可审计、门禁不可跳过的 pipeline"
   }
 }
