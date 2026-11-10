@@ -153,6 +153,10 @@ def collect():
             continue
         desc = fm.get("description") or ""
         desc = desc if isinstance(desc, str) else str(desc)
+        fm_name = (fm.get("name") or "").strip()
+        # 脚手架/占位模板技能（如 _template）不计入索引：既不入表也不算未分类
+        if name == "_template" or (fm_name.startswith("<") and fm_name.endswith(">")):
+            continue
         fam = assign.get(name)
         if not fam:
             unclassified.append(name)

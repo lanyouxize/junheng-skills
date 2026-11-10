@@ -2,7 +2,7 @@
 
 > **本文件是产物，不要手改。** 内容来自各技能 frontmatter + `_governance/taxonomy.json`（族群与摘要的人工知识）。
 > 重建：`python _governance/build_index.py`｜校验：`python _governance/lint_skills.py --new-only`
-> 生成于 2026-11-01 22:53 · 技能 86 个 · 族群 11 个
+> 生成于 2026-11-10 16:31 · 技能 91 个 · 族群 11 个
 
 ## 怎么用
 
@@ -14,9 +14,9 @@
 
 | 族群 | 数量 | 覆盖范围 |
 |---|---|---|
-| 宠物食品与配方 | 16 | 配方计算、法规限值、标签、成本、体况与安全闸 |
-| 学术研究与论文 | 14 | 选题、检索、精读、写作、评审与配图 |
-| 内容采集与媒体理解 | 9 | 公众号抓取归档、视频转写、视觉问答 |
+| 宠物食品与配方 | 18 | 配方计算、法规限值、标签、成本、体况与安全闸 |
+| 学术研究与论文 | 16 | 选题、检索、精读、写作、评审与配图 |
+| 内容采集与媒体理解 | 10 | 公众号抓取归档、视频转写、视觉问答 |
 | 浏览器与联网检索 | 6 | 真实浏览器操作、多引擎检索、GitHub 操作 |
 | 办公文档与演示 | 8 | PDF、Word、PPT、表格、脑图 |
 | 写作与人化改写 | 3 | 去 AI 味、文风复刻 |
@@ -25,9 +25,9 @@
 | 代码与 Agent 开发 | 2 | 编程专家、爬虫架构 |
 | 平台与外部系统 | 5 | 飞书、IMA、记忆治理、跨机迁移、积分助手 |
 | 逆向与软件解析 | 4 | 授权范围内的软件逆向、协议还原、agent 应用解析与证据链 |
-| **合计** | **86** | — |
+| **合计** | **91** | — |
 
-## 宠物食品与配方（16）
+## 宠物食品与配方（18）
 
 | 技能 | 一句话 | 触发词 | 来源 |
 |---|---|---|---|
@@ -37,18 +37,20 @@
 | `junheng-attainment` | 配方达成度评估 | 这个配方达不达标、钙磷比够不够、按国标能不能过 | 自建 |
 | `junheng-bcs` | 宠物体况评分 BCS 9 分制查询与参考图生成 | 猫狗胖不胖、算几分 | 自建 |
 | `junheng-core` | 钧衡 NutriAgent 共享内核（内部） | 技能找不到源码目录 | 自建 |
-| `junheng-cost` | 配方成本核算 | 这个配方成本多少钱一公斤、冻干出成率和成本怎么算、猫条一支成本多少 | 自建 |
+| `junheng-cost` | 宠物食品配方成本核算 | 这个配方成本多少钱一公斤、冻干出成率和成本怎么算、猫条一支成本多少、加工费怎么摊、损耗算进去没 | 自建 |
 | `junheng-energy` | 宠物食品能量计算 | 配方代谢能、RER 怎么算 | 自建 |
 | `junheng-feeding` | 宠物喂食指南与体况管理 | 猫每天吃多少克、BCS 7 分怎么喂 | 自建 |
+| `junheng-formulate` | 宠物食品最低成本配方求解：给定原料与营养约束，纯 JS 两阶段单纯形求最优配比 | 原料怎么搭配成本最低、这个约束有没有可行解 | 自建 |
 | `junheng-labeling` | 配方 → 合规标签底稿：营养保证值表（法规项目与顺序，带条款出处）、配料表（按重量递减）… | 帮我做一份标签底稿、营养保证值怎么写、这个配方合不合规 | 自建 |
 | `junheng-nutrition` | 宠物食品原料库查询与配方营养计算 | 原料含量、配方营养 | 自建 |
 | `junheng-optimize` | 宠物食品配方最低成本逆解 | 怎么配最省钱 | 自建 |
+| `junheng-orchestrator` | 钧衡配方研发多技能编排框架：把 junheng 域技能串成可审计、门禁不可跳过的 pipeline | 一键跑完配方研发全流程、给配方任务加质量门禁与审计追踪 | 自建 |
 | `junheng-pipeline` | 跨技能串联编排 | 把配方完整评估一遍、一条命令跑全套 | 自建 |
 | `junheng-safety` | 宠物食品有毒有害物质安全闸 | 巧克力能不能喂狗 | 自建 |
 | `junheng-standards` | 宠物营养法规限值查询 | AAFCO 下限、国标要求 | 自建 |
 | `pet-nutrition-needs` | 核算犬猫营养需要量与比对安全红线：覆盖能量、粗蛋白、必需氨基酸、牛磺酸、钙磷比与维生素… | 查宠物营养标准、做配方核算、比对 AAFCO 与 FEDI… | 自建 |
 
-## 学术研究与论文（14）
+## 学术研究与论文（16）
 
 | 技能 | 一句话 | 触发词 | 来源 |
 |---|---|---|---|
@@ -58,6 +60,7 @@
 | `ara-rigor-reviewer` | ARA 工件严谨度六维评审与定级 | 审查研究结论是否站得住、给工件定级 | 自建 |
 | `autoresearch` | 端到端自主 AI 研究编排：内循环实验 + 外循环综合 | 自动跑一轮 ML/CS 研究 | 自建 |
 | `brainstorming-research-ideas` | 结构化创意框架找研究选题与转向 | 要找研究选题、换方向、脑暴想法 | 自建 |
+| `citation-management` | Comprehensive citation management for academi… | — | 自建 |
 | `creative-thinking-for-research` | 用认知科学创造性框架（组合式创意、类比推理）找新颖方向 | 跳出常规思路、生成原创研究想法 | 自建 |
 | `literature-reviewer-skill` | 8 阶段中英文文献回顾，产出 GB/T 7714 引文的综述 | 检索文献、写综述、找证据 | 自建 |
 | `ml-paper-writing` | 撰写可投稿的 ML/AI 论文… | 写或改机器学习论文 | 自建 |
@@ -65,15 +68,17 @@
 | `paper-quick-reader` | 论文速读与对比：提供裸读、引导、精读三档深度，回答带页码级溯源以防幻觉，支持多篇横向对比 | 第几页提到什么 | skillhub |
 | `presenting-conference-talks` | 论文转会议演讲：Beamer PDF + 可编辑 PPTX + 讲稿 | 准备口头报告、spotlight 或会议汇报 | 自建 |
 | `sparse-autoencoder-training` | 用 SAELens 训练与分析稀疏自编码器，做特征可解释性 | 训练 SAE、做特征可解释性分析、解读模型内部表示 | 自建 |
+| `statistical-power` | Calculates sample sizes and statistical power… | 80% power、power analysis | 自建 |
 | `systems-paper-writing` | 面向 OSDI/SOSP/ASPLOS/NSDI/EuroSys 的系统类论文写作 | — | 自建 |
 
-## 内容采集与媒体理解（9）
+## 内容采集与媒体理解（10）
 
 | 技能 | 一句话 | 触发词 | 来源 |
 |---|---|---|---|
 | `deepseek-v4-flash-vision-video-rag` | 基于 DeepSeek 视觉大模型的视频理解与问答：支持剧情理解、事件时间线… | 或要定位某一秒发生了什么 | skillhub |
 | `douyin-video-extract-copywriter` | 抖音视频文案提取技能 | 下载抖音视频、提取抖音文案、抖音音频文案提取、抖音口播提取、抖音视频场景描述文案 | skillhub |
 | `glm-53-flash-vision-rag` | 基于 GLM 视觉大模型的 PDF 深度问答与检索：支持扫描件、图表、表格… | 或要定位某一页 | skillhub |
+| `junheng-marketintel` | 宠物食品产品信息分析 Agent 门面 | 竞品配方定位拆解、品类头部品牌盘点、产品宣称合规体检、售卖人群画像 | 自建 |
 | `videos-content-analyzer` | 分析视频内容，支持今日头条、抖音、B站、西瓜视频、小红书、快手等平台 | 提供视频链接并要求分析视频内容、总结视频、看看视频讲什么 | skillhub |
 | `wechat-article-archive` | 把微信公众号的整站历史文章抓成全量语料，交付三种归档件：可点读的单文件 HTML 阅读器… | 把某公众号文章整理成可读档 | skillhub |
 | `wechat-article-collector` | 自动采集微信公众号文章（图文/视频元数据）并归档写入「铭衍·元典」资料库数据表 | 采集/保存/批量下载公众号文章、按公众号批量抓历史、把微信文章入库或导出 JSONL | 自建 |
@@ -111,13 +116,13 @@
 |---|---|---|---|
 | `humanizer` | 润色文本以去除 AI 写作痕迹（浮夸象征、套路化表述等），使表达更自然、更像真人写作 | 改写、审校文稿或降低文本的机器感 | skillhub |
 | `humanizer-studio` | 去AI味文本人化工作室：把AI生成或模板化的文字改写成自然、像人写的文案与文章… | 去AI味、去机械感、humanizer、AI检测、文本润色 | skillhub |
-| `perfectly-replicate-writing-skills` | 双引擎蒸馏写作分身 | 思维+写作风格提示词、思维+写作分身子技能、双重复检系统 | skillhub |
+| `perfectly-replicate-writing-skills` | 给同一作者的多篇文章，蒸馏出「思维 + 写作风格」双引擎提示词与可安装分身… | 思维 + 写作风格 | skillhub |
 
 ## 成本与 Token 治理（8）
 
 | 技能 | 一句话 | 触发词 | 来源 |
 |---|---|---|---|
-| `free-model-market` | 41 家厂商免费模型货架：选型推荐、配置排障、巡检更新 | 有哪些免费大模型 API 可用、推荐免费模型、XX 厂商免费额度多少 | skillhub |
+| `free-model-market` | 41 家厂商免费模型货架：选型推荐、配置排障、巡检更新 | — | skillhub |
 | `repo-retrieval-governance` | 诊断并治理 AI 协作项目越用越贵的问题：量化检索面污染、常驻大文档、记忆层膨胀… | 为何对话越来越贵、仓库暴涨、检索被副本淹没 | skillhub |
 | `token-saver-qclaw` | token智能省流助手（安全加固版 6.1.0-hardened） | 纯自然语言、长文本 | skillhub |
 | `token-usage` | 统计本机 token 消耗并出可视化用量面板 | token 消耗、用量统计、花了多少额度、或要打开用量面板 | skillhub |
@@ -175,12 +180,11 @@
 判定口径：目录名必须等于 frontmatter `name`，且不含 `__` 安装器后缀；`name` 只允许 `a-z0-9._-`。
 实时判据以 `_governance/lint_skills.py --new-only` 为准，本节只是本轮快照。
 
-### 命名待修（8 条，属「批次5 项3」，改名需先验证调用方）
+### 命名待修（7 条，属「批次5 项3」，改名需先验证调用方）
 
 | 目录 | frontmatter name | 问题 |
 |---|---|---|
 | `handoff__skillhub` | `handoff` | 目录名含 `__` 后缀；目录名 ≠ name |
-| `memory-manager-v2__skillhub` | `memory-manager-v2` | 目录名含 `__` 后缀；目录名 ≠ name |
 | `perfectly-replicate-writing-skills__skillhub` | `perfectly-replicate-writing-skills` | 目录名含 `__` 后缀；目录名 ≠ name |
 | `python-crawler-architect__skillhub` | `Python 爬虫架构师` | 目录名含 `__` 后缀；目录名 ≠ name；name 非 slug |
 | `self-improving__skillhub` | `Self-Improving + Proactive Agent` | 目录名含 `__` 后缀；目录名 ≠ name；name 非 slug |
@@ -188,20 +192,16 @@
 | `token-saver-qclaw__skillhub` | `token-saver-qclaw` | 目录名含 `__` 后缀；目录名 ≠ name |
 | `workbuddy-speedup-diagnosis__skillhub` | `workbuddy-speedup` | 目录名含 `__` 后缀；目录名 ≠ name |
 
-### 触发词待补（24 个）
+### 触发词待补（26 个）
 
 这些技能的 description 里没有可抽取的触发短语（多为靠显式调用或任务语义触发的元层/平台技能）。
 补法：在该技能 `description` 末尾加「当用户…时使用」，或在此处明细里人工确认「无需触发词」。
 
-`browser-use`　`delivery-no-pseudoblock`　`dev-expert`　`github`　`grill-me`　`handoff__skillhub`　`ima-skills`　`mindmap-generator`　`nuwa-skill`　`python-crawler-architect__skillhub`　`rev-core`　`rev-runtime`　`rev-static`　`self-improving__skillhub`　`skill-vetter`　`systems-paper-writing`　`totorosir-workbuddy-score`　`ui-auto-click`　`web-access`　`wechat-article-scraper`　`word-docx`　`workbuddy-credit-usage`　`workbuddy-migration-assistant`　`workbuddy-speedup-diagnosis__skillhub`
+`browser-use`　`citation-management`　`delivery-no-pseudoblock`　`dev-expert`　`free-model-market`　`github`　`grill-me`　`handoff__skillhub`　`ima-skills`　`mindmap-generator`　`nuwa-skill`　`python-crawler-architect__skillhub`　`rev-core`　`rev-runtime`　`rev-static`　`self-improving__skillhub`　`skill-vetter`　`systems-paper-writing`　`totorosir-workbuddy-score`　`ui-auto-click`　`web-access`　`wechat-article-scraper`　`word-docx`　`workbuddy-credit-usage`　`workbuddy-migration-assistant`　`workbuddy-speedup-diagnosis__skillhub`
 
-### 体积超限（44 个 >10 KB，属「批次4 项10 渐进披露」）
+### 体积超限（47 个 >10 KB，属「批次4 项10 渐进披露」）
 
-`dev-expert`(65289B)　`nuwa-skill`(37967B)　`perfectly-replicate-writing-skills__skillhub`(33396B)　`totorosir-workbuddy-score`(32155B)　`literature-reviewer-skill`(28942B)　`paper-bilingual-search`(27809B)　`paper-quick-reader`(27627B)　`free-model-market`(24183B)　`creative-thinking-for-research`(22233B)　`lark-unified`(21394B)　`wechat-article-scraper`(20836B)　`luobo-ppt`(20705B)　`ui-auto-click`(20374B)　`brainstorming-research-ideas`(19519B)　`web-access`(18827B)　`memory-manager-v2__skillhub`(18658B)　`skill-optimizer`(18261B)　`ara-rigor-reviewer`(17922B)　`humanizer`(17709B)　`autoresearch`(16636B)　`repo-retrieval-governance`(16598B)　`minimax-docx`(15563B)　`ima-skills`(14920B)　`ara-compiler`(14904B)　`systems-paper-writing`(14573B)　`delivery-no-pseudoblock`(14556B)　`tiangong-skill__skillhub`(14076B)　`darwin-skill`(13911B)　`videos-content-analyzer`(13350B)　`junheng-labeling`(13293B)　`douyin-video-extract-copywriter`(13203B)　`sparse-autoencoder-training`(13051B)　`pdfkit-py`(12814B)　`ara-research-manager`(12747B)　`wechat-article-archive`(12633B)　`workbuddy-speedup-diagnosis__skillhub`(12275B)　`werss-ctl`(12268B)　`workbuddy-migration-assistant`(11935B)　`officecli`(11696B)　`browser-use`(11553B)　`ml-paper-writing`(11412B)　`junheng-standards`(10566B)　`presenting-conference-talks`(10507B)　`wechat-article-collector`(10485B)
-
-### 非技能目录（无 `SKILL.md`，不计入索引）
-
-`memory-manager-v2`
+`dev-expert`(53760B)　`paper-bilingual-search`(44349B)　`free-model-market`(35726B)　`totorosir-workbuddy-score`(32450B)　`paper-quick-reader`(28002B)　`nuwa-skill`(22911B)　`creative-thinking-for-research`(22166B)　`lark-unified`(21694B)　`luobo-ppt`(20776B)　`wechat-article-scraper`(20671B)　`perfectly-replicate-writing-skills__skillhub`(20555B)　`ui-auto-click`(20486B)　`junheng-marketintel`(19598B)　`brainstorming-research-ideas`(19463B)　`web-access`(18845B)　`memory-manager-v2`(18701B)　`humanizer`(18173B)　`skill-optimizer`(18171B)　`ara-rigor-reviewer`(17855B)　`statistical-power`(17834B)　`repo-retrieval-governance`(16780B)　`citation-management`(16630B)　`autoresearch`(16562B)　`minimax-docx`(15660B)　`literature-reviewer-skill`(15523B)　`ima-skills`(15177B)　`ara-compiler`(14803B)　`delivery-no-pseudoblock`(14754B)　`systems-paper-writing`(14521B)　`darwin-skill`(14140B)　`tiangong-skill__skillhub`(13885B)　`junheng-labeling`(13541B)　`videos-content-analyzer`(13387B)　`douyin-video-extract-copywriter`(13240B)　`junheng-orchestrator`(13132B)　`sparse-autoencoder-training`(12924B)　`wechat-article-archive`(12909B)　`pdfkit-py`(12856B)　`ara-research-manager`(12670B)　`werss-ctl`(12334B)　`workbuddy-migration-assistant`(11984B)　`workbuddy-speedup-diagnosis__skillhub`(11841B)　`officecli`(11777B)　`browser-use`(11535B)　`ml-paper-writing`(11307B)　`junheng-standards`(10748B)　`presenting-conference-talks`(10422B)
 
 ## 附：与其它文件的关系
 
